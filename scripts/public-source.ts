@@ -39,6 +39,13 @@ export async function publicWalletHistory(address: string, max = 1000): Promise<
   return out.slice(0, max);
 }
 
+/** Wallets that traded a market (most recent fills). */
+export async function publicMarketTakers(conditionId: string, limit = 500): Promise<string[]> {
+  const trades = await cached(`mtrades:${conditionId}:${limit}`, () =>
+    getJson(`https://data-api.polymarket.com/trades?market=${conditionId}&limit=${limit}`)) as { proxyWallet: string }[];
+  return Array.isArray(trades) ? trades.map((t) => t.proxyWallet) : [];
+}
+
 /** Resolution of a closed market from Gamma: the outcome whose final price is 1. Null if not cleanly resolved. */
 export async function publicResolution(conditionId: string): Promise<ResolutionLike | null> {
   const rows = await cached(`gamma:${conditionId}`, () =>
