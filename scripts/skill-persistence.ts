@@ -1,7 +1,9 @@
 // Experiment: does a wallet's edge against the price it paid persist from its older trades to its newer ones?
 // If it does, weighting market moves by learned wallet skill can carry information; if not, CALIBRE must say so.
-import { mkdir, writeFile } from "node:fs/promises";
-import { PredictionClient, type WalletTrade } from "../packages/chain/src/index.js";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { PredictionClient, type Market, type WalletTrade } from "../packages/chain/src/index.js";
+import { publicResolution, publicWalletHistory } from "./public-source.js";
 import { priceEdge, onePickPerMarket, tradesToPicks, type CategorisedPick, type ResolutionLike } from "../packages/core/src/index.js";
 import { need } from "./env.js";
 
@@ -10,18 +12,34 @@ const N_RANDOM = Number(process.env.N_RANDOM ?? 25);
 const TRADES = Number(process.env.TRADES ?? 200);
 const MIN_PICKS = 10;
 
+// SOURCE=public runs the study on Polymarket's free public data plus already-cached Tatum responses,
+// spending no Tatum credits. The default uses Tatum's Prediction Markets API.
+const PUBLIC = process.env.SOURCE === "public";
 const api = new PredictionClient(need("TATUM_API_KEY"), { cacheDir: ".cache/tatum", rps: 3 });
 
+/** A Tatum response already on disk, regardless of age (the cache key is the request path). */
+async function tatumCached<T>(path: string): Promise<T | null> {
+  try { return (JSON.parse(await readFile(`.cache/tatum/${createHash("sha1").update(path).digest("hex")}.json`, "utf8")) as { body: T }).body; }
+  catch { return null; }
+}
+
 // 1. Wallet samples
-const top = (await api.topTraders({ category: "SPORTS", limit: Math.min(50, N_TOP) })).map((t) => t.proxyWallet);
+const topFromCache = (await tatumCached<{ data: { proxyWallet: string }[] }>("/top-traders?category=SPORTS&limit=50"))
+  ?? (await tatumCached<{ data: { proxyWallet: string }[] }>("/top-traders?category=SPORTS&limit=25"));
+const top = PUBLIC
+  ? (topFromCache?.data ?? []).map((t) => t.proxyWallet).slice(0, N_TOP)
+  : (await api.topTraders({ category: "SPORTS", limit: Math.min(50, N_TOP) })).map((t) => t.proxyWallet);
 const random = new Set<string>();
-const closed = await api.events({ platform: "polymarket", status: "closed", category: "SPORTS", sort: "newest", limit: 40 });
-for (const ev of closed.data) {
-  if (random.size >= N_RANDOM) break;
-  const trades = await api.marketTrades(ev.markets[0]!, { limit: 100 });
-  for (const t of trades.data) if (!top.includes(t.taker)) random.add(t.taker);
+if (N_RANDOM > 0) {
+  const closed = await api.events({ platform: "polymarket", status: "closed", category: "SPORTS", sort: "newest", limit: 40 });
+  for (const ev of closed.data) {
+    if (random.size >= N_RANDOM) break;
+    const trades = await api.marketTrades(ev.markets[0]!, { limit: 100 });
+    for (const t of trades.data) if (!top.includes(t.taker)) random.add(t.taker);
+  }
 }
 const samples: [string, string[]][] = [["top", top], ["random", [...random].slice(0, N_RANDOM)]];
+console.log(`source=${PUBLIC ? "public" : "tatum"} wallets=${top.length}+${random.size} trades<=${TRADES}`);
 
 // 2. Histories and resolutions
 const resolutions = new Map<string, ResolutionLike | null>();
@@ -29,8 +47,15 @@ async function resolve(ids: string[]) {
   for (const id of ids) {
     if (resolutions.has(id)) continue;
     try {
-      const m = await api.market(id);
-      resolutions.set(id, m.resolution ? { outcome: m.resolution.outcome, outcomes: m.outcomes.map((o) => o.name) } : null);
+      const hit = PUBLIC ? await tatumCached<{ data: Market }>(`/markets/${id}`) : null;
+      if (hit?.data.resolution) {
+        resolutions.set(id, { outcome: hit.data.resolution.outcome, outcomes: hit.data.outcomes.map((o) => o.name) });
+      } else if (PUBLIC) {
+        resolutions.set(id, await publicResolution(id));
+      } else {
+        const m = await api.market(id);
+        resolutions.set(id, m.resolution ? { outcome: m.resolution.outcome, outcomes: m.outcomes.map((o) => o.name) } : null);
+      }
     } catch { resolutions.set(id, null); }
   }
 }
@@ -41,7 +66,7 @@ let done = 0;
 for (const [group, wallets] of samples) {
   for (const w of wallets) {
     let trades: WalletTrade[] = [];
-    try { trades = await api.walletHistory(w, TRADES); } catch (e) { console.log("skip", w, (e as Error).message.slice(0, 80)); continue; }
+    try { trades = PUBLIC ? await publicWalletHistory(w, TRADES) : await api.walletHistory(w, TRADES); } catch (e) { console.log("skip", w, (e as Error).message.slice(0, 80)); continue; }
     await resolve([...new Set(trades.map((t) => t.conditionId))]);
     const picks: CategorisedPick[] = onePickPerMarket(tradesToPicks(trades, resolutions)).sort((a, b) => a.ts - b.ts);
     done++;
