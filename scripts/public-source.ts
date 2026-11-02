@@ -46,6 +46,24 @@ export async function publicMarketTakers(conditionId: string, limit = 500): Prom
   return Array.isArray(trades) ? trades.map((t) => t.proxyWallet) : [];
 }
 
+/** Look up many closed markets per request and cache each one (an empty list means not closed yet). */
+export async function prefetchResolutions(conditionIds: string[]): Promise<void> {
+  const missing: string[] = [];
+  for (const id of new Set(conditionIds)) {
+    try { await readFile(`${DIR}/${createHash("sha1").update(`gamma:${id}`).digest("hex")}.json`); } catch { missing.push(id); }
+  }
+  await mkdir(DIR, { recursive: true });
+  for (let i = 0; i < missing.length; i += 40) {
+    const batch = missing.slice(i, i + 40);
+    const rows = (await getJson(`https://gamma-api.polymarket.com/markets?closed=true&limit=100&${batch.map((id) => `condition_ids=${id}`).join("&")}`)) as any[];
+    const byId = new Map(rows.map((r) => [String(r.conditionId).toLowerCase(), r]));
+    for (const id of batch) {
+      const row = byId.get(id.toLowerCase());
+      await writeFile(`${DIR}/${createHash("sha1").update(`gamma:${id}`).digest("hex")}.json`, JSON.stringify(row ? [row] : []));
+    }
+  }
+}
+
 /** Resolution of a closed market from Gamma: the outcome whose final price is 1. Null if not cleanly resolved. */
 export async function publicResolution(conditionId: string): Promise<ResolutionLike | null> {
   const rows = await cached(`gamma:${conditionId}`, () =>

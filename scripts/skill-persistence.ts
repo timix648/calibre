@@ -3,7 +3,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { PredictionClient, type Market, type WalletTrade } from "../packages/chain/src/index.js";
-import { publicMarketTakers, publicResolution, publicWalletHistory } from "./public-source.js";
+import { prefetchResolutions, publicMarketTakers, publicResolution, publicWalletHistory } from "./public-source.js";
 import { priceEdge, onePickPerMarket, tradesToPicks, type CategorisedPick, type ResolutionLike } from "../packages/core/src/index.js";
 import { need } from "./env.js";
 
@@ -30,7 +30,11 @@ const top = PUBLIC
   ? (topFromCache?.data ?? []).map((t) => t.proxyWallet).slice(0, N_TOP)
   : (await api.topTraders({ category: "SPORTS", limit: Math.min(50, N_TOP) })).map((t) => t.proxyWallet);
 const random = new Set<string>();
-if (N_RANDOM > 0 && process.env.SAMPLE === "active") {
+const SAMPLE_FILE = ".cache/active-sample.json";
+const savedSample = await readFile(SAMPLE_FILE, "utf8").then((s) => JSON.parse(s) as string[]).catch(() => null);
+if (N_RANDOM > 0 && process.env.SAMPLE === "active" && savedSample) {
+  for (const w of savedSample.slice(0, N_RANDOM)) random.add(w);
+} else if (N_RANDOM > 0 && process.env.SAMPLE === "active") {
   // Unbiased by profit: other wallets active in the same sports markets the top wallets traded.
   const markets = new Set<string>();
   for (const w of top) for (const t of await publicWalletHistory(w, 1000)) markets.add(t.conditionId);
@@ -39,6 +43,8 @@ if (N_RANDOM > 0 && process.env.SAMPLE === "active") {
   for (const m of shuffled) for (const w of new Set(await publicMarketTakers(m))) seen.set(w, (seen.get(w) ?? 0) + 1);
   const active = [...seen].filter(([w, n]) => n >= 3 && !top.includes(w)).map(([w]) => w);
   for (const w of active.sort(() => Math.random() - 0.5).slice(0, N_RANDOM)) random.add(w);
+  await mkdir(".cache", { recursive: true });
+  await writeFile(SAMPLE_FILE, JSON.stringify([...random]));
 } else if (N_RANDOM > 0) {
   const closed = await api.events({ platform: "polymarket", status: "closed", category: "SPORTS", sort: "newest", limit: 40 });
   for (const ev of closed.data) {
@@ -53,6 +59,7 @@ console.log(`source=${PUBLIC ? "public" : "tatum"} wallets=${top.length}+${rando
 // 2. Histories and resolutions
 const resolutions = new Map<string, ResolutionLike | null>();
 async function resolve(ids: string[]) {
+  if (PUBLIC) await prefetchResolutions(ids.filter((id) => !resolutions.has(id)));
   for (const id of ids) {
     if (resolutions.has(id)) continue;
     try {
