@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+.next/
+coverage/
+*.log
+~$*
+
+# Local research notes, blueprints and reference clones (not part of the submission)
+research/

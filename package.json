@@ -1,0 +1,30 @@
+{
+  "name": "calibre",
+  "private": true,
+  "description": "CALIBRE: learns who is actually right about what, from onchain track records, and turns it into a better forecast.",
+  "type": "module",
+  "packageManager": "pnpm@10.18.3",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "spike:prediction": "tsx scripts/spike-prediction.ts",
+    "spike:memwal": "tsx scripts/spike-memwal.ts",
+    "spike:grpc": "tsx scripts/spike-grpc.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.0",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "1.14.7",
+    "@mysten-incubation/memwal": "0.1.12",
+    "@mysten/sui": "2.38.0",
+    "@protobuf-ts/grpc-transport": "2.11.1",
+    "dotenv": "17.2.3"
+  }
+}

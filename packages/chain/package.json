@@ -1,0 +1,8 @@
+{
+  "name": "@calibre/chain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "Tatum clients: Sui gRPC (native) and the Prediction Markets API."
+}

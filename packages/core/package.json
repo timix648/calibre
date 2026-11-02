@@ -1,0 +1,8 @@
+{
+  "name": "@calibre/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "Pure scoring functions: Brier skill vs market, shrinkage, logit blending, calibration."
+}
