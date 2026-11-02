@@ -62,13 +62,15 @@ export function tradesToPicks(
     const resolved = norm(res.outcome);
     if (!resolved || (res.outcomes && !res.outcomes.some((o) => norm(o) === resolved))) continue;
     const won: Outcome = norm(t.outcome) === resolved ? 1 : 0;
-    const pSrc = impliedProb(t.side === "BUY" ? "YES" : "NO", t.price, k);
+    // A sell of X at q is a bet on "not X" at 1 - q, so score it from that side.
+    const buy = t.side === "BUY";
+    const pMkt = buy ? t.price : 1 - t.price;
     const { league, marketType } = classifySlug(t.slug);
     out.push({
       marketId: t.conditionId,
-      pSrc,
-      pMkt: t.price,
-      y: won,
+      pSrc: impliedProb("YES", pMkt, k),
+      pMkt,
+      y: buy ? won : ((1 - won) as Outcome),
       ts: t.timestamp * 1000,
       league,
       marketType,

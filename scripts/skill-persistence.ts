@@ -1,8 +1,8 @@
-// Experiment: does a wallet's skill against the price it paid persist from its older trades to its newer ones?
+// Experiment: does a wallet's edge against the price it paid persist from its older trades to its newer ones?
 // If it does, weighting market moves by learned wallet skill can carry information; if not, CALIBRE must say so.
 import { mkdir, writeFile } from "node:fs/promises";
 import { PredictionClient, type WalletTrade } from "../packages/chain/src/index.js";
-import { brierSkill, onePickPerMarket, tradesToPicks, type CategorisedPick, type ResolutionLike } from "../packages/core/src/index.js";
+import { priceEdge, onePickPerMarket, tradesToPicks, type CategorisedPick, type ResolutionLike } from "../packages/core/src/index.js";
 import { need } from "./env.js";
 
 const N_TOP = Number(process.env.N_TOP ?? 25);
@@ -47,11 +47,11 @@ for (const [group, wallets] of samples) {
     done++;
     if (picks.length < MIN_PICKS) { console.log(`[${done}] ${group} ${w.slice(0, 10)} only ${picks.length} resolved picks`); continue; }
     const half = Math.floor(picks.length / 2);
-    const old = brierSkill(picks.slice(0, half), { halfLifeDays: Infinity });
-    const recent = brierSkill(picks.slice(half), { halfLifeDays: Infinity });
+    const old = priceEdge(picks.slice(0, half), { halfLifeDays: Infinity });
+    const recent = priceEdge(picks.slice(half), { halfLifeDays: Infinity });
     const leagues = [...new Set(picks.map((p) => p.league))].slice(0, 4).join(",");
-    rows.push({ group, wallet: w, n: picks.length, bssOld: old.bss, bssNew: recent.bss, leagues });
-    console.log(`[${done}] ${group} ${w.slice(0, 10)} picks=${picks.length} skill old=${old.bss.toFixed(3)} new=${recent.bss.toFixed(3)} ${leagues}`);
+    rows.push({ group, wallet: w, n: picks.length, bssOld: old.edge, bssNew: recent.edge, leagues });
+    console.log(`[${done}] ${group} ${w.slice(0, 10)} picks=${picks.length} edge old=${old.edge.toFixed(3)} (z ${old.z.toFixed(1)}) new=${recent.edge.toFixed(3)} (z ${recent.z.toFixed(1)}) ${leagues}`);
   }
 }
 

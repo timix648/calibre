@@ -28,9 +28,12 @@ describe("tradesToPicks", () => {
     expect(picks[0]!.pSrc).toBeCloseTo(impliedProb("YES", 0.4));
   });
 
-  it("treats a sell as a belief below the price", () => {
+  it("scores a sell as a bet on the other side at 1 - price", () => {
+    // Sold Magic at 0.40 and Magic won: a losing bet on "not Magic" at 0.60.
     const [p] = tradesToPicks([trade({ side: "SELL" })], res);
-    expect(p!.pSrc).toBeLessThan(0.4);
+    expect(p).toMatchObject({ pMkt: 0.6, y: 0 });
+    const [q] = tradesToPicks([trade({ side: "SELL", conditionId: "m2" })], res);
+    expect(q).toMatchObject({ pMkt: 0.6, y: 1 });
   });
 
   it("skips unresolved markets and impossible prices", () => {
