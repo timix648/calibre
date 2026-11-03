@@ -94,32 +94,67 @@ export function tradesToPicks<T extends TradeLike>(
   const out: CategorisedPick[] = [];
   for (const t of trades) {
     const res = resolutions.get(t.conditionId);
-    if (!res || !(t.price > MIN_PICK_PRICE && t.price < MAX_PICK_PRICE) || !(t.size > 0)) continue;
+    if (!res || !(t.price > MIN_PICK_PRICE && t.price < MAX_PICK_PRICE)) continue;
     const cutoff = inPlayCutoff(res);
     // In-play skill is reaction speed during a live event; pre-game skill is forecasting. They are scored separately.
     const inPlay = cutoff !== undefined && t.timestamp * 1000 >= cutoff;
     if (phase === "pregame" && inPlay) continue;
     if (phase === "inplay" && (cutoff === undefined || !inPlay)) continue;
-    const resolved = norm(res.outcome);
-    if (!resolved || (res.outcomes && !res.outcomes.some((o) => norm(o) === resolved))) continue;
-    const won: Outcome = norm(t.outcome) === resolved ? 1 : 0;
-    // A sell of X at q is a bet on "not X" at 1 - q, so score it from that side.
-    const buy = t.side === "BUY";
-    const pMkt = buy ? t.price : 1 - t.price;
-    const category = leagueFor?.(t);
-    const { league, marketType } = category ? { league: category, marketType: "other" as const } : classifySlug(t.slug);
-    out.push({
-      marketId: t.conditionId,
-      pSrc: impliedProb("YES", pMkt, k),
-      pMkt,
-      y: buy ? won : ((1 - won) as Outcome),
-      ts: t.timestamp * 1000,
-      league,
-      marketType,
-      notional: t.price * t.size,
-    });
+    const pick = scoreTrade(t, res, k, leagueFor);
+    if (pick) out.push(pick);
   }
   return out;
+}
+
+/** True when a fill's price says the outcome was effectively already decided (0.97 and above, or 0.03 and below). */
+export function isSnipePrice(price: number): boolean {
+  return price >= MAX_PICK_PRICE || price <= MIN_PICK_PRICE;
+}
+
+/**
+ * The bets `tradesToPicks` drops for being priced at 0.97 and above or 0.03 and below ("sniping" an outcome that is
+ * already decided), scored the same way against the resolution, in every phase. Prices of exactly 0 or 1 are impossible fills
+ * and are skipped.
+ */
+export function tradesToSnipePicks<T extends TradeLike>(
+  trades: T[],
+  resolutions: Map<string, ResolutionLike | null>,
+  k = 0.25,
+  leagueFor?: (trade: T) => string | null | undefined,
+): CategorisedPick[] {
+  const out: CategorisedPick[] = [];
+  for (const t of trades) {
+    const res = resolutions.get(t.conditionId);
+    if (!res || !isSnipePrice(t.price) || !(t.price > 0 && t.price < 1)) continue;
+    const pick = scoreTrade(t, res, k, leagueFor);
+    if (pick) out.push(pick);
+  }
+  return out;
+}
+
+/** One trade scored against its market's resolution, with no price or phase filtering (null: unscorable). */
+function scoreTrade<T extends TradeLike>(
+  t: T, res: ResolutionLike, k: number, leagueFor?: (trade: T) => string | null | undefined,
+): CategorisedPick | null {
+  if (!(t.size > 0)) return null;
+  const resolved = norm(res.outcome);
+  if (!resolved || (res.outcomes && !res.outcomes.some((o) => norm(o) === resolved))) return null;
+  const won: Outcome = norm(t.outcome) === resolved ? 1 : 0;
+  // A sell of X at q is a bet on "not X" at 1 - q, so score it from that side.
+  const buy = t.side === "BUY";
+  const pMkt = buy ? t.price : 1 - t.price;
+  const category = leagueFor?.(t);
+  const { league, marketType } = category ? { league: category, marketType: "other" as const } : classifySlug(t.slug);
+  return {
+    marketId: t.conditionId,
+    pSrc: impliedProb("YES", pMkt, k),
+    pMkt,
+    y: buy ? won : ((1 - won) as Outcome),
+    ts: t.timestamp * 1000,
+    league,
+    marketType,
+    notional: t.price * t.size,
+  };
 }
 
 /**
