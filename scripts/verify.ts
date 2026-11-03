@@ -86,11 +86,11 @@ const lines: string[] = [
   "",
   "## Sealed verdicts",
   "",
-  verdicts.length === 0 ? "None yet." : "| Market | League | Label | Sharp share | Forecast | Price after move | Sui checkpoint | Blob |",
-  ...(verdicts.length === 0 ? [] : ["|---|---|---|---|---|---|---|---|"]),
+  verdicts.length === 0 ? "None yet." : "| Market | League | Label | Data source | Sharp share | Forecast | Price after move | Sui checkpoint | Blob |",
+  ...(verdicts.length === 0 ? [] : ["|---|---|---|---|---|---|---|---|---|"]),
   ...verdicts.map((v) => {
     const d = v.data;
-    return `| ${d.question.replace(/\|/g, "/")} | ${d.league} | ${d.label} | ${(d.sharpShare * 100).toFixed(0)}% | ${(d.forecast * 100).toFixed(1)}% | ${(d.priceAtVerdict * 100).toFixed(1)}% | ${d.checkpoint.sequence} | ${link(blobOf.get(`verdict:${v.key}:${v.version}`) ?? "")} |`;
+    return `| ${d.question.replace(/\|/g, "/")} | ${d.league} | ${d.label} | ${d.source ?? "tatum"} | ${(d.sharpShare * 100).toFixed(0)}% | ${(d.forecast * 100).toFixed(1)}% | ${(d.priceAtVerdict * 100).toFixed(1)}% | ${d.checkpoint.sequence} | ${link(blobOf.get(`verdict:${v.key}:${v.version}`) ?? "")} |`;
   }),
   "",
   "## Graded outcomes",

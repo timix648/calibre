@@ -119,3 +119,15 @@ keeps Tatum as the primary source and falls back to Polymarket's free public API
 - Most midterm takers are new accounts: 98 wallets have a resolved politics bet and only 26 have n >= 30. The politics skill
   signal is therefore thin (1 wallet with z >= 2, 4 with z <= -2), and a politics verdict will often read "noise" because few
   of the traders in a move are in the index.
+
+## Running the loop through election night
+`pnpm watch --loop 10 --min-jump 0.04` scans 16 sports and 14 midterm markets every 10 minutes. Tatum calls per hour while the
+history endpoint is still broken: about 30 (each market is re-probed once an hour when its breaker expires), 3 for event lists
+(sports volume, sports liquidity, politics, each kept 60 minutes), and 2 per judged market (market and live price), so roughly
+40 to 45 an hour with a handful of verdicts. The watcher stops asking Tatum for history and trades once 40 calls are on the
+hourly meter (`--tatum-hourly 50` minus 10 reserved for judging), so it cannot exceed about 50 an hour even after Tatum
+recovers. Run `pnpm grade` every hour or two once markets resolve, and `pnpm verify` to refresh `docs/PROOF.md`.
+
+First live run (3 Nov, 11:45 UTC, `--min-jump 0.04`): all 30 markets were served from Polymarket public data (Tatum history
+empty for every one), 3 moves were found, one was skipped because the market had settled (live mid 0%), two verdicts were sealed
+and `pnpm verify` rebuilt both from Walrus. No midterm market had moved 4 points in the last hour.
