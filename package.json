@@ -14,7 +14,8 @@
     "watch": "pnpm --filter @calibre/worker watch",
     "grade": "pnpm --filter @calibre/worker grade",
     "verify": "tsx scripts/verify.ts",
-    "export:site": "tsx scripts/export-site.ts"
+    "export:site": "tsx scripts/export-site.ts",
+    "mcp": "pnpm --silent --filter @calibre/mcp start"
   },
   "engines": {
     "node": ">=20"

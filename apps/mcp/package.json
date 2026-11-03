@@ -1,0 +1,19 @@
+{
+  "name": "@calibre/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CALIBRE MCP server (stdio): audit any Polymarket wallet and read the latest sealed verdicts.",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@calibre/core": "workspace:*",
+    "@calibre/public-data": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}
