@@ -47,6 +47,23 @@ describe("tradesToPicks", () => {
   });
 });
 
+describe("tradesToPicks phase", () => {
+  const start = 1_790_000_000_000;
+  const res = new Map([["m1", { outcome: "Magic", startTs: start }]]);
+  const pre = trade({ timestamp: start / 1000 - 600 });
+  const live = trade({ timestamp: start / 1000 + 600 });
+
+  it("keeps only pre-game trades by default, only live ones for inplay, both for all", () => {
+    expect(tradesToPicks([pre, live], res)).toHaveLength(1);
+    expect(tradesToPicks([pre, live], res, 0.25, undefined, "inplay").map((p) => p.ts)).toEqual([live.timestamp * 1000]);
+    expect(tradesToPicks([pre, live], res, 0.25, undefined, "all")).toHaveLength(2);
+  });
+
+  it("does not guess the phase for inplay when no start or close time is known", () => {
+    expect(tradesToPicks([live], new Map([["m1", { outcome: "Magic" }]]), 0.25, undefined, "inplay")).toEqual([]);
+  });
+});
+
 describe("onePickPerMarket", () => {
   it("merges fills of the same bet, size-weighted, keeping the earliest time", () => {
     const res = new Map([["m1", { outcome: "Magic" }]]);

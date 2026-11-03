@@ -65,7 +65,8 @@ async function resolve(ids: string[]) {
   for (const id of ids) {
     if (resolutions.has(id)) continue;
     try {
-      const hit = PUBLIC ? await tatumCached<{ data: Market }>(`/markets/${id}`) : null;
+      // PREGAME=1 resolves everything through Gamma, which carries game start times, so in-play bets are excluded.
+      const hit = PUBLIC && !process.env.PREGAME ? await tatumCached<{ data: Market }>(`/markets/${id}`) : null;
       if (hit?.data.resolution) {
         resolutions.set(id, { outcome: hit.data.resolution.outcome, outcomes: hit.data.outcomes.map((o) => o.name) });
       } else if (PUBLIC) {
@@ -86,7 +87,8 @@ for (const [group, wallets] of samples) {
     let trades: WalletTrade[] = [];
     try { trades = PUBLIC ? await publicWalletHistory(w, TRADES) : await api.walletHistory(w, TRADES); } catch (e) { console.log("skip", w, (e as Error).message.slice(0, 80)); continue; }
     await resolve([...new Set(trades.map((t) => t.conditionId))]);
-    const picks: CategorisedPick[] = onePickPerMarket(tradesToPicks(trades, resolutions)).sort((a, b) => a.ts - b.ts);
+    const phase = (process.env.PHASE ?? "pregame") as "pregame" | "inplay" | "all";
+    const picks: CategorisedPick[] = onePickPerMarket(tradesToPicks(trades, resolutions, 0.25, undefined, phase)).sort((a, b) => a.ts - b.ts);
     done++;
     if (picks.length < MIN_PICKS) { console.log(`[${done}] ${group} ${w.slice(0, 10)} only ${picks.length} resolved picks`); continue; }
     const half = Math.floor(picks.length / 2);

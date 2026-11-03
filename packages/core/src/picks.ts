@@ -82,18 +82,24 @@ const norm = (x: string) => x.trim().toLowerCase();
  * price of 0.97 and above or 0.03 and below, where the outcome was effectively known. `leagueFor` files a trade under a
  * category of its own (e.g. politics) instead of its slug's league; slugs of unknown leagues are filed as `other`.
  */
+export type TradePhase = "pregame" | "inplay" | "all";
+
 export function tradesToPicks<T extends TradeLike>(
   trades: T[],
   resolutions: Map<string, ResolutionLike | null>,
   k = 0.25,
   leagueFor?: (trade: T) => string | null | undefined,
+  phase: TradePhase = "pregame",
 ): CategorisedPick[] {
   const out: CategorisedPick[] = [];
   for (const t of trades) {
     const res = resolutions.get(t.conditionId);
     if (!res || !(t.price > MIN_PICK_PRICE && t.price < MAX_PICK_PRICE) || !(t.size > 0)) continue;
     const cutoff = inPlayCutoff(res);
-    if (cutoff !== undefined && t.timestamp * 1000 >= cutoff) continue;
+    // In-play skill is reaction speed during a live event; pre-game skill is forecasting. They are scored separately.
+    const inPlay = cutoff !== undefined && t.timestamp * 1000 >= cutoff;
+    if (phase === "pregame" && inPlay) continue;
+    if (phase === "inplay" && (cutoff === undefined || !inPlay)) continue;
     const resolved = norm(res.outcome);
     if (!resolved || (res.outcomes && !res.outcomes.some((o) => norm(o) === resolved))) continue;
     const won: Outcome = norm(t.outcome) === resolved ? 1 : 0;
