@@ -33,3 +33,31 @@ A trade's own price is the market price at the moment of the pick, so `pMkt = tr
 `pSrc = impliedProb(outcome bought, price)`. No price-history call is needed per pick; a source has positive
 skill exactly when its bought outcomes win more often than their prices implied. Map `outcomeIndex 0` to YES and
 `1` to NO, and compare the bought outcome's name with `resolution.outcome`.
+
+# Milestone 1 notes (3 Nov 2026)
+
+## Tatum Prediction API: what the live watcher found
+- `sort=endingSoon` lists long-finished events first (events from March 2026 still carry `status: active`), so it is
+  useless for finding games in play. The watcher lists `volume_desc` and `liquidity_desc` (`limit=100` is accepted) and
+  keeps events whose `closeTime` falls between 8 hours ago and 36 hours ahead (`selectCandidates` in `packages/core`).
+- An event's slug is `source.platformId` (e.g. `cs2-mglz-hero-2026-11-02`); markets carry no slug. League is its first segment.
+- Markets inside an active event can already be `resolved` (for example "Map 1 Winner"). Their history and trades
+  endpoints return empty arrays, so the watcher spends one history call to find that out and moves on.
+- `outcomes[0]` is YES (`chain.tokenIds.yes`); sports markets name it after the team. Grading maps the resolution name
+  to YES when it equals `outcomes[0].name`.
+- `PredictionClient.market()` used to make two calls for an uncached open market and never cached the resolved copy;
+  it now makes one call and keeps the resolved copy forever. `marketTradesSince` pages `/trades` with `pagination.cursor`.
+
+## Polymarket public data
+- Data API v2 renamed the market filter: `/v2/trades?market=` now returns 400, use `condition=`.
+- Gamma `/markets?closed=true&order=closedTime&ascending=false` pages 100 at a time and lists recent closes first;
+  game-winner markets are the ones whose slug ends in a date.
+- Gamma answers `[]` for markets that are not closed yet, and the file cache kept that forever. `prefetchResolutions`
+  takes `maxEmptyAgeMs` to look such markets up again, and `publicWalletHistory` takes `fresh` to skip cached pages.
+
+## Walrus Memory and Sui
+- `recall` returns at most 100 memories per query; `listMemories` pages the whole inventory (metadata only, no text).
+- Latest checkpoint: `ledgerService.getCheckpoint` with `readMask.paths = ["sequence_number", "digest", "summary.timestamp"]`
+  returns the sequence number, digest and certification time in about a second.
+- `pnpm --filter` runs scripts inside the package directory, so the worker moves to the repository root on start
+  (`apps/worker/src/lib/root.ts`) and every relative path (`.env`, `.cache`, `docs`) keeps working.

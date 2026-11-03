@@ -155,15 +155,27 @@ export class PredictionClient {
     return join(this.opts.cacheDir, createHash("sha1").update(path).digest("hex") + ".json");
   }
 
+  private async readCache<T>(path: string, ttlMs: number): Promise<T | null> {
+    const file = ttlMs > 0 ? this.cachePath(path) : null;
+    if (!file) return null;
+    try {
+      const hit = JSON.parse(await readFile(file, "utf8")) as { at: number; body: T };
+      if (Date.now() - hit.at < ttlMs) return hit.body;
+    } catch { /* miss */ }
+    return null;
+  }
+
+  private async writeCache(path: string, body: unknown): Promise<void> {
+    const file = this.cachePath(path);
+    if (!file) return;
+    await mkdir(this.opts.cacheDir!, { recursive: true });
+    await writeFile(file, JSON.stringify({ at: Date.now(), path, body }));
+  }
+
   async get<T>(path: string, cache: CacheOptions = {}): Promise<T> {
     const ttl = cache.ttlMs ?? 0;
-    const file = ttl > 0 ? this.cachePath(path) : null;
-    if (file) {
-      try {
-        const hit = JSON.parse(await readFile(file, "utf8")) as { at: number; body: T };
-        if (Date.now() - hit.at < ttl) return hit.body;
-      } catch { /* miss */ }
-    }
+    const hit = await this.readCache<T>(path, ttl);
+    if (hit !== null) return hit;
 
     for (let attempt = 0; ; attempt++) {
       await this.spend();
@@ -171,10 +183,7 @@ export class PredictionClient {
       const res = await this.fetchImpl(PREDICTION_BASE + path, { headers: { "x-api-key": this.apiKey } });
       if (res.ok) {
         const body = (await res.json()) as T;
-        if (file) {
-          await mkdir(this.opts.cacheDir!, { recursive: true });
-          await writeFile(file, JSON.stringify({ at: Date.now(), path, body }));
-        }
+        if (ttl > 0) await this.writeCache(path, body);
         return body;
       }
       const retryable = res.status === 429 || res.status >= 500;
@@ -187,12 +196,34 @@ export class PredictionClient {
     return this.get<{ data: PredictionEvent[]; pagination: { cursor?: string } }>(`/events${qs(p)}`, { ttlMs: 5 * 60_000 });
   }
 
-  /** Resolved markets never change, so they are cached forever; open ones for a minute. */
+  /**
+   * A resolved market never changes, so it is cached forever and served without a request.
+   * An open market is fetched at most once a minute; once it resolves, the resolved copy is kept for good.
+   */
   async market(id: string): Promise<Market> {
     const path = `/markets/${id}`;
-    const cached = await this.get<{ data: Market }>(path, { ttlMs: Infinity }).catch(() => null);
-    if (cached?.data.resolution) return cached.data;
-    return (await this.get<{ data: Market }>(path + qs({ t: Math.floor(Date.now() / 60_000) }), { ttlMs: 60_000 })).data;
+    const kept = await this.readCache<{ data: Market }>(path, Infinity);
+    if (kept?.data.resolution) return kept.data;
+    const fresh = await this.get<{ data: Market }>(path + qs({ t: Math.floor(Date.now() / 60_000) }), { ttlMs: 60_000 });
+    if (fresh.data.resolution) await this.writeCache(path, fresh);
+    return fresh.data;
+  }
+
+  /**
+   * Trades newest first, paging back with the cursor until a trade older than `sinceMs` is seen
+   * or `maxPages` pages (100 trades each) were read. Trades older than `sinceMs` are dropped.
+   */
+  async marketTradesSince(id: string, sinceMs: number, maxPages = 5): Promise<MarketTrade[]> {
+    const out: MarketTrade[] = [];
+    let cursor: string | undefined;
+    for (let page = 0; page < maxPages; page++) {
+      const r = await this.marketTrades(id, { limit: 100, cursor });
+      const fresh = r.data.filter((t) => Date.parse(t.timestamp) >= sinceMs);
+      out.push(...fresh);
+      if (fresh.length < r.data.length || r.data.length < 100 || !r.pagination.cursor) break;
+      cursor = r.pagination.cursor;
+    }
+    return out;
   }
 
   async marketTrades(id: string, p: { limit?: number; cursor?: string } = {}) {

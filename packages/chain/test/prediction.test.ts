@@ -1,7 +1,7 @@
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { PredictionApiError, PredictionClient } from "../src/prediction.js";
 
 type Reply = { status: number; body: unknown };
@@ -82,5 +82,40 @@ describe("PredictionClient", () => {
     await Promise.all([c.walletTrades("a"), c.walletTrades("b"), c.walletTrades("c")]);
     expect(waits.length).toBeGreaterThanOrEqual(2);
     expect(Math.max(...waits)).toBeGreaterThan(400);
+  });
+  it("fetches an open market once, then keeps the resolved copy for good", async () => {
+    dir = await mkdtemp(join(tmpdir(), "calibre-market-"));
+    const open = { data: { id: "m2", resolution: null } };
+    const resolved = { data: { id: "m2", resolution: { outcome: "YES", resolvedAt: "2026-01-01", source: "UMA" } } };
+    const f = fakeFetch([{ status: 200, body: open }, { status: 200, body: resolved }]);
+    const c = new PredictionClient("k", { fetch: f.fn, sleep: noSleep, cacheDir: dir });
+    const now = vi.spyOn(Date, "now");
+    const t0 = Date.now();
+    now.mockReturnValue(t0);
+    expect((await c.market("m2")).resolution).toBeNull();
+    expect(f.calls).toHaveLength(1);
+    now.mockReturnValue(t0 + 120_000);
+    expect((await c.market("m2")).resolution?.outcome).toBe("YES");
+    expect(f.calls).toHaveLength(2);
+    now.mockReturnValue(t0 + 600_000);
+    expect((await c.market("m2")).resolution?.outcome).toBe("YES");
+    expect(f.calls).toHaveLength(2);
+    now.mockRestore();
+  });
+
+  it("pages market trades back with the cursor and stops at the cutoff", async () => {
+    const trade = (ts: string) => ({ tradeId: ts, timestamp: ts });
+    const hour = (h: number) => new Date(Date.UTC(2026, 10, 3, h)).toISOString();
+    const pageOf = (hours: number[], cursor?: string) => ({
+      status: 200,
+      body: { data: hours.map((h) => trade(hour(h))), pagination: cursor ? { cursor } : {} },
+    });
+    const full = Array.from({ length: 100 }, () => 12);
+    const f = fakeFetch([pageOf(full, "c1"), pageOf([...Array.from({ length: 60 }, () => 11), ...Array.from({ length: 40 }, () => 9)], "c2")]);
+    const c = new PredictionClient("k", { fetch: f.fn, sleep: noSleep });
+    const trades = await c.marketTradesSince("m1", Date.UTC(2026, 10, 3, 10), 5);
+    expect(trades).toHaveLength(160);
+    expect(f.calls).toHaveLength(2);
+    expect(f.calls[1]!.url).toContain("cursor=c1");
   });
 });
