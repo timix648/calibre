@@ -1,0 +1,11 @@
+{
+  "name": "@calibre/public-data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "Live wallet audit from Polymarket's free public APIs (Data API v2 and Gamma). Uses fetch only, so it runs in a serverless function.",
+  "dependencies": {
+    "@calibre/core": "workspace:*"
+  }
+}
