@@ -1,10 +1,10 @@
 import type { Market, WalletTrade } from "../../../../packages/chain/src/index.js";
 import {
-  MIN_BETS_FOR_VERDICT, POLITICS, categoryFromTags, needsNewVersion, onePickPerMarket, priceEdge, tradesToPicks, walletKey, walletRecord,
+  MIN_BETS_FOR_VERDICT, OTHER, POLITICS, categoryFromTags, needsNewVersion, onePickPerMarket, priceEdge, tradesToPicks, walletKey, walletRecord,
   type ResolutionLike, type WalletEdgeRow, type WalletSkill,
 } from "../../../../packages/core/src/index.js";
 import { encode, NAMESPACES, type MemoryStore } from "../../../../packages/memory/src/index.js";
-import { prefetchResolutions, publicEventTags, publicResolution } from "../../../../scripts/public-source.js";
+import { cachedMarketTimes, prefetchResolutions, publicEventTags, publicResolution } from "../../../../scripts/public-source.js";
 import { MEMORY_STATE_FILE, WALLET_INDEX_FILE, readJson, tatumCached, writeJson } from "./config.js";
 
 export const HALF_LIFE_DAYS = 60;
@@ -19,7 +19,16 @@ export async function loadResolutions(
   const needGamma: string[] = [];
   for (const id of todo) {
     const hit = await tatumCached<{ data: Market }>(`/markets/${id}`);
-    if (hit?.data.resolution) into.set(id, { outcome: hit.data.resolution.outcome, outcomes: hit.data.outcomes.map((o) => o.name) });
+    if (hit?.data.resolution) {
+      // Tatum's market has no game start; take it from the Gamma row when that is cached, else use Tatum's close time.
+      const times = await cachedMarketTimes(id);
+      const closeTs = Date.parse(hit.data.closeTime);
+      into.set(id, {
+        outcome: hit.data.resolution.outcome, outcomes: hit.data.outcomes.map((o) => o.name),
+        ...(times.startTs !== undefined ? { startTs: times.startTs } : {}),
+        ...(times.closeTs !== undefined ? { closeTs: times.closeTs } : Number.isFinite(closeTs) ? { closeTs } : {}),
+      });
+    }
     else needGamma.push(id);
   }
   await prefetchResolutions(needGamma, opts);
@@ -70,13 +79,14 @@ export const loadMemoryState = () => readJson<Record<string, MemoryState>>(MEMOR
 
 /**
  * Write a wallet memory for every given row whose edge is new or moved by at least 0.5 pts since its last
- * version, 20 per request. Walrus Memory has no update, so each change is a higher version of the same key.
- * Returns how many memories were written.
+ * version, 20 per request. A row needs 30 bets for its first memory; a key that already has one is always re-versioned
+ * when its edge changes, so an old claim never outlives the evidence behind it. Walrus Memory has no update, so each
+ * change is a higher version of the same key. Rows in the "other" bucket are never written. Returns how many were written.
  */
 export async function sealWalletMemories(store: MemoryStore, rows: WalletEdgeRow[], log: (s: string) => void = console.log): Promise<number> {
   const state = await loadMemoryState();
   const todo = rows
-    .filter((r) => r.n >= MIN_BETS_FOR_VERDICT && needsNewVersion(state[walletKey(r.wallet, r.league)]?.edge, r.edge));
+    .filter((r) => r.league !== OTHER && (r.n >= MIN_BETS_FOR_VERDICT || state[walletKey(r.wallet, r.league)] !== undefined) && needsNewVersion(state[walletKey(r.wallet, r.league)]?.edge, r.edge));
   let written = 0;
   for (let i = 0; i < todo.length; i += 20) {
     const batch = todo.slice(i, i + 20);

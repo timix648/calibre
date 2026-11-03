@@ -1,4 +1,4 @@
-import { leagueOf } from "./wording.js";
+import { leagueOf } from "./leagues.js";
 import type { PricePoint } from "./moves.js";
 
 /** The fields of a Tatum event that market discovery needs. */

@@ -12,7 +12,8 @@ describe("classifySlug", () => {
     ["nba-was-orl-2026-11-02-spread-home-2pt5", "nba", "spread"],
     ["nfl-sea-den-2026-10-15", "nfl", "moneyline"],
     ["epl-ars-che-2026-11-08-player-saka-anytime", "epl", "prop"],
-    ["will-bitcoin-hit-150k", "will", "other"],
+    ["will-bitcoin-hit-150k", "other", "other"],
+    ["highest-temperature-in-chongqing-on-october-31-2026-20c", "other", "other"],
   ])("%s", (slug, league, type) => {
     expect(classifySlug(slug)).toEqual({ league, marketType: type });
   });

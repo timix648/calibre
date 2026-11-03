@@ -11,6 +11,14 @@ export interface FlowTrade {
   size: number;
 }
 
+/** A wallet's learned edge counts for at most this much (probability points), however large its history says it is. */
+export const MAX_WALLET_EDGE = 0.08;
+/** The forecast never leaves the post-move price by more than this. */
+export const MAX_FORECAST_SHIFT = 0.1;
+/** Version of the judging model. v2: edge cap, alpha 0.5, weights by share of total flow, forecast cap. v1 verdicts predate it. */
+export const MODEL_VERSION = "v2";
+export type ModelVersion = "v1" | "v2";
+
 export type WalletSkill = Pick<Edge, "edge" | "effN">;
 
 export interface WalletFlow {
@@ -19,7 +27,7 @@ export interface WalletFlow {
   netYesUsd: number;
   /** Notional-weighted YES-equivalent price this wallet traded at. */
   avgYesPrice: number;
-  /** Learned edge after shrinkage (probability points); 0 for unknown wallets. */
+  /** Learned edge after shrinkage and the cap (probability points); 0 for unknown wallets. */
   edge: number;
   /** This wallet's view of P(YES): its price shifted by its learned edge in the direction it bet. */
   pYes: number;
@@ -57,7 +65,7 @@ export function aggregateFlows(trades: FlowTrade[], skillOf: (wallet: string) =>
   }
   return [...byWallet].map(([wallet, a]) => {
     const skill = skillOf(wallet);
-    const edge = skill ? Math.max(0, shrunkEdge(skill, n0)) : 0;
+    const edge = skill ? clamp(shrunkEdge(skill, n0), 0, MAX_WALLET_EDGE) : 0;
     const avgYesPrice = a.pAcc / a.usd;
     const pYes = clamp(avgYesPrice + Math.sign(a.net) * edge, 0.01, 0.99);
     return { wallet, netYesUsd: a.net, avgYesPrice, edge, pYes, skill };
@@ -69,17 +77,18 @@ export function aggregateFlows(trades: FlowTrade[], skillOf: (wallet: string) =>
  * sharp-led: most money pushing the move came from wallets with learned positive edge.
  * contested: such wallets bet against the move with comparable weight.
  * noise: almost none of the move came from them.
- * The forecast pools skilled wallets' views around the new price, weighted by their share of skilled money.
+ * The forecast pools skilled wallets' views around the new price, each weighted by its share of ALL money in the move
+ * (so a few skilled dollars in a crowd barely move it), damped by alpha 0.5, and never more than 10 points from the price.
  */
 export function judgeMove(pBefore: number, pAfter: number, flows: WalletFlow[], opts: { sharp?: number; noise?: number; alpha?: number } = {}): MoveVerdict {
   const dir = Math.sign(pAfter - pBefore) || 1;
-  let aligned = 0, alignedSharp = 0, withSkill = 0, againstSkill = 0, skilledUsd = 0;
+  let aligned = 0, alignedSharp = 0, withSkill = 0, againstSkill = 0, totalUsd = 0;
   for (const f of flows) {
     const usd = Math.abs(f.netYesUsd);
+    totalUsd += usd;
     const isAligned = Math.sign(f.netYesUsd) === dir;
     if (isAligned) { aligned += usd; if (f.edge > 0) alignedSharp += usd; }
     if (f.edge > 0) {
-      skilledUsd += usd;
       if (isAligned) withSkill += f.edge * usd; else againstSkill += f.edge * usd;
     }
   }
@@ -91,8 +100,9 @@ export function judgeMove(pBefore: number, pAfter: number, flows: WalletFlow[], 
     : sharpShare < (opts.noise ?? 0.15) ? "noise"
     : "mixed";
   const signals = flows
-    .filter((f) => f.edge > 0 && skilledUsd > 0)
-    .map((f) => ({ p: f.pYes, w: Math.abs(f.netYesUsd) / skilledUsd, sourceId: f.wallet }));
-  const forecast = blend(pAfter, signals, { alpha: opts.alpha ?? 1 }).p;
+    .filter((f) => f.edge > 0 && totalUsd > 0)
+    .map((f) => ({ p: f.pYes, w: Math.abs(f.netYesUsd) / totalUsd, sourceId: f.wallet }));
+  const pooled = blend(pAfter, signals, { alpha: opts.alpha ?? 0.5 }).p;
+  const forecast = clamp(pooled, pAfter - MAX_FORECAST_SHIFT, pAfter + MAX_FORECAST_SHIFT);
   return { label, sharpShare, opposition, forecast, wallets: flows };
 }

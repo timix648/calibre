@@ -102,8 +102,8 @@ describe("tradesToPicks with a category hook", () => {
     const picks = tradesToPicks([trade("0xa", "will-the-democrats-win"), trade("0xb", "nba-okc-cle-2026-11-02")], resolutions, 0.25, (t) => (t.conditionId === "0xa" ? POLITICS : null));
     expect(picks.map((p) => p.league)).toEqual(["politics", "nba"]);
   });
-  it("keeps the slug behaviour without a hook", () => {
-    expect(tradesToPicks([trade("0xa", "will-the-democrats-win")], resolutions)[0]!.league).toBe("will");
+  it("files an unknown league as other without a hook", () => {
+    expect(tradesToPicks([trade("0xa", "will-the-democrats-win")], resolutions)[0]!.league).toBe("other");
   });
 });
 

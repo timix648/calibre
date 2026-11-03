@@ -1,4 +1,5 @@
 import type { Outcome } from "./brier.js";
+import { leagueOf } from "./leagues.js";
 import { impliedProb } from "./positions.js";
 import type { ScoredPick } from "./skill.js";
 
@@ -18,6 +19,34 @@ export interface ResolutionLike {
   outcome: string;
   /** The market's outcome names; a resolution matching none of them (e.g. 50-50) is skipped. */
   outcomes?: string[];
+  /** When the game or event started (ms), from Gamma's gameStartTime / eventStartTime. Trades from then on are in-play. */
+  startTs?: number;
+  /** When the market closed or resolved (ms). Without a start time, the last hours before it are treated as in-play. */
+  closeTs?: number;
+}
+
+/** Without a known start time, trades in this long before the close are treated as in-play. */
+export const PRE_CLOSE_BUFFER_MS = 3 * 3_600_000;
+/** Fills at or beyond these prices say the outcome was already known, not forecast. */
+export const MIN_PICK_PRICE = 0.03;
+export const MAX_PICK_PRICE = 0.97;
+
+/**
+ * Time (ms) from which a trade no longer counts as a forecast: the event start when known, otherwise three hours before
+ * the close. Trades placed once a game is live, or just before resolution, are reaction speed, not skill.
+ */
+export function inPlayCutoff(res: Pick<ResolutionLike, "startTs" | "closeTs">): number | undefined {
+  if (res.startTs !== undefined && Number.isFinite(res.startTs)) return res.startTs;
+  if (res.closeTs !== undefined && Number.isFinite(res.closeTs)) return res.closeTs - PRE_CLOSE_BUFFER_MS;
+  return undefined;
+}
+
+/** A Gamma timestamp such as `2026-10-15 02:30:00+00` or `2026-10-14T14:14:12Z`, in ms; undefined when absent or unparsable. */
+export function parseGammaTime(value: unknown): number | undefined {
+  if (typeof value !== "string" || !value.trim()) return undefined;
+  const iso = value.trim().replace(" ", "T").replace(/([+-]\d{2})$/, "$1:00");
+  const ts = Date.parse(iso);
+  return Number.isFinite(ts) ? ts : undefined;
 }
 
 export interface CategorisedPick extends ScoredPick {
@@ -36,7 +65,7 @@ const MARKET_TYPES: [RegExp, CategorisedPick["marketType"]][] = [
 /** League and market type from a Polymarket slug, e.g. `nba-okc-cle-2026-11-02-total-227pt5`. */
 export function classifySlug(slug: string): { league: string; marketType: CategorisedPick["marketType"] } {
   const s = slug.toLowerCase();
-  const league = s.split("-")[0] || "other";
+  const league = leagueOf(s);
   for (const [re, type] of MARKET_TYPES) if (re.test(s)) return { league, marketType: type };
   // Game slugs end in a date (team-team-yyyy-mm-dd) when they are the plain winner market.
   return { league, marketType: /\d{4}-\d{2}-\d{2}$/.test(s) ? "moneyline" : "other" };
@@ -48,8 +77,10 @@ const norm = (x: string) => x.trim().toLowerCase();
  * Turn a wallet's trades into scored picks against resolved outcomes.
  * Buying an outcome at price q signals a belief above q; selling it signals a belief below q.
  * The market probability at pick time is the trade price itself. Unresolved markets and
- * 50-50 style resolutions (outcome matching no traded name) are skipped. `leagueFor` files a trade under a category
- * of its own (e.g. politics) instead of the first word of its slug.
+ * 50-50 style resolutions (outcome matching no traded name) are skipped, and so are trades that cannot be forecasts:
+ * placed once the game or event had started (or in the last three hours before the close when no start is known), or at a
+ * price of 0.97 and above or 0.03 and below, where the outcome was effectively known. `leagueFor` files a trade under a
+ * category of its own (e.g. politics) instead of its slug's league; slugs of unknown leagues are filed as `other`.
  */
 export function tradesToPicks<T extends TradeLike>(
   trades: T[],
@@ -60,7 +91,9 @@ export function tradesToPicks<T extends TradeLike>(
   const out: CategorisedPick[] = [];
   for (const t of trades) {
     const res = resolutions.get(t.conditionId);
-    if (!res || !(t.price > 0 && t.price < 1) || !(t.size > 0)) continue;
+    if (!res || !(t.price > MIN_PICK_PRICE && t.price < MAX_PICK_PRICE) || !(t.size > 0)) continue;
+    const cutoff = inPlayCutoff(res);
+    if (cutoff !== undefined && t.timestamp * 1000 >= cutoff) continue;
     const resolved = norm(res.outcome);
     if (!resolved || (res.outcomes && !res.outcomes.some((o) => norm(o) === resolved))) continue;
     const won: Outcome = norm(t.outcome) === resolved ? 1 : 0;

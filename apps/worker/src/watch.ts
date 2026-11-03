@@ -9,7 +9,7 @@ import {
   PredictionApiError, TatumBudgetExceeded, latestCheckpoint, type Market, type PredictionClient,
 } from "../../../packages/chain/src/index.js";
 import {
-  BREAKER_HOLD_MS, aggregateFlows, breakerOpen, callsInLastHour, candlePoints, judgeMove, latestMove, priceSeriesFromTrades,
+  BREAKER_HOLD_MS, MODEL_VERSION, aggregateFlows, breakerOpen, callsInLastHour, candlePoints, judgeMove, latestMove, priceSeriesFromTrades,
   publicTradesToFlows, selectCandidates, selectMidtermCandidates, tripBreaker, verdictKey, verdictRecord, walletKey,
   type BreakerState, type Candidate, type DataSource, type FlowTrade, type Move, type TimedFlowTrade, type VerdictData,
   type VerdictWallet, type WalletEdgeRow,
@@ -229,6 +229,7 @@ async function judgeAndSeal(
     forecast: verdict.forecast, priceAtVerdict: move.to, trades: fills.length, wallets: flows.length, topWallets,
     checkpoint: { sequence: checkpoint.sequence, digest: checkpoint.digest, timestamp: checkpoint.timestamp },
     sealedAt: new Date().toISOString(),
+    model: MODEL_VERSION,
     source: evidence.source,
     ...(evidence.source === "polymarket-public" ? { fallbackReason: evidence.fallbackReason } : {}),
   };

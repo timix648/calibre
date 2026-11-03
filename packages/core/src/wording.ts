@@ -19,11 +19,6 @@ export function skillPhrase(v: SkillVerdict): string {
   return v === "skill" ? "likely skill" : v;
 }
 
-/** League code from a market or event slug: its first segment, e.g. `nba-okc-cle-2026-11-02` gives `nba`. */
-export function leagueOf(slug: string): string {
-  return slug.trim().toLowerCase().split("-")[0] || "other";
-}
-
 export function leagueLabel(league: string): string {
   return league.toUpperCase();
 }

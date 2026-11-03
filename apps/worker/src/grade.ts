@@ -45,7 +45,7 @@ for (const v of pending) {
   fresh.push({
     verdictKey: v.key, marketId: d.marketId, question: d.question, label: d.label, resolution: market.resolution.outcome,
     yesWon: y, forecast: d.forecast, priceAtVerdict: d.priceAtVerdict, grade: gradeForecast(d.forecast, d.priceAtVerdict, y),
-    gradedAt: new Date().toISOString(),
+    gradedAt: new Date().toISOString(), model: d.model ?? "v1",
   });
 }
 await writeJson(CHECK_STATE_FILE, checked);
@@ -62,10 +62,13 @@ if (fresh.length > 0) {
   console.log(`outcomes sealed: ${stored.filter((s) => s.blobId).length}/${fresh.length}`);
 }
 
-// 3. Brier by label: CALIBRE's forecast against the market price right after the move
-if (outcomes.length > 0) {
-  console.log("\nlabel          n   forecast Brier   market Brier   gain      forecast closer");
-  for (const s of summariseGrades(outcomes.map((o) => ({ label: o.outcome.label, grade: o.outcome.grade })))) {
+// 3. Brier by label: CALIBRE's forecast against the market price right after the move, one table per judging model
+// (v1 verdicts predate the conservative forecast and are never pooled with v2).
+for (const model of ["v1", "v2"] as const) {
+  const graded = outcomes.filter((o) => (o.outcome.model ?? "v1") === model);
+  if (graded.length === 0) continue;
+  console.log(`\nmodel ${model}: label          n   forecast Brier   market Brier   gain      forecast closer`);
+  for (const s of summariseGrades(graded.map((o) => ({ label: o.outcome.label, grade: o.outcome.grade })))) {
     console.log(`${s.label.padEnd(12)} ${String(s.n).padStart(3)}   ${s.forecastBrier.toFixed(4).padStart(14)}   ${s.marketBrier.toFixed(4).padStart(12)}   ${s.gain.toFixed(4).padStart(7)}   ${(s.winRate * 100).toFixed(0)}%`);
   }
 }

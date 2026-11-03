@@ -1,25 +1,27 @@
 // M1.1: build the wallet skill index and seal wallet memories.
 //   pnpm index [--extra 150] [--max-memories 100] [--trades 1000] [--no-memory] [--reuse]
-//              [--no-politics] [--politics-markets 30] [--politics-wallets 120] [--max-politics-memories 60]
+//              [--refresh-only] [--no-politics] [--politics-markets 30] [--politics-wallets 120] [--max-politics-memories 60]
 // --reuse keeps the sports wallets already in the index instead of looking for new ones.
 // The politics segment samples takers of the busiest midterm markets (wallets seen in at least two of them) and scores
 // their resolved politics bets as category "politics".
 import type { WalletTrade } from "../../../packages/chain/src/index.js";
 import {
-  MIN_BETS_FOR_VERDICT, POLITICS, isMidtermEvent, type ResolutionLike, type WalletEdgeRow,
+  MIN_BETS_FOR_VERDICT, OTHER, POLITICS, isMidtermEvent, retiredWalletRows, walletKey, type ResolutionLike, type WalletEdgeRow,
 } from "../../../packages/core/src/index.js";
 import {
   publicEventMarkets, publicMarketTakers, publicWalletHistory, recentClosedGameMarkets,
 } from "../../../scripts/public-source.js";
 import { WALLET_INDEX_FILE, cliArgs, memoryStore, predictionClient, readJson, tatumCallsUsed, writeJson } from "./lib/config.js";
 import { activeEvents } from "./lib/events.js";
-import { loadResolutions, politicsRows, sealWalletMemories, walletRows } from "./lib/wallet-index.js";
+import { loadMemoryState, loadResolutions, politicsRows, sealWalletMemories, walletRows } from "./lib/wallet-index.js";
 
 const args = cliArgs();
 const EXTRA = Number(args.get("extra") ?? 150);
 const MAX_MEMORIES = Number(args.get("max-memories") ?? 100);
 const TRADES = Number(args.get("trades") ?? 1000);
 const WRITE_MEMORY = !args.has("no-memory");
+/** Only re-version memories that already exist; do not write first memories for newly ranked rows. */
+const REFRESH_ONLY = args.has("refresh-only");
 const POLITICS_ON = !args.has("no-politics");
 const POLITICS_MARKETS = Number(args.get("politics-markets") ?? 30);
 const POLITICS_WALLETS = Number(args.get("politics-wallets") ?? 120);
@@ -109,10 +111,20 @@ for (const r of [...politicsEligible].sort((a, b) => Math.abs(b.z) - Math.abs(a.
 if (WRITE_MEMORY) {
   const store = memoryStore();
   const ranked = eligible.filter((r) => r.league !== POLITICS).sort((a, b) => Math.abs(b.z) - Math.abs(a.z)).slice(0, MAX_MEMORIES);
-  const written = await sealWalletMemories(store, ranked);
-  const rankedPolitics = [...politicsEligible].sort((a, b) => Math.abs(b.z) - Math.abs(a.z)).slice(0, MAX_POLITICS_MEMORIES);
-  const writtenPolitics = await sealWalletMemories(store, rankedPolitics);
-  console.log(`wallet memories written: ${written} sports, ${writtenPolitics} politics`);
+  if (!REFRESH_ONLY) {
+    const written = await sealWalletMemories(store, ranked);
+    const rankedPolitics = [...politicsEligible].sort((a, b) => Math.abs(b.z) - Math.abs(a.z)).slice(0, MAX_POLITICS_MEMORIES);
+    const writtenPolitics = await sealWalletMemories(store, rankedPolitics);
+    console.log(`wallet memories written: ${written} sports, ${writtenPolitics} politics`);
+  }
+
+  // Keys that already have a memory get a new version when their edge moved by 0.5 pts or more, even if the wallet no
+  // longer qualifies; keys whose bets are all gone are retired with a zero-bet version.
+  const state = await loadMemoryState();
+  const retired = retiredWalletRows(Object.keys(state), rows, { sports: new Set(wallets.filter((w) => histories.has(w))), politics: new Set(politicsWallets.filter((w) => histories.has(w))) }, updatedAt);
+  const refresh = [...rows.filter((r) => r.league !== OTHER && state[walletKey(r.wallet, r.league)]), ...retired];
+  const refreshed = await sealWalletMemories(store, refresh);
+  console.log(`existing wallet memories re-versioned: ${refreshed} (${retired.length} retired because no scorable bet is left)`);
 }
 const { used, budget } = await tatumCallsUsed();
 console.log(`Tatum calls used: ${used}/${budget}`);

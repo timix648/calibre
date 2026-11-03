@@ -42,10 +42,15 @@ const wallets = envelopes<WalletMemoryData>(walletMems, "wallet");
 
 const byLabel = new Map<string, number>();
 for (const v of verdicts) byLabel.set(v.data.label, (byLabel.get(v.data.label) ?? 0) + 1);
-const grades = summariseGrades(outcomes.map((o) => ({ label: o.data.label, grade: o.data.grade })));
-console.log(`\nverdicts rebuilt from Walrus: ${verdicts.length} (${[...byLabel].map(([l, n]) => `${l} ${n}`).join(", ") || "none"})`);
+const modelOf = (e: { model?: string }) => e.model ?? "v1";
+const gradesByModel = (["v1", "v2"] as const).map((model) => ({
+  model,
+  grades: summariseGrades(outcomes.filter((o) => modelOf(o.data) === model).map((o) => ({ label: o.data.label, grade: o.data.grade }))),
+})).filter((m) => m.grades.length > 0);
+const modelCounts = (["v1", "v2"] as const).map((m) => `${m} ${verdicts.filter((v) => modelOf(v.data) === m).length}`).join(", ");
+console.log(`\nverdicts rebuilt from Walrus: ${verdicts.length} (${[...byLabel].map(([l, n]) => `${l} ${n}`).join(", ") || "none"}); by model: ${modelCounts}`);
 console.log(`outcomes rebuilt from Walrus: ${outcomes.length}`);
-for (const g of grades) console.log(`  ${g.label.padEnd(10)} n=${g.n} forecast Brier ${g.forecastBrier.toFixed(4)} vs market ${g.marketBrier.toFixed(4)} (gain ${g.gain.toFixed(4)})`);
+for (const { model, grades } of gradesByModel) for (const g of grades) console.log(`  ${model} ${g.label.padEnd(10)} n=${g.n} forecast Brier ${g.forecastBrier.toFixed(4)} vs market ${g.marketBrier.toFixed(4)} (gain ${g.gain.toFixed(4)})`);
 console.log(`wallet memories decoded from a recall sample: ${wallets.length}`);
 
 // 3. Consistency: Walrus listing, Walrus content and the local ledgers must agree
@@ -86,23 +91,25 @@ const lines: string[] = [
   "",
   "## Sealed verdicts",
   "",
-  verdicts.length === 0 ? "None yet." : "| Market | League | Label | Data source | Sharp share | Forecast | Price after move | Sui checkpoint | Blob |",
-  ...(verdicts.length === 0 ? [] : ["|---|---|---|---|---|---|---|---|---|"]),
+  "Model v1 verdicts (those without a model field) pooled skilled wallets by their share of skilled money with alpha 1 and no cap, so their forecasts can sit far from the price. Model v2 caps each wallet's edge at 8 points, weights wallets by their share of all money in the move, uses alpha 0.5 and keeps the forecast within 10 points of the price. Walrus is append-only, so v1 verdicts stay as sealed; they are graded separately from v2.",
+  "",
+  verdicts.length === 0 ? "None yet." : "| Market | League | Label | Model | Data source | Sharp share | Forecast | Price after move | Sui checkpoint | Blob |",
+  ...(verdicts.length === 0 ? [] : ["|---|---|---|---|---|---|---|---|---|---|"]),
   ...verdicts.map((v) => {
     const d = v.data;
-    return `| ${d.question.replace(/\|/g, "/")} | ${d.league} | ${d.label} | ${d.source ?? "tatum"} | ${(d.sharpShare * 100).toFixed(0)}% | ${(d.forecast * 100).toFixed(1)}% | ${(d.priceAtVerdict * 100).toFixed(1)}% | ${d.checkpoint.sequence} | ${link(blobOf.get(`verdict:${v.key}:${v.version}`) ?? "")} |`;
+    return `| ${d.question.replace(/\|/g, "/")} | ${d.league} | ${d.label} | ${modelOf(d)} | ${d.source ?? "tatum"} | ${(d.sharpShare * 100).toFixed(0)}% | ${(d.forecast * 100).toFixed(1)}% | ${(d.priceAtVerdict * 100).toFixed(1)}% | ${d.checkpoint.sequence} | ${link(blobOf.get(`verdict:${v.key}:${v.version}`) ?? "")} |`;
   }),
   "",
   "## Graded outcomes",
   "",
-  grades.length === 0 ? "No sealed verdict has resolved yet." : "| Label | Graded | CALIBRE forecast Brier | Market price Brier | Gain |",
-  ...(grades.length === 0 ? [] : ["|---|---|---|---|---|"]),
-  ...grades.map((g) => `| ${g.label} | ${g.n} | ${g.forecastBrier.toFixed(4)} | ${g.marketBrier.toFixed(4)} | ${g.gain.toFixed(4)} |`),
+  gradesByModel.length === 0 ? "No sealed verdict has resolved yet." : "| Model | Label | Graded | CALIBRE forecast Brier | Market price Brier | Gain |",
+  ...(gradesByModel.length === 0 ? [] : ["|---|---|---|---|---|---|"]),
+  ...gradesByModel.flatMap(({ model, grades }) => grades.map((g) => `| ${model} | ${g.label} | ${g.n} | ${g.forecastBrier.toFixed(4)} | ${g.marketBrier.toFixed(4)} | ${g.gain.toFixed(4)} |`)),
   "",
   ...(outcomes.length > 0 ? ["Outcome blobs: " + outcomes.map((o) => link(blobOf.get(`outcome:${o.key}:${o.version}`) ?? "")).join(", "), ""] : []),
   "## Wallet memories (sample)",
   "",
-  ...wallets.slice(0, 5).map((w) => `- ${w.summary} (v${w.version}): ${link(blobOf.get(`wallet:${w.key}:${w.version}`) ?? "")}`),
+  ...wallets.slice(0, 5).map((w) => `- ${w.summary} (memory version ${w.version}): ${link(blobOf.get(`wallet:${w.key}:${w.version}`) ?? "")}`),
   "",
   "## Consistency checks",
   "",

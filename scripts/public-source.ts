@@ -3,7 +3,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import type { WalletTrade } from "../packages/chain/src/index.js";
-import type { ResolutionLike } from "../packages/core/src/index.js";
+import { parseGammaTime, type ResolutionLike } from "../packages/core/src/index.js";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const DIR = ".cache/public";
@@ -104,7 +104,30 @@ export async function prefetchResolutions(conditionIds: string[], opts: { maxEmp
   }
 }
 
-/** Resolution of a closed market from Gamma: the outcome whose final price is 1. Null if not cleanly resolved. */
+/**
+ * When a Gamma market started and closed, from the row cached with its resolution. `startTs` is the game or event start
+ * (`gameStartTime`, else `eventStartTime`; `startDate` is when the market was listed, not when play began). `closeTs` is the
+ * earlier of the scheduled end and the actual close.
+ */
+export function gammaMarketTimes(m: any): Pick<ResolutionLike, "startTs" | "closeTs"> {
+  const startTs = parseGammaTime(m?.gameStartTime) ?? parseGammaTime(m?.eventStartTime);
+  const ends = [parseGammaTime(m?.endDate), parseGammaTime(m?.closedTime)].filter((x): x is number => x !== undefined);
+  return {
+    ...(startTs !== undefined ? { startTs } : {}),
+    ...(ends.length > 0 ? { closeTs: Math.min(...ends) } : {}),
+  };
+}
+
+/** Start and close times of a market whose Gamma row is already on disk; nothing is fetched. */
+export async function cachedMarketTimes(conditionId: string): Promise<Pick<ResolutionLike, "startTs" | "closeTs">> {
+  const rows = await cacheHit<any[]>(`gamma:${conditionId}`);
+  return gammaMarketTimes(rows?.[0]);
+}
+
+/**
+ * Resolution of a closed market from Gamma: the outcome whose final price is 1, with the market's start and close times
+ * (the cached row keeps every Gamma field). Null if not cleanly resolved.
+ */
 export async function publicResolution(conditionId: string): Promise<ResolutionLike | null> {
   const rows = await cached(`gamma:${conditionId}`, () =>
     getJson(`https://gamma-api.polymarket.com/markets?condition_ids=${conditionId}&closed=true`)) as any[];
@@ -113,7 +136,7 @@ export async function publicResolution(conditionId: string): Promise<ResolutionL
   const outcomes: string[] = JSON.parse(m.outcomes);
   const prices: number[] = JSON.parse(m.outcomePrices).map(Number);
   const winner = prices.findIndex((p) => p >= 0.99);
-  return winner >= 0 ? { outcome: outcomes[winner]!, outcomes } : null;
+  return winner >= 0 ? { outcome: outcomes[winner]!, outcomes, ...gammaMarketTimes(m) } : null;
 }
 
 /** Condition IDs of the most recently closed Polymarket markets whose slug ends in a date (the plain winner market of a game). */

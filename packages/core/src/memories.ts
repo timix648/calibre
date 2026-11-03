@@ -1,4 +1,4 @@
-import type { MoveLabel } from "./attribution.js";
+import type { ModelVersion, MoveLabel } from "./attribution.js";
 import type { Edge } from "./edge.js";
 import type { Grade } from "./grading.js";
 import type { DataSource } from "./fallback.js";
@@ -30,6 +30,26 @@ export const walletKey = (wallet: string, league: string) => `${wallet.toLowerCa
 
 export function needsNewVersion(previousEdge: number | undefined, edge: number): boolean {
   return previousEdge === undefined || Math.abs(edge - previousEdge) >= REVERSION_THRESHOLD;
+}
+
+/**
+ * Zero-bet rows for wallet memories whose evidence is gone: a key that has a memory but no longer has a single scorable bet
+ * (every one was in-play, at an extreme price or in a junk category). Written as "too early", they stop the newest version of
+ * that key from claiming an edge. Only wallets scored in this run are considered (`scored.politics` for the politics keys).
+ */
+export function retiredWalletRows(
+  memoryKeys: string[], rows: Pick<WalletEdgeRow, "wallet" | "league">[], scored: { sports: Set<string>; politics: Set<string> }, updatedAt: string,
+): WalletEdgeRow[] {
+  const present = new Set(rows.map((r) => walletKey(r.wallet, r.league)));
+  const out: WalletEdgeRow[] = [];
+  for (const key of memoryKeys) {
+    if (present.has(key)) continue;
+    const cut = key.indexOf(":");
+    const wallet = key.slice(0, cut), league = key.slice(cut + 1);
+    if (!(league === "politics" ? scored.politics : scored.sports).has(wallet)) continue;
+    out.push({ wallet, league, edge: 0, se: 0, z: 0, n: 0, effN: 0, updatedAt });
+  }
+  return out;
 }
 
 export function walletRecord(row: WalletEdgeRow, version: number): MemoryRecord<WalletMemoryData> {
@@ -76,6 +96,8 @@ export interface VerdictData {
   topWallets: VerdictWallet[];
   checkpoint: { sequence: string; digest: string | null; timestamp: string | null };
   sealedAt: string;
+  /** Judging model that produced the forecast. Verdicts sealed before the field existed were judged by v1. */
+  model?: ModelVersion;
   /** Where the market data behind the verdict came from (verdicts sealed before the fallback existed omit it: Tatum). */
   source?: DataSource;
   /** Why Polymarket public data was used instead of Tatum, present when `source` is `polymarket-public`. */
@@ -114,6 +136,8 @@ export interface OutcomeData {
   priceAtVerdict: number;
   grade: Grade;
   gradedAt: string;
+  /** Judging model of the verdict this grades (absent: v1). */
+  model?: ModelVersion;
 }
 
 export function outcomeRecord(d: OutcomeData): MemoryRecord<OutcomeData> {

@@ -131,3 +131,49 @@ recovers. Run `pnpm grade` every hour or two once markets resolve, and `pnpm ver
 First live run (3 Nov, 11:45 UTC, `--min-jump 0.04`): all 30 markets were served from Polymarket public data (Tatum history
 empty for every one), 3 moves were found, one was skipped because the market had settled (live mid 0%), two verdicts were sealed
 and `pnpm verify` rebuilt both from Walrus. No midterm market had moved 4 points in the last hour.
+
+# Review fixes: in-play edge, forecast overreach, junk categories (3 Nov 2026)
+
+## Wallet edge no longer counts in-play trades
+A review found wallets with absurd edges (+41 pts at z 9 on CS2). They trade live games, often seconds before the outcome is
+known; that is latency, not forecasting skill. `tradesToPicks` now drops a trade when
+- it was placed at or after the market's start, or
+- no start is known and it was placed in the last 3 hours before the market closed, or
+- its price is 0.97 or above, or 0.03 or below.
+
+Start and close come from the Gamma row that `prefetchResolutions` already caches with each resolution (the cache keeps every field,
+so no new requests were needed). What Gamma returns for closed markets in the cache (38,738 rows): `gameStartTime` on 75%
+(`2026-10-15 02:30:00+00`), `eventStartTime` on 20% (`2026-10-15T02:30:00Z`), neither on 13% (weather, politics and price
+ladders). `startDate` is when the market was listed, not when play began, so it is not used. Start = `gameStartTime`, else
+`eventStartTime`; close = the earlier of `endDate` and `closedTime`. Markets resolved from the Tatum cache take the start from the
+Gamma row when it is cached and Tatum's `closeTime` otherwise.
+
+Rebuilt index (`pnpm index --reuse`, all caches reused, no Tatum calls): rows 4,095 to 1,527, rows with n >= 30 from 423 to 141,
+rows with z >= 2 from 61 (35 wallets) to 6 (6 wallets), z <= -2 from 15 to 7. The top edge fell from +41.0 pts (z 9.1, CS2) to
++16.5 pts (z 1.8). Wallets such as `0xef1eee` (MLB, 261 bets) and `0x4738e7` (NBA, 177 bets) placed 995 and 978 of their last 1,000
+trades after the game had started, so nothing is left to score. Of the 126 wallet memories sealed earlier, 89 changed by 0.5 pts
+or more and were re-versioned; 28 had no scorable bet left and were re-versioned as zero-bet "too early" memories, so the newest
+version of those keys no longer claims an edge (Walrus is append-only: the old versions stay, but the highest version wins).
+A key that already has a memory is re-versioned when its edge changes even if the wallet fell below 30 bets; a first memory still
+needs 30 bets. `pnpm index --refresh-only` re-versions existing memories without writing first memories.
+
+## Conservative forecast (model v2)
+A sealed verdict forecast 65% when the price after the move was 32.5% and only 3% of the aligned money came from wallets with a
+learned edge. Cause: one skilled wallet was weighted by its share of *skilled* money (all of it) with alpha 1. Model v2:
+- each wallet's shrunk edge is capped at 0.08;
+- skilled wallets are weighted by their share of the *total* flow in the move;
+- `judgeMove` blends with alpha 0.5;
+- the forecast is held within 0.10 of the price after the move.
+
+New verdicts carry `model: "v2"`. The two verdicts sealed before the change have no `model` field and are read as `v1`; Walrus is
+append-only, so they were not re-sealed or deleted. `pnpm verify` and `docs/PROOF.md` show the model of every verdict, and `pnpm grade`
+and `pnpm verify` score v1 and v2 verdicts in separate tables (outcomes carry the model of the verdict they grade).
+
+## Leagues are a whitelist
+The league used to be the first word of a market slug, so `highest-temperature-in-...` became the league `HIGHEST` and
+`will-...` became `WILL`. `leagueOf` in `packages/core/src/leagues.ts` now returns a prefix only if it is on a curated list of
+sports and esports leagues (NBA, NFL, MLB, NHL, WNBA, college football and basketball, the football leagues, ATP/WTA/ITF, cricket,
+overseas basketball, CS2, LoL, Valorant, Dota 2, UFC and so on); the list was built from the prefixes of the wallets in the index.
+Short prefixes that double as words or countries (`col`, `chi`, `aus`, `pol`, `den`, `fif`, `ow`, ...) count only when the slug
+carries a game date. Everything else is `other`; politics keeps its own category (event tag). `other` rows stay in the index for
+transparency, are never used as a skill lookup for a market, and never get a wallet memory.
