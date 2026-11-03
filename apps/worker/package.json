@@ -1,0 +1,12 @@
+{
+  "name": "@calibre/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CALIBRE engine: builds the wallet skill index, watches market moves, seals and grades verdicts.",
+  "scripts": {
+    "index": "tsx src/index-wallets.ts",
+    "watch": "tsx src/watch.ts",
+    "grade": "tsx src/grade.ts"
+  }
+}

@@ -62,6 +62,19 @@ describe("PredictionClient", () => {
     expect(f.calls[1]!.url).toContain("offset=100");
   });
 
+  it("stops before exceeding the call budget and persists the count across clients", async () => {
+    dir = await mkdtemp(join(tmpdir(), "calibre-budget-"));
+    const file = join(dir, "calls.json");
+    const f = fakeFetch([]);
+    const c1 = new PredictionClient("k", { fetch: f.fn, sleep: noSleep, callBudget: 2, budgetFile: file });
+    await c1.walletTrades("a");
+    await c1.walletTrades("b");
+    await expect(c1.walletTrades("c")).rejects.toThrow(/budget exhausted/);
+    const c2 = new PredictionClient("k", { fetch: f.fn, sleep: noSleep, callBudget: 2, budgetFile: file });
+    await expect(c2.walletTrades("d")).rejects.toThrow(/budget exhausted/);
+    expect(f.calls).toHaveLength(2);
+  });
+
   it("spaces requests to respect the rate limit", async () => {
     const waits: number[] = [];
     const f = fakeFetch([]);

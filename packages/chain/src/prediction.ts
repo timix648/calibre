@@ -78,6 +78,18 @@ export interface PredictionClientOptions {
   fetch?: typeof fetch;
   maxRetries?: number;
   sleep?: (ms: number) => Promise<void>;
+  /**
+   * Hard cap on network calls (credits are limited). Counted across runs in `budgetFile` when given.
+   * Cache hits do not count. Default: no cap.
+   */
+  callBudget?: number;
+  budgetFile?: string;
+}
+
+export class TatumBudgetExceeded extends Error {
+  constructor(readonly used: number, readonly budget: number) {
+    super(`Tatum call budget exhausted (${used}/${budget}). Raise TATUM_CALL_BUDGET deliberately if this is intended.`);
+  }
 }
 
 export interface CacheOptions {
@@ -120,6 +132,24 @@ export class PredictionClient {
     if (wait > 0) await this.sleep(wait);
   }
 
+  private used: number | null = null;
+
+  /** Count one network call against the budget; throws before the call when the budget is spent. */
+  private async spend(): Promise<void> {
+    const budget = this.opts.callBudget;
+    if (budget === undefined) return;
+    if (this.used === null) {
+      try { this.used = (JSON.parse(await readFile(this.opts.budgetFile ?? "", "utf8")) as { used: number }).used; }
+      catch { this.used = 0; }
+    }
+    if (this.used >= budget) throw new TatumBudgetExceeded(this.used, budget);
+    this.used++;
+    if (this.opts.budgetFile) await writeFile(this.opts.budgetFile, JSON.stringify({ used: this.used, budget }));
+  }
+
+  /** Network calls counted so far (null until the first call when a budget is set). */
+  get callsUsed(): number | null { return this.used; }
+
   private cachePath(path: string): string | null {
     if (!this.opts.cacheDir) return null;
     return join(this.opts.cacheDir, createHash("sha1").update(path).digest("hex") + ".json");
@@ -136,6 +166,7 @@ export class PredictionClient {
     }
 
     for (let attempt = 0; ; attempt++) {
+      await this.spend();
       await this.throttle();
       const res = await this.fetchImpl(PREDICTION_BASE + path, { headers: { "x-api-key": this.apiKey } });
       if (res.ok) {
