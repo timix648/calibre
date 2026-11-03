@@ -90,3 +90,32 @@ keeps Tatum as the primary source and falls back to Polymarket's free public API
 - Credit use: the watcher counts every Tatum call it makes (`.cache/worker/tatum-hourly.json`) and, once the last hour holds
   `--tatum-hourly` (default 50) minus 10 reserved for judging, uses public data with the reason "Tatum hourly call cap
   reached". Event lists are kept on disk for `--discover-every` minutes (default 60).
+
+# Elections coverage (3 Nov 2026)
+
+## Discovery
+- Tatum `events(status=active, category=POLITICS, sort=volume_desc, limit=100)` is a mix of everything political (2028
+  nominees, Iran, Ukraine). The event `category` is a free-text label ("United States", "Texas Senate"), so it cannot be used
+  to pick midterm races. The event `tags` can: every 2026 midterm event carries a tag containing `midterm` (`midterms`,
+  `texas-midterm`, `referendums-midterms`). `isMidtermEvent` keeps active events with such a tag that close within 14 days
+  (20 events on 3 Nov: control of the House and Senate, Balance of Power, each Senate race, governors, the California ballot measure).
+- Midterm markets are filed under the category `politics` (`league: "politics"` in candidates, verdicts and wallet rows),
+  not under the first word of the slug (`will`).
+- Tatum lists an event's markets in order of importance, so the watcher takes the first two of each event, busiest event
+  first (`selectMidtermCandidates`). Event lists are kept on disk (`.cache/worker/events-*.json`) for 60 minutes in the
+  watcher and 6 hours in the indexer.
+
+## Politics wallet segment
+- `pnpm index` ranks the markets of the midterm events by lifetime volume with Gamma (`/events?slug=`, free), takes the top 30,
+  and samples the takers of each from the public `/v2/trades?condition=` (500 fills each). Wallets seen in at least two of the
+  30 markets, most markets first, capped at 120, are scored: 4,426 takers, 985 in two or more markets, 120 taken, 98 with at least one resolved politics bet.
+- A bet counts as politics when its Polymarket **event** carries the `politics` tag (`publicEventTags`: Gamma
+  `/events?slug=a&slug=b…`, 25 per request, cached; closed events keep their tags, closed *markets* do not, so the lookup is per
+  event). This is applied to resolved bets only, through the `leagueFor` hook of `tradesToPicks`.
+- Same edge as the sports rows: `priceEdge` with a 60-day half-life, one pick per market. Rows with n >= 30 are ranked by |z|
+  (cap 60) and written as `wallet` envelopes with key `<wallet>:politics` to `calibre-wallets`.
+- The grader's learning loop now replaces wallet rows by (wallet, league) key and re-scores a wallet's politics bets with the
+  same tag lookup, so a politics verdict re-versions politics memories without touching the wallet's sports rows.
+- Most midterm takers are new accounts: 98 wallets have a resolved politics bet and only 26 have n >= 30. The politics skill
+  signal is therefore thin (1 wallet with z >= 2, 4 with z <= -2), and a politics verdict will often read "noise" because few
+  of the traders in a move are in the index.

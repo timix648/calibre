@@ -2,7 +2,7 @@
 //   pnpm --filter @calibre/worker grade [--force]
 import { TatumBudgetExceeded } from "../../../packages/chain/src/index.js";
 import {
-  gradeForecast, needsNewVersion, outcomeRecord, summariseGrades, walletKey, yesWon,
+  POLITICS, gradeForecast, needsNewVersion, outcomeRecord, summariseGrades, walletKey, yesWon,
   type OutcomeData, type ResolutionLike, type WalletEdgeRow,
 } from "../../../packages/core/src/index.js";
 import { encode, NAMESPACES } from "../../../packages/memory/src/index.js";
@@ -11,7 +11,7 @@ import {
   OUTCOME_LEDGER_FILE, VERDICT_LEDGER_FILE, WALLET_INDEX_FILE, WORKER_DIR, cliArgs, memoryStore, predictionClient, readJson, tatumCallsUsed, writeJson,
 } from "./lib/config.js";
 import type { LedgerEntry, OutcomeEntry } from "./lib/ledger.js";
-import { loadMemoryState, loadResolutions, sealWalletMemories, walletRows } from "./lib/wallet-index.js";
+import { loadMemoryState, loadResolutions, politicsRows, sealWalletMemories, walletRows } from "./lib/wallet-index.js";
 
 const FORCE = cliArgs().has("force");
 const CHECK_EVERY_MS = 60 * 60_000;
@@ -85,10 +85,13 @@ if (fresh.length > 0) {
   for (const wallet of seen.keys()) {
     const trades = await publicWalletHistory(wallet, 1000, { fresh: true });
     await loadResolutions(trades.map((t) => t.conditionId), resolutions, { maxEmptyAgeMs: 3 * 3_600_000 });
-    updatedRows.push(...walletRows(wallet, trades, resolutions, new Date().toISOString()));
+    const leagues = seen.get(wallet)!;
+    const now = new Date().toISOString();
+    if ([...leagues].some((l) => l !== POLITICS)) updatedRows.push(...walletRows(wallet, trades, resolutions, now));
+    if (leagues.has(POLITICS)) updatedRows.push(...(await politicsRows(wallet, trades, resolutions, now)));
   }
-  const replaced = new Set(seen.keys());
-  const merged = [...index.filter((r) => !replaced.has(r.wallet)), ...updatedRows].sort((a, b) => b.z - a.z);
+  const replaced = new Set(updatedRows.map((r) => walletKey(r.wallet, r.league)));
+  const merged = [...index.filter((r) => !replaced.has(walletKey(r.wallet, r.league))), ...updatedRows].sort((a, b) => b.z - a.z);
   await writeJson(WALLET_INDEX_FILE, merged);
 
   const changed = updatedRows.filter((r) => {

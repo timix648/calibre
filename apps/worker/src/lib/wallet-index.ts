@@ -1,10 +1,10 @@
 import type { Market, WalletTrade } from "../../../../packages/chain/src/index.js";
 import {
-  MIN_BETS_FOR_VERDICT, needsNewVersion, onePickPerMarket, priceEdge, tradesToPicks, walletKey, walletRecord,
+  MIN_BETS_FOR_VERDICT, POLITICS, categoryFromTags, needsNewVersion, onePickPerMarket, priceEdge, tradesToPicks, walletKey, walletRecord,
   type ResolutionLike, type WalletEdgeRow, type WalletSkill,
 } from "../../../../packages/core/src/index.js";
 import { encode, NAMESPACES, type MemoryStore } from "../../../../packages/memory/src/index.js";
-import { prefetchResolutions, publicResolution } from "../../../../scripts/public-source.js";
+import { prefetchResolutions, publicEventTags, publicResolution } from "../../../../scripts/public-source.js";
 import { MEMORY_STATE_FILE, WALLET_INDEX_FILE, readJson, tatumCached, writeJson } from "./config.js";
 
 export const HALF_LIFE_DAYS = 60;
@@ -30,8 +30,11 @@ export async function loadResolutions(
 }
 
 /** One row per league the wallet has resolved bets in: edge against the price paid, half-life 60 days. */
-export function walletRows(wallet: string, trades: WalletTrade[], resolutions: Map<string, ResolutionLike | null>, updatedAt: string): WalletEdgeRow[] {
-  const picks = tradesToPicks(trades, resolutions);
+export function walletRows(
+  wallet: string, trades: WalletTrade[], resolutions: Map<string, ResolutionLike | null>, updatedAt: string,
+  leagueFor?: (trade: WalletTrade) => string | null | undefined,
+): WalletEdgeRow[] {
+  const picks = tradesToPicks(trades, resolutions, 0.25, leagueFor);
   const byLeague = new Map<string, typeof picks>();
   for (const p of picks) byLeague.set(p.league, [...(byLeague.get(p.league) ?? []), p]);
   const rows: WalletEdgeRow[] = [];
@@ -90,4 +93,18 @@ export async function sealWalletMemories(store: MemoryStore, rows: WalletEdgeRow
     log(`  sealed ${Math.min(i + 20, todo.length)}/${todo.length} wallet memories (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
   }
   return written;
+}
+
+/**
+ * Edge rows for the politics category only. A trade counts as politics when its Polymarket event carries the
+ * politics tag (looked up for the resolved markets only), which also covers politics markets whose slug starts
+ * with a word like "will".
+ */
+export async function politicsRows(
+  wallet: string, trades: WalletTrade[], resolutions: Map<string, ResolutionLike | null>, updatedAt: string,
+): Promise<WalletEdgeRow[]> {
+  const resolved = trades.filter((t) => resolutions.get(t.conditionId));
+  const tags = await publicEventTags(resolved.map((t) => t.eventSlug).filter(Boolean));
+  const leagueFor = (t: WalletTrade) => categoryFromTags(tags.get(t.eventSlug));
+  return walletRows(wallet, resolved.filter((t) => leagueFor(t)), resolutions, updatedAt, leagueFor).filter((r) => r.league === POLITICS);
 }
