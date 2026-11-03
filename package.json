@@ -13,7 +13,8 @@
     "index": "pnpm --filter @calibre/worker index",
     "watch": "pnpm --filter @calibre/worker watch",
     "grade": "pnpm --filter @calibre/worker grade",
-    "verify": "tsx scripts/verify.ts"
+    "verify": "tsx scripts/verify.ts",
+    "export:site": "tsx scripts/export-site.ts"
   },
   "engines": {
     "node": ">=20"

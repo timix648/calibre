@@ -1,0 +1,56 @@
+{
+  "title": "On Polymarket sports, apparent trader skill does not persist once already-decided bets are removed",
+  "corrected": "2026-11-03",
+  "question": "Does a wallet's edge against the price it paid in its older bets predict its edge in its newer bets?",
+  "rows": [
+    {
+      "sample": "Profit-blind active wallets",
+      "bets": "All, including already-decided bets (first run)",
+      "wallets": 40,
+      "rho": 0.41,
+      "p": 0.005,
+      "note": "Wallets repeatedly buying outcomes already decided, such as at 98 cents"
+    },
+    {
+      "sample": "Profit-blind active wallets",
+      "bets": "All, already-decided bets excluded",
+      "wallets": 40,
+      "rho": 0.12,
+      "p": 0.23,
+      "note": null
+    },
+    {
+      "sample": "Profit-blind active wallets",
+      "bets": "Pre-game only",
+      "wallets": 30,
+      "rho": 0.03,
+      "p": 0.45,
+      "note": null
+    },
+    {
+      "sample": "Profit-blind active wallets",
+      "bets": "In-play only",
+      "wallets": 40,
+      "rho": -0.1,
+      "p": 0.73,
+      "note": null
+    },
+    {
+      "sample": "Top earners on the profit leaderboard",
+      "bets": "All, already-decided bets excluded",
+      "wallets": 23,
+      "rho": -0.07,
+      "p": 0.63,
+      "note": null
+    }
+  ],
+  "readout": [
+    "The first run's persistence came from wallets that repeatedly buy outcomes that are already decided. That earns a small steady edge, but it is not forecasting.",
+    "Once those bets are removed, no group of wallets shows edge that carries over from older to newer bets, pre-game or in-play.",
+    "The profit leaderboard is no better: the past edge of top earners does not predict their future edge."
+  ],
+  "caveats": [
+    "65 wallets, one split per wallet; wallets trade the same events, so they are not independent.",
+    "Real skill smaller than about 3 points per bet cannot be detected per wallet at these sample sizes; cohort-level tests with many more wallets could detect it."
+  ]
+}

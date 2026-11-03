@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-11-03T15:09:37.527Z",
+  "total": 245,
+  "namespaces": [
+    {
+      "name": "calibre-wallets",
+      "memories": 243,
+      "relayerCount": 243
+    },
+    {
+      "name": "calibre-verdicts",
+      "memories": 2,
+      "relayerCount": 2
+    },
+    {
+      "name": "calibre-outcomes",
+      "memories": 0,
+      "relayerCount": 0
+    },
+    {
+      "name": "calibre-lessons",
+      "memories": 0,
+      "relayerCount": 0
+    }
+  ],
+  "checkpoint": {
+    "sequence": "341242300",
+    "timestamp": "2026-11-03T15:09:54.453Z"
+  },
+  "sampleBlobs": [
+    {
+      "key": "0x4bff30af91642dc7d2b19a8664378fe55c45fc26:cfb",
+      "blobId": "k5Wmcin4nbaAPTcqNciQKwf8hdlhBfHnWGiDqfUhPXA",
+      "walruscan": "https://walruscan.com/mainnet/blob/k5Wmcin4nbaAPTcqNciQKwf8hdlhBfHnWGiDqfUhPXA"
+    },
+    {
+      "key": "0xe7870d0e1bfc65a23e3d66caf00ca1b9129e5034:wta",
+      "blobId": "dMMTQ6zyciyimYTDq1nd99PU1smMw4-Ffkxv2qFixr4",
+      "walruscan": "https://walruscan.com/mainnet/blob/dMMTQ6zyciyimYTDq1nd99PU1smMw4-Ffkxv2qFixr4"
+    },
+    {
+      "key": "0x21f333307ac6d2e65ac82f014b3dd2b64cbc35e3:cbb",
+      "blobId": "k9FFEM6GRGk0_jpbg6xCpq9A6Zamhx6dRNFEaQzeYKQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/k9FFEM6GRGk0_jpbg6xCpq9A6Zamhx6dRNFEaQzeYKQ"
+    },
+    {
+      "key": "0xaf5f9e847def287a30a549483123b422d74183ae:nfl",
+      "blobId": "xcRvSAg5Ibr5id9ysYMony_C6qSdVPQTnvRcue_2q3E",
+      "walruscan": "https://walruscan.com/mainnet/blob/xcRvSAg5Ibr5id9ysYMony_C6qSdVPQTnvRcue_2q3E"
+    },
+    {
+      "key": "0x914932a4341d2fe564b91e0a31fc5880b05ff2da:nba",
+      "blobId": "Ix1HVzqzpskp1PnO8nPUEJ_kpJpND_A2jVoEqhIz3JE",
+      "walruscan": "https://walruscan.com/mainnet/blob/Ix1HVzqzpskp1PnO8nPUEJ_kpJpND_A2jVoEqhIz3JE"
+    },
+    {
+      "key": "0x126266f57f9812c42daaf69767f622ad36ce056f:nfl",
+      "blobId": "8qgfz7Wq8eL8GTul3qJz3IAwTL-0Oe23oXxSVpX-Lkg",
+      "walruscan": "https://walruscan.com/mainnet/blob/8qgfz7Wq8eL8GTul3qJz3IAwTL-0Oe23oXxSVpX-Lkg"
+    },
+    {
+      "key": "0x448861155279dbf833d041b963e3ac854599e319:cfb",
+      "blobId": "pzPMdtT2r3LE1idtsM0mgIlQMOt2L2x1jVPuoepZ0Hk",
+      "walruscan": "https://walruscan.com/mainnet/blob/pzPMdtT2r3LE1idtsM0mgIlQMOt2L2x1jVPuoepZ0Hk"
+    },
+    {
+      "key": "0x1e814bedfdb7bde5434791a927777deeeac5ae48:cfb",
+      "blobId": "EzHrFKL0dP53NafP5CQkHuN9VWQPHiC1r6BdK-aeRZ4",
+      "walruscan": "https://walruscan.com/mainnet/blob/EzHrFKL0dP53NafP5CQkHuN9VWQPHiC1r6BdK-aeRZ4"
+    }
+  ]
+}

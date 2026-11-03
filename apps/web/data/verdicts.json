@@ -1,0 +1,171 @@
+{
+  "generatedAt": "2026-11-03T15:09:37.527Z",
+  "verdicts": [
+    {
+      "id": "0x7e8ead1e26f8cdfaf36b9ea8109d004512a09e4a4bd396a495a103a38da3ae4d-1793706300",
+      "key": "0x7e8ead1e26f8cdfaf36b9ea8109d004512a09e4a4bd396a495a103a38da3ae4d:1793706300",
+      "version": 1,
+      "blobId": "v9bRLEOo_QDw-uym8hgWUKsuIUNi_b5-3oFrXG_xHus",
+      "walruscan": "https://walruscan.com/mainnet/blob/v9bRLEOo_QDw-uym8hgWUKsuIUNi_b5-3oFrXG_xHus",
+      "summary": "CS2 move up on \"Counter-Strike: Legacy vs B8 - Map 1 Winner\" (LEGACY 21% to 46%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 41% for LEGACY. Data: Polymarket public API (Tatum history was empty for this market; not asked again until 12:25 UTC)",
+      "data": {
+        "marketId": "0x7e8ead1e26f8cdfaf36b9ea8109d004512a09e4a4bd396a495a103a38da3ae4d",
+        "eventSlug": "cs2-lgc-b8-2026-11-02",
+        "league": "cs2",
+        "question": "Counter-Strike: Legacy vs B8 - Map 1 Winner",
+        "yesOutcome": "LEGACY",
+        "move": {
+          "from": 0.20999999999999996,
+          "to": 0.455,
+          "startTs": 1793705100000,
+          "endTs": 1793706300000
+        },
+        "label": "contested",
+        "sharpShare": 0.006643768020233597,
+        "opposition": 13.445662510658837,
+        "forecast": 0.4050615609478668,
+        "priceAtVerdict": 0.455,
+        "trades": 507,
+        "wallets": 213,
+        "topWallets": [
+          {
+            "wallet": "0x56c9fbdeccf198f1f5ad95ace39b24f5f7fb0d9e",
+            "league": "cs2",
+            "netYesUsd": -9009.01,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x283d2f94da9d2307b0eab9ec8088bc52df8d4cad",
+            "league": "cs2",
+            "netYesUsd": 5249.99,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x6e2c0e9474af7d720e5aba2a5b0bb6f723b7787c",
+            "league": "cs2",
+            "netYesUsd": -2641.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x462d515e957253d2fa79a1f808e6e99eb2eece9b",
+            "league": "cs2",
+            "netYesUsd": 2553.25,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x4873713d4954ab6ecebaf5fb1b018f622bb515ba",
+            "league": "cs2",
+            "netYesUsd": -2500,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341192160",
+          "digest": "2GVjo7vzz919v41d2po7LGbPzX6VqKwH91MKhWdbpvKi",
+          "timestamp": "2026-11-03T11:46:12.365Z"
+        },
+        "sealedAt": "2026-11-03T11:45:55.803Z",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 12:25 UTC"
+      }
+    },
+    {
+      "id": "0xc6ba2de1cbfaca9e04c2a857a052444ced3f655e4634bc7412c82e158cae8cc3-1793706300",
+      "key": "0xc6ba2de1cbfaca9e04c2a857a052444ced3f655e4634bc7412c82e158cae8cc3:1793706300",
+      "version": 1,
+      "blobId": "qzGG7w0GPkedvWvu4OvpbqkDtVqFVKHEGx1uhspiPmo",
+      "walruscan": "https://walruscan.com/mainnet/blob/qzGG7w0GPkedvWvu4OvpbqkDtVqFVKHEGx1uhspiPmo",
+      "summary": "CS2 move down on \"Counter-Strike: FURIA vs Natus Vincere - Map 2 Winner\" (FURIA 71% to 33%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 65% for FURIA. Data: Polymarket public API (Tatum history was empty for this market; not asked again until 12:25 UTC)",
+      "data": {
+        "marketId": "0xc6ba2de1cbfaca9e04c2a857a052444ced3f655e4634bc7412c82e158cae8cc3",
+        "eventSlug": "cs2-furia-navi-2026-11-03",
+        "league": "cs2",
+        "question": "Counter-Strike: FURIA vs Natus Vincere - Map 2 Winner",
+        "yesOutcome": "FURIA",
+        "move": {
+          "from": 0.71,
+          "to": 0.325,
+          "startTs": 1793705400000,
+          "endTs": 1793706300000
+        },
+        "label": "contested",
+        "sharpShare": 0.027265193630529035,
+        "opposition": 4.8769199807909525,
+        "forecast": 0.6501997700218165,
+        "priceAtVerdict": 0.325,
+        "trades": 284,
+        "wallets": 198,
+        "topWallets": [
+          {
+            "wallet": "0xba437745c058346319971651197bef40c3cbc6c0",
+            "league": "cs2",
+            "netYesUsd": -2909.27,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x3471a897e56a8d3621ca79af87dae4325977f17e",
+            "league": "cs2",
+            "netYesUsd": 1478.51,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xec981ed70ae69c5cbcac08c1ba063e734f6bafcd",
+            "league": "cs2",
+            "netYesUsd": 1404.63,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x42145460f32a84dd27df2dbd7afbee779213db99",
+            "league": "cs2",
+            "netYesUsd": 1400,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd5374430a0e5a775af0480e5d1f9a434f31a0f7c",
+            "league": "cs2",
+            "netYesUsd": -1232.35,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341192049",
+          "digest": "5xqcsWph7xiNV4JKqohoEmgGCPzoWWuCrHFZ98J31d6x",
+          "timestamp": "2026-11-03T11:45:45.344Z"
+        },
+        "sealedAt": "2026-11-03T11:45:29.116Z",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 12:25 UTC"
+      }
+    }
+  ]
+}
