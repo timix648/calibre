@@ -9,7 +9,7 @@ cd "$(dirname "$0")/.."
 chmod 600 .env
 mkdir -p .cache/logs
 
-TATUM_HOURLY="${TATUM_HOURLY:-12}"     # ~1,350 calls left on the guard / ~120 hours to the deadline
+TATUM_HOURLY="${TATUM_HOURLY:-18}"     # ~1,350 calls left on the guard / ~72 hours of watching (3 days)
 MIN_JUMP="${MIN_JUMP:-0.04}"
 LOOP_MIN="${LOOP_MIN:-10}"
 
