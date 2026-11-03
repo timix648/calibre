@@ -32,7 +32,9 @@ const top = PUBLIC
   ? (topFromCache?.data ?? []).map((t) => t.proxyWallet).slice(0, N_TOP)
   : (await api.topTraders({ category: "SPORTS", limit: Math.min(50, N_TOP) })).map((t) => t.proxyWallet);
 const random = new Set<string>();
-const SAMPLE_FILE = ".cache/active-sample.json";
+// SAMPLE_FILE / MARKETS let a wider study draw and keep its own sample without touching the original one.
+const SAMPLE_FILE = process.env.SAMPLE_FILE ?? ".cache/active-sample.json";
+const MARKETS = Number(process.env.MARKETS ?? 120);
 const savedSample = await readFile(SAMPLE_FILE, "utf8").then((s) => JSON.parse(s) as string[]).catch(() => null);
 if (N_RANDOM > 0 && process.env.SAMPLE === "active" && savedSample) {
   for (const w of savedSample.slice(0, N_RANDOM)) random.add(w);
@@ -40,7 +42,7 @@ if (N_RANDOM > 0 && process.env.SAMPLE === "active" && savedSample) {
   // Unbiased by profit: other wallets active in the same sports markets the top wallets traded.
   const markets = new Set<string>();
   for (const w of top) for (const t of await publicWalletHistory(w, 1000)) markets.add(t.conditionId);
-  const shuffled = [...markets].sort(() => Math.random() - 0.5).slice(0, 120);
+  const shuffled = [...markets].sort(() => Math.random() - 0.5).slice(0, MARKETS);
   const seen = new Map<string, number>();
   for (const m of shuffled) for (const w of new Set(await publicMarketTakers(m))) seen.set(w, (seen.get(w) ?? 0) + 1);
   const active = [...seen].filter(([w, n]) => n >= 3 && !top.includes(w)).map(([w]) => w);
@@ -124,4 +126,5 @@ for (const g of ["top", "random", "all"]) {
 }
 console.log("\nSUMMARY", JSON.stringify(summary, null, 2));
 await mkdir(".cache/results", { recursive: true });
-await writeFile(".cache/results/skill-persistence.json", JSON.stringify({ at: new Date().toISOString(), params: { N_TOP, N_RANDOM, TRADES }, summary, rows }, null, 2));
+const RESULTS_FILE = process.env.RESULTS_FILE ?? ".cache/results/skill-persistence.json";
+await writeFile(RESULTS_FILE, JSON.stringify({ at: new Date().toISOString(), params: { N_TOP, N_RANDOM, TRADES, MARKETS, phase: process.env.PHASE ?? "pregame" }, summary, rows }, null, 2));
