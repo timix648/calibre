@@ -27,23 +27,51 @@ async function getJson(url: string): Promise<any> {
   throw new Error("rate limited: " + url);
 }
 
+async function cacheHit<T>(key: string): Promise<T | null> {
+  try { return JSON.parse(await readFile(`${DIR}/${createHash("sha1").update(key).digest("hex")}.json`, "utf8")) as T; } catch { return null; }
+}
+
+interface V2Trade {
+  proxy_wallet: string; side: "BUY" | "SELL"; condition_id: string; size: number; price: number; timestamp: number;
+  title: string; slug: string; event_slug: string; outcome: string; outcome_index: number;
+}
+const fromV2 = (t: V2Trade): WalletTrade => ({
+  proxyWallet: t.proxy_wallet, side: t.side, conditionId: t.condition_id, size: t.size, price: t.price,
+  timestamp: t.timestamp, title: t.title, slug: t.slug, eventSlug: t.event_slug, outcome: t.outcome, outcomeIndex: t.outcome_index,
+});
+
 /** Up to `max` most recent trades of a wallet (same fields as Tatum's /wallets/{addr}/trades). */
 export async function publicWalletHistory(address: string, max = 1000): Promise<WalletTrade[]> {
+  // Pages fetched before Polymarket retired Data API v1 (3 Nov 2026) are reused from cache.
   const out: WalletTrade[] = [];
-  for (let offset = 0; offset < max; offset += 500) {
-    const page = await cached(`trades:${address}:${offset}`, () =>
-      getJson(`https://data-api.polymarket.com/trades?user=${address}&limit=500&offset=${offset}`)) as WalletTrade[];
-    out.push(...page);
-    if (page.length < 500) break;
+  if (await cacheHit(`trades:${address}:0`)) {
+    for (let offset = 0; offset < max; offset += 500) {
+      const page = await cacheHit<WalletTrade[]>(`trades:${address}:${offset}`);
+      if (!page) break;
+      out.push(...page);
+      if (page.length < 500) break;
+    }
+    return out.slice(0, max);
+  }
+  let cursor = "";
+  while (out.length < max) {
+    const page = await cached(`v2trades:${address}:${cursor}`, () =>
+      getJson(`https://data-api.polymarket.com/v2/trades?user=${address}&limit=500${cursor ? `&cursor=${cursor}` : ""}`)) as
+      { data: V2Trade[]; pagination: { has_more: boolean; next_cursor?: string } };
+    out.push(...page.data.map(fromV2));
+    if (!page.pagination.has_more || !page.pagination.next_cursor) break;
+    cursor = page.pagination.next_cursor;
   }
   return out.slice(0, max);
 }
 
 /** Wallets that traded a market (most recent fills). */
 export async function publicMarketTakers(conditionId: string, limit = 500): Promise<string[]> {
-  const trades = await cached(`mtrades:${conditionId}:${limit}`, () =>
-    getJson(`https://data-api.polymarket.com/trades?market=${conditionId}&limit=${limit}`)) as { proxyWallet: string }[];
-  return Array.isArray(trades) ? trades.map((t) => t.proxyWallet) : [];
+  const v1 = await cacheHit<{ proxyWallet: string }[]>(`mtrades:${conditionId}:${limit}`);
+  if (v1) return v1.map((t) => t.proxyWallet);
+  const page = await cached(`v2mtrades:${conditionId}:${limit}`, () =>
+    getJson(`https://data-api.polymarket.com/v2/trades?market=${conditionId}&limit=${limit}`)) as { data?: V2Trade[] };
+  return (page.data ?? []).map((t) => t.proxy_wallet);
 }
 
 /** Look up many closed markets per request and cache each one (an empty list means not closed yet). */
