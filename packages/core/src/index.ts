@@ -8,3 +8,7 @@ export * from "./picks.js";
 export * from "./edge.js";
 export * from "./attribution.js";
 export * from "./moves.js";
+export * from "./wording.js";
+export * from "./grading.js";
+export * from "./memories.js";
+export * from "./discovery.js";

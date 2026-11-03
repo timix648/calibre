@@ -15,7 +15,9 @@ const MIN_PICKS = 10;
 // SOURCE=public runs the study on Polymarket's free public data plus already-cached Tatum responses,
 // spending no Tatum credits. The default uses Tatum's Prediction Markets API.
 const PUBLIC = process.env.SOURCE === "public";
-const api = new PredictionClient(need("TATUM_API_KEY"), { cacheDir: ".cache/tatum", rps: 3 });
+const api = new PredictionClient(need("TATUM_API_KEY"), {
+  cacheDir: ".cache/tatum", rps: 3, callBudget: Number(process.env.TATUM_CALL_BUDGET ?? 1500), budgetFile: ".cache/tatum-calls.json",
+});
 
 /** A Tatum response already on disk, regardless of age (the cache key is the request path). */
 async function tatumCached<T>(path: string): Promise<T | null> {

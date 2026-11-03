@@ -1,16 +1,16 @@
 // Free Polymarket public data for the one-off research backtest, so it costs no Tatum credits.
 // The live product uses Tatum's Prediction Markets API; this is only for the skill-vs-luck study.
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import type { WalletTrade } from "../packages/chain/src/index.js";
 import type { ResolutionLike } from "../packages/core/src/index.js";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const DIR = ".cache/public";
 
-async function cached<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
+async function cached<T>(key: string, fetcher: () => Promise<T>, fresh = false): Promise<T> {
   const file = `${DIR}/${createHash("sha1").update(key).digest("hex")}.json`;
-  try { return JSON.parse(await readFile(file, "utf8")) as T; } catch { /* miss */ }
+  if (!fresh) { try { return JSON.parse(await readFile(file, "utf8")) as T; } catch { /* miss */ } }
   const body = await fetcher();
   await mkdir(DIR, { recursive: true });
   await writeFile(file, JSON.stringify(body));
@@ -42,11 +42,14 @@ const fromV2 = (t: V2Trade): WalletTrade => ({
   timestamp: t.timestamp, title: t.title, slug: t.slug, eventSlug: t.event_slug, outcome: t.outcome, outcomeIndex: t.outcome_index,
 });
 
-/** Up to `max` most recent trades of a wallet (same fields as Tatum's /wallets/{addr}/trades). */
-export async function publicWalletHistory(address: string, max = 1000): Promise<WalletTrade[]> {
+/**
+ * Up to `max` most recent trades of a wallet (same fields as Tatum's /wallets/{addr}/trades).
+ * `fresh` skips the disk cache so trades made since the last fetch are included.
+ */
+export async function publicWalletHistory(address: string, max = 1000, opts: { fresh?: boolean } = {}): Promise<WalletTrade[]> {
   // Pages fetched before Polymarket retired Data API v1 (3 Nov 2026) are reused from cache.
   const out: WalletTrade[] = [];
-  if (await cacheHit(`trades:${address}:0`)) {
+  if (!opts.fresh && await cacheHit(`trades:${address}:0`)) {
     for (let offset = 0; offset < max; offset += 500) {
       const page = await cacheHit<WalletTrade[]>(`trades:${address}:${offset}`);
       if (!page) break;
@@ -58,7 +61,7 @@ export async function publicWalletHistory(address: string, max = 1000): Promise<
   let cursor = "";
   while (out.length < max) {
     const page = await cached(`v2trades:${address}:${cursor}`, () =>
-      getJson(`https://data-api.polymarket.com/v2/trades?user=${address}&limit=500${cursor ? `&cursor=${cursor}` : ""}`)) as
+      getJson(`https://data-api.polymarket.com/v2/trades?user=${address}&limit=500${cursor ? `&cursor=${cursor}` : ""}`), opts.fresh) as
       { data: V2Trade[]; pagination: { has_more: boolean; next_cursor?: string } };
     out.push(...page.data.map(fromV2));
     if (!page.pagination.has_more || !page.pagination.next_cursor) break;
@@ -72,15 +75,22 @@ export async function publicMarketTakers(conditionId: string, limit = 500): Prom
   const v1 = await cacheHit<{ proxyWallet: string }[]>(`mtrades:${conditionId}:${limit}`);
   if (v1) return v1.map((t) => t.proxyWallet);
   const page = await cached(`v2mtrades:${conditionId}:${limit}`, () =>
-    getJson(`https://data-api.polymarket.com/v2/trades?market=${conditionId}&limit=${limit}`)) as { data?: V2Trade[] };
+    getJson(`https://data-api.polymarket.com/v2/trades?condition=${conditionId}&limit=${limit}`)) as { data?: V2Trade[] };
   return (page.data ?? []).map((t) => t.proxy_wallet);
 }
 
-/** Look up many closed markets per request and cache each one (an empty list means not closed yet). */
-export async function prefetchResolutions(conditionIds: string[]): Promise<void> {
+/**
+ * Look up many closed markets per request and cache each one (an empty list means not closed yet).
+ * `maxEmptyAgeMs` re-checks markets cached as "not closed" once that entry is older than the limit.
+ */
+export async function prefetchResolutions(conditionIds: string[], opts: { maxEmptyAgeMs?: number } = {}): Promise<void> {
   const missing: string[] = [];
   for (const id of new Set(conditionIds)) {
-    try { await readFile(`${DIR}/${createHash("sha1").update(`gamma:${id}`).digest("hex")}.json`); } catch { missing.push(id); }
+    const file = `${DIR}/${createHash("sha1").update(`gamma:${id}`).digest("hex")}.json`;
+    try {
+      const body = JSON.parse(await readFile(file, "utf8")) as unknown[];
+      if (body.length === 0 && opts.maxEmptyAgeMs !== undefined && Date.now() - (await stat(file)).mtimeMs > opts.maxEmptyAgeMs) missing.push(id);
+    } catch { missing.push(id); }
   }
   await mkdir(DIR, { recursive: true });
   for (let i = 0; i < missing.length; i += 40) {
@@ -104,4 +114,17 @@ export async function publicResolution(conditionId: string): Promise<ResolutionL
   const prices: number[] = JSON.parse(m.outcomePrices).map(Number);
   const winner = prices.findIndex((p) => p >= 0.99);
   return winner >= 0 ? { outcome: outcomes[winner]!, outcomes } : null;
+}
+
+/** Condition IDs of the most recently closed Polymarket markets whose slug ends in a date (the plain winner market of a game). */
+export async function recentClosedGameMarkets(limit = 100): Promise<{ conditionId: string; slug: string }[]> {
+  const out: { conditionId: string; slug: string }[] = [];
+  for (let offset = 0; offset < 1000 && out.length < limit; offset += 100) {
+    const rows = await getJson(`https://gamma-api.polymarket.com/markets?closed=true&order=closedTime&ascending=false&limit=100&offset=${offset}`) as any[];
+    if (rows.length === 0) break;
+    for (const r of rows) {
+      if (typeof r.slug === "string" && r.conditionId && /^[a-z0-9]+-.*\d{4}-\d{2}-\d{2}$/.test(r.slug)) out.push({ conditionId: String(r.conditionId), slug: r.slug });
+    }
+  }
+  return out.slice(0, limit);
 }

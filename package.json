@@ -9,7 +9,11 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "spike:prediction": "tsx scripts/spike-prediction.ts",
     "spike:memwal": "tsx scripts/spike-memwal.ts",
-    "spike:grpc": "tsx scripts/spike-grpc.ts"
+    "spike:grpc": "tsx scripts/spike-grpc.ts",
+    "index": "pnpm --filter @calibre/worker index",
+    "watch": "pnpm --filter @calibre/worker watch",
+    "grade": "pnpm --filter @calibre/worker grade",
+    "verify": "tsx scripts/verify.ts"
   },
   "engines": {
     "node": ">=20"
