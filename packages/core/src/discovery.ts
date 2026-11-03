@@ -10,6 +10,7 @@ export interface EventLike {
   totalVolume: number;
   markets: string[];
   source?: { platformId?: string };
+  tags?: string[];
 }
 
 export interface Candidate {
@@ -64,4 +65,44 @@ export function candlePoints(candles: { timestamp: string; close: number }[]): P
     .map((c) => ({ ts: Date.parse(c.timestamp), close: c.close }))
     .filter((p) => Number.isFinite(p.ts) && Number.isFinite(p.close))
     .sort((a, b) => a.ts - b.ts);
+}
+
+/** The category CALIBRE files US election markets under, whatever the first word of a market slug is. */
+export const POLITICS = "politics";
+
+/** `politics` when an event's tags include Polymarket's politics tag, otherwise null. */
+export function categoryFromTags(tags: string[] | undefined): typeof POLITICS | null {
+  return tags?.some((t) => t.toLowerCase() === POLITICS) ? POLITICS : null;
+}
+
+/** An active event tagged as a midterm race (control of Congress, Senate, governor, ballot measure) that closes soon. */
+export function isMidtermEvent(e: EventLike, now: number, opts: { aheadDays?: number; pastHours?: number } = {}): boolean {
+  const close = Date.parse(e.closeTime);
+  const from = now - (opts.pastHours ?? 24) * 3_600_000;
+  const to = now + (opts.aheadDays ?? 14) * 86_400_000;
+  return e.status === "active" && close >= from && close <= to && e.markets.length > 0 &&
+    (e.tags ?? []).some((t) => t.toLowerCase().includes("midterm"));
+}
+
+/**
+ * Markets of the 2026 midterm events closing within the next days, busiest event first, `perEvent` markets from each
+ * (events list their markets in order of importance, so the first ones are the headline contests).
+ * They are filed under the politics category.
+ */
+export function selectMidtermCandidates(
+  events: EventLike[],
+  opts: { now: number; maxMarkets: number; perEvent?: number; aheadDays?: number },
+): Candidate[] {
+  const seen = new Set<string>();
+  const live = events
+    .filter((e) => !seen.has(e.id) && seen.add(e.id) && isMidtermEvent(e, opts.now, { aheadDays: opts.aheadDays }))
+    .sort((a, b) => b.totalVolume - a.totalVolume);
+  const out: Candidate[] = [];
+  for (const e of live) {
+    for (const marketId of e.markets.slice(0, opts.perEvent ?? 2)) {
+      if (out.length >= opts.maxMarkets) return out;
+      out.push({ marketId, eventId: e.id, eventTitle: e.title, slug: e.source?.platformId ?? e.id, league: POLITICS, closeTime: e.closeTime });
+    }
+  }
+  return out;
 }

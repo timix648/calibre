@@ -1,10 +1,13 @@
-import type { OutcomeData, VerdictData } from "../../../../packages/core/src/index.js";
+import type { DataSource, OutcomeData, VerdictData } from "../../../../packages/core/src/index.js";
 
 /** A verdict as sealed in Walrus Memory, with the blob it landed in. */
 export interface LedgerEntry {
   key: string;
   blobId: string;
   sealedAt: string;
+  /** Where the market data came from; absent on rows written before the fallback existed (Tatum). */
+  source?: DataSource;
+  fallbackReason?: string;
   verdict: VerdictData;
 }
 

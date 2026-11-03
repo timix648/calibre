@@ -33,7 +33,7 @@ async function cacheHit<T>(key: string): Promise<T | null> {
   try { return JSON.parse(await readFile(`${DIR}/${createHash("sha1").update(key).digest("hex")}.json`, "utf8")) as T; } catch { return null; }
 }
 
-interface V2Trade {
+export interface V2Trade {
   proxy_wallet: string; side: "BUY" | "SELL"; condition_id: string; size: number; price: number; timestamp: number;
   title: string; slug: string; event_slug: string; outcome: string; outcome_index: number;
 }
@@ -127,4 +127,61 @@ export async function recentClosedGameMarkets(limit = 100): Promise<{ conditionI
     }
   }
   return out.slice(0, limit);
+}
+
+/**
+ * Fills of one market, newest first, paged with the Data API v2 cursor until a fill older than `sinceMs` is seen or
+ * `maxPages` pages (500 fills each) were read. Never cached: the live watcher needs the latest fills.
+ */
+export async function publicMarketTradesSince(conditionId: string, sinceMs: number, maxPages = 4): Promise<V2Trade[]> {
+  const out: V2Trade[] = [];
+  let cursor = "";
+  for (let page = 0; page < maxPages; page++) {
+    const r = await getJson(`https://data-api.polymarket.com/v2/trades?condition=${conditionId}&limit=500${cursor ? `&cursor=${cursor}` : ""}`) as
+      { data?: V2Trade[]; pagination?: { has_more?: boolean; next_cursor?: string } };
+    const rows = r.data ?? [];
+    const fresh = rows.filter((t) => t.timestamp * 1000 >= sinceMs);
+    out.push(...fresh);
+    if (fresh.length < rows.length || !r.pagination?.has_more || !r.pagination.next_cursor) break;
+    cursor = r.pagination.next_cursor;
+  }
+  return out;
+}
+
+/** Tags of Polymarket events by slug (an empty list for a slug Gamma does not know), looked up 25 per request and cached. */
+export async function publicEventTags(slugs: string[]): Promise<Map<string, string[]>> {
+  const out = new Map<string, string[]>();
+  const missing: string[] = [];
+  for (const slug of new Set(slugs)) {
+    const hit = await cacheHit<string[]>(`gamma-event-tags:${slug}`);
+    if (hit) out.set(slug, hit); else missing.push(slug);
+  }
+  await mkdir(DIR, { recursive: true });
+  for (let i = 0; i < missing.length; i += 25) {
+    const batch = missing.slice(i, i + 25);
+    const rows = await getJson(`https://gamma-api.polymarket.com/events?${batch.map((s) => `slug=${encodeURIComponent(s)}`).join("&")}`) as
+      { slug: string; tags?: { slug: string }[] }[];
+    const bySlug = new Map(rows.map((r) => [r.slug, (r.tags ?? []).map((t) => t.slug)]));
+    for (const slug of batch) {
+      const tags = bySlug.get(slug) ?? [];
+      out.set(slug, tags);
+      await writeFile(`${DIR}/${createHash("sha1").update(`gamma-event-tags:${slug}`).digest("hex")}.json`, JSON.stringify(tags));
+    }
+  }
+  return out;
+}
+
+/** Markets of the given Polymarket events with their lifetime volume (USD), for ranking the busiest ones. */
+export async function publicEventMarkets(slugs: string[]): Promise<{ conditionId: string; question: string; volume: number; eventSlug: string }[]> {
+  const out: { conditionId: string; question: string; volume: number; eventSlug: string }[] = [];
+  for (let i = 0; i < slugs.length; i += 10) {
+    const rows = await getJson(`https://gamma-api.polymarket.com/events?${slugs.slice(i, i + 10).map((s) => `slug=${encodeURIComponent(s)}`).join("&")}`) as
+      { slug: string; markets?: { conditionId: string; question: string; volumeNum?: number; closed?: boolean }[] }[];
+    for (const e of rows) {
+      for (const m of e.markets ?? []) {
+        if (!m.closed && m.conditionId) out.push({ conditionId: m.conditionId, question: m.question, volume: Number(m.volumeNum ?? 0), eventSlug: e.slug });
+      }
+    }
+  }
+  return out;
 }

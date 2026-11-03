@@ -19,6 +19,8 @@ export interface PredictionEvent {
   closeTime: string;
   totalVolume: number;
   markets: string[];
+  tags?: string[];
+  source?: { platformId?: string };
 }
 
 export interface Market {
@@ -66,6 +68,17 @@ export interface TopTrader {
   userName: string | null;
   vol: number;
   pnl: number;
+}
+
+/** Live order-book price of a market (`/markets/{id}/price`). `midPrice` is the YES mid. */
+export interface MarketPrice {
+  marketId: string;
+  timestamp: string;
+  yes: { price: number; bid: number; ask: number };
+  no: { price: number; bid: number; ask: number };
+  midPrice: number;
+  spread: number;
+  lastTradePrice: number | null;
 }
 
 export interface Candle { timestamp: string; open: number; high: number; low: number; close: number; volume: number }
@@ -232,6 +245,11 @@ export class PredictionClient {
 
   async marketHistory(id: string, p: { interval: Interval; start: string; end: string }) {
     return (await this.get<{ data: { candles: Candle[] } }>(`/markets/${id}/history${qs(p)}`, { ttlMs: 10 * 60_000 })).data.candles;
+  }
+
+  /** Live YES bid/ask/mid. Never cached: it is read at the moment a verdict is judged. */
+  async marketPrice(id: string): Promise<MarketPrice> {
+    return (await this.get<{ data: MarketPrice }>(`/markets/${id}/price`)).data;
   }
 
   async topTraders(p: { category?: string; limit?: number; offset?: number } = {}) {

@@ -12,3 +12,4 @@ export * from "./wording.js";
 export * from "./grading.js";
 export * from "./memories.js";
 export * from "./discovery.js";
+export * from "./fallback.js";

@@ -61,3 +61,32 @@ skill exactly when its bought outcomes win more often than their prices implied.
   returns the sequence number, digest and certification time in about a second.
 - `pnpm --filter` runs scripts inside the package directory, so the worker moves to the repository root on start
   (`apps/worker/src/lib/root.ts`) and every relative path (`.env`, `.cache`, `docs`) keeps working.
+
+# Tatum outage and the labelled fallback (3 Nov 2026)
+
+From about 08:00 UTC on 3 Nov, Tatum's Prediction API answered `/markets/{id}/trades` and `/markets/{id}/history` with empty
+arrays and `/wallets/{addr}/trades` with HTTP 500, while `/events`, `/markets/{id}` and `/markets/{id}/price` kept working
+(Tatum acknowledged the report publicly). Election Day and the midterm markets fall inside the outage, so the watcher
+keeps Tatum as the primary source and falls back to Polymarket's free public API when Tatum has nothing.
+
+## How the watcher behaves
+- Per market it asks Tatum `history` first. An empty result for an active market, or a failure (the client retries a 5xx
+  once in the watcher), switches that market to Polymarket public data and opens a **circuit breaker for 60 minutes**
+  (`.cache/worker/tatum-breaker.json`), so a broken endpoint costs one credit per market per hour, not one per pass.
+  Sub-markets that are already resolved return empty too; they trip the breaker as well, which also saves credits.
+- Public data: Data API v2 `https://data-api.polymarket.com/v2/trades?condition=<conditionId>&limit=500` with cursor paging
+  (`pagination.next_cursor`; snake_case fields). `outcome_index` 0 maps to YES and 1 to NO, `side` BUY/SELL to buy/sell, and
+  `timestamp` is in seconds. The price series is the YES price of the last fill in each 5-minute bucket
+  (`priceSeriesFromTrades` in `packages/core/src/fallback.ts`). The same fills, filtered to the move, feed the attribution.
+- CLOB `https://clob.polymarket.com/prices-history?market=<YES token id>&interval=1d&fidelity=5` was checked and answers
+  with `{ history: [{ t, p }] }` roughly every 5 minutes. It is not used: it needs the YES token id from Tatum's
+  `/markets/{id}` (one more credit per market) and the fills are needed for attribution anyway.
+- The live price is always read from Tatum `/markets/{id}/price` (one call per judged market). The verdict is judged
+  against its `midPrice`: if the mid has retraced below the minimum jump, or sits within 3 points of 0 or 1 (a market that is
+  settling), the move is dropped. So Tatum stays on the critical path even when the history came from the public API.
+- Every verdict envelope (`data.source`, `data.fallbackReason`) and every ledger row (`source`, `fallbackReason`) says
+  `tatum` or `polymarket-public`; a public-sourced summary ends with `Data: Polymarket public API (<reason>)`. Verdicts sealed
+  before the fallback existed have no `source` field and are read as Tatum.
+- Credit use: the watcher counts every Tatum call it makes (`.cache/worker/tatum-hourly.json`) and, once the last hour holds
+  `--tatum-hourly` (default 50) minus 10 reserved for judging, uses public data with the reason "Tatum hourly call cap
+  reached". Event lists are kept on disk for `--discover-every` minutes (default 60).

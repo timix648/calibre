@@ -48,12 +48,14 @@ const norm = (x: string) => x.trim().toLowerCase();
  * Turn a wallet's trades into scored picks against resolved outcomes.
  * Buying an outcome at price q signals a belief above q; selling it signals a belief below q.
  * The market probability at pick time is the trade price itself. Unresolved markets and
- * 50-50 style resolutions (outcome matching no traded name) are skipped.
+ * 50-50 style resolutions (outcome matching no traded name) are skipped. `leagueFor` files a trade under a category
+ * of its own (e.g. politics) instead of the first word of its slug.
  */
-export function tradesToPicks(
-  trades: TradeLike[],
+export function tradesToPicks<T extends TradeLike>(
+  trades: T[],
   resolutions: Map<string, ResolutionLike | null>,
   k = 0.25,
+  leagueFor?: (trade: T) => string | null | undefined,
 ): CategorisedPick[] {
   const out: CategorisedPick[] = [];
   for (const t of trades) {
@@ -65,7 +67,8 @@ export function tradesToPicks(
     // A sell of X at q is a bet on "not X" at 1 - q, so score it from that side.
     const buy = t.side === "BUY";
     const pMkt = buy ? t.price : 1 - t.price;
-    const { league, marketType } = classifySlug(t.slug);
+    const category = leagueFor?.(t);
+    const { league, marketType } = category ? { league: category, marketType: "other" as const } : classifySlug(t.slug);
     out.push({
       marketId: t.conditionId,
       pSrc: impliedProb("YES", pMkt, k),

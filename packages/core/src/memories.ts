@@ -1,6 +1,7 @@
 import type { MoveLabel } from "./attribution.js";
 import type { Edge } from "./edge.js";
 import type { Grade } from "./grading.js";
+import type { DataSource } from "./fallback.js";
 import { formatPoints, leagueLabel, shortAddress, skillPhrase, skillVerdict, type SkillVerdict } from "./wording.js";
 
 /** Same shape as the memory package's Envelope, so core stays dependency-free. */
@@ -75,6 +76,10 @@ export interface VerdictData {
   topWallets: VerdictWallet[];
   checkpoint: { sequence: string; digest: string | null; timestamp: string | null };
   sealedAt: string;
+  /** Where the market data behind the verdict came from (verdicts sealed before the fallback existed omit it: Tatum). */
+  source?: DataSource;
+  /** Why Polymarket public data was used instead of Tatum, present when `source` is `polymarket-public`. */
+  fallbackReason?: string;
 }
 
 export const verdictKey = (marketId: string, moveEndTs: number) => `${marketId}:${Math.floor(moveEndTs / 1000)}`;
@@ -93,7 +98,7 @@ export function verdictRecord(d: VerdictData): MemoryRecord<VerdictData> {
     kind: "verdict",
     key: verdictKey(d.marketId, d.move.endTs),
     version: 1,
-    summary: `${d.league.toUpperCase()} move ${dir} on "${d.question}" (${d.yesOutcome} ${pct(d.move.from)} to ${pct(d.move.to)}) is ${d.label}: ${why[d.label]}. CALIBRE forecast ${pct(d.forecast)} for ${d.yesOutcome}`,
+    summary: `${d.league.toUpperCase()} move ${dir} on "${d.question}" (${d.yesOutcome} ${pct(d.move.from)} to ${pct(d.move.to)}) is ${d.label}: ${why[d.label]}. CALIBRE forecast ${pct(d.forecast)} for ${d.yesOutcome}${d.source === "polymarket-public" ? `. Data: Polymarket public API (${d.fallbackReason ?? "Tatum unavailable"})` : ""}`,
     data: d,
   };
 }

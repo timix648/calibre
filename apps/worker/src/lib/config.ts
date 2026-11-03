@@ -10,8 +10,9 @@ import { need } from "../../../../scripts/env.js";
 export const TATUM_BUDGET_FILE = ".cache/tatum-calls.json";
 export const tatumBudget = () => Number(process.env.TATUM_CALL_BUDGET ?? 1500);
 
-export function predictionClient(): PredictionClient {
+export function predictionClient(opts: { maxRetries?: number } = {}): PredictionClient {
   return new PredictionClient(need("TATUM_API_KEY"), {
+    ...opts,
     callBudget: tatumBudget(),
     budgetFile: TATUM_BUDGET_FILE,
     cacheDir: ".cache/tatum",
@@ -80,3 +81,5 @@ export const WORKER_DIR = ".cache/worker";
 export const VERDICT_LEDGER_FILE = `${WORKER_DIR}/verdicts.json`;
 export const OUTCOME_LEDGER_FILE = `${WORKER_DIR}/outcomes.json`;
 export const WATCH_STATE_FILE = `${WORKER_DIR}/watch-state.json`;
+export const BREAKER_FILE = `${WORKER_DIR}/tatum-breaker.json`;
+export const TATUM_LOG_FILE = `${WORKER_DIR}/tatum-hourly.json`;
