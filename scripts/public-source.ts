@@ -19,7 +19,9 @@ async function cached<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
 
 async function getJson(url: string): Promise<any> {
   for (let attempt = 0; attempt < 5; attempt++) {
-    const res = await fetch(url);
+    let res: Response;
+    try { res = await fetch(url, { signal: AbortSignal.timeout(30_000) }); }
+    catch { await sleep(2000 * 2 ** attempt); continue; } // dropped connection or timeout: retry
     if (res.ok) { await sleep(150); return res.json(); }
     if (res.status === 429 || res.status >= 500) { await sleep(1000 * 2 ** attempt); continue; }
     throw new Error(`${res.status} ${url}`);
