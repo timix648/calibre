@@ -1,0 +1,109 @@
+// M1.3: grade sealed verdicts whose market has resolved, then fold the new evidence back into wallet memories.
+//   pnpm --filter @calibre/worker grade [--force]
+import { TatumBudgetExceeded } from "../../../packages/chain/src/index.js";
+import {
+  gradeForecast, needsNewVersion, outcomeRecord, summariseGrades, walletKey, yesWon,
+  type OutcomeData, type ResolutionLike, type WalletEdgeRow,
+} from "../../../packages/core/src/index.js";
+import { encode, NAMESPACES } from "../../../packages/memory/src/index.js";
+import { publicWalletHistory } from "../../../scripts/public-source.js";
+import {
+  OUTCOME_LEDGER_FILE, VERDICT_LEDGER_FILE, WALLET_INDEX_FILE, WORKER_DIR, cliArgs, memoryStore, predictionClient, readJson, tatumCallsUsed, writeJson,
+} from "./lib/config.js";
+import type { LedgerEntry, OutcomeEntry } from "./lib/ledger.js";
+import { loadMemoryState, loadResolutions, sealWalletMemories, walletRows } from "./lib/wallet-index.js";
+
+const FORCE = cliArgs().has("force");
+const CHECK_EVERY_MS = 60 * 60_000;
+const CHECK_STATE_FILE = `${WORKER_DIR}/grade-state.json`;
+
+const api = predictionClient();
+const store = memoryStore();
+const verdicts = await readJson<LedgerEntry[]>(VERDICT_LEDGER_FILE, []);
+const outcomes = await readJson<OutcomeEntry[]>(OUTCOME_LEDGER_FILE, []);
+const checked = await readJson<Record<string, number>>(CHECK_STATE_FILE, {});
+const done = new Set(outcomes.map((o) => o.key));
+const pending = verdicts.filter((v) => !done.has(v.key) && checked[v.key] !== -1);
+console.log(`${verdicts.length} sealed verdicts, ${outcomes.length} graded, ${pending.length} waiting`);
+
+// 1. Which pending verdicts have resolved? One Tatum call per market, at most once an hour each.
+const fresh: OutcomeData[] = [];
+for (const v of pending) {
+  if (!FORCE && Date.now() - (checked[v.key] ?? 0) < CHECK_EVERY_MS) continue;
+  let market;
+  try { market = await api.market(v.verdict.marketId); }
+  catch (e) {
+    if (e instanceof TatumBudgetExceeded) { console.error(e.message); break; }
+    console.log(`  ${v.verdict.marketId.slice(0, 10)}: ${(e as Error).message}`);
+    continue;
+  }
+  checked[v.key] = Date.now();
+  if (!market.resolution) { console.log(`  ${v.verdict.eventSlug}: not resolved yet (${market.status})`); continue; }
+  const y = yesWon(market.resolution.outcome, market.outcomes.map((o) => o.name));
+  if (y === null) { console.log(`  ${v.verdict.eventSlug}: resolved "${market.resolution.outcome}", not gradable`); checked[v.key] = -1; continue; }
+  const d = v.verdict;
+  fresh.push({
+    verdictKey: v.key, marketId: d.marketId, question: d.question, label: d.label, resolution: market.resolution.outcome,
+    yesWon: y, forecast: d.forecast, priceAtVerdict: d.priceAtVerdict, grade: gradeForecast(d.forecast, d.priceAtVerdict, y),
+    gradedAt: new Date().toISOString(),
+  });
+}
+await writeJson(CHECK_STATE_FILE, checked);
+
+// 2. Seal one outcome memory per newly graded verdict
+if (fresh.length > 0) {
+  const records = fresh.map((o) => outcomeRecord(o));
+  const stored = await store.rememberBulk(NAMESPACES.outcomes, records.map((r) => encode(r)));
+  fresh.forEach((o, i) => {
+    const blobId = stored[i]?.blobId;
+    if (blobId) outcomes.push({ key: o.verdictKey, blobId, outcome: o });
+  });
+  await writeJson(OUTCOME_LEDGER_FILE, outcomes);
+  console.log(`outcomes sealed: ${stored.filter((s) => s.blobId).length}/${fresh.length}`);
+}
+
+// 3. Brier by label: CALIBRE's forecast against the market price right after the move
+if (outcomes.length > 0) {
+  console.log("\nlabel          n   forecast Brier   market Brier   gain      forecast closer");
+  for (const s of summariseGrades(outcomes.map((o) => ({ label: o.outcome.label, grade: o.outcome.grade })))) {
+    console.log(`${s.label.padEnd(12)} ${String(s.n).padStart(3)}   ${s.forecastBrier.toFixed(4).padStart(14)}   ${s.marketBrier.toFixed(4).padStart(12)}   ${s.gain.toFixed(4).padStart(7)}   ${(s.winRate * 100).toFixed(0)}%`);
+  }
+}
+
+// 4. Learning loop: re-score the wallets behind each newly graded verdict with their newest resolved bets
+if (fresh.length > 0) {
+  const seen = new Map<string, Set<string>>();
+  for (const o of fresh) {
+    const v = verdicts.find((x) => x.key === o.verdictKey)!.verdict;
+    for (const w of v.topWallets) seen.set(w.wallet, (seen.get(w.wallet) ?? new Set()).add(v.league));
+  }
+  const index = await readJson<WalletEdgeRow[]>(WALLET_INDEX_FILE, []);
+  const state = await loadMemoryState();
+  const before = new Map(index.map((r) => [walletKey(r.wallet, r.league), r]));
+  const updatedRows: WalletEdgeRow[] = [];
+  const resolutions = new Map<string, ResolutionLike | null>();
+  for (const wallet of seen.keys()) {
+    const trades = await publicWalletHistory(wallet, 1000, { fresh: true });
+    await loadResolutions(trades.map((t) => t.conditionId), resolutions, { maxEmptyAgeMs: 3 * 3_600_000 });
+    updatedRows.push(...walletRows(wallet, trades, resolutions, new Date().toISOString()));
+  }
+  const replaced = new Set(seen.keys());
+  const merged = [...index.filter((r) => !replaced.has(r.wallet)), ...updatedRows].sort((a, b) => b.z - a.z);
+  await writeJson(WALLET_INDEX_FILE, merged);
+
+  const changed = updatedRows.filter((r) => {
+    const key = walletKey(r.wallet, r.league);
+    return seen.get(r.wallet)?.has(r.league) && needsNewVersion(state[key]?.edge, r.edge) && r.n >= 30;
+  });
+  for (const r of updatedRows) {
+    if (!seen.get(r.wallet)?.has(r.league)) continue;
+    const old = before.get(walletKey(r.wallet, r.league));
+    console.log(`  ${r.wallet.slice(0, 10)} ${r.league}: edge ${old ? (old.edge * 100).toFixed(1) : "new"} -> ${(r.edge * 100).toFixed(1)} pts, n ${old?.n ?? 0} -> ${r.n}`);
+  }
+  const written = await sealWalletMemories(store, changed);
+  console.log(`wallet memories re-versioned: ${written}`);
+}
+
+const { used, budget } = await tatumCallsUsed();
+console.log(`Tatum calls used: ${used}/${budget}`);
+process.exit(0);
