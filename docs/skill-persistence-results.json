@@ -1,0 +1,537 @@
+{
+  "at": "2026-11-03T10:11:46.002Z",
+  "params": {
+    "N_TOP": 25,
+    "N_RANDOM": 40,
+    "TRADES": 1000
+  },
+  "summary": {
+    "top": {
+      "wallets": 23,
+      "spearman_old_vs_new": 0.085,
+      "newSkill_topThirdByOld": 0.0408,
+      "newSkill_bottomThirdByOld": 0.0378,
+      "share_positive_new": 0.7
+    },
+    "random": {
+      "wallets": 40,
+      "spearman_old_vs_new": 0.39,
+      "newSkill_topThirdByOld": 0.0318,
+      "newSkill_bottomThirdByOld": -0.0092,
+      "share_positive_new": 0.55
+    },
+    "all": {
+      "wallets": 63,
+      "spearman_old_vs_new": 0.282,
+      "newSkill_topThirdByOld": 0.0323,
+      "newSkill_bottomThirdByOld": 0.0065,
+      "share_positive_new": 0.6
+    }
+  },
+  "rows": [
+    {
+      "group": "top",
+      "wallet": "0x684baa57c338c2549aec0aa3f034f695d72a8409",
+      "n": 619,
+      "bssOld": 0.012418310318042679,
+      "bssNew": 0.032137840999430296,
+      "leagues": "wnba,mlb,fifwc,wta"
+    },
+    {
+      "group": "top",
+      "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+      "n": 315,
+      "bssOld": -0.024624503041093947,
+      "bssNew": 0.024155896160835074,
+      "leagues": "nba,mlb,will,fifwc"
+    },
+    {
+      "group": "top",
+      "wallet": "0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6",
+      "n": 92,
+      "bssOld": 0.07995150108149664,
+      "bssNew": 0.06699330979171092,
+      "leagues": "cs2,wta,btc,eth"
+    },
+    {
+      "group": "top",
+      "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
+      "n": 82,
+      "bssOld": -0.1448981807007758,
+      "bssNew": 0.003918082817887539,
+      "leagues": "nba,nfl,nhl,cbb"
+    },
+    {
+      "group": "top",
+      "wallet": "0x4bff30af91642dc7d2b19a8664378fe55c45fc26",
+      "n": 357,
+      "bssOld": -0.03358627282242238,
+      "bssNew": -0.037220810374086116,
+      "leagues": "ufc,mlb,wnba,cfb"
+    },
+    {
+      "group": "top",
+      "wallet": "0x9703676286b93c2eca71ca96e8757104519a69c2",
+      "n": 350,
+      "bssOld": -0.045972945904734865,
+      "bssNew": -0.014318734420677366,
+      "leagues": "will,us,nhl,nba"
+    },
+    {
+      "group": "top",
+      "wallet": "0x6ac5bb06a9eb05641fd5e82640268b92f3ab4b6e",
+      "n": 380,
+      "bssOld": -0.002165201405904467,
+      "bssNew": 0.09195146109181646,
+      "leagues": "lol,val,mlb,unl"
+    },
+    {
+      "group": "top",
+      "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+      "n": 18,
+      "bssOld": -0.02399217986734738,
+      "bssNew": 0.1706982735603791,
+      "leagues": "nba,mls,nfl,itf"
+    },
+    {
+      "group": "top",
+      "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+      "n": 182,
+      "bssOld": -0.13832816404150647,
+      "bssNew": 0.16243428659832912,
+      "leagues": "nfl,nba"
+    },
+    {
+      "group": "top",
+      "wallet": "0x7ad71d79a3bb90d0a87a06500fa0fe11663842aa",
+      "n": 253,
+      "bssOld": 0.06813494890907013,
+      "bssNew": 0.003663574785206526,
+      "leagues": "bra2,mls,uel,arg"
+    },
+    {
+      "group": "top",
+      "wallet": "0x9b11866433281ade9f2811dbde8acdefc45f5375",
+      "n": 158,
+      "bssOld": -0.04358068512181867,
+      "bssNew": -0.07273696187271439,
+      "leagues": "nfl,nba,atp"
+    },
+    {
+      "group": "top",
+      "wallet": "0x21f333307ac6d2e65ac82f014b3dd2b64cbc35e3",
+      "n": 195,
+      "bssOld": -0.0313604521779262,
+      "bssNew": 0.00026668632137766154,
+      "leagues": "cbb,nba,nhl,mlb"
+    },
+    {
+      "group": "top",
+      "wallet": "0xe7870d0e1bfc65a23e3d66caf00ca1b9129e5034",
+      "n": 319,
+      "bssOld": 0.12464034744984402,
+      "bssNew": 0.05811040745179267,
+      "leagues": "atp,wta,cs2,lal"
+    },
+    {
+      "group": "top",
+      "wallet": "0xc3744a19f42266ce6fa2736f52eae6e178b20f3e",
+      "n": 106,
+      "bssOld": -0.29493302362873064,
+      "bssNew": 0.19296049907148938,
+      "leagues": "nba"
+    },
+    {
+      "group": "top",
+      "wallet": "0xc46661a5c720740d7c70fbf2cfc10c5de8c4b5cf",
+      "n": 20,
+      "bssOld": 0.25420466304616723,
+      "bssNew": 0.05439751782753577,
+      "leagues": "nba,will,nfl,nhl"
+    },
+    {
+      "group": "top",
+      "wallet": "0x8a8685a792c184e5c2ee8c7d4d4baba7c2c94998",
+      "n": 385,
+      "bssOld": -0.09212293740473027,
+      "bssNew": 0.005221217802872177,
+      "leagues": "lol,cs2,atp,cfb"
+    },
+    {
+      "group": "top",
+      "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
+      "n": 358,
+      "bssOld": -0.012271057030547226,
+      "bssNew": 0.01510602386679487,
+      "leagues": "nhl,cfb,nba,nfl"
+    },
+    {
+      "group": "top",
+      "wallet": "0x285faa3e3d1465cf3ff1bff1e1d14891f5b8495f",
+      "n": 79,
+      "bssOld": 0.016910973975776605,
+      "bssNew": -0.10300278373380094,
+      "leagues": "cs2,nhl,nba,val"
+    },
+    {
+      "group": "top",
+      "wallet": "0xebfdb8164f0e0748818d6c7a9ac85a323267fd63",
+      "n": 194,
+      "bssOld": 0.08674074650494305,
+      "bssNew": 0.07804105581294117,
+      "leagues": "btc,fifwc,atp,wta"
+    },
+    {
+      "group": "top",
+      "wallet": "0xa975581a2876e6c25e47dee8e6a0f3bda0a378a3",
+      "n": 44,
+      "bssOld": 0.08385978222787774,
+      "bssNew": -0.08141402881836748,
+      "leagues": "ucl,nfl,mlb,epl"
+    },
+    {
+      "group": "top",
+      "wallet": "0x84ec4b5b2dbf75d07041b7b89f0a82647e3a72c1",
+      "n": 76,
+      "bssOld": -0.020817423484130876,
+      "bssNew": -0.0963777774114261,
+      "leagues": "bra,canpl,cs2,mlb"
+    },
+    {
+      "group": "top",
+      "wallet": "0x2879ded7fe05df00eddbb2fba412a0d30964411a",
+      "n": 148,
+      "bssOld": 0.09054541429569508,
+      "bssNew": 0.10587056355472291,
+      "leagues": "unl,ja2,fif,fin1"
+    },
+    {
+      "group": "top",
+      "wallet": "0x9f15613ebf1f36d4bc679e1211d1fc567cf9bdb3",
+      "n": 774,
+      "bssOld": -0.04911864616651882,
+      "bssNew": -0.012672611505756213,
+      "leagues": "nwsl,arg,mlb,atp"
+    },
+    {
+      "group": "random",
+      "wallet": "0xa16a1302ca05463f30faebeb5c045767fde233a1",
+      "n": 573,
+      "bssOld": 0.002387905158575516,
+      "bssNew": 0.006450196946347856,
+      "leagues": "will,democratic,gavin,alexandria"
+    },
+    {
+      "group": "random",
+      "wallet": "0x3d1b085b9566bcdb70f5aced40a278768cac5b55",
+      "n": 853,
+      "bssOld": 0.01616275206329139,
+      "bssNew": 0.0016038568000699648,
+      "leagues": "nba,lol,mlb,cfb"
+    },
+    {
+      "group": "random",
+      "wallet": "0xaf5f9e847def287a30a549483123b422d74183ae",
+      "n": 917,
+      "bssOld": -0.0007726803828596373,
+      "bssNew": 0.012737989752179728,
+      "leagues": "bra3,lol,wnba,mlb"
+    },
+    {
+      "group": "random",
+      "wallet": "0x8a3b59b6374a7e5c5195a18944e6f82c63365fa5",
+      "n": 616,
+      "bssOld": 0.11227379433890426,
+      "bssNew": 0.0549828351165092,
+      "leagues": "lol,val,cs2,atp"
+    },
+    {
+      "group": "random",
+      "wallet": "0x24cee225701a99613577dbb95b3f71c53d59da46",
+      "n": 130,
+      "bssOld": -0.058912010538537625,
+      "bssNew": 0.05346572975790792,
+      "leagues": "wta,atp,xagusd,itf"
+    },
+    {
+      "group": "random",
+      "wallet": "0xa3a8bbcc0c5da98b364d679e7d792d7556bc5762",
+      "n": 569,
+      "bssOld": 0.29579227031059435,
+      "bssNew": 0.09556980843457649,
+      "leagues": "dota2,cs2,lol,val"
+    },
+    {
+      "group": "random",
+      "wallet": "0x4502bb5e2d93ce227dff6067b46ac99842ce9eed",
+      "n": 400,
+      "bssOld": 0.03725737285091355,
+      "bssNew": -0.002475877292699856,
+      "leagues": "lal,ufc,bra,mex"
+    },
+    {
+      "group": "random",
+      "wallet": "0xb6fa57039ea79185895500dbd0067c288594abcf",
+      "n": 241,
+      "bssOld": -0.010583827842410158,
+      "bssNew": -0.011171302161157016,
+      "leagues": "elon,will,donald"
+    },
+    {
+      "group": "random",
+      "wallet": "0xd1a63a243042d864520512fbdbd2fd20e0ab1507",
+      "n": 417,
+      "bssOld": 0.08513235565826505,
+      "bssNew": 0.06843988761061495,
+      "leagues": "will,itsb,nlc,scoc"
+    },
+    {
+      "group": "random",
+      "wallet": "0xbc5613462ce3902eea10874a11cf74191f4a8f28",
+      "n": 563,
+      "bssOld": -0.054530739980746486,
+      "bssNew": -0.024361939225893386,
+      "leagues": "btc,xrp,eth,sol"
+    },
+    {
+      "group": "random",
+      "wallet": "0xb4b513bc48279ad795eefedf204aef3936ec1bd4",
+      "n": 466,
+      "bssOld": 0.14295763148730953,
+      "bssNew": 0.033756479017469414,
+      "leagues": "wta,atp,ucl,mlb"
+    },
+    {
+      "group": "random",
+      "wallet": "0x40e9808592e9458f7a26a3f272960290f3b8494f",
+      "n": 72,
+      "bssOld": -0.0028043031080707916,
+      "bssNew": -0.011578791733739666,
+      "leagues": "mlb,npb,kbo"
+    },
+    {
+      "group": "random",
+      "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+      "n": 121,
+      "bssOld": 0.05957716464472247,
+      "bssNew": -0.11075445755216866,
+      "leagues": "cfb,nba,bun,nhl"
+    },
+    {
+      "group": "random",
+      "wallet": "0xc29f63417d0c7ec14dd3592c392f972fc619dc4e",
+      "n": 722,
+      "bssOld": -0.06025634636510432,
+      "bssNew": -0.006365508047091396,
+      "leagues": "mlb,fifwc,atp,wta"
+    },
+    {
+      "group": "random",
+      "wallet": "0x2652dd1140c3b9e69c8852264cf8dbe727672a1d",
+      "n": 33,
+      "bssOld": 0.10251100515169317,
+      "bssNew": -0.16573673903432887,
+      "leagues": "atp,aus,wta"
+    },
+    {
+      "group": "random",
+      "wallet": "0x7860ddc761c01dc49336ed1cd51c4e36f9e7ab46",
+      "n": 646,
+      "bssOld": 0.18217822970036548,
+      "bssNew": 0.17527619678365713,
+      "leagues": "idn2,kor2,kor,itf"
+    },
+    {
+      "group": "random",
+      "wallet": "0xe0ca50f6f3c97f5c16c696ce7bf60e9b5a615898",
+      "n": 659,
+      "bssOld": -0.00652395128234853,
+      "bssNew": 0.06286570971704,
+      "leagues": "lal,sea,bun,nba"
+    },
+    {
+      "group": "random",
+      "wallet": "0x216050de6080fac3926226b2b8ce3d5544784c78",
+      "n": 401,
+      "bssOld": -0.0699589754965839,
+      "bssNew": -0.058794810561038115,
+      "leagues": "nfl,brco,bol1,fl1"
+    },
+    {
+      "group": "random",
+      "wallet": "0x9fd404dbe2d02a756be5e30407fbf3e58c0fde15",
+      "n": 372,
+      "bssOld": 0.014930264194466776,
+      "bssNew": -0.07305563902849883,
+      "leagues": "mlb,nfl,cs2,lol"
+    },
+    {
+      "group": "random",
+      "wallet": "0x0e7fa09bf44514693b5ecc2420c50abc39b62015",
+      "n": 552,
+      "bssOld": -0.01935844062050405,
+      "bssNew": -0.016008539601871357,
+      "leagues": "will,bitcoin,ethereum,mar1"
+    },
+    {
+      "group": "random",
+      "wallet": "0x3abcee60d39400dc22b04f11c2676564d3c2b096",
+      "n": 290,
+      "bssOld": 0.07637104992417483,
+      "bssNew": -0.0022798145966731204,
+      "leagues": "nba,fif,cbb,lol"
+    },
+    {
+      "group": "random",
+      "wallet": "0x546a5166295433ddda571cde5d077fc46abd1988",
+      "n": 829,
+      "bssOld": -0.03761397577305304,
+      "bssNew": -0.019801135303060605,
+      "leagues": "cs2,meta,spy,nvda"
+    },
+    {
+      "group": "random",
+      "wallet": "0x1e814bedfdb7bde5434791a927777deeeac5ae48",
+      "n": 909,
+      "bssOld": -0.0032571564673555447,
+      "bssNew": -0.01686110673472593,
+      "leagues": "atp,nfl,mlb,wta"
+    },
+    {
+      "group": "random",
+      "wallet": "0x1b44a7a2aeec83d21b81130d7b5f449132f51488",
+      "n": 696,
+      "bssOld": 0.004678822520693227,
+      "bssNew": 0.014441977996975594,
+      "leagues": "wta,cfb,el1,lal"
+    },
+    {
+      "group": "random",
+      "wallet": "0xef1eee8224e39cfbcddf01159891725ff67e6e1f",
+      "n": 930,
+      "bssOld": 0.034432022713120916,
+      "bssNew": 0.021060662438276045,
+      "leagues": "mlb,dota2,itf,atp"
+    },
+    {
+      "group": "random",
+      "wallet": "0xe61695610689a96a0208d5c04279cb4ae0f6baa4",
+      "n": 536,
+      "bssOld": -0.010613514039633294,
+      "bssNew": -0.01644170754953489,
+      "leagues": "atp,wta,wnba,lol"
+    },
+    {
+      "group": "random",
+      "wallet": "0x448861155279dbf833d041b963e3ac854599e319",
+      "n": 636,
+      "bssOld": -0.01162523809111899,
+      "bssNew": 0.03270858307043258,
+      "leagues": "mlb,epl,arg,bra"
+    },
+    {
+      "group": "random",
+      "wallet": "0x0f48cbd617d1b2350abdce6213a0ff1172e6e2a4",
+      "n": 613,
+      "bssOld": 0.005343287221082896,
+      "bssNew": 0.006541662931270355,
+      "leagues": "btc,us,elon,atp"
+    },
+    {
+      "group": "random",
+      "wallet": "0x551c8f09fffa54889974a101e2af2b92c13dfe91",
+      "n": 368,
+      "bssOld": -0.010769971239822249,
+      "bssNew": 0.0009902707461983745,
+      "leagues": "bl2,ned2,epl,fl1"
+    },
+    {
+      "group": "random",
+      "wallet": "0x914932a4341d2fe564b91e0a31fc5880b05ff2da",
+      "n": 484,
+      "bssOld": 0.034442073981527356,
+      "bssNew": 0.03163148647476631,
+      "leagues": "highest,btc,wta,uel"
+    },
+    {
+      "group": "random",
+      "wallet": "0xddb993dbaee76440dbb42408a1925e38b7aaedcd",
+      "n": 499,
+      "bssOld": -0.010907087844129167,
+      "bssNew": 0.07409615366871142,
+      "leagues": "nba,mls,nfl,bknbl"
+    },
+    {
+      "group": "random",
+      "wallet": "0x126266f57f9812c42daaf69767f622ad36ce056f",
+      "n": 605,
+      "bssOld": -0.029900936367389747,
+      "bssNew": 0.026245515654163287,
+      "leagues": "cfb,mlb,ufc,nhl"
+    },
+    {
+      "group": "random",
+      "wallet": "0xa5210526a589221769501fa0a7ca4e7b4278d609",
+      "n": 272,
+      "bssOld": 0.05975701423819918,
+      "bssNew": 0.04119756481825436,
+      "leagues": "cs2,val,dota2,unl"
+    },
+    {
+      "group": "random",
+      "wallet": "0x902859b3b16e0a95311cd31b41c702a1e8b78608",
+      "n": 72,
+      "bssOld": -0.16697882401921932,
+      "bssNew": -0.13065342253976792,
+      "leagues": "btc"
+    },
+    {
+      "group": "random",
+      "wallet": "0x70447eabbe8c23839b9c8f8dbf32185f5be85104",
+      "n": 592,
+      "bssOld": 0.09573773692376121,
+      "bssNew": 0.1726505313104474,
+      "leagues": "itf,cs2,val,wta"
+    },
+    {
+      "group": "random",
+      "wallet": "0xf6145f0f978a1bb43f679d579f70a115fa362712",
+      "n": 157,
+      "bssOld": -0.011565428415215727,
+      "bssNew": -0.037780086948476926,
+      "leagues": "atp,cs2,bun,epl"
+    },
+    {
+      "group": "random",
+      "wallet": "0xf16533644b62afaf8da90ab6ba59eff4432d4c47",
+      "n": 998,
+      "bssOld": 0.031272599888176295,
+      "bssNew": -0.021332165000801574,
+      "leagues": "ere,elc,atp,irl1"
+    },
+    {
+      "group": "random",
+      "wallet": "0xb924bb9cbcf6f7ae3012e00a340c387bd3f151c3",
+      "n": 481,
+      "bssOld": -0.026947278936088257,
+      "bssNew": -0.01343999334123161,
+      "leagues": "lal,will,epl,nhl"
+    },
+    {
+      "group": "random",
+      "wallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
+      "n": 578,
+      "bssOld": -0.008195636937716258,
+      "bssNew": 0.027189294001920855,
+      "leagues": "cfb,mlb,nfl,wnba"
+    },
+    {
+      "group": "random",
+      "wallet": "0xebc0df15e665da95bf819105b723ae90042ffa41",
+      "n": 529,
+      "bssOld": 0.014324843762742486,
+      "bssNew": 0.0006488617958592577,
+      "leagues": "will,highest,nba,donald"
+    }
+  ]
+}
