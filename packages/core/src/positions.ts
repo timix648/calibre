@@ -1,4 +1,4 @@
-import { clamp } from "./math.js";
+import { clamp } from "./math";
 
 export type Side = "YES" | "NO";
 

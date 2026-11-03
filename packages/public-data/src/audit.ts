@@ -1,5 +1,5 @@
 import { auditWallet, type ResolutionLike, type WalletAudit } from "@calibre/core";
-import { fetchResolutions, fetchWalletTrades, isAddress, PublicApiError, type FetchOpts } from "./polymarket.js";
+import { fetchResolutions, fetchWalletTrades, isAddress, PublicApiError, type FetchOpts } from "./polymarket";
 
 export const MAX_AUDIT_TRADES = 1000;
 

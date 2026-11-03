@@ -1,2 +1,2 @@
-export * from "./polymarket.js";
-export * from "./audit.js";
+export * from "./polymarket";
+export * from "./audit";

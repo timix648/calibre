@@ -1,5 +1,5 @@
-import { brier, type Outcome } from "./brier.js";
-import { DAY_MS, decayWeight } from "./math.js";
+import { brier, type Outcome } from "./brier";
+import { DAY_MS, decayWeight } from "./math";
 
 /** One resolved pick: what the source believed, what the market said at the same time, and what happened. */
 export interface ScoredPick {

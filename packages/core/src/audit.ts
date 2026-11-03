@@ -1,5 +1,5 @@
-import { priceEdge, type Edge } from "./edge.js";
-import { onePickPerMarket, tradesToPicks, tradesToSnipePicks, type CategorisedPick, type ResolutionLike, type TradeLike } from "./picks.js";
+import { priceEdge, type Edge } from "./edge";
+import { onePickPerMarket, tradesToPicks, tradesToSnipePicks, type CategorisedPick, type ResolutionLike, type TradeLike } from "./picks";
 
 /** Bets needed in a phase before a positive z-score is called a proven edge. */
 export const MIN_BETS_FOR_PROVEN = 100;

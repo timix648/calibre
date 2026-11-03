@@ -1,4 +1,4 @@
-import { clamp, logit, sigmoid } from "./math.js";
+import { clamp, logit, sigmoid } from "./math";
 
 export interface Signal {
   /** Source's probability for YES. */

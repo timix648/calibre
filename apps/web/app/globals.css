@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0c10;
+  --color-panel: #11141a;
+  --color-panel-2: #161a22;
+  --color-line: #232935;
+  --color-fg: #e7eaf0;
+  --color-muted: #8f98a8;
+  --color-faint: #5d6676;
+  --color-accent: #5eead4;
+  --color-good: #4ade80;
+  --color-bad: #fb7185;
+  --color-warn: #fbbf24;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-calibre h1 { font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; margin: 0 0 1rem; line-height: 1.25; }
+.prose-calibre h2 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.6rem; }
+.prose-calibre h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+.prose-calibre p { color: #c3c9d4; line-height: 1.7; margin: 0 0 0.9rem; }
+.prose-calibre ul { list-style: disc; padding-left: 1.3rem; margin: 0 0 1rem; color: #c3c9d4; }
+.prose-calibre li { line-height: 1.65; margin: 0.3rem 0; }
+.prose-calibre code { font-family: var(--font-mono); font-size: 0.86em; background: var(--color-panel-2); border: 1px solid var(--color-line); padding: 0.05em 0.35em; border-radius: 4px; }
+.prose-calibre strong { color: var(--color-fg); font-weight: 600; }
+.prose-calibre table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 0 0 1.2rem; }
+.prose-calibre th { text-align: left; color: var(--color-muted); font-weight: 500; border-bottom: 1px solid var(--color-line); padding: 0.5rem 0.6rem; }
+.prose-calibre td { border-bottom: 1px solid var(--color-line); padding: 0.5rem 0.6rem; vertical-align: top; color: #c3c9d4; }
+.prose-calibre .table-wrap { overflow-x: auto; }

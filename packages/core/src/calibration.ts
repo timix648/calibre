@@ -1,4 +1,4 @@
-import type { Outcome } from "./brier.js";
+import type { Outcome } from "./brier";
 
 export interface Bucket {
   lo: number;

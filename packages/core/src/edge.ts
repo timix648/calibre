@@ -1,5 +1,5 @@
-import { DAY_MS, decayWeight } from "./math.js";
-import type { ScoredPick } from "./skill.js";
+import { DAY_MS, decayWeight } from "./math";
+import type { ScoredPick } from "./skill";
 
 /**
  * Edge against the price paid: how much more often a wallet's bought outcomes win than their prices implied.

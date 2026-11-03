@@ -1,6 +1,6 @@
-import { blend } from "./blend.js";
-import { shrunkEdge, type Edge } from "./edge.js";
-import { clamp } from "./math.js";
+import { blend } from "./blend";
+import { shrunkEdge, type Edge } from "./edge";
+import { clamp } from "./math";
 
 /** One fill in a market (shape of Tatum's /markets/{id}/trades). */
 export interface FlowTrade {

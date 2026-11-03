@@ -1,5 +1,5 @@
-import { leagueOf } from "./leagues.js";
-import type { PricePoint } from "./moves.js";
+import { leagueOf } from "./leagues";
+import type { PricePoint } from "./moves";
 
 /** The fields of a Tatum event that market discovery needs. */
 export interface EventLike {

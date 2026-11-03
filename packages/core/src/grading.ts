@@ -1,4 +1,4 @@
-import { brier, type Outcome } from "./brier.js";
+import { brier, type Outcome } from "./brier";
 
 export interface Grade {
   /** Brier score of CALIBRE's skill-weighted forecast. */

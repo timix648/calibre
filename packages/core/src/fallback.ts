@@ -1,5 +1,5 @@
-import type { FlowTrade } from "./attribution.js";
-import type { PricePoint } from "./moves.js";
+import type { FlowTrade } from "./attribution";
+import type { PricePoint } from "./moves";
 
 /** Where the evidence behind a verdict came from. Tatum is primary; Polymarket's public API is the labelled fallback. */
 export type DataSource = "tatum" | "polymarket-public";

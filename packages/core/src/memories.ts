@@ -1,8 +1,8 @@
-import type { ModelVersion, MoveLabel } from "./attribution.js";
-import type { Edge } from "./edge.js";
-import type { Grade } from "./grading.js";
-import type { DataSource } from "./fallback.js";
-import { formatPoints, leagueLabel, shortAddress, skillPhrase, skillVerdict, type SkillVerdict } from "./wording.js";
+import type { ModelVersion, MoveLabel } from "./attribution";
+import type { Edge } from "./edge";
+import type { Grade } from "./grading";
+import type { DataSource } from "./fallback";
+import { formatPoints, leagueLabel, shortAddress, skillPhrase, skillVerdict, type SkillVerdict } from "./wording";
 
 /** Same shape as the memory package's Envelope, so core stays dependency-free. */
 export interface MemoryRecord<T> {

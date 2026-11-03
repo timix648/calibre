@@ -1,7 +1,7 @@
-import type { Outcome } from "./brier.js";
-import { leagueOf } from "./leagues.js";
-import { impliedProb } from "./positions.js";
-import type { ScoredPick } from "./skill.js";
+import type { Outcome } from "./brier";
+import { leagueOf } from "./leagues";
+import { impliedProb } from "./positions";
+import type { ScoredPick } from "./skill";
 
 /** The fields of a wallet trade that scoring needs (shape of Tatum's /wallets/{addr}/trades). */
 export interface TradeLike {
