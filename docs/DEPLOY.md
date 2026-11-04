@@ -33,8 +33,12 @@ pnpm --filter @calibre/web build
 ## What runs where
 
 - Static pages: `/`, `/moves`, `/move/[id]` (one per sealed verdict), `/proof`, `/method`.
-- Serverless function: `/api/wallet/[address]` (`maxDuration` 60 s, set in the route file). `/wallet/[address]` is a thin page that calls it from the browser.
+- Serverless functions: `/api/xray/wallet/[address]`, `/api/xray/market/[ref]` and `/api/xray/handle/[handle]` (GET, CORS open so the browser extension can call them; `maxDuration` 60 s; no Tatum calls, Polymarket's free Gamma and Data APIs only; the market route returns partial results with `complete: false` after about 25 s). `/market/[ref]` is a thin page over the market route. The old `/api/wallet/[address]` (`maxDuration` 60 s, set in the route file). `/wallet/[address]` is a thin page that calls it from the browser.
 - The route caches each audit in the function instance's memory for 10 minutes, de-duplicates concurrent audits of one wallet, and allows 8 uncached audits per minute per IP. This state is per instance, so on Vercel it is best effort; successful responses also carry `Cache-Control: public, s-maxage=600`, so Vercel's CDN absorbs repeat requests.
+
+## The browser extension
+
+Build it with `pnpm --filter @calibre/extension build` and load `apps/extension/dist` unpacked. In its options set the API base URL to the deployed site (default `http://localhost:3000`). See `apps/extension/README.md`.
 
 ## Updating the data
 
