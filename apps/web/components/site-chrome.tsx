@@ -6,6 +6,7 @@ import { SmartInput } from "./smart-input";
 
 const NAV = [
   { href: "/radar", label: "Radar" },
+  { href: "/record", label: "Record" },
   { href: "/proof", label: "Proof" },
   { href: "/method", label: "Method" },
   { href: "/#extension", label: "Extension" },
