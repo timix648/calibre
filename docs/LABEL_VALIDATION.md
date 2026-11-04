@@ -1,12 +1,10 @@
 # Label validation
 
-> **Preliminary (40 wallets).** Regenerated from the wide study logs once they are in; do not quote these numbers as findings.
-
 Question: does the X-ray label a wallet would have had from its older bets say anything about how it does on its newer bets?
 
 ## Method
 
-- Source: the per-wallet lines of the skill-persistence study logs (skill-persistence-allphase.log, skill-persistence-pregame.log, skill-persistence-inplay.log). Each wallet's bets are split at the middle: the older half is what the X-ray would have known, the newer half is what happened next.
+- Source: the per-wallet lines of the skill-persistence study logs (wide-all.log, wide-pregame.log, wide-inplay.log). Each wallet's bets are split at the middle: the older half is what the X-ray would have known, the newer half is what happened next.
 - Wallets: the profit-blind sample only (wallets drawn from the same markets, not picked for profit).
 - Label from the older half, with the rules of the live X-ray: proven losing record = z <= -2 over at least 30 bets; positive record = z >= 2 over at least 100 bets; too early = fewer than 30 bets; otherwise no proven edge. "Mostly sniping" cannot be derived from the logs and is left out.
 - Edge: points won above the price paid, per bet, on one pick per market. Mean newer-half edge comes with a percentile bootstrap 95% interval (2,000 resamples over wallets, fixed seed). A wallet counts once, whatever its size.
@@ -14,39 +12,39 @@ Question: does the X-ray label a wallet would have had from its older bets say a
 
 ## All bets
 
-40 wallets with a result line.
+983 wallets with a result line.
 
 | Label from older half | Wallets | Mean older edge (pts) | Mean newer edge (pts) | 95% interval | Share with negative newer edge |
 |---|---:|---:|---:|---|---:|
-| proven losing record | 4 | -6.0 | -2.9 | -4.0 to -1.9 | 100% (4/4) |
-| positive record (unproven going forward) | 1 | +10.4 | +1.0 | n/a (fewer than 2 wallets) | 0% (0/1) |
-| no proven edge | 33 | -0.4 | -0.4 | -1.9 to +0.9 | 55% (18/33) |
-| too early | 2 | +6.4 | -6.8 | -19.7 to +6.2 | 50% (1/2) |
-| all wallets | 40 | -0.3 | -1.0 | -2.6 to +0.5 | 57% (23/40) |
+| proven losing record | 57 | -9.1 | -3.8 | -5.1 to -2.4 | 81% (46/57) |
+| positive record (unproven going forward) | 40 | +8.3 | +2.2 | +0.5 to +4.1 | 38% (15/40) |
+| no proven edge | 801 | +0.2 | -1.0 | -1.3 to -0.7 | 60% (484/801) |
+| too early | 85 | +2.7 | -1.9 | -4.3 to +1.0 | 60% (51/85) |
+| all wallets | 983 | +0.2 | -1.1 | -1.5 to -0.7 | 61% (596/983) |
 
 ## Pre-game bets
 
-30 wallets with a result line.
+823 wallets with a result line.
 
 | Label from older half | Wallets | Mean older edge (pts) | Mean newer edge (pts) | 95% interval | Share with negative newer edge |
 |---|---:|---:|---:|---|---:|
-| proven losing record | 0 | n/a | n/a | n/a (fewer than 2 wallets) | n/a |
-| positive record (unproven going forward) | 0 | n/a | n/a | n/a (fewer than 2 wallets) | n/a |
-| no proven edge | 25 | +0.0 | -1.4 | -3.4 to +0.6 | 60% (15/25) |
-| too early | 5 | +9.0 | +1.5 | -9.7 to +13.9 | 40% (2/5) |
-| all wallets | 30 | +1.5 | -0.9 | -3.3 to +1.7 | 57% (17/30) |
+| proven losing record | 21 | -10.6 | -1.2 | -3.8 to +1.6 | 71% (15/21) |
+| positive record (unproven going forward) | 11 | +7.3 | -1.0 | -3.1 to +1.3 | 55% (6/11) |
+| no proven edge | 491 | +0.5 | -1.2 | -1.7 to -0.7 | 60% (296/491) |
+| too early | 300 | -1.0 | -1.9 | -3.3 to -0.2 | 60% (180/300) |
+| all wallets | 823 | -0.2 | -1.4 | -2.0 to -0.8 | 60% (497/823) |
 
 ## In-play bets
 
-40 wallets with a result line.
+940 wallets with a result line.
 
 | Label from older half | Wallets | Mean older edge (pts) | Mean newer edge (pts) | 95% interval | Share with negative newer edge |
 |---|---:|---:|---:|---|---:|
-| proven losing record | 3 | -10.8 | +0.9 | -4.1 to +10.4 | 67% (2/3) |
-| positive record (unproven going forward) | 1 | +4.9 | -1.9 | n/a (fewer than 2 wallets) | 100% (1/1) |
-| no proven edge | 28 | -0.6 | -1.8 | -3.8 to +0.0 | 64% (18/28) |
-| too early | 8 | +0.7 | +4.4 | -4.0 to +12.6 | 38% (3/8) |
-| all wallets | 40 | -1.0 | -0.3 | -2.6 to +2.1 | 60% (24/40) |
+| proven losing record | 47 | -9.7 | -3.5 | -5.1 to -2.0 | 72% (34/47) |
+| positive record (unproven going forward) | 15 | +8.6 | +0.9 | -1.2 to +3.1 | 40% (6/15) |
+| no proven edge | 707 | -0.1 | -1.1 | -1.5 to -0.7 | 61% (433/707) |
+| too early | 171 | -0.2 | -1.9 | -3.6 to -0.2 | 52% (89/171) |
+| all wallets | 940 | -0.4 | -1.3 | -1.7 to -0.9 | 60% (562/940) |
 
 ## How to read this
 

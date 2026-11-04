@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-04T05:22:29.194Z",
-  "preliminary": "40 wallets",
+  "generatedAt": "2026-11-04T11:50:39.381Z",
+  "preliminary": null,
   "sources": [
-    "skill-persistence-allphase.log",
-    "skill-persistence-pregame.log",
-    "skill-persistence-inplay.log"
+    "wide-all.log",
+    "wide-pregame.log",
+    "wide-inplay.log"
   ],
   "includesTop": false,
   "rules": {
@@ -21,187 +21,199 @@
   "phases": [
     {
       "phase": "all",
-      "wallets": 40,
+      "wallets": 983,
       "labels": [
         {
           "label": "proven losing record",
-          "wallets": 4,
-          "meanNewEdgePts": -2.9,
+          "wallets": 57,
+          "meanNewEdgePts": -3.7578947368421054,
           "ci95Pts": [
-            -4.025,
-            -1.875
+            -5.107017543859651,
+            -2.42280701754386
           ],
-          "negative": 4,
-          "shareNegative": 1,
-          "meanOldEdgePts": -6.05
+          "negative": 46,
+          "shareNegative": 0.8070175438596491,
+          "meanOldEdgePts": -9.070175438596491
         },
         {
           "label": "positive record (unproven going forward)",
-          "wallets": 1,
-          "meanNewEdgePts": 1,
-          "ci95Pts": null,
-          "negative": 0,
-          "shareNegative": 0,
-          "meanOldEdgePts": 10.4
+          "wallets": 40,
+          "meanNewEdgePts": 2.1799999999999997,
+          "ci95Pts": [
+            0.52,
+            4.094999999999999
+          ],
+          "negative": 15,
+          "shareNegative": 0.375,
+          "meanOldEdgePts": 8.267499999999998
         },
         {
           "label": "no proven edge",
-          "wallets": 33,
-          "meanNewEdgePts": -0.42424242424242425,
+          "wallets": 801,
+          "meanNewEdgePts": -0.9746566791510611,
           "ci95Pts": [
-            -1.863636363636363,
-            0.9424242424242426
+            -1.3133583021223458,
+            -0.6602996254681647
           ],
-          "negative": 18,
-          "shareNegative": 0.5454545454545454,
-          "meanOldEdgePts": -0.3575757575757576
+          "negative": 484,
+          "shareNegative": 0.6042446941323346,
+          "meanOldEdgePts": 0.18776529338327105
         },
         {
           "label": "too early",
-          "wallets": 2,
-          "meanNewEdgePts": -6.75,
+          "wallets": 85,
+          "meanNewEdgePts": -1.8658823529411763,
           "ci95Pts": [
-            -19.7,
-            6.2
+            -4.348235294117648,
+            0.98
           ],
-          "negative": 1,
-          "shareNegative": 0.5,
-          "meanOldEdgePts": 6.3500000000000005
+          "negative": 51,
+          "shareNegative": 0.6,
+          "meanOldEdgePts": 2.7
         },
         {
           "label": "all wallets",
-          "wallets": 40,
-          "meanNewEdgePts": -0.9525,
+          "wallets": 983,
+          "meanNewEdgePts": -1.0847405900305185,
           "ci95Pts": [
-            -2.5974999999999993,
-            0.5325
+            -1.4591047812817919,
+            -0.713224821973549
           ],
-          "negative": 23,
-          "shareNegative": 0.575,
-          "meanOldEdgePts": -0.3224999999999999
+          "negative": 596,
+          "shareNegative": 0.6063072227873856,
+          "meanOldEdgePts": 0.19694811800610393
         }
       ]
     },
     {
       "phase": "pregame",
-      "wallets": 30,
+      "wallets": 823,
       "labels": [
         {
           "label": "proven losing record",
-          "wallets": 0,
-          "meanNewEdgePts": null,
-          "ci95Pts": null,
-          "negative": 0,
-          "shareNegative": null,
-          "meanOldEdgePts": null
+          "wallets": 21,
+          "meanNewEdgePts": -1.1761904761904765,
+          "ci95Pts": [
+            -3.8000000000000007,
+            1.595238095238095
+          ],
+          "negative": 15,
+          "shareNegative": 0.7142857142857143,
+          "meanOldEdgePts": -10.595238095238095
         },
         {
           "label": "positive record (unproven going forward)",
-          "wallets": 0,
-          "meanNewEdgePts": null,
-          "ci95Pts": null,
-          "negative": 0,
-          "shareNegative": null,
-          "meanOldEdgePts": null
+          "wallets": 11,
+          "meanNewEdgePts": -1,
+          "ci95Pts": [
+            -3.1272727272727265,
+            1.2818181818181815
+          ],
+          "negative": 6,
+          "shareNegative": 0.5454545454545454,
+          "meanOldEdgePts": 7.263636363636365
         },
         {
           "label": "no proven edge",
-          "wallets": 25,
-          "meanNewEdgePts": -1.388,
+          "wallets": 491,
+          "meanNewEdgePts": -1.1989816700611005,
           "ci95Pts": [
-            -3.412,
-            0.6360000000000002
+            -1.6926680244399186,
+            -0.6887983706720976
           ],
-          "negative": 15,
-          "shareNegative": 0.6,
-          "meanOldEdgePts": 0.008000000000000123
+          "negative": 296,
+          "shareNegative": 0.6028513238289206,
+          "meanOldEdgePts": 0.5421588594704692
         },
         {
           "label": "too early",
-          "wallets": 5,
-          "meanNewEdgePts": 1.4599999999999997,
+          "wallets": 300,
+          "meanNewEdgePts": -1.8560000000000014,
           "ci95Pts": [
-            -9.68,
-            13.879999999999999
+            -3.3399999999999994,
+            -0.24333333333333318
           ],
-          "negative": 2,
-          "shareNegative": 0.4,
-          "meanOldEdgePts": 8.959999999999999
+          "negative": 180,
+          "shareNegative": 0.6,
+          "meanOldEdgePts": -0.992666666666667
         },
         {
           "label": "all wallets",
-          "wallets": 30,
-          "meanNewEdgePts": -0.9133333333333334,
+          "wallets": 823,
+          "meanNewEdgePts": -1.435236938031591,
           "ci95Pts": [
-            -3.323333333333335,
-            1.7133333333333336
+            -2.0397326852976883,
+            -0.8032806804374236
           ],
-          "negative": 17,
-          "shareNegative": 0.5666666666666667,
-          "meanOldEdgePts": 1.4999999999999998
+          "negative": 497,
+          "shareNegative": 0.6038882138517618,
+          "meanOldEdgePts": -0.21166464155528542
         }
       ]
     },
     {
       "phase": "inplay",
-      "wallets": 40,
+      "wallets": 940,
       "labels": [
         {
           "label": "proven losing record",
-          "wallets": 3,
-          "meanNewEdgePts": 0.9,
+          "wallets": 47,
+          "meanNewEdgePts": -3.5085106382978717,
           "ci95Pts": [
-            -4.1000000000000005,
-            10.4
+            -5.070212765957446,
+            -1.9702127659574467
           ],
-          "negative": 2,
-          "shareNegative": 0.6666666666666666,
-          "meanOldEdgePts": -10.799999999999999
+          "negative": 34,
+          "shareNegative": 0.723404255319149,
+          "meanOldEdgePts": -9.734042553191493
         },
         {
           "label": "positive record (unproven going forward)",
-          "wallets": 1,
-          "meanNewEdgePts": -1.9,
-          "ci95Pts": null,
-          "negative": 1,
-          "shareNegative": 1,
-          "meanOldEdgePts": 4.9
+          "wallets": 15,
+          "meanNewEdgePts": 0.8666666666666667,
+          "ci95Pts": [
+            -1.1933333333333331,
+            3.0933333333333333
+          ],
+          "negative": 6,
+          "shareNegative": 0.4,
+          "meanOldEdgePts": 8.580000000000002
         },
         {
           "label": "no proven edge",
-          "wallets": 28,
-          "meanNewEdgePts": -1.7892857142857146,
+          "wallets": 707,
+          "meanNewEdgePts": -1.0811881188118815,
           "ci95Pts": [
-            -3.8321428571428577,
-            7.930164461608261e-17
+            -1.4660537482319644,
+            -0.7125884016973131
           ],
-          "negative": 18,
-          "shareNegative": 0.6428571428571429,
-          "meanOldEdgePts": -0.5892857142857143
+          "negative": 433,
+          "shareNegative": 0.6124469589816125,
+          "meanOldEdgePts": -0.05671852899575674
         },
         {
           "label": "too early",
-          "wallets": 8,
-          "meanNewEdgePts": 4.4375,
+          "wallets": 171,
+          "meanNewEdgePts": -1.8596491228070176,
           "ci95Pts": [
-            -4.012499999999999,
-            12.5625
+            -3.5672514619883042,
+            -0.16315789473684225
           ],
-          "negative": 3,
-          "shareNegative": 0.375,
-          "meanOldEdgePts": 0.7249999999999996
+          "negative": 89,
+          "shareNegative": 0.52046783625731,
+          "meanOldEdgePts": -0.21286549707602334
         },
         {
           "label": "all wallets",
-          "wallets": 40,
-          "meanNewEdgePts": -0.3450000000000003,
+          "wallets": 940,
+          "meanNewEdgePts": -1.3130851063829792,
           "ci95Pts": [
-            -2.6049999999999995,
-            2.0775000000000006
+            -1.7459574468085097,
+            -0.8686170212765967
           ],
-          "negative": 24,
-          "shareNegative": 0.6,
-          "meanOldEdgePts": -0.9550000000000001
+          "negative": 562,
+          "shareNegative": 0.597872340425532,
+          "meanOldEdgePts": -0.43117021276595724
         }
       ]
     }
