@@ -72,6 +72,8 @@ The demo agent signs with the key in `AGENT_SUI_KEY`. Use a **fresh key made for
 1. Create the key and note its address, for example with the Sui CLI: `sui client new-address ed25519`, then
    `sui keytool export --key-identity <address>` prints the `suiprivkey1...` string.
 2. Put `AGENT_SUI_KEY=suiprivkey1...` in the repository's `.env` (git-ignored). The script prints the buyer address when it starts.
+   Keep that `.env` on the laptop. If it ever sits on a server, leave it out of backups (`--exclude=.env --exclude='.env.*'`) and shred it
+   with the backup archives at teardown (`docs/VPS_OPS.md`).
 3. Send that address on **Sui mainnet**:
    - **0.10 USDC** (Circle USDC, coin type `0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC`).
      One run spends at most 0.05 USDC (5 calls at 0.01), so 0.10 covers two full runs. Do not send other stablecoins; the agent will refuse them.

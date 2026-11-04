@@ -26,7 +26,7 @@ scp export-index.tar.gz <vps>:~/
 
 ```bash
 ls ~/calibre-study/.cache/results/SQUARE_DONE   # exists only once the replay has finished
-pgrep -af square-replay || echo "replay not running"
+tmux ls | grep calibre-replay || echo "replay not running"   # stop a running one by name: tmux kill-session -t calibre-replay
 
 cd ~/calibre-study
 tar xzf ~/export-index.tar.gz
@@ -38,6 +38,9 @@ Output: `~/calibre-study/.cache/index/wallets-wide.json`. It runs one wallet at 
 light; `nice -n 19` keeps it behind everything else.
 
 ## 3. Copy and merge into the watcher
+
+Stop and restart the watcher by session name only (`tmux kill-session -t calibre-watch`), never with `pkill -f`, and keep `.env` out of every
+backup (`--exclude=.env --exclude='.env.*'`). Stopping, backups and teardown are in `docs/VPS_OPS.md`.
 
 ```bash
 mkdir -p ~/calibre-watch/.cache/index

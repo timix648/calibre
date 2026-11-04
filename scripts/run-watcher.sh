@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # Long-running CALIBRE engine for a server: watches markets every 10 minutes and grades sealed verdicts every hour,
 # restarting either loop if it crashes. Tatum use is capped per hour so the remaining credits last to the deadline.
-# Usage: bash scripts/run-watcher.sh   (stop with: pkill -f run-watcher.sh; pkill -f "apps/worker")
+# Usage: tmux new -d -s calibre-watch 'nice -n 10 bash scripts/run-watcher.sh'
+# Stop it by session name only: tmux kill-session -t calibre-watch
+# Never stop it with pkill -f: that matches every process whose command line contains the text, remote shells included.
+# Backups must leave .env out and a teardown must delete it: see docs/VPS_OPS.md.
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
@@ -39,5 +42,5 @@ grade_loop() {
 watch_loop & WATCH_PID=$!
 grade_loop & GRADE_PID=$!
 echo "$(date -u +%FT%TZ) started watch=$WATCH_PID grade=$GRADE_PID tatum_hourly=$TATUM_HOURLY" | tee -a .cache/logs/watch.log
-trap 'kill $WATCH_PID $GRADE_PID 2>/dev/null; exit 0' INT TERM
+trap 'kill $WATCH_PID $GRADE_PID 2>/dev/null; exit 0' INT TERM HUP
 wait
