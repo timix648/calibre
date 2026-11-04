@@ -10,7 +10,7 @@ A small panel on polymarket.com that shows the X-ray from a CALIBRE site:
 It follows Polymarket's single-page navigation, so the panel updates when you click from page to page. The panel lives in a closed shadow
 root at the bottom right; collapse it with the dash, close it with the cross.
 
-Square money is a caution signal and early evidence, not a trade recommendation: in a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.
+Square money is a caution signal and early evidence, not a trade recommendation: in a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); not conclusive.
 
 ## Build
 
