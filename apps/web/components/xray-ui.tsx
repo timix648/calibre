@@ -1,13 +1,5 @@
-import { XRAY_TONE, type XrayLabel } from "@calibre/core";
+import { XRAY_SHORT, XRAY_TONE, type XrayLabel } from "@calibre/core";
 import { Badge } from "./ui";
-
-const SHORT: Record<XrayLabel, string> = {
-  "proven losing record": "Proven losing record",
-  "mostly sniping": "Mostly sniping",
-  "too early": "Too early",
-  "positive record (unproven going forward)": "Positive record (unproven)",
-  "no proven edge": "No proven edge",
-};
 
 /** One-line meaning of each label, for tooltips and legends. */
 export const LABEL_MEANING: Record<XrayLabel, string> = {
@@ -23,7 +15,7 @@ export function XrayChip({ label, compact = false }: { label: XrayLabel | null; 
   const tone = XRAY_TONE[label];
   return (
     <span title={LABEL_MEANING[label]}>
-      <Badge tone={tone}>{compact ? SHORT[label] : label.charAt(0).toUpperCase() + label.slice(1)}</Badge>
+      <Badge tone={tone}>{compact ? XRAY_SHORT[label] : label.charAt(0).toUpperCase() + label.slice(1)}</Badge>
     </span>
   );
 }

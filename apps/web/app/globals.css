@@ -63,3 +63,26 @@ a {
 .prose-calibre th { text-align: left; color: var(--color-muted); font-weight: 500; border-bottom: 1px solid var(--color-line); padding: 0.5rem 0.6rem; }
 .prose-calibre td { border-bottom: 1px solid var(--color-line); padding: 0.5rem 0.6rem; vertical-align: top; color: #c3c9d4; }
 .prose-calibre .table-wrap { overflow-x: auto; }
+
+/* Charts and motion. Everything here is switched off for people who ask for less motion. */
+.gauge-fill { stroke-dasharray: 1; stroke-dashoffset: 1; animation: gauge-in 0.9s cubic-bezier(0.22, 0.8, 0.3, 1) 0.1s forwards; }
+@keyframes gauge-in { to { stroke-dashoffset: 0; } }
+
+.bar-grow { transform: scaleY(0); animation: bar-grow 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) forwards; }
+@keyframes bar-grow { to { transform: scaleY(1); } }
+.bar-fade { opacity: 0; animation: bar-fade 0.8s ease-out 0.5s forwards; }
+@keyframes bar-fade { to { opacity: 1; } }
+
+.flow-step { opacity: 0; transform: translateY(6px); animation: flow-in 0.5s ease-out forwards; }
+@keyframes flow-in { to { opacity: 1; transform: none; } }
+
+.indeterminate { animation: indeterminate 1.4s ease-in-out infinite; }
+@keyframes indeterminate { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .gauge-fill { animation: none; stroke-dashoffset: 0; }
+  .bar-grow { animation: none; transform: none; }
+  .bar-fade { animation: none; opacity: 1; }
+  .flow-step { animation: none; opacity: 1; transform: none; }
+  .indeterminate { animation: none; transform: none; width: 100%; opacity: 0.5; }
+}

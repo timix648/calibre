@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { FindingsBars } from "@/components/findings-bars";
+import { HowItWorks } from "@/components/how-it-works";
 import { SmartInput } from "@/components/smart-input";
 import { Card, H2, Stat, TableWrap } from "@/components/ui";
 import { findings, memory, verdicts } from "@/lib/data";
@@ -55,40 +57,48 @@ export default function Home() {
           <H2 sub={`${best.wallets} wallets chosen without looking at profit, sports markets. Each is ranked by its edge on older bets, then followed on newer ones.`}>
             <span id="finding">The finding: past losers keep losing, past winners do not stay ahead</span>
           </H2>
-          <TableWrap>
-            <table className="w-full min-w-[420px] text-sm">
-              <thead>
-                <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
-                  <th className="py-2 pr-3 font-medium">Group, ranked on older bets</th>
-                  <th className="px-3 py-2 text-right font-medium">Edge on their next bets</th>
-                  <th className="py-2 pl-3 font-medium">Reading</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-line/60">
-                  <td className="py-3 pr-3 font-medium">Worst third</td>
-                  <td className="num px-3 py-3 text-right font-semibold text-bad">{signed(best.worst)}</td>
-                  <td className="py-3 pl-3 text-muted">Keep losing</td>
-                </tr>
-                <tr className="border-b border-line/60">
-                  <td className="py-3 pr-3 font-medium">Best third</td>
-                  <td className="num px-3 py-3 text-right font-semibold">{signed(best.best)}</td>
-                  <td className="py-3 pl-3 text-muted">Do not stay ahead</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-3 font-medium">Top profit-leaderboard earners <span className="text-faint">({top.wallets})</span></td>
-                  <td className="num px-3 py-3 text-right font-semibold">{top.rho.toFixed(2)}</td>
-                  <td className="py-3 pl-3 text-muted">No signal (rank correlation, p {top.p})</td>
-                </tr>
-              </tbody>
-            </table>
-          </TableWrap>
+          <FindingsBars row={best} top={top} />
+          <ul className="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Reading">
+            <li className="rounded-lg border border-line bg-panel-2 px-3.5 py-2.5 text-sm"><span className="num font-semibold">≈ 0</span> <span className="text-muted">Past winners do not stay ahead.</span></li>
+            <li className="rounded-lg border border-bad/30 bg-bad/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-bad">{signed(best.worst)}</span> <span className="text-muted">Past losers lose about 2 pts per bet.</span></li>
+            <li className="rounded-lg border border-line bg-panel-2 px-3.5 py-2.5 text-sm"><span className="font-semibold">No signal</span> <span className="text-muted">in the profit leaderboard (p {top.p}).</span></li>
+          </ul>
+          <details className="mt-4 text-sm">
+            <summary className="cursor-pointer text-muted hover:text-fg">All five samples, with the same numbers</summary>
+            <TableWrap>
+              <table className="mt-3 w-full min-w-[460px] text-sm">
+                <thead>
+                  <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
+                    <th className="py-2 pr-3 font-medium">Sample</th>
+                    <th className="px-3 py-2 text-right font-medium">Best third</th>
+                    <th className="px-3 py-2 text-right font-medium">Worst third</th>
+                    <th className="py-2 pl-3 text-right font-medium">Rank corr.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {w.rows.map((r) => (
+                    <tr key={r.bets} className="border-b border-line/60">
+                      <td className="py-2 pr-3">{r.bets} <span className="text-faint">({r.wallets})</span></td>
+                      <td className="num px-3 py-2 text-right text-muted">{signed(r.best)}</td>
+                      <td className={`num px-3 py-2 text-right ${r.worst <= -0.015 ? "text-bad" : "text-muted"}`}>{signed(r.worst)}</td>
+                      <td className="num py-2 pl-3 text-right text-muted">{r.rho.toFixed(2)} <span className="text-faint">p {r.p}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableWrap>
+          </details>
           <p className="mt-4 text-sm leading-relaxed text-muted">
             Edge is how much more often bets won than the prices paid implied. Already-decided bets (97 cents or more, 3 cents or less) are excluded.
             Wallets trade the same events, so the p-values are optimistic.{" "}
             <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
           </p>
         </Card>
+      </section>
+
+      <section aria-labelledby="how">
+        <h2 id="how" className="mb-4 text-lg font-semibold tracking-tight">How it works</h2>
+        <HowItWorks />
       </section>
 
       <section aria-labelledby="sharps">

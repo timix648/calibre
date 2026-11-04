@@ -2,7 +2,7 @@ import { pts } from "@/lib/format";
 
 /**
  * An edge with its error band (edge +/- 2 standard errors) on a fixed scale of -30 to +30 points.
- * The band crossing the zero line means the record cannot be told apart from luck.
+ * The shaded luck band is zero plus or minus two standard errors; a band crossing zero cannot be told apart from luck.
  */
 export function EdgeBar({
   edge, low, high, range = 0.3, label,
@@ -17,6 +17,7 @@ export function EdgeBar({
   return (
     <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={text} className="h-[22px] w-full min-w-[140px] max-w-[260px]">
       <title>{text}</title>
+      {known ? <rect x={x(-(high! - low!) / 2)} y={4} width={Math.max(1, x((high! - low!) / 2) - x(-(high! - low!) / 2))} height={H - 8} rx={3} fill="var(--color-muted)" opacity={0.14} /> : null}
       <line x1={x(-0.2)} x2={x(-0.2)} y1={H / 2 - 3} y2={H / 2 + 3} stroke="var(--color-line)" />
       <line x1={x(0.2)} x2={x(0.2)} y1={H / 2 - 3} y2={H / 2 + 3} stroke="var(--color-line)" />
       <line x1={W / 2} x2={W / 2} y1={2} y2={H - 2} stroke="var(--color-faint)" strokeDasharray="2 2" />

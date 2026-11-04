@@ -1,3 +1,4 @@
+import { XRAY_SHORT } from "../../../packages/core/src/xray";
 import type { MarketXray, WalletXray } from "../../../packages/public-data/src";
 
 export type Tone = "bad" | "warn" | "muted" | "good" | "accent";
@@ -28,13 +29,7 @@ export interface PanelModel {
   refresh?: boolean;
 }
 
-const LABEL_TEXT: Record<string, string> = {
-  "proven losing record": "Proven losing record",
-  "mostly sniping": "Mostly sniping",
-  "too early": "Too early",
-  "positive record (unproven going forward)": "Positive record (unproven)",
-  "no proven edge": "No proven edge",
-};
+const LABEL_TEXT: Record<string, string> = XRAY_SHORT;
 
 const tone = (t: string | null | undefined): Tone => (t === "bad" || t === "warn" || t === "good" ? t : "muted");
 const pct = (p: number) => `${Math.round(p * 100)}%`;

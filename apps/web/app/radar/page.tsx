@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GaugeLegend, SquareGauge } from "@/components/square-gauge";
 import { SmartInput } from "@/components/smart-input";
 import { Badge, Card, ExternalLink, H2, PageTitle, TableWrap } from "@/components/ui";
 import { dataGeneratedAt, outcomeFor, verdicts } from "@/lib/data";
@@ -26,6 +27,13 @@ export default function Radar() {
         <SmartInput placeholder="Paste a Polymarket market or event link" button="X-ray" />
       </Card>
 
+      <Card>
+        <H2 sub="The gauge fills with the share of the money pushing a move that came from wallets with a proven losing record. The outer band is how much of that money could be judged at all. It describes who pushed the price; it is not a call to act.">
+          Reading the square-money gauge
+        </H2>
+        <GaugeLegend />
+      </Card>
+
       <section aria-labelledby="sealed">
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
           <h2 id="sealed" className="text-lg font-semibold tracking-tight">Sealed verdicts</h2>
@@ -38,6 +46,34 @@ export default function Radar() {
         {rows.length === 0 ? (
           <p className="text-muted">No verdicts have been sealed yet.</p>
         ) : (
+          <>
+          <ul className="space-y-3 md:hidden">
+            {rows.map((v) => {
+              const d = v.data;
+              const graded = outcomeFor(v.key);
+              return (
+                <li key={v.id} className="rounded-xl border border-line bg-panel p-4">
+                  <Link href={`/move/${v.id}`} className="font-medium leading-snug text-fg underline decoration-line underline-offset-4">{d.question}</Link>
+                  <div className="mt-1 text-xs text-faint">{d.league.toUpperCase()} · {d.wallets} wallets, {d.trades} fills</div>
+                  <div className="mt-3 flex items-center justify-between gap-3">
+                    <div>
+                      <div className="num text-sm text-muted">{pct(d.move.from)} → {pct(d.move.to)}</div>
+                      <div className="mt-1.5 flex items-center gap-1.5"><Badge tone="accent">{d.label}</Badge><span className="text-xs text-faint">{d.model ?? "v1"}</span></div>
+                    </div>
+                    {d.squareMoney ? (
+                      <div className="text-center"><SquareGauge share={d.squareMoney.share} coverage={d.squareMoney.coverage} size="sm" /><div className="num text-[11px] text-faint">covers {pct(d.squareMoney.coverage)}</div></div>
+                    ) : <span className="text-xs text-faint">square money not recorded</span>}
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
+                    <span>{utc(d.sealedAt)}</span>
+                    {graded ? <Badge tone={graded.data.grade.gain > 0 ? "good" : "muted"}>Graded</Badge> : <Badge tone="warn">Waiting</Badge>}
+                    <ExternalLink href={v.walruscan || walruscan(v.blobId)}>Walruscan</ExternalLink>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="hidden md:block">
           <TableWrap>
             <table className="w-full min-w-[820px] text-sm">
               <thead>
@@ -65,7 +101,7 @@ export default function Radar() {
                       <td className="num whitespace-nowrap px-3 py-3 text-muted">{pct(d.move.from)} → {pct(d.move.to)}</td>
                       <td className="px-3 py-3"><Badge tone="accent">{d.label}</Badge><span className="ml-1.5 text-xs text-faint">{d.model ?? "v1"}</span></td>
                       <td className="num px-3 py-3 text-muted">
-                        {d.squareMoney ? <>{pct(d.squareMoney.share)}<span className="block text-xs text-faint">covers {pct(d.squareMoney.coverage)}</span></> : <span className="text-faint">not recorded</span>}
+                        {d.squareMoney ? <><SquareGauge share={d.squareMoney.share} coverage={d.squareMoney.coverage} size="sm" /><span className="block text-xs text-faint">covers {pct(d.squareMoney.coverage)}</span></> : <span className="text-faint">not recorded</span>}
                       </td>
                       <td className="px-3 py-3 text-muted">{sourceLabel(d.source)}</td>
                       <td className="whitespace-nowrap px-3 py-3 text-muted">{utc(d.sealedAt)}</td>
@@ -77,6 +113,8 @@ export default function Radar() {
               </tbody>
             </table>
           </TableWrap>
+          </div>
+          </>
         )}
       </section>
     </div>

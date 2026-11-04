@@ -29,15 +29,18 @@ export type XrayTone = "bad" | "warn" | "muted" | "good";
 /** The audit fields the label reads. */
 export type XrayInput = Pick<WalletAudit, "n" | "overall" | "sniping">;
 
+/** The numbers behind a label: scored bets, overall z-score, and the share of resolved markets that were sniping. */
+export function xrayLabelFromStats(s: { n: number; z: number; snipingShare: number }): XrayLabel {
+  if (s.n >= XRAY_MIN_BETS_LOSING && s.z <= XRAY_LOSING_Z) return "proven losing record";
+  if (s.snipingShare > XRAY_SNIPING_SHARE) return "mostly sniping";
+  if (s.n < XRAY_MIN_BETS) return "too early";
+  if (s.z >= XRAY_POSITIVE_Z && s.n >= XRAY_MIN_BETS_POSITIVE) return "positive record (unproven going forward)";
+  return "no proven edge";
+}
+
 /** Label order: a proven losing record first (the reliable one), then sniping, then too early, then a positive record, else no edge. */
 export function xrayLabel(a: XrayInput): XrayLabel {
-  const { z } = a.overall;
-  const n = a.n;
-  if (n >= XRAY_MIN_BETS_LOSING && z <= XRAY_LOSING_Z) return "proven losing record";
-  if (a.sniping.share > XRAY_SNIPING_SHARE) return "mostly sniping";
-  if (n < XRAY_MIN_BETS) return "too early";
-  if (z >= XRAY_POSITIVE_Z && n >= XRAY_MIN_BETS_POSITIVE) return "positive record (unproven going forward)";
-  return "no proven edge";
+  return xrayLabelFromStats({ n: a.n, z: a.overall.z, snipingShare: a.sniping.share });
 }
 
 export const XRAY_TONE: Record<XrayLabel, XrayTone> = {
@@ -46,6 +49,15 @@ export const XRAY_TONE: Record<XrayLabel, XrayTone> = {
   "too early": "muted",
   "positive record (unproven going forward)": "good",
   "no proven edge": "muted",
+};
+
+/** The short chip text of each label. The site and the browser extension both read this, so their chips always match. */
+export const XRAY_SHORT: Record<XrayLabel, string> = {
+  "proven losing record": "Proven losing record",
+  "mostly sniping": "Mostly sniping",
+  "too early": "Too early",
+  "positive record (unproven going forward)": "Positive record (unproven)",
+  "no proven edge": "No proven edge",
 };
 
 /** Only a losing record is a reliable label: past losers keep losing, past winners do not stay ahead. */
