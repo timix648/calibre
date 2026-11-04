@@ -1,4 +1,28 @@
-# Finding: on Polymarket sports, apparent trader "skill" does not persist once you remove already-decided bets
+# Finding: on Polymarket sports, past winners don't stay ahead, but past losers keep losing
+
+## Wide study, 1,000 profit-blind wallets (3 Nov 2026, the headline)
+Same method as below (`scripts/wide-study.sh`, already-decided bets at ≥0.97/≤0.03 excluded), with 1,000 wallets sampled
+without regard to profit from 2,000 random sports markets, plus the 25 top earners. Full report: `research/wide-study`
+on the build machine; summary:
+
+| Bets counted, profit-blind wallets | Wallets | Rank correlation, older vs newer edge | p | Best third by older edge: newer edge | Worst third: newer edge |
+|---|---|---|---|---|---|
+| All | 983 | **0.17** | <0.0001 | −0.2 pts | **−2.1 pts** |
+| All, 100+ bets | 840 | **0.21** | <0.0001 | +0.3 pts | **−2.1 pts** |
+| Pre-game, 100+ bets | 403 | 0.07 | 0.09 | −0.8 pts | −1.9 pts |
+| In-play, 100+ bets | 683 | 0.14 | <0.0001 | −0.5 pts | −2.0 pts |
+| Top earners (all) | 23 | −0.04 | 0.57 | −1.1 pts | +0.4 pts |
+
+- With enough wallets, track records do persist, but almost entirely on the **losing** side: wallets in the best third
+  roughly break even afterwards, while wallets in the worst third keep losing about 2 points per bet.
+- No group showed a reliably **positive** future edge, so copying past winners is not supported; avoiding (or fading)
+  proven losers is.
+- The profit leaderboard carries no persistent signal.
+- The 40-wallet study below lacked the power to see this; it is kept as the record of how the method was corrected.
+
+---
+
+# Earlier: apparent trader "skill" does not persist once you remove already-decided bets (40 wallets)
 
 Studies run 2–3 Nov 2026 with `scripts/skill-persistence.ts` (`SOURCE=public SAMPLE=active TRADES=1000`, plus `PHASE`).
 This file was corrected on 3 Nov after a stricter test; the first version reported persistence that came from an artefact.

@@ -1,90 +1,142 @@
 import Link from "next/link";
-import { FindingsChart } from "@/components/findings-chart";
-import { SearchBox } from "@/components/search-box";
-import { Card, H2, Stat } from "@/components/ui";
-import { findings, memory, verdicts, walletIndex } from "@/lib/data";
+import { SmartInput } from "@/components/smart-input";
+import { Card, H2, Stat, TableWrap } from "@/components/ui";
+import { findings, memory, verdicts } from "@/lib/data";
 
 const SAMPLE_WALLET = "0x684baa57c338c2549aec0aa3f034f695d72a8409";
 
-const STEPS = [
-  { title: "Catch the move", body: "When a Polymarket price jumps, CALIBRE pulls the trades behind it and groups them by the wallet that took them." },
-  { title: "Audit each wallet", body: "Every wallet's real record is measured against the price it paid, split into pre-game and in-play bets, with bets at already-decided prices set apart as sniping. Edge comes with an error band." },
-  { title: "Seal the verdict", body: "The verdict is written to Walrus Memory on Sui mainnet, with a Sui checkpoint read through Tatum, before the result is known. It can say plainly that nobody behind the move has a proven edge." },
-  { title: "Grade it later", body: "When the market resolves, the forecast is scored against the market price and the outcome is sealed next to the verdict." },
+const POINTS = [
+  {
+    title: "A square is a bettor who reliably loses",
+    body: "A proven losing record is the one label that holds up: in the study, wallets that had lost to their prices kept losing, about 2 points on every bet.",
+  },
+  {
+    title: "A sharp is hard to prove, so we do not call one",
+    body: "Past winners did not stay ahead. A positive record is shown, flagged as unproven going forward, and never sold as a signal. Leaderboard rank carries no signal either.",
+  },
+  {
+    title: "Square money is a caution, not a trade",
+    body: "On any market we show how much of the latest move came from proven losers, and how much of it we could judge. Whether such moves reverse is a pending study, so we do not tell you to fade them.",
+  },
+];
+
+const PARTS = [
+  { href: "/radar", title: "Radar", body: "Recent moves, judged by who traded them and sealed on Walrus before the result." },
+  { href: `/wallet/${SAMPLE_WALLET}`, title: "Wallet X-ray", body: "Edge with error bars, sniping share and a plain-English call. Try a sample wallet." },
+  { href: "/proof", title: "Proof", body: "Memory counts, blob links and how to check them yourself." },
 ];
 
 export default function Home() {
-  const verdictsNamespace = memory.namespaces.find((n) => n.name === "calibre-verdicts")?.memories ?? verdicts.length;
+  const sealed = memory.namespaces.find((n) => n.name === "calibre-verdicts")?.memories ?? verdicts.length;
+  const w = findings.wide;
+  const best = w.rows[0]!;
+  const top = w.rows[w.rows.length - 1]!;
+  const signed = (v: number) => `${v > 0 ? "+" : v < 0 ? "-" : ""}${Math.abs(v * 100).toFixed(1)} pts`;
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <div className="space-y-14 sm:space-y-20">
       <section>
-        <p className="text-sm font-medium text-accent">Polymarket wallet audits, sealed on Walrus</p>
-        <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-5xl sm:leading-[1.1]">
-          Who moved this market, and is their record skill, luck, or sniping?
+        <p className="text-sm font-medium text-accent">Sharps vs squares, for prediction markets</p>
+        <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-6xl">
+          Whale X-ray for prediction markets
         </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          CALIBRE shows who traded a move and audits each wallet&apos;s real record with error bars. When nobody behind a move has a proven edge,
-          it says so. Every verdict is sealed in Walrus Memory with a Sui checkpoint read through Tatum, and graded after the market resolves.
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+          Before you chase a price move or copy a whale, see whether the money behind it comes from traders who reliably lose.
         </p>
-        <SearchBox className="mt-7 max-w-xl" />
+        <SmartInput large autoFocus className="mt-8 max-w-2xl" button="X-ray it" />
         <p className="mt-3 text-sm text-muted">
-          No address handy? <Link className="text-accent underline" href={`/wallet/${SAMPLE_WALLET}`}>Audit a sample wallet</Link>, or see the{" "}
-          <Link className="text-accent underline" href="/moves">sealed verdicts</Link>.
+          Accepts a Polymarket profile link, a wallet address, or a market or event link. No address handy?{" "}
+          <Link className="text-accent underline" href={`/wallet/${SAMPLE_WALLET}`}>Try a sample wallet</Link>, or open the{" "}
+          <Link className="text-accent underline" href="/radar">radar</Link>.
         </p>
       </section>
 
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Numbers">
-        <Stat label="Memories on mainnet" value={memory.total} note="Walrus Memory, Sui" />
-        <Stat label="Sealed verdicts" value={verdictsNamespace} note="Graded after resolution" />
-        <Stat label="Wallet records" value={walletIndex.totalRows.toLocaleString("en-US")} note={`${walletIndex.totalWallets} wallets, by league`} />
-        <Stat label="Sui checkpoint" value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"} note="Read through Tatum gRPC" />
+      <section aria-labelledby="finding">
+        <Card>
+          <H2 sub={`${best.wallets} wallets chosen without looking at profit, sports markets. Each is ranked by its edge on older bets, then followed on newer ones.`}>
+            <span id="finding">The finding: past losers keep losing, past winners do not stay ahead</span>
+          </H2>
+          <TableWrap>
+            <table className="w-full min-w-[420px] text-sm">
+              <thead>
+                <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
+                  <th className="py-2 pr-3 font-medium">Group, ranked on older bets</th>
+                  <th className="px-3 py-2 text-right font-medium">Edge on their next bets</th>
+                  <th className="py-2 pl-3 font-medium">Reading</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-line/60">
+                  <td className="py-3 pr-3 font-medium">Worst third</td>
+                  <td className="num px-3 py-3 text-right font-semibold text-bad">{signed(best.worst)}</td>
+                  <td className="py-3 pl-3 text-muted">Keep losing</td>
+                </tr>
+                <tr className="border-b border-line/60">
+                  <td className="py-3 pr-3 font-medium">Best third</td>
+                  <td className="num px-3 py-3 text-right font-semibold">{signed(best.best)}</td>
+                  <td className="py-3 pl-3 text-muted">Do not stay ahead</td>
+                </tr>
+                <tr>
+                  <td className="py-3 pr-3 font-medium">Top profit-leaderboard earners <span className="text-faint">({top.wallets})</span></td>
+                  <td className="num px-3 py-3 text-right font-semibold">{top.rho.toFixed(2)}</td>
+                  <td className="py-3 pl-3 text-muted">No signal (rank correlation, p {top.p})</td>
+                </tr>
+              </tbody>
+            </table>
+          </TableWrap>
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            Edge is how much more often bets won than the prices paid implied. Already-decided bets (97 cents or more, 3 cents or less) are excluded.
+            Wallets trade the same events, so the p-values are optimistic.{" "}
+            <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
+          </p>
+        </Card>
       </section>
 
-      <Card>
-        <H2
-          sub="We checked whether a wallet's edge against the price it paid in older bets predicts its edge in newer bets. If it did, weighting a move by who traded it would carry information."
-        >
-          What the data says: the leaderboard ranks luck
-        </H2>
-        <FindingsChart rows={findings.rows} />
-        <ul className="mt-5 space-y-2 text-sm leading-relaxed text-muted">
-          {findings.readout.map((line) => (
-            <li key={line} className="flex gap-2">
-              <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-faint" />
-              <span>{line}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-4 text-sm text-muted">
-          So CALIBRE does not call a move &quot;sharp money&quot; from wallet history alone. Profit-blind wallets unless noted; sports markets; corrected {findings.corrected}.{" "}
-          <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
-        </p>
-      </Card>
-
-      <section>
-        <H2>How it works</H2>
-        <ol className="grid gap-3 sm:grid-cols-2">
-          {STEPS.map((s, i) => (
-            <li key={s.title} className="rounded-xl border border-line bg-panel p-5">
+      <section aria-labelledby="sharps">
+        <h2 id="sharps" className="mb-4 text-lg font-semibold tracking-tight">Sharps vs squares, honestly</h2>
+        <ol className="grid gap-3 sm:grid-cols-3">
+          {POINTS.map((p, i) => (
+            <li key={p.title} className="rounded-xl border border-line bg-panel p-5">
               <div className="num text-xs text-accent">0{i + 1}</div>
-              <h3 className="mt-1 font-semibold">{s.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted">{s.body}</p>
+              <h3 className="mt-1 font-semibold leading-snug">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
             </li>
           ))}
         </ol>
       </section>
 
+      <section id="extension" className="scroll-mt-24" aria-labelledby="ext">
+        <Card className="border-accent/30">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <h2 id="ext" className="text-lg font-semibold tracking-tight">X-ray Polymarket as you browse</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                The Chrome extension adds a small panel to polymarket.com. On a profile it shows the wallet&apos;s X-ray; on a market it shows who pushed the latest move
+                and how much of that money came from proven losers.
+              </p>
+            </div>
+            <ol className="space-y-1.5 text-sm leading-relaxed text-muted">
+              <li><span className="num text-accent">1</span> Build it: <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">pnpm --filter @calibre/extension build</code></li>
+              <li><span className="num text-accent">2</span> Open <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">chrome://extensions</code>, turn on Developer mode</li>
+              <li><span className="num text-accent">3</span> Load unpacked, pick <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">apps/extension/dist</code></li>
+              <li><span className="num text-accent">4</span> In its options, set the API address to this site</li>
+            </ol>
+          </div>
+        </Card>
+      </section>
+
       <section className="grid gap-3 sm:grid-cols-3">
-        {[
-          { href: "/moves", title: "Sealed verdicts", body: "Every move CALIBRE judged, with its receipt." },
-          { href: "/proof", title: "Proof", body: "Memory counts, blob links, and how to verify them yourself." },
-          { href: "/method", title: "Method", body: "How edge is measured, the study, and what it cannot show." },
-        ].map((l) => (
+        {PARTS.map((l) => (
           <Link key={l.href} href={l.href} className="rounded-xl border border-line bg-panel p-5 transition hover:border-accent/60">
             <div className="font-semibold">{l.title} <span aria-hidden className="text-accent">→</span></div>
             <p className="mt-1 text-sm text-muted">{l.body}</p>
           </Link>
         ))}
+      </section>
+
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Receipts">
+        <Stat label="Memories on mainnet" value={memory.total} note="Walrus Memory, Sui" />
+        <Stat label="Sealed verdicts" value={sealed} note="Graded after resolution" />
+        <Stat label="Sui checkpoint" value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"} note="Read through Tatum gRPC" />
       </section>
     </div>
   );

@@ -80,6 +80,22 @@ try {
 
 // 5. The findings table (numbers from docs/FINDINGS.md, corrected 3 Nov 2026)
 const findings = {
+  wide: {
+    headline: "In 1,000 profit-blind wallets, past winners do not stay ahead, but past losers keep losing.",
+    date: "2026-11-03",
+    rows: [
+      { bets: "All bets", wallets: 983, rho: 0.17, p: "<0.0001", best: -0.002, worst: -0.021 },
+      { bets: "All bets, wallets with 100+ bets", wallets: 840, rho: 0.21, p: "<0.0001", best: 0.003, worst: -0.021 },
+      { bets: "Pre-game bets, 100+ bets", wallets: 403, rho: 0.07, p: "0.09", best: -0.008, worst: -0.019 },
+      { bets: "In-play bets, 100+ bets", wallets: 683, rho: 0.14, p: "<0.0001", best: -0.005, worst: -0.02 },
+      { bets: "Top earners on the profit leaderboard", wallets: 23, rho: -0.04, p: "0.57", best: -0.011, worst: 0.004 }
+    ],
+    readout: [
+      "Track records do persist across 1,000 wallets, but almost entirely on the losing side: the worst third by older edge keeps losing about 2 points per bet.",
+      "The best third by older edge roughly breaks even afterwards. No group showed a reliably positive future edge.",
+      "The profit leaderboard carries no persistent signal."
+    ]
+  },
   title: "On Polymarket sports, apparent trader skill does not persist once already-decided bets are removed",
   corrected: "2026-11-03",
   question: "Does a wallet's edge against the price it paid in its older bets predict its edge in its newer bets?",

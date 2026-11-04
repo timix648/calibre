@@ -7,7 +7,7 @@ const ADDRESS = /^0x[0-9a-fA-F]{40}$/;
 
 export async function generateMetadata({ params }: { params: Promise<{ address: string }> }): Promise<Metadata> {
   const { address } = await params;
-  return { title: ADDRESS.test(address) ? `Wallet ${shortAddr(address)}` : "Wallet audit", robots: { index: false } };
+  return { title: ADDRESS.test(address) ? `Wallet ${shortAddr(address)}` : "Wallet X-ray", robots: { index: false } };
 }
 
 export default async function WalletPage({ params }: { params: Promise<{ address: string }> }) {
@@ -16,7 +16,7 @@ export default async function WalletPage({ params }: { params: Promise<{ address
   return (
     <div className="space-y-6">
       <PageTitle
-        title="Wallet audit"
+        title="Wallet X-ray"
         sub={
           valid ? (
             <>

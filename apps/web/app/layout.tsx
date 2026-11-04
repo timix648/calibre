@@ -3,9 +3,9 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "CALIBRE: skill, luck, or sniping?", template: "%s | CALIBRE" },
+  title: { default: "CALIBRE: Whale X-ray for prediction markets", template: "%s | CALIBRE" },
   description:
-    "Who moved this market, and is their record skill, luck, or sniping? CALIBRE audits Polymarket wallets with error bars and seals every verdict in Walrus Memory.",
+    "Before you chase a price move or copy a whale, see whether the money behind it comes from traders who reliably lose. Wallet and market X-rays for Polymarket.",
 };
 
 export const viewport: Viewport = { themeColor: "#0a0c10", width: "device-width", initialScale: 1 };

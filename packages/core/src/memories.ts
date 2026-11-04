@@ -102,6 +102,8 @@ export interface VerdictData {
   source?: DataSource;
   /** Why Polymarket public data was used instead of Tatum, present when `source` is `polymarket-public`. */
   fallbackReason?: string;
+  /** Share of the move-aligned money that came from wallets with a proven losing record, with how much of that money could be judged. */
+  squareMoney?: { share: number; coverage: number };
 }
 
 export const verdictKey = (marketId: string, moveEndTs: number) => `${marketId}:${Math.floor(moveEndTs / 1000)}`;

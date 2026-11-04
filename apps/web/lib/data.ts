@@ -64,7 +64,19 @@ export const memory = memoryFile as unknown as {
   checkpoint: { sequence: string; timestamp: string | null } | null;
   sampleBlobs: { key: string; blobId: string; walruscan: string }[];
 };
+export interface WideRow {
+  bets: string;
+  wallets: number;
+  rho: number;
+  p: string;
+  /** Edge of the best third by older edge, in later bets (probability points). */
+  best: number;
+  /** Edge of the worst third by older edge, in later bets. */
+  worst: number;
+}
+
 export const findings = findingsFile as unknown as {
+  wide: { headline: string; date: string; rows: WideRow[]; readout: string[] };
   title: string;
   corrected: string;
   question: string;

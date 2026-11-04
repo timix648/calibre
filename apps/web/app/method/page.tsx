@@ -38,6 +38,27 @@ export default async function Method() {
       </Card>
 
       <Card>
+        <H2>The X-ray labels and square money</H2>
+        <div className="prose-calibre">
+          <p>
+            The wallet X-ray puts every wallet in one of five labels, read in this order from its overall record (pre-game and in-play together, one bet per market, sniping excluded):
+          </p>
+          <ul>
+            <li><strong>Proven losing record</strong>: overall z of -2 or lower over at least 30 bets. This is the reliable label. In the 1,000-wallet study, wallets in the worst third kept losing about 2 points per bet afterwards.</li>
+            <li><strong>Mostly sniping</strong>: more than 40% of resolved markets were bought at 97 cents or more, or 3 cents or less.</li>
+            <li><strong>Too early</strong>: under 30 scored bets.</li>
+            <li><strong>Positive record (unproven going forward)</strong>: overall z of 2 or more over at least 100 bets. It is shown, and flagged, because past winners did not stay ahead.</li>
+            <li><strong>No proven edge</strong>: everything else.</li>
+          </ul>
+          <p>
+            <strong>Square money</strong> on a market is the share of the money pushing its latest move (4 points or more in the last 6 hours) that came from wallets labeled proven losing record.
+            Only the six biggest takers are audited, so every figure comes with its <strong>coverage</strong>: the share of the pushing money that could be judged.
+            It is a caution signal. A replay study of whether such moves reverse is pending, so CALIBRE does not recommend fading them.
+          </p>
+        </div>
+      </Card>
+
+      <Card>
         <H2 sub="The write-up from the repository, docs/FINDINGS.md, rendered as is. It was corrected on 3 Nov 2026 after a stricter test.">The study, and its correction</H2>
         <Markdown source={md} skipFirstHeading />
       </Card>

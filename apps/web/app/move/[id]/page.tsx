@@ -31,7 +31,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
   return (
     <div className="space-y-8">
       <div>
-        <Link href="/moves" className="text-sm text-muted hover:text-fg">← Sealed verdicts</Link>
+        <Link href="/radar" className="text-sm text-muted hover:text-fg">← Radar</Link>
         <div className="mt-3">
           <PageTitle
             title={d.question}

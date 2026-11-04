@@ -38,3 +38,11 @@ export const MOVE_LABEL_TEXT: Record<MoveLabel, string> = {
 export function sourceLabel(source: string | undefined): string {
   return source === "polymarket-public" ? "Polymarket public API (fallback)" : "Tatum Prediction Markets API";
 }
+
+/** "45 min" or "2 h 10 min" for a span in milliseconds. */
+export function span(ms: number): string {
+  const min = Math.max(1, Math.round(ms / 60_000));
+  return min < 60 ? `${min} min` : `${Math.floor(min / 60)} h${min % 60 ? ` ${min % 60} min` : ""}`;
+}
+
+export const usd = (v: number) => `$${Math.round(v).toLocaleString("en-US")}`;
