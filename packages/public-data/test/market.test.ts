@@ -149,6 +149,12 @@ describe("analyseFills", () => {
     expect(analyseFills(flat, NOW).noMoveReason).toContain("No recent move");
     expect(analyseFills([fill("a", 60 * 9, 0.4, 10)], NOW).noMoveReason).toContain("No trades");
   });
+  it("does not treat a market settling at 0 or 1 as a move", () => {
+    const ending = [fill("a", 120, 0.43, 10), fill("b", 60, 0.2, 10), fill("c", 5, 0.01, 10)];
+    const a = analyseFills(ending, NOW);
+    expect(a.move).toBeNull();
+    expect(a.noMoveReason).toContain("settling");
+  });
   it("reads a falling price as a move down, pushed by NO buyers and YES sellers", () => {
     const down = [
       fill("base", 200, 0.6, 10),

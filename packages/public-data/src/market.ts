@@ -192,6 +192,8 @@ export function analyseFills(fills: TimedFlowTrade[], now: number, opts: { windo
   const points = priceSeriesFromTrades(recent);
   const move = latestMove(points, { minJump: opts.minJump ?? MIN_MOVE, windowMs });
   if (!move) return none("No recent move: the price has not shifted by 4 points or more in the last 6 hours.");
+  // A price running to 0 or 1 is the outcome being settled (the game ended), not traders moving the market.
+  if (move.to <= 0.03 || move.to >= 0.97) return none("The market is settling: the price has gone to its final value, so there is no live move to judge.");
   const inMove = recent.filter((f) => f.ts >= move.startTs - 5 * 60_000);
   const flows = aggregateFlows(inMove, () => undefined);
   const dir = Math.sign(move.to - move.from) || 1;

@@ -68,7 +68,7 @@ export function marketModel(r: MarketXray, sitePath: string): PanelModel {
   const m = r.move;
   const base: PanelModel = { title: "Market X-ray", subtitle: r.market.question, stats: [], takers: [], notes: [], more: { label: "Open the full X-ray", sitePath } };
   if (!m) {
-    return { ...base, lead: `No recent move. ${r.noMoveReason ?? ""}`.trim(), notes: [r.caution] };
+    return { ...base, lead: r.noMoveReason ?? "No recent move.", notes: [r.caution] };
   }
   const sq = r.squareMoney;
   const notes: string[] = [];
