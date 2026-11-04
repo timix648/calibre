@@ -39,6 +39,13 @@ export function detectPage(href: string): PageTarget | null {
     const market = head === "event" ? parts[start + 2]?.toLowerCase() : undefined;
     return market && SLUG.test(market) ? { kind: "market", slug, marketSlug: market } : { kind: "market", slug };
   }
+  // Polymarket sends game pages to `/sports/<league>/<event-slug>` (and esports to `/esports/...`); the event slug is the
+  // segment after the league, preferring one that carries a game date.
+  if ((head === "sports" || head === "esports") && parts.length > start + 2) {
+    const tail = parts.slice(start + 2).map((p) => p.toLowerCase()).filter((p) => SLUG.test(p));
+    const slug = tail.find((p) => /-\d{4}-\d{2}-\d{2}/.test(p)) ?? tail[0];
+    return slug ? { kind: "market", slug } : null;
+  }
   return null;
 }
 

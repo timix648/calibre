@@ -22,6 +22,12 @@ describe("detectPage", () => {
     expect(detectPage("https://polymarket.com/market/will-it-rain-tomorrow")).toEqual({ kind: "market", slug: "will-it-rain-tomorrow" });
     expect(detectPage("https://polymarket.com/pt-BR/event/some-event/")).toEqual({ kind: "market", slug: "some-event" });
   });
+  it("detects sports and esports game pages by their event slug", () => {
+    expect(detectPage("https://polymarket.com/sports/nba/nba-phi-det-2026-11-04")).toEqual({ kind: "market", slug: "nba-phi-det-2026-11-04" });
+    expect(detectPage("https://polymarket.com/esports/cs2/games/cs2-mglz-hero-2026-11-02")).toEqual({ kind: "market", slug: "cs2-mglz-hero-2026-11-02" });
+    expect(detectPage("https://polymarket.com/sports/nba")).toBeNull();
+  });
+
   it("ignores every other page and other sites", () => {
     for (const href of [
       "https://polymarket.com/", "https://polymarket.com/sports", "https://polymarket.com/event", "https://polymarket.com/leaderboard",
