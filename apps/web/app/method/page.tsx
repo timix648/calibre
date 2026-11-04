@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { LabelTestTable, allWallets, signedPts, validationRow } from "@/components/label-validation";
 import { Card, H2, PageTitle, TableWrap } from "@/components/ui";
-import { replay } from "@/lib/data";
+import { replay, scale } from "@/lib/data";
 import { Markdown } from "@/lib/markdown";
 
 export const metadata: Metadata = { title: "Method" };
@@ -35,6 +35,20 @@ export default async function Method() {
         title="Method"
         sub="How CALIBRE measures a wallet's record, what the study found, and what none of it can show."
       />
+
+      <Card>
+        <H2 sub="Plain sums over the study outputs, written by scripts/scale-stats.ts. Nothing is estimated or extrapolated.">The data behind it</H2>
+        <dl className="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-[auto_1fr]">
+          <dt className="num text-fg">${(scale.replay.marketVolumeUsd / 1e9).toFixed(2)}B</dt>
+          <dd className="text-muted">Polymarket&apos;s own trading-volume figure, summed over the {scale.replay.markets.toLocaleString("en-US")} closed sports markets in the square-money replay ({scale.replay.leagues} leagues).</dd>
+          <dt className="num text-fg">${(scale.replay.pushingUsd / 1e6).toFixed(1)}M</dt>
+          <dd className="text-muted">Money that pushed the {scale.replay.moves.toLocaleString("en-US")} replayed moves, traced to {scale.replay.walletsLabeled.toLocaleString("en-US")} distinct taker wallets.</dd>
+          <dt className="num text-fg">{scale.index.scoredBets.toLocaleString("en-US")}</dt>
+          <dd className="text-muted">Bets scored against the price paid in the wallet index: {scale.index.wallets.toLocaleString("en-US")} wallets, {scale.index.rows.toLocaleString("en-US")} wallet-by-league records, {scale.index.leagues} leagues and categories.</dd>
+          <dt className="num text-fg">{scale.wideStudy.scoredBets.toLocaleString("en-US")}</dt>
+          <dd className="text-muted">Bets scored in the profit-blind study of {scale.wideStudy.wallets.toLocaleString("en-US")} wallets that the label test uses.</dd>
+        </dl>
+      </Card>
 
       <Card>
         <H2>How edge is measured</H2>

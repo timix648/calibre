@@ -6,6 +6,15 @@ import memoryFile from "../data/memory.json";
 import findingsFile from "../data/findings.json";
 import labelValidationFile from "../data/label-validation.json";
 import replayFile from "../data/replay.json";
+import scaleFile from "../data/scale.json";
+
+/** How much data the studies and the index processed: plain sums written by scripts/scale-stats.ts. */
+export const scale = scaleFile as {
+  generatedAt: string;
+  replay: { markets: number; marketsWithVolume: number; marketVolumeUsd: number; leagues: number; moves: number; pushingUsd: number; walletsLabeled: number };
+  wideStudy: { wallets: number; scoredBets: number };
+  index: { rows: number; wallets: number; leagues: number; scoredBets: number };
+};
 
 export interface SealedRecord<T> {
   id: string;

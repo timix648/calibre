@@ -9,6 +9,19 @@ that pushed the price, scores each one against the prices it actually paid on it
 whether the move came from proven losers, from the rare proven winner, or from wallets with no record either way. Every judgement
 on a live move is sealed on Walrus Memory before the result is known, and graded in public afterwards.
 
+## By the numbers
+
+| | |
+|---|---|
+| **$1.78 billion** | traded in the 4,587 closed sports markets the square-money replay covers (Polymarket's own volume figure, 142 leagues) |
+| **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
+| **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
+| **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
+| **59 verdicts** | sealed on Walrus Memory mainnet before the result was known; 48 graded, 378 memories in all |
+| **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
+
+Every figure is a plain sum over the study outputs (`scripts/scale-stats.ts`), not an estimate.
+
 ## What it does
 
 | | |

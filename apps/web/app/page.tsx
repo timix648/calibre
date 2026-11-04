@@ -3,6 +3,7 @@ import { FindingsBars } from "@/components/findings-bars";
 import { LabelTestChart, LabelTestTable, allWallets, signedPts, validationRow } from "@/components/label-validation";
 import { SmartInput } from "@/components/smart-input";
 import { Card, H2, TableWrap } from "@/components/ui";
+import { ScaleBand } from "@/components/scale-band";
 import { VerdictTrace } from "@/components/verdict-trace";
 import { findings, memory, outcomes, verdicts } from "@/lib/data";
 
@@ -49,6 +50,8 @@ export default function Home() {
           <Link className="text-accent underline" href="/radar">radar</Link>.
         </p>
       </section>
+
+      <ScaleBand />
 
       <section aria-labelledby="labeltest">
         <Card>

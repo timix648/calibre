@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-11-04T21:14:34.506Z",
+  "replay": {
+    "markets": 4587,
+    "marketsWithVolume": 4587,
+    "marketVolumeUsd": 1781140099,
+    "leagues": 142,
+    "moves": 11975,
+    "pushingUsd": 197581886,
+    "walletsLabeled": 10113
+  },
+  "wideStudy": {
+    "wallets": 1006,
+    "scoredBets": 356116
+  },
+  "index": {
+    "rows": 69914,
+    "wallets": 5740,
+    "leagues": 197,
+    "scoredBets": 790185
+  }
+}
