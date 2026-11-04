@@ -6,7 +6,7 @@
 // is read from Polymarket's free public API and every verdict says so (`source`, `fallbackReason`). A market whose Tatum
 // history came back empty is not asked again for 60 minutes, so a broken endpoint does not burn credits.
 import {
-  PredictionApiError, TatumBudgetExceeded, latestCheckpoint, type Market, type PredictionClient,
+  PredictionApiError, TatumBudgetExceeded, anchorCheckpoint, type Market, type PredictionClient,
 } from "../../../packages/chain/src/index.js";
 import {
   BREAKER_HOLD_MS, MODEL_VERSION, aggregateFlows, breakerOpen, callsInLastHour, candlePoints, judgeMove, latestMove, priceSeriesFromTrades,
@@ -253,14 +253,14 @@ async function judgeAndSeal(
       };
     });
 
-  const checkpoint = await latestCheckpoint(suiClient());
+  const checkpoint = await anchorCheckpoint(suiClient());
   const data: VerdictData = {
     marketId: c.marketId, eventSlug: c.slug, league: c.league, question: market.question, yesOutcome,
     move, label: verdict.label, sharpShare: verdict.sharpShare,
     opposition: Number.isFinite(verdict.opposition) ? verdict.opposition : null,
     forecast: verdict.forecast, priceAtVerdict: move.to, trades: fills.length, wallets: flows.length, topWallets,
     squareShare: square.squareShare, squareCoverage: square.squareCoverage,
-    checkpoint: { sequence: checkpoint.sequence, digest: checkpoint.digest, timestamp: checkpoint.timestamp },
+    checkpoint: { sequence: checkpoint.sequence, digest: checkpoint.digest, timestamp: checkpoint.timestamp, source: checkpoint.source },
     sealedAt: new Date().toISOString(),
     model: MODEL_VERSION,
     source: evidence.source,

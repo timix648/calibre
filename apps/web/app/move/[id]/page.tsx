@@ -66,7 +66,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
             </div>
             <p className="text-sm leading-relaxed text-muted">
               {pct(square.share)} of the money pushing the price came from wallets with a proven losing record; {pct(square.coverage)} of it belonged to wallets the index could judge.
-              Caution signal. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.
+              Caution signal. In a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); early evidence, not conclusive.
             </p>
           </div>
         </Card>
@@ -153,7 +153,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
           <p className="text-sm leading-relaxed">
             <strong>{sourceLabel(d.source)}.</strong>{" "}
             {d.source === "polymarket-public"
-              ? <>The trades behind this move came from Polymarket&apos;s public Data API because Tatum&apos;s trade history was unavailable for this market{d.fallbackReason ? ` (${d.fallbackReason})` : ""}. The checkpoint was still read through Tatum.</>
+              ? <>The trades behind this move came from Polymarket&apos;s public Data API because Tatum&apos;s trade history was unavailable for this market{d.fallbackReason ? ` (${d.fallbackReason})` : ""}.{d.checkpoint.source === "sui-public-graphql" ? " The checkpoint was read through Sui's public GraphQL because Tatum's gateway was unavailable." : " The checkpoint was still read through Tatum."}</>
               : "The prices and trades behind this move came from Tatum's Prediction Markets API."}
           </p>
 

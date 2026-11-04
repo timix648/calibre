@@ -63,7 +63,7 @@ export const memory = memoryFile as unknown as {
   generatedAt: string;
   total: number;
   namespaces: { name: string; memories: number; relayerCount: number }[];
-  checkpoint: { sequence: string; timestamp: string | null } | null;
+  checkpoint: { sequence: string; timestamp: string | null; source?: string } | null;
   sampleBlobs: { key: string; blobId: string; walruscan: string }[];
 };
 export interface WideRow {

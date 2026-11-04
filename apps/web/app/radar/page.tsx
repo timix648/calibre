@@ -46,7 +46,7 @@ export default function Radar() {
         </p>
         <p className="mb-4 text-sm leading-relaxed text-muted">
           The label is the sealed model&apos;s read of the money behind the move, from the edge it had learned for each wallet. It is not a claim that anyone behind a move is skilled.
-          Square money is a caution signal: in a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive. The square-money share is recorded from model v3 onward; earlier verdicts (v1, v2) predate the measure and stay as they were sealed.
+          Square money is a caution signal: in a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); early evidence, not conclusive. The square-money share is recorded from model v3 onward; earlier verdicts (v1, v2) predate the measure and stay as they were sealed.
         </p>
         {rows.length === 0 ? (
           <p className="text-muted">No verdicts have been sealed yet.</p>

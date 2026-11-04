@@ -19,7 +19,7 @@ const POINTS = [
   },
   {
     title: "Square money is a caution, not a trade",
-    body: "On any market we show how much of the latest move came from proven losers, and how much of it we could judge. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.",
+    body: "On any market we show how much of the latest move came from proven losers, and how much of it we could judge. In a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); early evidence, not conclusive.",
   },
 ];
 
@@ -173,7 +173,7 @@ export default function Home() {
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Receipts">
         <Stat label="Memories on mainnet" value={memory.total} note="Walrus Memory, Sui" />
         <Stat label="Sealed verdicts" value={sealed} note="Graded after resolution" />
-        <Stat label="Sui checkpoint" value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"} note="Read through Tatum gRPC" />
+        <Stat label="Sui checkpoint" value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"} note={memory.checkpoint?.source === "sui-public-graphql" ? "Read through Sui public GraphQL" : "Read through Tatum gRPC"} />
       </section>
     </div>
   );

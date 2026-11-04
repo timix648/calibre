@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-04T07:07:12.878Z",
-  "source": "scripts/square-replay.ts (research output SQUARE_REPORT.md)",
-  "markets": 1662,
-  "moves": 4355,
-  "labeledMoves": 1759,
+  "generatedAt": "2026-11-04T20:26:56.302Z",
+  "source": "scripts/square-replay.ts (research output SQUARE_REPORT.md, final run of 4 Nov 2026)",
+  "markets": 4587,
+  "moves": 11975,
+  "labeledMoves": 4589,
   "minMovePts": 6,
   "windowMinutes": 60,
   "continuationMinutes": 180,
   "rows": [
-    { "group": "proven losers (50% or more of the labeled flow)", "moves": 176, "followEdgePts": -3.4, "ci95Pts": [-9.7, 2.7] },
-    { "group": "mixed", "moves": 226, "followEdgePts": 1.4, "ci95Pts": [-4.2, 7.1] },
-    { "group": "no proven losers (clean)", "moves": 1357, "followEdgePts": 0.3, "ci95Pts": [-1.9, 2.6] },
-    { "group": "all labeled moves", "moves": 1759, "followEdgePts": 0.1, "ci95Pts": [-1.9, 2.1] }
+    { "group": "proven losers (50% or more of the labeled flow)", "moves": 436, "followEdgePts": -2.4, "ci95Pts": [-6.4, 1.4] },
+    { "group": "mixed", "moves": 556, "followEdgePts": -1.0, "ci95Pts": [-4.4, 2.5] },
+    { "group": "no proven losers (clean)", "moves": 3597, "followEdgePts": 0.7, "ci95Pts": [-0.7, 2.1] },
+    { "group": "all labeled moves", "moves": 4589, "followEdgePts": 0.2, "ci95Pts": [-1.0, 1.5] }
   ],
-  "differencePts": -3.8,
-  "pOneSided": 0.1396,
+  "differencePts": -3.1,
+  "pOneSided": 0.0734,
   "byPhase": [
-    { "phase": "pre-game", "loserMoves": 56, "loserEdgePts": -1.8, "cleanMoves": 497, "cleanEdgePts": 0.2 },
-    { "phase": "in-play", "loserMoves": 120, "loserEdgePts": -4.2, "cleanMoves": 860, "cleanEdgePts": 0.4 }
+    { "phase": "pre-game", "loserMoves": 147, "loserEdgePts": -1.8, "cleanMoves": 1276, "cleanEdgePts": -0.8 },
+    { "phase": "in-play", "loserMoves": 289, "loserEdgePts": -2.8, "cleanMoves": 2320, "cleanEdgePts": 1.5 }
   ]
 }

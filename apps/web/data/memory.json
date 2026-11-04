@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-11-03T15:09:37.527Z",
-  "total": 245,
+  "generatedAt": "2026-11-04T20:36:38.848Z",
+  "total": 378,
   "namespaces": [
     {
       "name": "calibre-wallets",
-      "memories": 243,
-      "relayerCount": 243
+      "memories": 271,
+      "relayerCount": 271
     },
     {
       "name": "calibre-verdicts",
-      "memories": 2,
-      "relayerCount": 2
+      "memories": 59,
+      "relayerCount": 59
     },
     {
       "name": "calibre-outcomes",
-      "memories": 0,
-      "relayerCount": 0
+      "memories": 48,
+      "relayerCount": 48
     },
     {
       "name": "calibre-lessons",
@@ -24,8 +24,9 @@
     }
   ],
   "checkpoint": {
-    "sequence": "341242300",
-    "timestamp": "2026-11-03T15:09:54.453Z"
+    "sequence": "341678009",
+    "timestamp": "2026-11-04T20:36:55.996Z",
+    "source": "sui-public-graphql"
   },
   "sampleBlobs": [
     {
@@ -57,16 +58,6 @@
       "key": "0x126266f57f9812c42daaf69767f622ad36ce056f:nfl",
       "blobId": "8qgfz7Wq8eL8GTul3qJz3IAwTL-0Oe23oXxSVpX-Lkg",
       "walruscan": "https://walruscan.com/mainnet/blob/8qgfz7Wq8eL8GTul3qJz3IAwTL-0Oe23oXxSVpX-Lkg"
-    },
-    {
-      "key": "0x448861155279dbf833d041b963e3ac854599e319:cfb",
-      "blobId": "pzPMdtT2r3LE1idtsM0mgIlQMOt2L2x1jVPuoepZ0Hk",
-      "walruscan": "https://walruscan.com/mainnet/blob/pzPMdtT2r3LE1idtsM0mgIlQMOt2L2x1jVPuoepZ0Hk"
-    },
-    {
-      "key": "0x1e814bedfdb7bde5434791a927777deeeac5ae48:cfb",
-      "blobId": "EzHrFKL0dP53NafP5CQkHuN9VWQPHiC1r6BdK-aeRZ4",
-      "walruscan": "https://walruscan.com/mainnet/blob/EzHrFKL0dP53NafP5CQkHuN9VWQPHiC1r6BdK-aeRZ4"
     }
   ]
 }

@@ -96,6 +96,20 @@ For each call it prints the X-ray label, the payment **receipt digest** and a Su
 (`https://suiscan.xyz/mainnet/tx/<digest>`), then a summary of the calls made and USDC spent. Open one link to show a judge the payment
 settling on mainnet; the recipient address then shows the USDC arriving.
 
+### 4. The first real call (4 Nov 2026)
+
+Run against the deployed site with `MPP_RECIPIENT` and `MPP_SECRET_KEY` set in Vercel:
+
+| | |
+|---|---|
+| Transaction | [`9edpkVC9QQegXDDwvxEt5dZyd2NZ36vBLw2yaqknF86K`](https://suiscan.xyz/mainnet/tx/9edpkVC9QQegXDDwvxEt5dZyd2NZ36vBLw2yaqknF86K) |
+| Checkpoint | 341674249, 2026-11-04 20:21:41 UTC |
+| Status | SUCCESS |
+| Transfer | 10,000 units of native USDC (0.01) from the agent `0x62c1296aa94dd95c94734f916ff9b69934926ac5ca3706122d4519c7dfbf3cdf` to the recipient `0x6b2e6674d9f19c45ababd054fac1dfa3e3cbe8e7f4d58084bda4c4a1460ef5cf` |
+| Gas | gas price 0, computation and storage cost 0: the agent held no SUI |
+
+Checked on chain through Sui's public GraphQL (`transaction(digest: …) { effects { status balanceChanges gasEffects } }`).
+
 ## Files
 
 - `apps/web/app/api/v1/xray/[address]/route.ts`: the route.

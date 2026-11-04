@@ -210,10 +210,10 @@ describe("shapeMarketXray", () => {
     expect(r.squareMoney!.share).toBeLessThan(r.squareMoney!.shareOfJudged!);
     expect(r.squareMoney!.coverage).toBeGreaterThan(0.2);
     expect(r.squareMoney!.coverage).toBeLessThan(1);
-    expect(r.squareMoney!.note).toContain("Caution signal. In a replay of 4,355 moves");
+    expect(r.squareMoney!.note).toContain("Caution signal. In a replay of 11,975 moves");
     expect(r.complete).toBe(false);
     expect(r.elapsedMs).toBe(5000);
-    expect(r.caution).toContain("3.8 pts worse for followers; not yet conclusive");
+    expect(r.caution).toContain("3.1 pts worse for followers (p = 0.07); early evidence, not conclusive");
     expect(r.market.url).toBe("https://polymarket.com/event/nba-phi-det-2026-11-04");
   });
   it("is complete when every audit finished", () => {

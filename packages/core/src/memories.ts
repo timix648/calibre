@@ -97,7 +97,7 @@ export interface VerdictData {
   trades: number;
   wallets: number;
   topWallets: VerdictWallet[];
-  checkpoint: { sequence: string; digest: string | null; timestamp: string | null };
+  checkpoint: { sequence: string; digest: string | null; timestamp: string | null; source?: "tatum-grpc" | "sui-public-graphql" };
   sealedAt: string;
   /** Judging model that produced the forecast. Verdicts sealed before the field existed were judged by v1. */
   model?: ModelVersion;

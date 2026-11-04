@@ -4,7 +4,7 @@
 // comes from the local index; the findings numbers are the ones in docs/FINDINGS.md. Nothing secret is written: the files
 // hold wallet addresses and market data that are already public, plus Walrus blob IDs.
 import { copyFile, mkdir, writeFile } from "node:fs/promises";
-import { latestCheckpoint } from "../packages/chain/src/index.js";
+import { anchorCheckpoint } from "../packages/chain/src/index.js";
 import {
   auditVerdict, summariseGrades, type OutcomeData, type VerdictData, type WalletEdgeRow,
 } from "../packages/core/src/index.js";
@@ -69,11 +69,12 @@ const walletRows = eligible
 const verdictCounts: Record<string, number> = {};
 for (const r of eligible) verdictCounts[auditVerdict(r)] = (verdictCounts[auditVerdict(r)] ?? 0) + 1;
 
-// 4. The latest Sui checkpoint, read through Tatum gRPC
-let checkpoint: { sequence: string; timestamp: string | null } | null = null;
+// 4. The latest Sui checkpoint, read through Tatum gRPC (Sui's public GraphQL if Tatum is unavailable; `source` says which)
+let checkpoint: { sequence: string; timestamp: string | null; source: string } | null = null;
 try {
-  const c = await latestCheckpoint(suiClient());
-  checkpoint = { sequence: String(c.sequence), timestamp: c.timestamp ?? null };
+  const c = await anchorCheckpoint(suiClient());
+  checkpoint = { sequence: String(c.sequence), timestamp: c.timestamp ?? null, source: c.source };
+  if (c.fallbackReason) console.warn(`checkpoint from Sui public GraphQL: ${c.fallbackReason}`);
 } catch (e) {
   console.warn(`could not read the latest checkpoint: ${(e as Error).message}`);
 }

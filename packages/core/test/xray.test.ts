@@ -93,7 +93,7 @@ describe("squareMoneyShare", () => {
   });
   it("words the note as a caution, not a trade", () => {
     const note = squareMoneyNote(squareMoneyShare(flows, { a: "proven losing record", b: "no proven edge" }, 1));
-    expect(note).toContain("Caution signal. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.");
+    expect(note).toContain("Caution signal. In a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); early evidence, not conclusive.");
     expect(note.toLowerCase()).not.toMatch(/fade/);
     expect(note).toContain("90%");
   });

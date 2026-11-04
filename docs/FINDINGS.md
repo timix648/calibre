@@ -24,22 +24,26 @@ resamples, fixed seed). Full tables, by phase: `docs/LABEL_VALIDATION.md`; code:
 - Caveats: older and newer halves of one wallet share its style, so this is not a clean out-of-sample trading test; wallets trade the
   same events, so the intervals are optimistic; edge is measured against the price paid and ignores fees and bet size.
 
-## Square-money replay (4 Nov 2026): early evidence, not conclusive
+## Square-money replay (final run, 4 Nov 2026): early evidence, not conclusive
 Question: when a market moves mostly because proven losers pushed it, does following the move pay worse? `scripts/square-replay.ts`
-replays 4,355 real moves of 6 points or more within 60 minutes, in 1,662 closed sports markets. For each move the six biggest takers
-are labeled using **only bets that resolved before the move**. The follow edge is the final result minus the price at the end of the
-move, in the move's direction (negative: the move overshot).
+replays 11,975 real moves of 6 points or more within 60 minutes, in 4,587 closed sports markets (4,589 moves had labeled takers).
+For each move the six biggest takers are labeled using **only bets that resolved before the move**. The follow edge is the final
+result minus the price at the end of the move, in the move's direction (negative: the move overshot).
 
 | Moves pushed by | Moves | Follow edge, pts [95% CI] |
 |---|---:|---|
-| proven losers (50% or more of the labeled flow) | 176 | -3.4 [-9.7, +2.7] |
-| mixed | 226 | +1.4 [-4.2, +7.1] |
-| no proven losers (clean) | 1,357 | +0.3 [-1.9, +2.6] |
-| all labeled moves | 1,759 | +0.1 [-1.9, +2.1] |
+| proven losers (50% or more of the labeled flow) | 436 | -2.4 [-6.4, +1.4] |
+| mixed | 556 | -1.0 [-4.4, +2.5] |
+| no proven losers (clean) | 3,597 | +0.7 [-0.7, +2.1] |
+| all labeled moves | 4,589 | +0.2 [-1.0, +1.5] |
 
-- Difference, loser-driven minus clean: **-3.8 pts**, one-sided permutation p about 0.14. The interval for loser-driven moves spans
+- Difference, loser-driven minus clean: **-3.1 pts**, one-sided permutation p = 0.073. The interval for loser-driven moves spans
   zero, so this is **early evidence, not conclusive**. Followers of loser-driven moves did worse in the replay; that is all it says.
-- A longer replay (6,000 markets) is running. CALIBRE shows square money as a caution signal and never tells anyone to trade against it.
+- By phase: in-play loser-driven -2.8 pts (289 moves) against clean +1.5 (2,320); pre-game loser-driven -1.8 (147) against clean -0.8 (1,276).
+  The gap is mostly in-play, like the label results above.
+- The first run (1,662 markets, 4,355 moves) gave -3.8 pts at p about 0.14; the larger run narrowed the interval and the gap held
+  in direction. The run stopped at 4,587 of a planned 6,000 markets when the machine ran out of memory; the markets it did finish
+  are reported in full. CALIBRE shows square money as a caution signal and never tells anyone to trade against it.
 
 ---
 

@@ -127,8 +127,8 @@ export default async function Method() {
         </TableWrap>
         <div className="prose-calibre mt-4">
           <p>
-            <strong>Reading it.</strong> Following a loser-driven move did {fixed(replay.differencePts)} pts worse than following a clean one (one-sided permutation p about {replay.pOneSided.toFixed(2)}).
-            The interval for loser-driven moves spans zero, so this is <strong>early evidence, not conclusive</strong>. A longer replay (6,000 markets) is running.
+            <strong>Reading it.</strong> Following a loser-driven move did {fixed(replay.differencePts)} pts worse than following a clean one (one-sided permutation p = {replay.pOneSided.toFixed(3)}).
+            The interval for loser-driven moves spans zero, so this is <strong>early evidence, not conclusive</strong>. An earlier, smaller run (4,355 moves) gave -3.8 pts at p about 0.14: the larger run narrowed the interval and the gap held in direction.
           </p>
           <ul>
             <li>Follow edge is the final result minus the price at the end of the move, in the move&apos;s direction. Negative means the move overshot.</li>

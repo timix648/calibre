@@ -6,6 +6,16 @@ import { pct, shortAddr, sourceLabel, suiscanCheckpoint, utc } from "@/lib/forma
 
 export const metadata: Metadata = { title: "Proof" };
 
+// The first paid agent call (scripts/agent-pay-demo.ts), checked on chain via Sui GraphQL: status SUCCESS, gas price 0,
+// 10,000 units of native USDC (0.01) from the agent to the API's recipient address.
+const PAYMENT = {
+  digest: "9edpkVC9QQegXDDwvxEt5dZyd2NZ36vBLw2yaqknF86K",
+  checkpoint: "341674249",
+  at: "4 Nov 2026, 20:21:41 UTC",
+  from: "0x62c1296aa94dd95c94734f916ff9b69934926ac5ca3706122d4519c7dfbf3cdf",
+  to: "0x6b2e6674d9f19c45ababd054fac1dfa3e3cbe8e7f4d58084bda4c4a1460ef5cf",
+};
+
 export default function Proof() {
   return (
     <div className="space-y-8">
@@ -21,7 +31,7 @@ export default function Proof() {
         <Stat
           label="Sui checkpoint"
           value={memory.checkpoint ? <ExternalLink href={suiscanCheckpoint(memory.checkpoint.sequence)}>{Number(memory.checkpoint.sequence).toLocaleString("en-US")}</ExternalLink> : "n/a"}
-          note={memory.checkpoint?.timestamp ? `${utc(memory.checkpoint.timestamp)}, via Tatum gRPC` : undefined}
+          note={memory.checkpoint?.timestamp ? `${utc(memory.checkpoint.timestamp)}, via ${memory.checkpoint.source === "sui-public-graphql" ? "Sui public GraphQL (Tatum gRPC unavailable)" : "Tatum gRPC"}` : undefined}
         />
       </section>
 
@@ -120,7 +130,7 @@ export default function Proof() {
       </Card>
 
       <Card>
-        <H2 sub={`${walletIndex.totalRows.toLocaleString("en-US")} wallet-by-league records across ${walletIndex.totalWallets} wallets are sealed. A few of them:`}>Sample wallet records on Walruscan</H2>
+        <H2 sub={`${(memory.namespaces.find((n) => n.name === "calibre-wallets")?.memories ?? 0).toLocaleString("en-US")} wallet records are sealed on Walrus. The local index the watcher labels takers from is larger (${walletIndex.totalRows.toLocaleString("en-US")} wallet-by-league rows across ${walletIndex.totalWallets.toLocaleString("en-US")} wallets) and is not all sealed. A few sealed records:`}>Sample wallet records on Walruscan</H2>
         <ul className="space-y-2 text-sm">
           {memory.sampleBlobs.map((b) => {
             const [wallet, league] = b.key.split(":");
@@ -135,9 +145,22 @@ export default function Proof() {
       </Card>
 
       <Card>
+        <H2 sub="One real call to the paid agent API, settled on Sui mainnet.">Agent payment receipt</H2>
+        <dl className="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-[auto_1fr]">
+          <dt className="text-muted">Call</dt><dd><code className="num text-xs">GET /api/v1/xray/&lt;wallet&gt;</code>, paid with MPP (0.01 USDC)</dd>
+          <dt className="text-muted">Transaction</dt><dd><ExternalLink href={`https://suiscan.xyz/mainnet/tx/${PAYMENT.digest}`}><span className="num break-all text-xs">{PAYMENT.digest}</span></ExternalLink></dd>
+          <dt className="text-muted">Checkpoint</dt><dd><ExternalLink href={suiscanCheckpoint(PAYMENT.checkpoint)}>{Number(PAYMENT.checkpoint).toLocaleString("en-US")}</ExternalLink> <span className="text-muted">at {PAYMENT.at}</span></dd>
+          <dt className="text-muted">Transfer</dt><dd>0.01 USDC from the agent wallet <span className="num">{shortAddr(PAYMENT.from)}</span> to the API&apos;s wallet <span className="num">{shortAddr(PAYMENT.to)}</span>; the agent held no SUI and paid no gas</dd>
+        </dl>
+        <p className="mt-3 text-sm leading-relaxed text-muted">
+          The API answers 402 with a payment challenge, the agent signs a USDC transfer, and the server checks the transaction on chain before it returns the X-ray with the digest as its receipt. Each digest pays for one call. See <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">docs/AGENT_PAYMENTS.md</code>.
+        </p>
+      </Card>
+
+      <Card>
         <H2>Verify it yourself</H2>
         <p className="text-sm leading-relaxed text-muted">
-          The repository includes a script that lists every memory in each namespace, decodes the sealed verdicts and outcomes, checks that the counts agree, reads the latest Sui checkpoint through Tatum, and writes the result to <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">docs/PROOF.md</code>.
+          The repository includes a script that lists every memory in each namespace, decodes the sealed verdicts and outcomes, checks that the counts agree, reads the latest Sui checkpoint through Tatum (or Sui's public GraphQL when Tatum is unavailable), and writes the result to <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">docs/PROOF.md</code>.
         </p>
         <pre className="num mt-3 overflow-x-auto rounded-lg border border-line bg-bg p-4 text-sm">{`pnpm install\ncp .env.example .env   # add your Tatum and Walrus Memory keys\npnpm verify`}</pre>
         <p className="mt-3 text-sm leading-relaxed text-muted">

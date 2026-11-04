@@ -1,6 +1,4896 @@
 {
-  "generatedAt": "2026-11-03T15:09:37.527Z",
+  "generatedAt": "2026-11-04T20:36:38.848Z",
   "verdicts": [
+    {
+      "id": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30-1793823000",
+      "key": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30:1793823000",
+      "version": 1,
+      "blobId": "G4uw6t_JW_WbRMRSFoyOGY4mNnnZJcih9m7oJ-TfLo8",
+      "walruscan": "https://walruscan.com/mainnet/blob/G4uw6t_JW_WbRMRSFoyOGY4mNnnZJcih9m7oJ-TfLo8",
+      "summary": "UCL move up on \"Will SSC Napoli win on 2026-11-04?\" (YES 16% to 23%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 23% for YES. Square money 0% of the money pushing the move (judged 38%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30",
+        "eventSlug": "ucl-por-nap-2026-11-04",
+        "league": "ucl",
+        "question": "Will SSC Napoli win on 2026-11-04?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.16,
+          "to": 0.225,
+          "startTs": 1793822400000,
+          "endTs": 1793823000000
+        },
+        "label": "contested",
+        "sharpShare": 0.006598440551840777,
+        "opposition": 67.14731159649416,
+        "forecast": 0.2251038546137259,
+        "priceAtVerdict": 0.225,
+        "trades": 102,
+        "wallets": 73,
+        "topWallets": [
+          {
+            "wallet": "0xbb6418f9db6d1c765965dc4c9d48cd5b4d2bdb86",
+            "league": "ucl",
+            "netYesUsd": -2967.05,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xc23dc0eca9e1c2e293de8911b9ac254f0bcd82c8",
+            "league": "ucl",
+            "netYesUsd": -1408.2,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x2559b5bae55fc693e15896e816aae2761d8eb2e3",
+            "league": "ucl",
+            "netYesUsd": -1022.55,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": -913.4,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
+            "league": "ucl",
+            "netYesUsd": -524.14,
+            "edge": 0,
+            "z": -1.2395282024990923,
+            "n": 13,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.3818583531473676,
+        "checkpoint": {
+          "sequence": "341671502",
+          "digest": "3PhJehzBEQ7grNXMcZ39kYWsj71We76LsZUdjTUAF8uU",
+          "timestamp": "2026-11-04T20:10:40.126Z"
+        },
+        "sealedAt": "2026-11-04T20:10:40.736Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xcd77ee0ddabb7edae7498631da52a756f1982c6e143e61dde7bcc09bda2d89fc-1793823000",
+      "key": "0xcd77ee0ddabb7edae7498631da52a756f1982c6e143e61dde7bcc09bda2d89fc:1793823000",
+      "version": 1,
+      "blobId": "OLDDnRkG1tWZ8wPSWIjWD9E-d9ElnAkbrLxvbaA2ErA",
+      "walruscan": "https://walruscan.com/mainnet/blob/OLDDnRkG1tWZ8wPSWIjWD9E-d9ElnAkbrLxvbaA2ErA",
+      "summary": "UCL move down on \"Will FC Porto win on 2026-11-04?\" (YES 60% to 52%) is mixed: 25% of the money behind it came from wallets with a learned edge. CALIBRE forecast 51% for YES. Square money 0% of the money pushing the move (judged 25%). Data: Polymarket public API (Tatum history was empty for this market; not asked again until 20:39 UTC)",
+      "data": {
+        "marketId": "0xcd77ee0ddabb7edae7498631da52a756f1982c6e143e61dde7bcc09bda2d89fc",
+        "eventSlug": "ucl-por-nap-2026-11-04",
+        "league": "ucl",
+        "question": "Will FC Porto win on 2026-11-04?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.6,
+          "to": 0.515,
+          "startTs": 1793822400000,
+          "endTs": 1793823000000
+        },
+        "label": "mixed",
+        "sharpShare": 0.2525311111268854,
+        "opposition": 0.012708869634149373,
+        "forecast": 0.5125235745277307,
+        "priceAtVerdict": 0.515,
+        "trades": 150,
+        "wallets": 110,
+        "topWallets": [
+          {
+            "wallet": "0x99aa00fde98f1ee632a3a60c7d13cf0d14716c5a",
+            "league": "ucl",
+            "netYesUsd": 3116.12,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x300b4292912c123066a380a344b505b0f353f636",
+            "league": "ucl",
+            "netYesUsd": -1267.57,
+            "edge": 0.02859858711302889,
+            "z": 0.9271703646392976,
+            "n": 5,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xcca049c9fb56d679ae107147670b09b2930e8552",
+            "league": "ucl",
+            "netYesUsd": 1213.95,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xffff6537da5efd428cc09187f90cbd2e726d4413",
+            "league": "ucl",
+            "netYesUsd": 1073.72,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x29a44c0f0aaeb6d1745d39313c3576449afb205e",
+            "league": "ucl",
+            "netYesUsd": -1000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.2525311111268854,
+        "checkpoint": {
+          "sequence": "341671407",
+          "digest": "EzzZdNocBWUHPT2cJEZ1veM7WvUPP39gxu9fhPq5dRnB",
+          "timestamp": "2026-11-04T20:10:16.983Z"
+        },
+        "sealedAt": "2026-11-04T20:10:18.066Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 20:39 UTC"
+      }
+    },
+    {
+      "id": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448-1793817000",
+      "key": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448:1793817000",
+      "version": 1,
+      "blobId": "D4pH_ZyFRwihPjhyrSmXyldOUU33DejTMkJDuGZjXOg",
+      "walruscan": "https://walruscan.com/mainnet/blob/D4pH_ZyFRwihPjhyrSmXyldOUU33DejTMkJDuGZjXOg",
+      "summary": "UCL move down on \"Will Liverpool FC win on 2026-11-04?\" (YES 80% to 54%) is mixed: 16% of the money behind it came from wallets with a learned edge. CALIBRE forecast 54% for YES. Square money 9% of the money pushing the move (judged 33%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448",
+        "eventSlug": "ucl-fen-liv-2026-11-04",
+        "league": "ucl",
+        "question": "Will Liverpool FC win on 2026-11-04?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.8,
+          "to": 0.535,
+          "startTs": 1793815800000,
+          "endTs": 1793817000000
+        },
+        "label": "mixed",
+        "sharpShare": 0.15572688099479529,
+        "opposition": 0.02140761800424181,
+        "forecast": 0.5358376087731507,
+        "priceAtVerdict": 0.535,
+        "trades": 512,
+        "wallets": 277,
+        "topWallets": [
+          {
+            "wallet": "0x39bb1386ff887661d7b3e3be725bb52355f473f2",
+            "league": "ucl",
+            "netYesUsd": 4086.98,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x91feec8af2b517f024d91564ee108d707cc0c1c6",
+            "league": "ucl",
+            "netYesUsd": 3350,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x65503c7f9e142ac88b1ce09df3363ff77f188451",
+            "league": "ucl",
+            "netYesUsd": 3281.99,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
+            "league": "ucl",
+            "netYesUsd": -2045.81,
+            "edge": 0.026828856122729807,
+            "z": 1.0500796277919455,
+            "n": 5,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x1372b87303da68e2b91f7344b710dfdb51cb4ce0",
+            "league": "ucl",
+            "netYesUsd": 1940.34,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0.08928852642610842,
+        "squareCoverage": 0.33070384668439334,
+        "checkpoint": {
+          "sequence": "341648744",
+          "digest": "9yF9hruLSHjXUFDrRVKdx6eqFbufqs3Zxg8t9EAFG7in",
+          "timestamp": "2026-11-04T18:38:44.781Z"
+        },
+        "sealedAt": "2026-11-04T18:38:45.658Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0-1793816400",
+      "key": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0:1793816400",
+      "version": 1,
+      "blobId": "G9iXGT1Af9LXlsHNa4CUzES_I6i7pllxM_MCqiZbv14",
+      "walruscan": "https://walruscan.com/mainnet/blob/G9iXGT1Af9LXlsHNa4CUzES_I6i7pllxM_MCqiZbv14",
+      "summary": "UCL move up on \"Will Fenerbahçe SK vs. Liverpool FC end in a draw?\" (YES 13% to 28%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 27% for YES. Square money 0% of the money pushing the move (judged 58%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0",
+        "eventSlug": "ucl-fen-liv-2026-11-04",
+        "league": "ucl",
+        "question": "Will Fenerbahçe SK vs. Liverpool FC end in a draw?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.13,
+          "to": 0.275,
+          "startTs": 1793815800000,
+          "endTs": 1793816400000
+        },
+        "label": "noise",
+        "sharpShare": 0.0029346276236684376,
+        "opposition": 0,
+        "forecast": 0.27498976687346804,
+        "priceAtVerdict": 0.275,
+        "trades": 50,
+        "wallets": 39,
+        "topWallets": [
+          {
+            "wallet": "0x0346afae2603313d2bbee96b628536c8cbe352a5",
+            "league": "ucl",
+            "netYesUsd": 1306,
+            "edge": 0,
+            "z": -3.646217170551597,
+            "n": 17,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x65503c7f9e142ac88b1ce09df3363ff77f188451",
+            "league": "ucl",
+            "netYesUsd": 448.38,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": 414.39,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x91feec8af2b517f024d91564ee108d707cc0c1c6",
+            "league": "ucl",
+            "netYesUsd": -205.29,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x076daa87c4fe1a85402a9b6b8e0a866224388d4c",
+            "league": "ucl",
+            "netYesUsd": -95.54,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.580681615359729,
+        "checkpoint": {
+          "sequence": "341646162",
+          "digest": "3qFKb6bx3ChAVwQkmhiebkXRadPZsV6kdahyprdaftEf",
+          "timestamp": "2026-11-04T18:28:17.561Z"
+        },
+        "sealedAt": "2026-11-04T18:28:18.571Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x966ee5e52c4347af1b6014a84b24f616da2d41809847080db9fa17272d0fee3c-1793816700",
+      "key": "0x966ee5e52c4347af1b6014a84b24f616da2d41809847080db9fa17272d0fee3c:1793816700",
+      "version": 1,
+      "blobId": "9xwYpfMJB4bZtc1CpNfUFA6C_rv85cu8GR6XLO4GPJk",
+      "walruscan": "https://walruscan.com/mainnet/blob/9xwYpfMJB4bZtc1CpNfUFA6C_rv85cu8GR6XLO4GPJk",
+      "summary": "UCL move up on \"Will Fenerbahçe SK win on 2026-11-04?\" (YES 5% to 17%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 16% for YES. Square money 0% of the money pushing the move (judged 23%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x966ee5e52c4347af1b6014a84b24f616da2d41809847080db9fa17272d0fee3c",
+        "eventSlug": "ucl-fen-liv-2026-11-04",
+        "league": "ucl",
+        "question": "Will Fenerbahçe SK win on 2026-11-04?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.050000000000000044,
+          "to": 0.165,
+          "startTs": 1793815800000,
+          "endTs": 1793816700000
+        },
+        "label": "contested",
+        "sharpShare": 0.03084031829772077,
+        "opposition": 10.876295422408045,
+        "forecast": 0.16192612229006048,
+        "priceAtVerdict": 0.165,
+        "trades": 230,
+        "wallets": 110,
+        "topWallets": [
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": 2976.62,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x65503c7f9e142ac88b1ce09df3363ff77f188451",
+            "league": "ucl",
+            "netYesUsd": -2624.88,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x2dc021439a8dc8f7c845cc64c5563b7ba53970a0",
+            "league": "ucl",
+            "netYesUsd": -2500,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xa797d6bd8fe6e404bb4d8e4ab3d97c38336fdede",
+            "league": "ucl",
+            "netYesUsd": -1189.99,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xbc9bb5e0d7ed5609c18a71c1bf3e325de2ed1b9c",
+            "league": "ucl",
+            "netYesUsd": -1070.57,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.2262067659265601,
+        "checkpoint": {
+          "sequence": "341646080",
+          "digest": "57nTifbSLxZUDeNBHFXhsEJZUCKtuPxXzbRb4n9tjbv3",
+          "timestamp": "2026-11-04T18:27:57.522Z"
+        },
+        "sealedAt": "2026-11-04T18:27:58.316Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574-1793815500",
+      "key": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574:1793815500",
+      "version": 1,
+      "blobId": "8bFOR7BdBDfBPPMGW0Sw5TPn4dLNIeuKQM5UfMt2Ch4",
+      "walruscan": "https://walruscan.com/mainnet/blob/8bFOR7BdBDfBPPMGW0Sw5TPn4dLNIeuKQM5UfMt2Ch4",
+      "summary": "UCL move down on \"Will Real Madrid CF win on 2026-11-04?\" (YES 83% to 61%) is noise: only 10% of the money behind it came from wallets with a learned edge. CALIBRE forecast 61% for YES. Square money 0% of the money pushing the move (judged 54%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574",
+        "eventSlug": "ucl-aek1-rma-2026-11-04",
+        "league": "ucl",
+        "question": "Will Real Madrid CF win on 2026-11-04?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.83,
+          "to": 0.605,
+          "startTs": 1793813100000,
+          "endTs": 1793815500000
+        },
+        "label": "noise",
+        "sharpShare": 0.1007169516321202,
+        "opposition": 0.6460219001157178,
+        "forecast": 0.612982308410476,
+        "priceAtVerdict": 0.605,
+        "trades": 1014,
+        "wallets": 575,
+        "topWallets": [
+          {
+            "wallet": "0xdbbbde184ab04018ce0373c0dbe4e5fd6be805a8",
+            "league": "ucl",
+            "netYesUsd": 50000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x2759769cd371bee44ec5bfc5e72c7f1f092b2b38",
+            "league": "ucl",
+            "netYesUsd": -43829.8,
+            "edge": 0,
+            "z": -0.4805027252661605,
+            "n": 19,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x0e62671015e00e3826b200e39ea07bd3884e17c2",
+            "league": "ucl",
+            "netYesUsd": 20000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x97861652298fa6e2121b01f5a7c21bd3ac1fde36",
+            "league": "ucl",
+            "netYesUsd": -17100,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": -16478.01,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.5421838355499763,
+        "checkpoint": {
+          "sequence": "341640993",
+          "digest": "HUjf3Hfcppkr8ca9fDJtAdGe4vQZzRqFwucPfD16Z695",
+          "timestamp": "2026-11-04T18:07:13.660Z"
+        },
+        "sealedAt": "2026-11-04T18:07:14.362Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x2cdf2ba3625a8ef942f00cd1bd6c09025cfb8f579d0dce3d3e386316bbf44247-1793815500",
+      "key": "0x2cdf2ba3625a8ef942f00cd1bd6c09025cfb8f579d0dce3d3e386316bbf44247:1793815500",
+      "version": 1,
+      "blobId": "qpn5nFOkxzN4gVUUz-8bgQeqZ06hXkpgMs5BQNWuTC8",
+      "walruscan": "https://walruscan.com/mainnet/blob/qpn5nFOkxzN4gVUUz-8bgQeqZ06hXkpgMs5BQNWuTC8",
+      "summary": "UCL move up on \"Will AEK vs. Real Madrid CF end in a draw?\" (YES 11% to 21%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 20% for YES. Square money 0% of the money pushing the move (judged 2%). Data: Polymarket public API (Tatum history was empty for this market; not asked again until 18:35 UTC)",
+      "data": {
+        "marketId": "0x2cdf2ba3625a8ef942f00cd1bd6c09025cfb8f579d0dce3d3e386316bbf44247",
+        "eventSlug": "ucl-aek1-rma-2026-11-04",
+        "league": "ucl",
+        "question": "Will AEK vs. Real Madrid CF end in a draw?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.109999989,
+          "to": 0.205,
+          "startTs": 1793813700000,
+          "endTs": 1793815500000
+        },
+        "label": "contested",
+        "sharpShare": 0.02037536216647081,
+        "opposition": 30.019793577849992,
+        "forecast": 0.20358993511602666,
+        "priceAtVerdict": 0.205,
+        "trades": 101,
+        "wallets": 65,
+        "topWallets": [
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": -138097.74,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x983eedfbd75803602e4a6e6ea9aab6dc6b9c6748",
+            "league": "ucl",
+            "netYesUsd": 42060.33,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x7ea571c40408f340c1c8fc8eaacebab53c1bde7b",
+            "league": "ucl",
+            "netYesUsd": -17285.14,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x0346afae2603313d2bbee96b628536c8cbe352a5",
+            "league": "ucl",
+            "netYesUsd": -3042.18,
+            "edge": 0,
+            "z": -3.646217170551597,
+            "n": 17,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x2fa944dc56b2b6f99088122407f2d158aaaea486",
+            "league": "ucl",
+            "netYesUsd": -2000,
+            "edge": 0.031232370095252017,
+            "z": 0.8590461098102777,
+            "n": 31,
+            "blobId": "zHFcC71b_l25csA3vucfDt3AOqGlhgiRYXRAbiRsLck",
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.02241855820589662,
+        "checkpoint": {
+          "sequence": "341640903",
+          "digest": "Hd4muq7NuDL5xDApEzQT7PbBpYXguiYLQRh8ubfw2VYR",
+          "timestamp": "2026-11-04T18:06:51.688Z"
+        },
+        "sealedAt": "2026-11-04T18:06:52.605Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 18:35 UTC"
+      }
+    },
+    {
+      "id": "0x69aeb202063d522a2138eea4af2b246ded0b5f0a369e3533844d3c3a91126b7a-1793815200",
+      "key": "0x69aeb202063d522a2138eea4af2b246ded0b5f0a369e3533844d3c3a91126b7a:1793815200",
+      "version": 1,
+      "blobId": "avqJF5RJOR_dqNyusa2uuphYYrFeTKadlEMUF51aXQA",
+      "walruscan": "https://walruscan.com/mainnet/blob/avqJF5RJOR_dqNyusa2uuphYYrFeTKadlEMUF51aXQA",
+      "summary": "UCL move up on \"Will AEK win on 2026-11-04?\" (YES 6% to 17%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 16% for YES. Square money 0% of the money pushing the move (judged 0%). Data: Polymarket public API (Tatum history was empty for this market; not asked again until 18:35 UTC)",
+      "data": {
+        "marketId": "0x69aeb202063d522a2138eea4af2b246ded0b5f0a369e3533844d3c3a91126b7a",
+        "eventSlug": "ucl-aek1-rma-2026-11-04",
+        "league": "ucl",
+        "question": "Will AEK win on 2026-11-04?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.06000000000000005,
+          "to": 0.165,
+          "startTs": 1793813100000,
+          "endTs": 1793815200000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.15597676004141012,
+        "priceAtVerdict": 0.165,
+        "trades": 314,
+        "wallets": 170,
+        "topWallets": [
+          {
+            "wallet": "0x709e8dcb133555794decc598e07f2c923b8366f5",
+            "league": "ucl",
+            "netYesUsd": -256312,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x983eedfbd75803602e4a6e6ea9aab6dc6b9c6748",
+            "league": "ucl",
+            "netYesUsd": 153356.57,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xee00ba338c59557141789b127927a55f5cc5cea1",
+            "league": "ucl",
+            "netYesUsd": -90405.01,
+            "edge": 0,
+            "z": -0.8164965809277261,
+            "n": 1,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "ucl",
+            "netYesUsd": -82940.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
+            "league": "ucl",
+            "netYesUsd": -82702.02,
+            "edge": 0.026828856122729807,
+            "z": 1.0500796277919455,
+            "n": 5,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.001655039601956724,
+        "checkpoint": {
+          "sequence": "341640818",
+          "digest": "5akmB73Qu4kbUFb2qQBaESfuVKfVt5zMTy663SrH65p6",
+          "timestamp": "2026-11-04T18:06:30.922Z"
+        },
+        "sealedAt": "2026-11-04T18:06:31.653Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 18:35 UTC"
+      }
+    },
+    {
+      "id": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388-1793813400",
+      "key": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388:1793813400",
+      "version": 1,
+      "blobId": "uPZ-rctAioiTKx93pO1XLNdC-hy2BROU21oosZYf0Ls",
+      "walruscan": "https://walruscan.com/mainnet/blob/uPZ-rctAioiTKx93pO1XLNdC-hy2BROU21oosZYf0Ls",
+      "summary": "POLITICS move up on \"Will the Republicans win the Mississippi Senate race in 2026?\" (YES 7% to 13%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 13% for YES. Square money 0% of the money pushing the move (judged 4%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388",
+        "eventSlug": "mississippi-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Republicans win the Mississippi Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.069,
+          "to": 0.1255,
+          "startTs": 1793810400000,
+          "endTs": 1793813400000
+        },
+        "label": "contested",
+        "sharpShare": 0.006103946009395348,
+        "opposition": 1.5251474026725018,
+        "forecast": 0.12526283086975631,
+        "priceAtVerdict": 0.1255,
+        "trades": 114,
+        "wallets": 69,
+        "topWallets": [
+          {
+            "wallet": "0x09bb36b444503887dcd4ad3a9722a9432ae1f8b1",
+            "league": "politics",
+            "netYesUsd": 4602.43,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x58b3380f71bd6c706dd398a5e60bde55fa3a653c",
+            "league": "politics",
+            "netYesUsd": 3284.06,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x524db836890e08aceb3abcdee98d44240e324495",
+            "league": "politics",
+            "netYesUsd": 1625.84,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x122cb94c437ea5e6f088c6c0c143c592ab8efbed",
+            "league": "politics",
+            "netYesUsd": -602.6,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x107120f8ac73180f633ae88463b2109bc90e169b",
+            "league": "politics",
+            "netYesUsd": -500,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.040939624755167436,
+        "checkpoint": {
+          "sequence": "341633232",
+          "digest": "5KgzfzBeAFYFdkxo1qvWWQGgfZY9SDypwK3rDaqeTSK",
+          "timestamp": "2026-11-04T17:35:52.048Z"
+        },
+        "sealedAt": "2026-11-04T17:35:52.740Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72-1793813400",
+      "key": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72:1793813400",
+      "version": 1,
+      "blobId": "oG5x8Dzy9saa-xnj-jVxVF0Kvm6NL3eD0NefNh_1uCs",
+      "walruscan": "https://walruscan.com/mainnet/blob/oG5x8Dzy9saa-xnj-jVxVF0Kvm6NL3eD0NefNh_1uCs",
+      "summary": "POLITICS move down on \"Will the Democrats win the Mississippi Senate race in 2026?\" (YES 93% to 88%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 88% for YES. Square money 0% of the money pushing the move (judged 0%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72",
+        "eventSlug": "mississippi-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Mississippi Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.9319999999999999,
+          "to": 0.8825,
+          "startTs": 1793810400000,
+          "endTs": 1793813400000
+        },
+        "label": "contested",
+        "sharpShare": 0.0033184982675551395,
+        "opposition": 1629.373645733472,
+        "forecast": 0.882338394336073,
+        "priceAtVerdict": 0.8825,
+        "trades": 194,
+        "wallets": 85,
+        "topWallets": [
+          {
+            "wallet": "0xda66ddc4529eb7ac68add4eca06c37cdcde03f38",
+            "league": "politics",
+            "netYesUsd": -4122.35,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x107120f8ac73180f633ae88463b2109bc90e169b",
+            "league": "politics",
+            "netYesUsd": 2500,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x7e5972bfc25819775ee5a9d4f191919375487b8b",
+            "league": "politics",
+            "netYesUsd": 2113.79,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x1bc32be106439240f59aa25668e613831a5cdc6e",
+            "league": "politics",
+            "netYesUsd": 1699.67,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xeb490d0534bb68b4c2ce139b219a728cd2c3693e",
+            "league": "politics",
+            "netYesUsd": 1400,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0,
+        "checkpoint": {
+          "sequence": "341633121",
+          "digest": "GRQewAZiRk8r4QGaA4bcAAjfhfiAMYAT6bF4bNWdA1HD",
+          "timestamp": "2026-11-04T17:35:24.984Z"
+        },
+        "sealedAt": "2026-11-04T17:35:25.654Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x741bb46008b72234857c5118c8365ab3c2f69dbf28b30b59de04f173b8a778de-1793812200",
+      "key": "0x741bb46008b72234857c5118c8365ab3c2f69dbf28b30b59de04f173b8a778de:1793812200",
+      "version": 1,
+      "blobId": "1YYSjafiQoe53ugOgUKk4CAm3dXN_sFLkgGsgnugxN8",
+      "walruscan": "https://walruscan.com/mainnet/blob/1YYSjafiQoe53ugOgUKk4CAm3dXN_sFLkgGsgnugxN8",
+      "summary": "POLITICS move up on \"Will Dan Sullivan win the Alaska Senate race in 2026?\" (YES 4% to 8%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 8% for YES. Square money 0% of the money pushing the move (judged 0%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x741bb46008b72234857c5118c8365ab3c2f69dbf28b30b59de04f173b8a778de",
+        "eventSlug": "alaska-senate-election-winner",
+        "league": "politics",
+        "question": "Will Dan Sullivan win the Alaska Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.04,
+          "to": 0.08,
+          "startTs": 1793808900000,
+          "endTs": 1793812200000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.07794024314805803,
+        "priceAtVerdict": 0.08,
+        "trades": 283,
+        "wallets": 55,
+        "topWallets": [
+          {
+            "wallet": "0xe0ad70274728fb9cf3cd847974af69cc5e9fb056",
+            "league": "politics",
+            "netYesUsd": 3121.49,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x655cfdb07874f3f8a53486989f805aa7c99d4420",
+            "league": "politics",
+            "netYesUsd": -1740.89,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x629c2844d5c0e36774a67fe10dcd43ca31a76c01",
+            "league": "politics",
+            "netYesUsd": -1563.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xffd058182d5d898c55349fad86ea71e72550cd07",
+            "league": "politics",
+            "netYesUsd": -1451.4,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x6e9a6afde1e8bd4a0c7bf2809cf87fe14c00f3bb",
+            "league": "politics",
+            "netYesUsd": 1338.07,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0,
+        "checkpoint": {
+          "sequence": "341627952",
+          "digest": "GLjMTRvQqzUji6Vk5hWLKM5MBXLDfXTY7f3vwre4man8",
+          "timestamp": "2026-11-04T17:14:36.585Z"
+        },
+        "sealedAt": "2026-11-04T17:14:37.552Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xb75b024be6f2a56afeb23082fa142eb6ee6b7938fc3bb63132dac9b656833cf3-1793808900",
+      "key": "0xb75b024be6f2a56afeb23082fa142eb6ee6b7938fc3bb63132dac9b656833cf3:1793808900",
+      "version": 1,
+      "blobId": "uN5w1g9Il2IAEb6qBR8NaXY-ndX8c8iKZttZXPH1ndg",
+      "walruscan": "https://walruscan.com/mainnet/blob/uN5w1g9Il2IAEb6qBR8NaXY-ndX8c8iKZttZXPH1ndg",
+      "summary": "UEL move up on \"Will Olympiakós SFP win on 2026-11-05?\" (YES 19% to 26%) is sharp-led: 53% of the money behind it came from wallets with a learned edge. CALIBRE forecast 26% for YES. Square money 0% of the money pushing the move (judged 85%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xb75b024be6f2a56afeb23082fa142eb6ee6b7938fc3bb63132dac9b656833cf3",
+        "eventSlug": "uel-ren1-oly-2026-11-05",
+        "league": "uel",
+        "question": "Will Olympiakós SFP win on 2026-11-05?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.19000000230000003,
+          "to": 0.255,
+          "startTs": 1793808600000,
+          "endTs": 1793808900000
+        },
+        "label": "sharp-led",
+        "sharpShare": 0.5266314901047511,
+        "opposition": 0,
+        "forecast": 0.25591382277359276,
+        "priceAtVerdict": 0.255,
+        "trades": 23,
+        "wallets": 18,
+        "topWallets": [
+          {
+            "wallet": "0xc1be0f0a63489ba29c008ae52f2d55f3f47bd6a2",
+            "league": "uel",
+            "netYesUsd": 310.8,
+            "edge": 0.0017776580756399313,
+            "z": 0.0753995555372644,
+            "n": 4,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "uel",
+            "netYesUsd": -263.49,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xc3bc3969d5bfed0be748acbcb1dd3c09bf0231fb",
+            "league": "uel",
+            "netYesUsd": -250,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
+            "league": "uel",
+            "netYesUsd": 189.3,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x95830475db0762ad2b6b25327832fa13c879fa5d",
+            "league": "uel",
+            "netYesUsd": 30,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8473887008269286,
+        "checkpoint": {
+          "sequence": "341615294",
+          "digest": "6k2L3MJm1bT3MV6vt11tgyQwUrYJZp19avqzEFhwy9QY",
+          "timestamp": "2026-11-04T16:23:32.352Z"
+        },
+        "sealedAt": "2026-11-04T16:23:33.170Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad-1793808900",
+      "key": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad:1793808900",
+      "version": 1,
+      "blobId": "__XdHubeHRpIjbHNovTat3nUysB_c1lDzSzBskjqbYY",
+      "walruscan": "https://walruscan.com/mainnet/blob/__XdHubeHRpIjbHNovTat3nUysB_c1lDzSzBskjqbYY",
+      "summary": "UEL move up on \"Will Stade Rennais FC 1901 vs. Olympiakós SFP end in a draw?\" (YES 26% to 38%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 37% for YES. Square money 0% of the money pushing the move (judged 31%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad",
+        "eventSlug": "uel-ren1-oly-2026-11-05",
+        "league": "uel",
+        "question": "Will Stade Rennais FC 1901 vs. Olympiakós SFP end in a draw?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.26,
+          "to": 0.375,
+          "startTs": 1793805300000,
+          "endTs": 1793808900000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.37499999999999994,
+        "priceAtVerdict": 0.375,
+        "trades": 49,
+        "wallets": 35,
+        "topWallets": [
+          {
+            "wallet": "0x2fa944dc56b2b6f99088122407f2d158aaaea486",
+            "league": "uel",
+            "netYesUsd": -1688.54,
+            "edge": 0,
+            "z": -0.8361578891646515,
+            "n": 50,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x4408cc367a713840d92693acd35cc205e59e1b6a",
+            "league": "uel",
+            "netYesUsd": 792.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x84ebe80937030274db5b5d04d47f336013c3869d",
+            "league": "uel",
+            "netYesUsd": -780,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
+            "league": "uel",
+            "netYesUsd": 136.25,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
+            "league": "uel",
+            "netYesUsd": 123.91,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.30640867579062764,
+        "checkpoint": {
+          "sequence": "341615192",
+          "digest": "FTttB6qLVXqv7J458VKhmJyhedjJnFHQpf2g7epaa5Hj",
+          "timestamp": "2026-11-04T16:23:07.398Z"
+        },
+        "sealedAt": "2026-11-04T16:23:08.534Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x543a842ab090203d3a8c2cb1b18b5f5a88083a0b75b7e535e2dc30b2db6b4012-1793808900",
+      "key": "0x543a842ab090203d3a8c2cb1b18b5f5a88083a0b75b7e535e2dc30b2db6b4012:1793808900",
+      "version": 1,
+      "blobId": "G7oHQ-FWM5AsBik9Z6gSXktiz_92KDtd1UyYVrMgv-c",
+      "walruscan": "https://walruscan.com/mainnet/blob/G7oHQ-FWM5AsBik9Z6gSXktiz_92KDtd1UyYVrMgv-c",
+      "summary": "UEL move down on \"Will Stade Rennais FC 1901 win on 2026-11-05?\" (YES 48% to 37%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 36% for YES. Square money 0% of the money pushing the move (judged 24%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x543a842ab090203d3a8c2cb1b18b5f5a88083a0b75b7e535e2dc30b2db6b4012",
+        "eventSlug": "uel-ren1-oly-2026-11-05",
+        "league": "uel",
+        "question": "Will Stade Rennais FC 1901 win on 2026-11-05?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.48,
+          "to": 0.365,
+          "startTs": 1793808600000,
+          "endTs": 1793808900000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.36499999999999994,
+        "priceAtVerdict": 0.365,
+        "trades": 89,
+        "wallets": 45,
+        "topWallets": [
+          {
+            "wallet": "0x61a3f1ef9c9618f532eb49f0cb260486c168e508",
+            "league": "uel",
+            "netYesUsd": 9000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "uel",
+            "netYesUsd": -901.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xba5ad62dc13426ec5c7b750aa645bd94ecd6b257",
+            "league": "uel",
+            "netYesUsd": 500,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x89dc86ecfa26586aaca3682c792ef4c4657ce678",
+            "league": "uel",
+            "netYesUsd": -309.57,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xdb5b062da038c2751065c9f3eed5244e57b36ddc",
+            "league": "uel",
+            "netYesUsd": 306.28,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.2419495743707729,
+        "checkpoint": {
+          "sequence": "341615104",
+          "digest": "CJoXeLNeA2R6BK3FgvAtPKJZWfEy9jyFC6AkU75iJkEe",
+          "timestamp": "2026-11-04T16:22:45.659Z"
+        },
+        "sealedAt": "2026-11-04T16:22:46.371Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388-1793805900",
+      "key": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388:1793805900",
+      "version": 1,
+      "blobId": "qN9LaqXLZDlzYtKtSub9Ld45GJSfSG8xx9JtjWbUa0k",
+      "walruscan": "https://walruscan.com/mainnet/blob/qN9LaqXLZDlzYtKtSub9Ld45GJSfSG8xx9JtjWbUa0k",
+      "summary": "POLITICS move down on \"Will the Republicans win the Mississippi Senate race in 2026?\" (YES 17% to 6%) is noise: only 9% of the money behind it came from wallets with a learned edge. CALIBRE forecast 7% for YES. Square money 0% of the money pushing the move (judged 7%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388",
+        "eventSlug": "mississippi-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Republicans win the Mississippi Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.1742229655,
+          "to": 0.0635,
+          "startTs": 1793802900000,
+          "endTs": 1793805900000
+        },
+        "label": "noise",
+        "sharpShare": 0.08596674125941119,
+        "opposition": 0,
+        "forecast": 0.06535252691902659,
+        "priceAtVerdict": 0.0635,
+        "trades": 165,
+        "wallets": 61,
+        "topWallets": [
+          {
+            "wallet": "0x09bb36b444503887dcd4ad3a9722a9432ae1f8b1",
+            "league": "politics",
+            "netYesUsd": -5000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x655cfdb07874f3f8a53486989f805aa7c99d4420",
+            "league": "politics",
+            "netYesUsd": -1149.9,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xd218e474776403a330142299f7796e8ba32eb5c9",
+            "league": "politics",
+            "netYesUsd": -768.21,
+            "edge": 0.005407570962687724,
+            "z": 0.24964332703050485,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xeb490d0534bb68b4c2ce139b219a728cd2c3693e",
+            "league": "politics",
+            "netYesUsd": -678.82,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x066a7727f53124db18aa963f900bb95b36f7550d",
+            "league": "politics",
+            "netYesUsd": 599.17,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.06987377855221279,
+        "checkpoint": {
+          "sequence": "341602493",
+          "digest": "3Zq3fEEUBFTudFDgRc4UCuXWE5qYL7jScUEMM8ECWUsz",
+          "timestamp": "2026-11-04T15:31:38.900Z"
+        },
+        "sealedAt": "2026-11-04T15:31:39.766Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72-1793806200",
+      "key": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72:1793806200",
+      "version": 1,
+      "blobId": "9zT_GUGrDoM56kRQJWJPEfkWJP8nsdJeNMU8m0DbHOg",
+      "walruscan": "https://walruscan.com/mainnet/blob/9zT_GUGrDoM56kRQJWJPEfkWJP8nsdJeNMU8m0DbHOg",
+      "summary": "POLITICS move up on \"Will the Democrats win the Mississippi Senate race in 2026?\" (YES 83% to 93%) is noise: only 7% of the money behind it came from wallets with a learned edge. CALIBRE forecast 93% for YES. Square money 0% of the money pushing the move (judged 7%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72",
+        "eventSlug": "mississippi-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Mississippi Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.834,
+          "to": 0.9305,
+          "startTs": 1793803500000,
+          "endTs": 1793806200000
+        },
+        "label": "noise",
+        "sharpShare": 0.06778788697367383,
+        "opposition": 0.000038461968796240574,
+        "forecast": 0.9288623031850816,
+        "priceAtVerdict": 0.9305,
+        "trades": 198,
+        "wallets": 91,
+        "topWallets": [
+          {
+            "wallet": "0x42477970683d4d0a52ec7082fee5d760cc5591c4",
+            "league": "politics",
+            "netYesUsd": 4933.1,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x993f451b6d5c21996b1bf688493cea9c4c823ee3",
+            "league": "politics",
+            "netYesUsd": 3784.5,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x34210829b1a2af105b90b62cfcbafda0d3155caf",
+            "league": "politics",
+            "netYesUsd": 2671.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xebc12fc3c03e8e0a5cc07bc4f6eece5b877cfced",
+            "league": "politics",
+            "netYesUsd": 2543.75,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x8aa739ef6613b1e647fc992b06cf569f5b540d94",
+            "league": "politics",
+            "netYesUsd": 1992.32,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.06629746339390857,
+        "checkpoint": {
+          "sequence": "341602402",
+          "digest": "3AuA3yYRCifzgH4J1q7UwygYLU4m9YBGjV8FExQjiNej",
+          "timestamp": "2026-11-04T15:31:16.743Z"
+        },
+        "sealedAt": "2026-11-04T15:31:17.622Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x741bb46008b72234857c5118c8365ab3c2f69dbf28b30b59de04f173b8a778de-1793804100",
+      "key": "0x741bb46008b72234857c5118c8365ab3c2f69dbf28b30b59de04f173b8a778de:1793804100",
+      "version": 1,
+      "blobId": "uuVmrn4dVWllzAvCTEvCKlQc7tSMYISJteSv-4K9kgM",
+      "walruscan": "https://walruscan.com/mainnet/blob/uuVmrn4dVWllzAvCTEvCKlQc7tSMYISJteSv-4K9kgM",
+      "summary": "POLITICS move down on \"Will Dan Sullivan win the Alaska Senate race in 2026?\" (YES 15% to 10%) is mixed: 25% of the money behind it came from wallets with a learned edge. CALIBRE forecast 10% for YES. Square money 0% of the money pushing the move (judged 49%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x741bb46008b72234857c5118c8365ab3c2f69dbf28b30b59de04f173b8a778de",
+        "eventSlug": "alaska-senate-election-winner",
+        "league": "politics",
+        "question": "Will Dan Sullivan win the Alaska Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.15300000000000002,
+          "to": 0.1035,
+          "startTs": 1793800500000,
+          "endTs": 1793804100000
+        },
+        "label": "mixed",
+        "sharpShare": 0.25389602258482824,
+        "opposition": 0,
+        "forecast": 0.10464629698590384,
+        "priceAtVerdict": 0.1035,
+        "trades": 167,
+        "wallets": 74,
+        "topWallets": [
+          {
+            "wallet": "0xd218e474776403a330142299f7796e8ba32eb5c9",
+            "league": "politics",
+            "netYesUsd": -4285.77,
+            "edge": 0.005407570962687724,
+            "z": 0.24964332703050485,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xc301c1e034e71e1a6ce9684f029c4674a00466aa",
+            "league": "politics",
+            "netYesUsd": -4275.55,
+            "edge": 0,
+            "z": -1.9265028864009188,
+            "n": 22,
+            "blobId": "vT_BSWHjC4bBtMay-oZYvQbWQBX7jwlUGP-Nu0Q0Nlo",
+            "label": "too early"
+          },
+          {
+            "wallet": "0x122cb94c437ea5e6f088c6c0c143c592ab8efbed",
+            "league": "politics",
+            "netYesUsd": -1693.91,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x3dda0231151cae91a9f3561f947b6fa007218799",
+            "league": "politics",
+            "netYesUsd": -1229.15,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x6e9a6afde1e8bd4a0c7bf2809cf87fe14c00f3bb",
+            "league": "politics",
+            "netYesUsd": -1042.71,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.4855968496027033,
+        "checkpoint": {
+          "sequence": "341594741",
+          "digest": "EGAwPrvCyxBzU6U7pWD5vyM2cFmPAXPR96STVx1FZxEV",
+          "timestamp": "2026-11-04T15:00:16.502Z"
+        },
+        "sealedAt": "2026-11-04T15:00:17.579Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388-1793796000",
+      "key": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388:1793796000",
+      "version": 1,
+      "blobId": "3-leZ66rdeV796jGH7opUPtAd64bPlZG-qEvrYFYtX8",
+      "walruscan": "https://walruscan.com/mainnet/blob/3-leZ66rdeV796jGH7opUPtAd64bPlZG-qEvrYFYtX8",
+      "summary": "POLITICS move down on \"Will the Republicans win the Mississippi Senate race in 2026?\" (YES 25% to 19%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 19% for YES. Square money 0% of the money pushing the move (judged 0%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xc8c5760c26490b0cd0bedcf1c61aa86c5e09c8b2886b84ff4ea2db81d5f29388",
+        "eventSlug": "mississippi-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Republicans win the Mississippi Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.2489999722,
+          "to": 0.189,
+          "startTs": 1793792400000,
+          "endTs": 1793796000000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.1892912526839931,
+        "priceAtVerdict": 0.189,
+        "trades": 98,
+        "wallets": 53,
+        "topWallets": [
+          {
+            "wallet": "0xeb490d0534bb68b4c2ce139b219a728cd2c3693e",
+            "league": "politics",
+            "netYesUsd": -1419.1,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x655cfdb07874f3f8a53486989f805aa7c99d4420",
+            "league": "politics",
+            "netYesUsd": -1030.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xb84ffa7f27660d78cd7e9faafd951d94bdc6ea41",
+            "league": "politics",
+            "netYesUsd": 480,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xc322de5e7ec0b915ddcb5e937a257a328c60e0bf",
+            "league": "politics",
+            "netYesUsd": -361.13,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xd29738d7a981bbe4ede05b31bbf726531a5b2c15",
+            "league": "politics",
+            "netYesUsd": -316.27,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0,
+        "checkpoint": {
+          "sequence": "341562146",
+          "digest": "2pbDyiq49PEJhrVAVG5WucndQgdRQarPHD5xvSNfKNZX",
+          "timestamp": "2026-11-04T12:47:47.716Z"
+        },
+        "sealedAt": "2026-11-04T12:47:48.868Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72-1793793900",
+      "key": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72:1793793900",
+      "version": 1,
+      "blobId": "pbU2hLcb6Gmb86k82UlVB9lUzRJb7gSrSII1TVyEcEw",
+      "walruscan": "https://walruscan.com/mainnet/blob/pbU2hLcb6Gmb86k82UlVB9lUzRJb7gSrSII1TVyEcEw",
+      "summary": "POLITICS move up on \"Will the Democrats win the Mississippi Senate race in 2026?\" (YES 72% to 80%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 80% for YES. Square money 0% of the money pushing the move (judged 24%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x8c9b8ad3a64088a06d45e0b296a9a836203bc7f3ef35d134c57abead446a8b72",
+        "eventSlug": "mississippi-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Mississippi Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.721,
+          "to": 0.7985,
+          "startTs": 1793791800000,
+          "endTs": 1793793900000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.7982153017842941,
+        "priceAtVerdict": 0.7985,
+        "trades": 105,
+        "wallets": 68,
+        "topWallets": [
+          {
+            "wallet": "0xdf903ee52261f475ee5a02f9189acdb7cdba41f0",
+            "league": "politics",
+            "netYesUsd": -1594.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xd7e4084b5b247202ed5ad0b8e9079d856abe9e1e",
+            "league": "politics",
+            "netYesUsd": 816.11,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x076daa87c4fe1a85402a9b6b8e0a866224388d4c",
+            "league": "politics",
+            "netYesUsd": 683.39,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xf2b05d854e0af18e70b76e96534e2e7f7a04b26b",
+            "league": "politics",
+            "netYesUsd": 667.29,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x2eaca90ec0add74877e17937a79337b7a243f094",
+            "league": "politics",
+            "netYesUsd": 484.86,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.2415122193155553,
+        "checkpoint": {
+          "sequence": "341552742",
+          "digest": "5TQwMxvHfZA1Sr8ENb6FvKuW5NJhxhc8vujnMDJcYzma",
+          "timestamp": "2026-11-04T12:09:34.825Z"
+        },
+        "sealedAt": "2026-11-04T12:09:35.571Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xd89fb36348a1f29191d40ff29c96f0b145241903dd647f12349ddda5b2c1961b-1793793300",
+      "key": "0xd89fb36348a1f29191d40ff29c96f0b145241903dd647f12349ddda5b2c1961b:1793793300",
+      "version": 1,
+      "blobId": "-6aIK1_jBYMJdfWFHTPqdOjTlHi5H-Y9lwNjC0wjccw",
+      "walruscan": "https://walruscan.com/mainnet/blob/-6aIK1_jBYMJdfWFHTPqdOjTlHi5H-Y9lwNjC0wjccw",
+      "summary": "CS2 move up on \"Counter-Strike: Natus Vincere vs Team Falcons - Map 2 Winner\" (NATUS VINCERE 42% to 82%) is mixed: 15% of the money behind it came from wallets with a learned edge. CALIBRE forecast 80% for NATUS VINCERE. Square money 0% of the money pushing the move (judged 8%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xd89fb36348a1f29191d40ff29c96f0b145241903dd647f12349ddda5b2c1961b",
+        "eventSlug": "cs2-navi-fal2-2026-11-04",
+        "league": "cs2",
+        "question": "Counter-Strike: Natus Vincere vs Team Falcons - Map 2 Winner",
+        "yesOutcome": "NATUS VINCERE",
+        "move": {
+          "from": 0.42000002319999996,
+          "to": 0.82,
+          "startTs": 1793789700000,
+          "endTs": 1793793300000
+        },
+        "label": "mixed",
+        "sharpShare": 0.15225190966836727,
+        "opposition": 0.08368256927233718,
+        "forecast": 0.7973232951114878,
+        "priceAtVerdict": 0.82,
+        "trades": 987,
+        "wallets": 493,
+        "topWallets": [
+          {
+            "wallet": "0x4d6ef7033e3e332ba584882d09070b3abe755cfd",
+            "league": "cs2",
+            "netYesUsd": 33126.08,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xd3b034d7bfb2473fb252d0414646d9786bac329e",
+            "league": "cs2",
+            "netYesUsd": -18615.2,
+            "edge": 0,
+            "z": -0.23623855958406376,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x42145460f32a84dd27df2dbd7afbee779213db99",
+            "league": "cs2",
+            "netYesUsd": -14480.55,
+            "edge": 0.0008191611698312245,
+            "z": 0.02095021863338704,
+            "n": 14,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x0259b2054f046fe0ee8f3e075fdb85fc3ba9769e",
+            "league": "cs2",
+            "netYesUsd": -10000,
+            "edge": 0,
+            "z": -0.19273379974756755,
+            "n": 47,
+            "blobId": "f3Hm81DfY0T3fQENrMwEgQsGh5bN9931kyukOKPvA9I",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x1610db79f753a80207e1d66716be9e91e627ae49",
+            "league": "cs2",
+            "netYesUsd": -9146.27,
+            "edge": 0,
+            "z": -0.3093953935999898,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.08351226985759656,
+        "checkpoint": {
+          "sequence": "341550104",
+          "digest": "HFDxnGYdMQUQpHsuYAEkzoLZvk4GKq1Bn8u3oSYFmc7u",
+          "timestamp": "2026-11-04T11:58:51.969Z"
+        },
+        "sealedAt": "2026-11-04T11:58:53.037Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xd89fb36348a1f29191d40ff29c96f0b145241903dd647f12349ddda5b2c1961b-1793792700",
+      "key": "0xd89fb36348a1f29191d40ff29c96f0b145241903dd647f12349ddda5b2c1961b:1793792700",
+      "version": 1,
+      "blobId": "_9sSFQ2bGTVEjINsoYg4JZWW0rPBFOkw1QT_5iHUPGc",
+      "walruscan": "https://walruscan.com/mainnet/blob/_9sSFQ2bGTVEjINsoYg4JZWW0rPBFOkw1QT_5iHUPGc",
+      "summary": "CS2 move up on \"Counter-Strike: Natus Vincere vs Team Falcons - Map 2 Winner\" (NATUS VINCERE 42% to 86%) is mixed: 16% of the money behind it came from wallets with a learned edge. CALIBRE forecast 83% for NATUS VINCERE. Square money 0% of the money pushing the move (judged 9%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xd89fb36348a1f29191d40ff29c96f0b145241903dd647f12349ddda5b2c1961b",
+        "eventSlug": "cs2-navi-fal2-2026-11-04",
+        "league": "cs2",
+        "question": "Counter-Strike: Natus Vincere vs Team Falcons - Map 2 Winner",
+        "yesOutcome": "NATUS VINCERE",
+        "move": {
+          "from": 0.4200000118,
+          "to": 0.855,
+          "startTs": 1793789100000,
+          "endTs": 1793792700000
+        },
+        "label": "mixed",
+        "sharpShare": 0.16423436794964255,
+        "opposition": 0.09196135901947973,
+        "forecast": 0.829161292104921,
+        "priceAtVerdict": 0.855,
+        "trades": 798,
+        "wallets": 427,
+        "topWallets": [
+          {
+            "wallet": "0x4d6ef7033e3e332ba584882d09070b3abe755cfd",
+            "league": "cs2",
+            "netYesUsd": 33126.08,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xd3b034d7bfb2473fb252d0414646d9786bac329e",
+            "league": "cs2",
+            "netYesUsd": -18615.2,
+            "edge": 0,
+            "z": -0.23623855958406376,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x42145460f32a84dd27df2dbd7afbee779213db99",
+            "league": "cs2",
+            "netYesUsd": -15000,
+            "edge": 0.0008191611698312245,
+            "z": 0.02095021863338704,
+            "n": 14,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x0259b2054f046fe0ee8f3e075fdb85fc3ba9769e",
+            "league": "cs2",
+            "netYesUsd": -10000,
+            "edge": 0,
+            "z": -0.19273379974756755,
+            "n": 47,
+            "blobId": "f3Hm81DfY0T3fQENrMwEgQsGh5bN9931kyukOKPvA9I",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x9609d30d4ab2c72992c86b5559343bbb8feba48d",
+            "league": "cs2",
+            "netYesUsd": 9111.02,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.0929716160364478,
+        "checkpoint": {
+          "sequence": "341547333",
+          "digest": "Ccng6CjSn1EUC5wkcdkFXC4AeMmqSnLXKkw9FgMdFqsx",
+          "timestamp": "2026-11-04T11:47:36.445Z"
+        },
+        "sealedAt": "2026-11-04T11:47:37.106Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x737bf9b784e57fe98a5b7a6f4e9723bd10214ce292400f2d09d5748a1fb03092-1793785200",
+      "key": "0x737bf9b784e57fe98a5b7a6f4e9723bd10214ce292400f2d09d5748a1fb03092:1793785200",
+      "version": 1,
+      "blobId": "0wkI6iSqA2217F7oOzgiUpvUAizvhOr2SVwOlu6MeSQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/0wkI6iSqA2217F7oOzgiUpvUAizvhOr2SVwOlu6MeSQ",
+      "summary": "CS2 move up on \"Counter-Strike: TheMongolz vs FURIA - Map 1 Winner\" (THEMONGOLZ 36% to 47%) is mixed: 20% of the money behind it came from wallets with a learned edge. CALIBRE forecast 47% for THEMONGOLZ. Data: Polymarket public API (Tatum history was empty for this market; not asked again until 10:02 UTC)",
+      "data": {
+        "marketId": "0x737bf9b784e57fe98a5b7a6f4e9723bd10214ce292400f2d09d5748a1fb03092",
+        "eventSlug": "cs2-mglz-furia-2026-11-04",
+        "league": "cs2",
+        "question": "Counter-Strike: TheMongolz vs FURIA - Map 1 Winner",
+        "yesOutcome": "THEMONGOLZ",
+        "move": {
+          "from": 0.36,
+          "to": 0.465,
+          "startTs": 1793781600000,
+          "endTs": 1793785200000
+        },
+        "label": "mixed",
+        "sharpShare": 0.2038077998483386,
+        "opposition": 0.047737683494398296,
+        "forecast": 0.4683654764240797,
+        "priceAtVerdict": 0.465,
+        "trades": 271,
+        "wallets": 170,
+        "topWallets": [
+          {
+            "wallet": "0x9e3ed7b661a903fc97afcf49e0f014ebe869f882",
+            "league": "cs2",
+            "netYesUsd": 5708.94,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0180046fa3137a7912d70995892b06687d29c6ee",
+            "league": "cs2",
+            "netYesUsd": 4307.47,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x076daa87c4fe1a85402a9b6b8e0a866224388d4c",
+            "league": "cs2",
+            "netYesUsd": 3771.74,
+            "edge": 0.004553002594558618,
+            "z": 0.13903729407465046,
+            "n": 6,
+            "blobId": null
+          },
+          {
+            "wallet": "0xddc38b82423310f5bbf2e2dc58745661a624029c",
+            "league": "cs2",
+            "netYesUsd": -3314.37,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x1610db79f753a80207e1d66716be9e91e627ae49",
+            "league": "cs2",
+            "netYesUsd": -2290.57,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341516762",
+          "digest": "4YB4UE1jpMu8BxhciHGBLfW1A6bgSFg1tSDr8Ca7wrv4",
+          "timestamp": "2026-11-04T09:43:24.052Z"
+        },
+        "sealedAt": "2026-11-04T09:43:24.950Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 10:02 UTC"
+      }
+    },
+    {
+      "id": "0xedca8db60b5fe5a9cc29e967e3a1485602d46dd1a32603437417eabab359b710-1793778900",
+      "key": "0xedca8db60b5fe5a9cc29e967e3a1485602d46dd1a32603437417eabab359b710:1793778900",
+      "version": 1,
+      "blobId": "0EWsAr2tFI-esDqJ0_pJOKLDo-Wun_kjfJxojJo3R6M",
+      "walruscan": "https://walruscan.com/mainnet/blob/0EWsAr2tFI-esDqJ0_pJOKLDo-Wun_kjfJxojJo3R6M",
+      "summary": "CS2 move down on \"Counter-Strike: Liquid vs BetBoom Team - Map 2 Winner\" (LIQUID 38% to 14%) is noise: only 6% of the money behind it came from wallets with a learned edge. CALIBRE forecast 15% for LIQUID. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xedca8db60b5fe5a9cc29e967e3a1485602d46dd1a32603437417eabab359b710",
+        "eventSlug": "cs2-tl1-bb3-2026-11-04",
+        "league": "cs2",
+        "question": "Counter-Strike: Liquid vs BetBoom Team - Map 2 Winner",
+        "yesOutcome": "LIQUID",
+        "move": {
+          "from": 0.3799999924,
+          "to": 0.145,
+          "startTs": 1793775300000,
+          "endTs": 1793778900000
+        },
+        "label": "noise",
+        "sharpShare": 0.062457619659244276,
+        "opposition": 0.16307951781286315,
+        "forecast": 0.1491614533852512,
+        "priceAtVerdict": 0.145,
+        "trades": 199,
+        "wallets": 155,
+        "topWallets": [
+          {
+            "wallet": "0xd3b034d7bfb2473fb252d0414646d9786bac329e",
+            "league": "cs2",
+            "netYesUsd": -21368.02,
+            "edge": 0,
+            "z": -0.23623855958406376,
+            "n": 3,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+            "league": "cs2",
+            "netYesUsd": -8948.43,
+            "edge": 0,
+            "z": -1.4858727867312664,
+            "n": 3,
+            "blobId": null
+          },
+          {
+            "wallet": "0x52ecea7b3159f09db589e4f4ee64872fd0bba6f3",
+            "league": "cs2",
+            "netYesUsd": 3666.63,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x01e6e3c5cfe50943e7721398054cb1e22032e7e0",
+            "league": "cs2",
+            "netYesUsd": -3015,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x6e2c0e9474af7d720e5aba2a5b0bb6f723b7787c",
+            "league": "cs2",
+            "netYesUsd": -2828.8,
+            "edge": 0.0154746139753911,
+            "z": 0.6454200533842139,
+            "n": 4,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341491722",
+          "digest": "EcmwXkkwSKorCSsQgdaytoQLCSUMfgapZ3A4WGWZqPH4",
+          "timestamp": "2026-11-04T08:01:44.523Z"
+        },
+        "sealedAt": "2026-11-04T08:01:45.118Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x792cf633611df7af8592549b0e9289c9f24cdc4b5ebab0f5701ccd2974691a4a-1793779200",
+      "key": "0x792cf633611df7af8592549b0e9289c9f24cdc4b5ebab0f5701ccd2974691a4a:1793779200",
+      "version": 1,
+      "blobId": "uPxCMUFDySUzavVlSx4tWdHrAzZpDzEWNHNLvVfram4",
+      "walruscan": "https://walruscan.com/mainnet/blob/uPxCMUFDySUzavVlSx4tWdHrAzZpDzEWNHNLvVfram4",
+      "summary": "CS2 move up on \"Counter-Strike: MOUZ vs PARIVISION - Map 2 Winner\" (MOUZ 74% to 86%) is mixed: 36% of the money behind it came from wallets with a learned edge. CALIBRE forecast 85% for MOUZ. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x792cf633611df7af8592549b0e9289c9f24cdc4b5ebab0f5701ccd2974691a4a",
+        "eventSlug": "cs2-mouz-prv-2026-11-04",
+        "league": "cs2",
+        "question": "Counter-Strike: MOUZ vs PARIVISION - Map 2 Winner",
+        "yesOutcome": "MOUZ",
+        "move": {
+          "from": 0.7400000104,
+          "to": 0.855,
+          "startTs": 1793776200000,
+          "endTs": 1793779200000
+        },
+        "label": "mixed",
+        "sharpShare": 0.3571459069092078,
+        "opposition": 0.0531293621030427,
+        "forecast": 0.845175972290065,
+        "priceAtVerdict": 0.855,
+        "trades": 348,
+        "wallets": 232,
+        "topWallets": [
+          {
+            "wallet": "0x42145460f32a84dd27df2dbd7afbee779213db99",
+            "league": "cs2",
+            "netYesUsd": 19000,
+            "edge": 0.0003008162339631558,
+            "z": 0.007659472971004133,
+            "n": 15,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+            "league": "cs2",
+            "netYesUsd": 11450.62,
+            "edge": 0,
+            "z": -1.4858727867312664,
+            "n": 3,
+            "blobId": null
+          },
+          {
+            "wallet": "0x6e2c0e9474af7d720e5aba2a5b0bb6f723b7787c",
+            "league": "cs2",
+            "netYesUsd": 4041.86,
+            "edge": 0.0154746139753911,
+            "z": 0.6454200533842139,
+            "n": 4,
+            "blobId": null
+          },
+          {
+            "wallet": "0x52ecea7b3159f09db589e4f4ee64872fd0bba6f3",
+            "league": "cs2",
+            "netYesUsd": 3221.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x9e3ed7b661a903fc97afcf49e0f014ebe869f882",
+            "league": "cs2",
+            "netYesUsd": 2887.98,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341491625",
+          "digest": "7vuFzrEYpw4Hh8omEC8DR5BVe1Nhjvg8jcenQ1tJPuQe",
+          "timestamp": "2026-11-04T08:01:20.965Z"
+        },
+        "sealedAt": "2026-11-04T08:01:21.937Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x154743106aa9b31a948b3b45bb29df9cdcd33412b634788919a0af5926eeaeb4-1793771700",
+      "key": "0x154743106aa9b31a948b3b45bb29df9cdcd33412b634788919a0af5926eeaeb4:1793771700",
+      "version": 1,
+      "blobId": "L5jnOoS8MxJPotg-srkcPB6S1bxKN219-g1TzMTHkM0",
+      "walruscan": "https://walruscan.com/mainnet/blob/L5jnOoS8MxJPotg-srkcPB6S1bxKN219-g1TzMTHkM0",
+      "summary": "CS2 move up on \"Counter-Strike: Natus Vincere vs B8 - Map 2 Winner\" (NATUS VINCERE 48% to 62%) is mixed: 23% of the money behind it came from wallets with a learned edge. CALIBRE forecast 62% for NATUS VINCERE. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x154743106aa9b31a948b3b45bb29df9cdcd33412b634788919a0af5926eeaeb4",
+        "eventSlug": "cs2-navi-b8-2026-11-03",
+        "league": "cs2",
+        "question": "Counter-Strike: Natus Vincere vs B8 - Map 2 Winner",
+        "yesOutcome": "NATUS VINCERE",
+        "move": {
+          "from": 0.4799999311,
+          "to": 0.615,
+          "startTs": 1793770500000,
+          "endTs": 1793771700000
+        },
+        "label": "mixed",
+        "sharpShare": 0.23143467363679618,
+        "opposition": 0.005024102528783972,
+        "forecast": 0.6151438791800201,
+        "priceAtVerdict": 0.615,
+        "trades": 366,
+        "wallets": 179,
+        "topWallets": [
+          {
+            "wallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+            "league": "cs2",
+            "netYesUsd": -5708.14,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x56c9fbdeccf198f1f5ad95ace39b24f5f7fb0d9e",
+            "league": "cs2",
+            "netYesUsd": 3908.29,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x3471a897e56a8d3621ca79af87dae4325977f17e",
+            "league": "cs2",
+            "netYesUsd": 2416.07,
+            "edge": 0.014838709677419354,
+            "z": 0.9229582069908971,
+            "n": 1,
+            "blobId": null
+          },
+          {
+            "wallet": "0xec981ed70ae69c5cbcac08c1ba063e734f6bafcd",
+            "league": "cs2",
+            "netYesUsd": 2262.27,
+            "edge": 0.0321861418326503,
+            "z": 1.4694368045708193,
+            "n": 2,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd17abb0a321360e69a69a8fceccd5ace8fb69900",
+            "league": "cs2",
+            "netYesUsd": -1846.62,
+            "edge": 0,
+            "z": -1.0327382741199318,
+            "n": 5,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341461485",
+          "digest": "7PT9AcraHQi8WEm8NgCsUnXpUi7uYsqKFRSCtFAGdQqR",
+          "timestamp": "2026-11-04T05:59:07.403Z"
+        },
+        "sealedAt": "2026-11-04T05:59:08.293Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x6ab45c3b39bc9c09c8d32f3d09a1318ba61de5fef9d672e157f9d753bbc85a88-1793767500",
+      "key": "0x6ab45c3b39bc9c09c8d32f3d09a1318ba61de5fef9d672e157f9d753bbc85a88:1793767500",
+      "version": 1,
+      "blobId": "dw1iGbBsgqKV_vQcbfz0NSP6ZLX7Lo1TPwYGKbvYCZw",
+      "walruscan": "https://walruscan.com/mainnet/blob/dw1iGbBsgqKV_vQcbfz0NSP6ZLX7Lo1TPwYGKbvYCZw",
+      "summary": "CS2 move down on \"Counter-Strike: Heroic vs Team Falcons - Map 2 Winner\" (HEROIC 36% to 31%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 30% for HEROIC. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x6ab45c3b39bc9c09c8d32f3d09a1318ba61de5fef9d672e157f9d753bbc85a88",
+        "eventSlug": "cs2-hero-fal2-2026-11-03",
+        "league": "cs2",
+        "question": "Counter-Strike: Heroic vs Team Falcons - Map 2 Winner",
+        "yesOutcome": "HEROIC",
+        "move": {
+          "from": 0.36,
+          "to": 0.305,
+          "startTs": 1793764800000,
+          "endTs": 1793767500000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.30499999999999994,
+        "priceAtVerdict": 0.305,
+        "trades": 33,
+        "wallets": 17,
+        "topWallets": [
+          {
+            "wallet": "0xc69bd5567b40ef4d11922eaa57e1f9be1c642076",
+            "league": "cs2",
+            "netYesUsd": 875,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+            "league": "cs2",
+            "netYesUsd": -698.44,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd9e0aaca471f489be338fd0f91a26e8669a805f2",
+            "league": "cs2",
+            "netYesUsd": -404.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc311fb2479c8305ec09cd466440cad337ae3c154",
+            "league": "cs2",
+            "netYesUsd": -100,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x6d875ddf75921fbb2b09da4993daedfcd7ba70e8",
+            "league": "cs2",
+            "netYesUsd": 95.16,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341443861",
+          "digest": "8f16t3ho7QWeT8UFqHpJ6ELHcN13qjegHHUYFexcFw6u",
+          "timestamp": "2026-11-04T04:47:46.324Z"
+        },
+        "sealedAt": "2026-11-04T04:47:47.318Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xd9a7a3477620f14429e0343a3a3838b90874e01d3f5bc49e10f5ba7d70b303ed-1793766600",
+      "key": "0xd9a7a3477620f14429e0343a3a3838b90874e01d3f5bc49e10f5ba7d70b303ed:1793766600",
+      "version": 1,
+      "blobId": "QBtvv4VCWtMDI1GwH0zZHWcJekvnZlJKqL4NnlSeKI0",
+      "walruscan": "https://walruscan.com/mainnet/blob/QBtvv4VCWtMDI1GwH0zZHWcJekvnZlJKqL4NnlSeKI0",
+      "summary": "CS2 move down on \"Counter-Strike: Heroic vs Team Falcons - Map 1 Winner\" (HEROIC 39% to 18%) is noise: only 6% of the money behind it came from wallets with a learned edge. CALIBRE forecast 18% for HEROIC. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xd9a7a3477620f14429e0343a3a3838b90874e01d3f5bc49e10f5ba7d70b303ed",
+        "eventSlug": "cs2-hero-fal2-2026-11-03",
+        "league": "cs2",
+        "question": "Counter-Strike: Heroic vs Team Falcons - Map 1 Winner",
+        "yesOutcome": "HEROIC",
+        "move": {
+          "from": 0.3892761427,
+          "to": 0.175,
+          "startTs": 1793763000000,
+          "endTs": 1793766600000
+        },
+        "label": "noise",
+        "sharpShare": 0.056310542958037925,
+        "opposition": 0.016507046063677817,
+        "forecast": 0.1772533347916488,
+        "priceAtVerdict": 0.175,
+        "trades": 196,
+        "wallets": 116,
+        "topWallets": [
+          {
+            "wallet": "0x0259b2054f046fe0ee8f3e075fdb85fc3ba9769e",
+            "league": "cs2",
+            "netYesUsd": -14629.32,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd17abb0a321360e69a69a8fceccd5ace8fb69900",
+            "league": "cs2",
+            "netYesUsd": 3089.84,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x9e3ed7b661a903fc97afcf49e0f014ebe869f882",
+            "league": "cs2",
+            "netYesUsd": 2699.65,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x54c23f20d9247ee86417685646bc655959bc23ad",
+            "league": "cs2",
+            "netYesUsd": 2000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6",
+            "league": "cs2",
+            "netYesUsd": -1786.92,
+            "edge": 0,
+            "z": -0.7946895897097686,
+            "n": 5,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341441282",
+          "digest": "Dh2DVzhnmoEGfYxztaLgq57gdMW95Bk52pwjr4Ap7pTb",
+          "timestamp": "2026-11-04T04:37:18.090Z"
+        },
+        "sealedAt": "2026-11-04T04:37:18.894Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x60dc9bf724ebe190ffbbba9dc86905b039ce3bd0df45b732db7e5ac2e9fafbda-1793762700",
+      "key": "0x60dc9bf724ebe190ffbbba9dc86905b039ce3bd0df45b732db7e5ac2e9fafbda:1793762700",
+      "version": 1,
+      "blobId": "cmz5Qmo7Wc8mPLjO8J5vMsEzlKFBnLiD3Jwg7Nf04uA",
+      "walruscan": "https://walruscan.com/mainnet/blob/cmz5Qmo7Wc8mPLjO8J5vMsEzlKFBnLiD3Jwg7Nf04uA",
+      "summary": "CFB move down on \"Buffalo vs. Miami (OH)\" (BUFFALO 22% to 8%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 8% for BUFFALO. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x60dc9bf724ebe190ffbbba9dc86905b039ce3bd0df45b732db7e5ac2e9fafbda",
+        "eventSlug": "cfb-buf-miaoh-2026-11-03",
+        "league": "cfb",
+        "question": "Buffalo vs. Miami (OH)",
+        "yesOutcome": "BUFFALO",
+        "move": {
+          "from": 0.219999978,
+          "to": 0.075,
+          "startTs": 1793759100000,
+          "endTs": 1793762700000
+        },
+        "label": "noise",
+        "sharpShare": 0.0037753508521824824,
+        "opposition": 0,
+        "forecast": 0.07501630305980206,
+        "priceAtVerdict": 0.075,
+        "trades": 143,
+        "wallets": 94,
+        "topWallets": [
+          {
+            "wallet": "0xf28e42d20e4826f2b10a24bc952001697947cab2",
+            "league": "cfb",
+            "netYesUsd": -80401.22,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "cfb",
+            "netYesUsd": -20334.72,
+            "edge": 0,
+            "z": -0.504318645095729,
+            "n": 26,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
+            "league": "cfb",
+            "netYesUsd": -18504.16,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xef1bfe068ea3eb4c357d95805baf1050fd528697",
+            "league": "cfb",
+            "netYesUsd": 5869.98,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x5102078b37376025b1529516409c56f7a5ff7b08",
+            "league": "cfb",
+            "netYesUsd": -1710.94,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341423692",
+          "digest": "D4ZjxzTMyuWPKSz8fGA2BZgZsowACDonjjdjQZXLx9eZ",
+          "timestamp": "2026-11-04T03:25:48.077Z"
+        },
+        "sealedAt": "2026-11-04T03:25:48.961Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103-1793759400",
+      "key": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103:1793759400",
+      "version": 1,
+      "blobId": "dEz6uWURdaKXvhGxvvUk0fuxDQ1B-J7-GfN6C8ixIBk",
+      "walruscan": "https://walruscan.com/mainnet/blob/dEz6uWURdaKXvhGxvvUk0fuxDQ1B-J7-GfN6C8ixIBk",
+      "summary": "NHL move down on \"Jets vs. Canadiens: O/U 4.5\" (OVER 72% to 53%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 53% for OVER. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103",
+        "eventSlug": "nhl-wpg-mon-2026-11-03",
+        "league": "nhl",
+        "question": "Jets vs. Canadiens: O/U 4.5",
+        "yesOutcome": "OVER",
+        "move": {
+          "from": 0.7200000579,
+          "to": 0.53,
+          "startTs": 1793756400000,
+          "endTs": 1793759400000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.53,
+        "priceAtVerdict": 0.53,
+        "trades": 14,
+        "wallets": 10,
+        "topWallets": [
+          {
+            "wallet": "0x161a7f666ca49d592848cf415b42f49a84714103",
+            "league": "nhl",
+            "netYesUsd": -53.27,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x4993d87841a762692fd1c8d6d02d68e98c4a7d94",
+            "league": "nhl",
+            "netYesUsd": -40.55,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xbbcb57aa37796e1382d0b78ebc34312408854332",
+            "league": "nhl",
+            "netYesUsd": -40.55,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2a0d91fe7c9b1f92fda6e38fdfd5cfdb182010c1",
+            "league": "nhl",
+            "netYesUsd": -40.55,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf753f261f0c07ef3ec3b9eb15d51cbdaa5340b0a",
+            "league": "nhl",
+            "netYesUsd": -5,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341411133",
+          "digest": "6xNF1NidAmJUvCYnQv3RWt8RTZVuLdzau8BAHQAKiuqW",
+          "timestamp": "2026-11-04T02:34:49.875Z"
+        },
+        "sealedAt": "2026-11-04T02:34:50.945Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xc72ff3357e2e9d4e5642b12ba3ab10178bd699dd0fb0fc80ea230fe5171a98ed-1793759400",
+      "key": "0xc72ff3357e2e9d4e5642b12ba3ab10178bd699dd0fb0fc80ea230fe5171a98ed:1793759400",
+      "version": 1,
+      "blobId": "RWZ0NLTY3ZooJFlkBafq70-MYsyvPLAKsfWPMKwaYDg",
+      "walruscan": "https://walruscan.com/mainnet/blob/RWZ0NLTY3ZooJFlkBafq70-MYsyvPLAKsfWPMKwaYDg",
+      "summary": "CFB move up on \"Ohio vs. Akron\" (OHIO 59% to 75%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 75% for OHIO. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xc72ff3357e2e9d4e5642b12ba3ab10178bd699dd0fb0fc80ea230fe5171a98ed",
+        "eventSlug": "cfb-ohio-akron-2026-11-03",
+        "league": "cfb",
+        "question": "Ohio vs. Akron",
+        "yesOutcome": "OHIO",
+        "move": {
+          "from": 0.5899999896,
+          "to": 0.745,
+          "startTs": 1793757900000,
+          "endTs": 1793759400000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.745,
+        "priceAtVerdict": 0.745,
+        "trades": 105,
+        "wallets": 71,
+        "topWallets": [
+          {
+            "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
+            "league": "cfb",
+            "netYesUsd": -3416.19,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x5c89768e750ef8baecad3307aa8a8333e65589e8",
+            "league": "cfb",
+            "netYesUsd": -1488.37,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x7c1b3a6db8a1d57de8ee5d7bca620dc0623185c8",
+            "league": "cfb",
+            "netYesUsd": -983.06,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0f76e9a901b9b18b0ac0561556079aa4f0a6dcc9",
+            "league": "cfb",
+            "netYesUsd": 813.79,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd38b71f3e8ed1af71983e5c309eac3dfa9b35029",
+            "league": "cfb",
+            "netYesUsd": 705.35,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341411047",
+          "digest": "8hAZ9w1CTYij2tyqb94WoRXCreMByKHVNTx8m45FzCQM",
+          "timestamp": "2026-11-04T02:34:28.867Z"
+        },
+        "sealedAt": "2026-11-04T02:34:29.648Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xb9fffc5194308b572094f5d52be8b9f5c30db9b53178b21906005d0d4c8ca13a-1793757000",
+      "key": "0xb9fffc5194308b572094f5d52be8b9f5c30db9b53178b21906005d0d4c8ca13a:1793757000",
+      "version": 1,
+      "blobId": "RThSiBpXMuBmbtHsj-6VHV9ADr_fWwet2vi4lJfZMHo",
+      "walruscan": "https://walruscan.com/mainnet/blob/RThSiBpXMuBmbtHsj-6VHV9ADr_fWwet2vi4lJfZMHo",
+      "summary": "CS2 move up on \"Counter-Strike: Liquid vs TYLOO - Map 1 Winner\" (LIQUID 58% to 64%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 64% for LIQUID. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xb9fffc5194308b572094f5d52be8b9f5c30db9b53178b21906005d0d4c8ca13a",
+        "eventSlug": "cs2-tl1-tyloo-2026-11-03",
+        "league": "cs2",
+        "question": "Counter-Strike: Liquid vs TYLOO - Map 1 Winner",
+        "yesOutcome": "LIQUID",
+        "move": {
+          "from": 0.5800000000000001,
+          "to": 0.635,
+          "startTs": 1793755200000,
+          "endTs": 1793757000000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.635,
+        "priceAtVerdict": 0.635,
+        "trades": 29,
+        "wallets": 20,
+        "topWallets": [
+          {
+            "wallet": "0xa00aed6b9fc8cc36a4cabed462041c51b6220652",
+            "league": "cs2",
+            "netYesUsd": -352.28,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xec189684f008a1a216e8a947159862cac47a89eb",
+            "league": "cs2",
+            "netYesUsd": 203.83,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x228dae8695e97e8344fd5558428908802af6103e",
+            "league": "cs2",
+            "netYesUsd": 120,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x022aec28ef87ebd7bc8443416287a0de84e454a0",
+            "league": "cs2",
+            "netYesUsd": 101.17,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf7dc1a54d203aa6e3fd9591f09fe785ad52afd98",
+            "league": "cs2",
+            "netYesUsd": -100,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341400961",
+          "digest": "BbTx2YfBgWdKZPc8Jd4dsRXfw2FgC8Hd84Wy4oGhNtzk",
+          "timestamp": "2026-11-04T01:53:30.317Z"
+        },
+        "sealedAt": "2026-11-04T01:53:31.365Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d-1793755500",
+      "key": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d:1793755500",
+      "version": 1,
+      "blobId": "VhGdTq91l7JW7TWi2TfIEdt-ON4Ea6n4YSDGR_euLH8",
+      "walruscan": "https://walruscan.com/mainnet/blob/VhGdTq91l7JW7TWi2TfIEdt-ON4Ea6n4YSDGR_euLH8",
+      "summary": "POLITICS move down on \"Will the Republicans win the Michigan Senate race in 2026?\" (YES 17% to 6%) is noise: only 3% of the money behind it came from wallets with a learned edge. CALIBRE forecast 6% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d",
+        "eventSlug": "michigan-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Republicans win the Michigan Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.17,
+          "to": 0.055,
+          "startTs": 1793751900000,
+          "endTs": 1793755500000
+        },
+        "label": "noise",
+        "sharpShare": 0.02723884806126153,
+        "opposition": 0,
+        "forecast": 0.055115883163630745,
+        "priceAtVerdict": 0.055,
+        "trades": 363,
+        "wallets": 109,
+        "topWallets": [
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "politics",
+            "netYesUsd": 8200.7,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xfe2d0b7350141c8413da4ab3eb72b5d71026da35",
+            "league": "politics",
+            "netYesUsd": -2046.91,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "politics",
+            "netYesUsd": -1064.68,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xb0c85813a7a4428f1139ff91d3118a92c391fe7f",
+            "league": "politics",
+            "netYesUsd": -664.2,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x01e6e3c5cfe50943e7721398054cb1e22032e7e0",
+            "league": "politics",
+            "netYesUsd": -647.4,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341395862",
+          "digest": "9cBMpe3KRmJB7zmDswUVaAzU4cxR7ekLzjagGejdCPUo",
+          "timestamp": "2026-11-04T01:32:46.432Z"
+        },
+        "sealedAt": "2026-11-04T01:32:47.170Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4-1793755500",
+      "key": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4:1793755500",
+      "version": 1,
+      "blobId": "71q5EJquRCY58cnCGOAuY8XraqKkLRWWMEwRLSuOKfY",
+      "walruscan": "https://walruscan.com/mainnet/blob/71q5EJquRCY58cnCGOAuY8XraqKkLRWWMEwRLSuOKfY",
+      "summary": "POLITICS move up on \"Will the Democrats win the Michigan Senate race in 2026?\" (YES 83% to 95%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 95% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4",
+        "eventSlug": "michigan-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Michigan Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.83,
+          "to": 0.954,
+          "startTs": 1793752200000,
+          "endTs": 1793755500000
+        },
+        "label": "contested",
+        "sharpShare": 0.000028554561610794363,
+        "opposition": 25.51265017012062,
+        "forecast": 0.9539910929069357,
+        "priceAtVerdict": 0.954,
+        "trades": 533,
+        "wallets": 161,
+        "topWallets": [
+          {
+            "wallet": "0x9a4a4764d10916b32040f5c145e61e98ccb5170f",
+            "league": "politics",
+            "netYesUsd": 9724.5,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2a7e5145ba79751f0618c40067174a05005cdec0",
+            "league": "politics",
+            "netYesUsd": -6412.06,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc6587b11a2209e46dfe3928b31c5514a8e33b784",
+            "league": "politics",
+            "netYesUsd": 4651.31,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf769c6390f6d564fe4859effbddb682c62660114",
+            "league": "politics",
+            "netYesUsd": 4161.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xb175fe652b89b8775ff57b900d9575b312aa0396",
+            "league": "politics",
+            "netYesUsd": 3000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341395766",
+          "digest": "GSZL7WnGPoqMjEAuX2mP4pyQWkrHCdrApchHNGjBaNDw",
+          "timestamp": "2026-11-04T01:32:23.033Z"
+        },
+        "sealedAt": "2026-11-04T01:32:23.867Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417-1793755800",
+      "key": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417:1793755800",
+      "version": 1,
+      "blobId": "MsYK7aiuTGQ9_iCfENtA-gIYALiS5CWBSatoZ3FWj28",
+      "walruscan": "https://walruscan.com/mainnet/blob/MsYK7aiuTGQ9_iCfENtA-gIYALiS5CWBSatoZ3FWj28",
+      "summary": "POLITICS move up on \"Will the Democrats win the Texas Senate race in 2026?\" (YES 80% to 97%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 97% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417",
+        "eventSlug": "texas-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Texas Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.8,
+          "to": 0.9655,
+          "startTs": 1793752500000,
+          "endTs": 1793755800000
+        },
+        "label": "noise",
+        "sharpShare": 0.004095076629752615,
+        "opposition": 0.13229285720215073,
+        "forecast": 0.9654569186174733,
+        "priceAtVerdict": 0.9655,
+        "trades": 1343,
+        "wallets": 309,
+        "topWallets": [
+          {
+            "wallet": "0x96489abcb9f583d6835c8ef95ffc923d05a86825",
+            "league": "politics",
+            "netYesUsd": 35747.65,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x608532073e9727f4b442204ebf6fc6de3b5c4219",
+            "league": "politics",
+            "netYesUsd": 21649.82,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe172d9e17386f9b4298e2e6eaf8c66d8a8b4e8e0",
+            "league": "politics",
+            "netYesUsd": 21592,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0c0e270cf879583d6a0142fc817e05b768d0434e",
+            "league": "politics",
+            "netYesUsd": 13373.7,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x1c3cdc2caa24eeb9434100f82ac32c22a26b1b01",
+            "league": "politics",
+            "netYesUsd": 13330,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341395661",
+          "digest": "6gaRHzxSNi1rJF7Y9GPaBJ46iHnxb7JJiReTeFef1AUU",
+          "timestamp": "2026-11-04T01:31:57.316Z"
+        },
+        "sealedAt": "2026-11-04T01:31:58.215Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x60dc9bf724ebe190ffbbba9dc86905b039ce3bd0df45b732db7e5ac2e9fafbda-1793755200",
+      "key": "0x60dc9bf724ebe190ffbbba9dc86905b039ce3bd0df45b732db7e5ac2e9fafbda:1793755200",
+      "version": 1,
+      "blobId": "CdFiOmopBIue-EW-QOKNYYQMYKxGQtD1KmegewDrqFE",
+      "walruscan": "https://walruscan.com/mainnet/blob/CdFiOmopBIue-EW-QOKNYYQMYKxGQtD1KmegewDrqFE",
+      "summary": "CFB move down on \"Buffalo vs. Miami (OH)\" (BUFFALO 40% to 35%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 34% for BUFFALO. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x60dc9bf724ebe190ffbbba9dc86905b039ce3bd0df45b732db7e5ac2e9fafbda",
+        "eventSlug": "cfb-buf-miaoh-2026-11-03",
+        "league": "cfb",
+        "question": "Buffalo vs. Miami (OH)",
+        "yesOutcome": "BUFFALO",
+        "move": {
+          "from": 0.4,
+          "to": 0.345,
+          "startTs": 1793754300000,
+          "endTs": 1793755200000
+        },
+        "label": "noise",
+        "sharpShare": 0.001201804629832153,
+        "opposition": 0,
+        "forecast": 0.3449549283987599,
+        "priceAtVerdict": 0.345,
+        "trades": 33,
+        "wallets": 13,
+        "topWallets": [
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "cfb",
+            "netYesUsd": -1092.59,
+            "edge": 0,
+            "z": -0.504318645095729,
+            "n": 26,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc73133aa487dbd85e589e8b5a2dc7111b9316981",
+            "league": "cfb",
+            "netYesUsd": -526.8,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc1bd0480a4c75688c2f753e03f442c758b6b4550",
+            "league": "cfb",
+            "netYesUsd": 354.33,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xcc0296855d99a45c88ceba0cc3caa4c75f39e0d4",
+            "league": "cfb",
+            "netYesUsd": 43,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x3089fcf3fe5b67ec287654b4d627bcd1d51135e4",
+            "league": "cfb",
+            "netYesUsd": 39,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341393032",
+          "digest": "9aC3g9vej2p9Z6gq8dhaxY2NCWpEJbMetCFYGG4SRkMh",
+          "timestamp": "2026-11-04T01:21:13.924Z"
+        },
+        "sealedAt": "2026-11-04T01:21:14.902Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xdcc4d3f2267f58bc394681f2505561516684dd9f7e31ab8ae3ce478905394141-1793752800",
+      "key": "0xdcc4d3f2267f58bc394681f2505561516684dd9f7e31ab8ae3ce478905394141:1793752800",
+      "version": 1,
+      "blobId": "aH___M0vWeZI_-qu7z_NCPb-eQYKtU8TxElLkrIhI08",
+      "walruscan": "https://walruscan.com/mainnet/blob/aH___M0vWeZI_-qu7z_NCPb-eQYKtU8TxElLkrIhI08",
+      "summary": "NHL move up on \"Red Wings vs. Lightning: O/U 4.5\" (OVER 71% to 84%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 84% for OVER. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xdcc4d3f2267f58bc394681f2505561516684dd9f7e31ab8ae3ce478905394141",
+        "eventSlug": "nhl-det-tb-2026-11-03",
+        "league": "nhl",
+        "question": "Red Wings vs. Lightning: O/U 4.5",
+        "yesOutcome": "OVER",
+        "move": {
+          "from": 0.7100000116,
+          "to": 0.835,
+          "startTs": 1793751600000,
+          "endTs": 1793752800000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.835,
+        "priceAtVerdict": 0.835,
+        "trades": 4,
+        "wallets": 2,
+        "topWallets": [
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "nhl",
+            "netYesUsd": -5.48,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd9c9651bfd445b2cddf750662ee79a755f216686",
+            "league": "nhl",
+            "netYesUsd": -2,
+            "edge": 0,
+            "z": -1.361187129809696,
+            "n": 2,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341385286",
+          "digest": "CpvUhAu2cJ5b9pBLqMg5Y1HKWKgapbRuaTFQdyX2ieb3",
+          "timestamp": "2026-11-04T00:50:32.184Z"
+        },
+        "sealedAt": "2026-11-04T00:50:33.188Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xf63c3d6e8bf71ef0a0e629fa9f667ae3156f171e09de763b42953309f57ae0c7-1793753100",
+      "key": "0xf63c3d6e8bf71ef0a0e629fa9f667ae3156f171e09de763b42953309f57ae0c7:1793753100",
+      "version": 1,
+      "blobId": "aDSOLJiKdqHa-orgjhwvKHvHCopLaD2mdzdBVicKWCs",
+      "walruscan": "https://walruscan.com/mainnet/blob/aDSOLJiKdqHa-orgjhwvKHvHCopLaD2mdzdBVicKWCs",
+      "summary": "NHL move down on \"Red Wings vs. Lightning\" (RED WINGS 28% to 9%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 9% for RED WINGS. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xf63c3d6e8bf71ef0a0e629fa9f667ae3156f171e09de763b42953309f57ae0c7",
+        "eventSlug": "nhl-det-tb-2026-11-03",
+        "league": "nhl",
+        "question": "Red Wings vs. Lightning",
+        "yesOutcome": "RED WINGS",
+        "move": {
+          "from": 0.28,
+          "to": 0.085,
+          "startTs": 1793751300000,
+          "endTs": 1793753100000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.085,
+        "priceAtVerdict": 0.085,
+        "trades": 53,
+        "wallets": 30,
+        "topWallets": [
+          {
+            "wallet": "0xbc7de0402f6ea3358b4d30805a11a3b524ca305e",
+            "league": "nhl",
+            "netYesUsd": -1660,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "nhl",
+            "netYesUsd": -314.07,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0d2d845a6ff64e31e04a70afce8a573940767ff5",
+            "league": "nhl",
+            "netYesUsd": -242.25,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa1a77ea9382bb8c3610f3303b66e093f644aace4",
+            "league": "nhl",
+            "netYesUsd": -159.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa21de05abe49bd242f45e7aefe34be04c8f2a2b3",
+            "league": "nhl",
+            "netYesUsd": 123.28,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341385171",
+          "digest": "4binBiSZoqbv7RxjY3rF4rwMx8LdKMK53d5wqbB2Uiz7",
+          "timestamp": "2026-11-04T00:50:05.267Z"
+        },
+        "sealedAt": "2026-11-04T00:50:06.339Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xc72ff3357e2e9d4e5642b12ba3ab10178bd699dd0fb0fc80ea230fe5171a98ed-1793751900",
+      "key": "0xc72ff3357e2e9d4e5642b12ba3ab10178bd699dd0fb0fc80ea230fe5171a98ed:1793751900",
+      "version": 1,
+      "blobId": "8ziq6oku4g-4aPfkHiqrEypJxyhf8c-a9yaj3aE_uAE",
+      "walruscan": "https://walruscan.com/mainnet/blob/8ziq6oku4g-4aPfkHiqrEypJxyhf8c-a9yaj3aE_uAE",
+      "summary": "CFB move down on \"Ohio vs. Akron\" (OHIO 82% to 76%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 76% for OHIO. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xc72ff3357e2e9d4e5642b12ba3ab10178bd699dd0fb0fc80ea230fe5171a98ed",
+        "eventSlug": "cfb-ohio-akron-2026-11-03",
+        "league": "cfb",
+        "question": "Ohio vs. Akron",
+        "yesOutcome": "OHIO",
+        "move": {
+          "from": 0.8200000000000001,
+          "to": 0.755,
+          "startTs": 1793749200000,
+          "endTs": 1793751900000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.7550014738137741,
+        "priceAtVerdict": 0.755,
+        "trades": 68,
+        "wallets": 34,
+        "topWallets": [
+          {
+            "wallet": "0xf28e42d20e4826f2b10a24bc952001697947cab2",
+            "league": "cfb",
+            "netYesUsd": 85163.83,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
+            "league": "cfb",
+            "netYesUsd": 39253.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x7e3a1f95c558f39a51ff334d789e3e039b553246",
+            "league": "cfb",
+            "netYesUsd": -6423.58,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "cfb",
+            "netYesUsd": 3219.07,
+            "edge": 0,
+            "z": -0.504318645095729,
+            "n": 26,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe65aa09ffca6d852cd9861a25795193e37a44a49",
+            "league": "cfb",
+            "netYesUsd": 2600,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341380004",
+          "digest": "9E4AEb5NTNCtHqtKQZNH3bhn8sQ3xW29baSfRLFeSowd",
+          "timestamp": "2026-11-04T00:29:23.840Z"
+        },
+        "sealedAt": "2026-11-04T00:29:24.729Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x77f96481ba0b03c8a10c6ae8a22d55f8488b84055a072529161f4465aeefc1e4-1793751300",
+      "key": "0x77f96481ba0b03c8a10c6ae8a22d55f8488b84055a072529161f4465aeefc1e4:1793751300",
+      "version": 1,
+      "blobId": "wC-fE4hUks-4btpoSqt97miT_NQcna06s-P2z8LUvfM",
+      "walruscan": "https://walruscan.com/mainnet/blob/wC-fE4hUks-4btpoSqt97miT_NQcna06s-P2z8LUvfM",
+      "summary": "NHL move down on \"Jets vs. Canadiens\" (JETS 40% to 25%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 25% for JETS. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x77f96481ba0b03c8a10c6ae8a22d55f8488b84055a072529161f4465aeefc1e4",
+        "eventSlug": "nhl-wpg-mon-2026-11-03",
+        "league": "nhl",
+        "question": "Jets vs. Canadiens",
+        "yesOutcome": "JETS",
+        "move": {
+          "from": 0.4,
+          "to": 0.245,
+          "startTs": 1793749500000,
+          "endTs": 1793751300000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.245,
+        "priceAtVerdict": 0.245,
+        "trades": 68,
+        "wallets": 44,
+        "topWallets": [
+          {
+            "wallet": "0x4bff30af91642dc7d2b19a8664378fe55c45fc26",
+            "league": "nhl",
+            "netYesUsd": -48003.95,
+            "edge": 0,
+            "z": -2.4569093665211232,
+            "n": 16,
+            "blobId": null
+          },
+          {
+            "wallet": "0xbb6418f9db6d1c765965dc4c9d48cd5b4d2bdb86",
+            "league": "nhl",
+            "netYesUsd": 2662.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x61952bcaf26f0fb12c79525cdbe515ef2752b9e3",
+            "league": "nhl",
+            "netYesUsd": -1300.08,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x760907c8840491c8c86fddb843d3f1d801786c4e",
+            "league": "nhl",
+            "netYesUsd": 585,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x1ab674bbf3d8299b22527606ec46c817a3d9078e",
+            "league": "nhl",
+            "netYesUsd": 350,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341377412",
+          "digest": "J1JS8AyXJMJTjfvuZMA7kd43aQQXKbgEMDYHaWcZqWeb",
+          "timestamp": "2026-11-04T00:18:53.605Z"
+        },
+        "sealedAt": "2026-11-04T00:18:54.859Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x058abc80015fb957222cdd3698cdcd34bc66c5db63c92b6cc7518638fc892713-1793751300",
+      "key": "0x058abc80015fb957222cdd3698cdcd34bc66c5db63c92b6cc7518638fc892713:1793751300",
+      "version": 1,
+      "blobId": "r2RvQWC9jFfdUxOcQQM1pW8AVgKs9QEiOru1yCesdOE",
+      "walruscan": "https://walruscan.com/mainnet/blob/r2RvQWC9jFfdUxOcQQM1pW8AVgKs9QEiOru1yCesdOE",
+      "summary": "NHL move up on \"Avalanche vs. Blue Jackets: O/U 4.5\" (OVER 80% to 87%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 87% for OVER. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x058abc80015fb957222cdd3698cdcd34bc66c5db63c92b6cc7518638fc892713",
+        "eventSlug": "nhl-col-cbj-2026-11-03",
+        "league": "nhl",
+        "question": "Avalanche vs. Blue Jackets: O/U 4.5",
+        "yesOutcome": "OVER",
+        "move": {
+          "from": 0.8,
+          "to": 0.87,
+          "startTs": 1793750700000,
+          "endTs": 1793751300000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.8700000000000001,
+        "priceAtVerdict": 0.87,
+        "trades": 6,
+        "wallets": 3,
+        "topWallets": [
+          {
+            "wallet": "0x953f833fe7453b8a54f093f15b57761d03c2b63f",
+            "league": "nhl",
+            "netYesUsd": 36.95,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "nhl",
+            "netYesUsd": -1.38,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x63ff86b0729d6fe8d3462476edc968452468a9bb",
+            "league": "nhl",
+            "netYesUsd": -1.02,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341377320",
+          "digest": "He5CSCGXJQp1SFks1Vae2jEqdDZmPjcHFv3jAK5ssH6e",
+          "timestamp": "2026-11-04T00:18:31.588Z"
+        },
+        "sealedAt": "2026-11-04T00:18:32.645Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xbfe73d34703666e734932ea558391967d66e3f8882380a1f138fa18cd8269671-1793751300",
+      "key": "0xbfe73d34703666e734932ea558391967d66e3f8882380a1f138fa18cd8269671:1793751300",
+      "version": 1,
+      "blobId": "ofIgTsXffmHu1PWiuqvONrDAaD5j2k1SdKW7HTfZvCQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/ofIgTsXffmHu1PWiuqvONrDAaD5j2k1SdKW7HTfZvCQ",
+      "summary": "NHL move down on \"Avalanche vs. Blue Jackets\" (AVALANCHE 54% to 37%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 36% for AVALANCHE. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xbfe73d34703666e734932ea558391967d66e3f8882380a1f138fa18cd8269671",
+        "eventSlug": "nhl-col-cbj-2026-11-03",
+        "league": "nhl",
+        "question": "Avalanche vs. Blue Jackets",
+        "yesOutcome": "AVALANCHE",
+        "move": {
+          "from": 0.5399999993,
+          "to": 0.365,
+          "startTs": 1793750100000,
+          "endTs": 1793751300000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.36499999999999994,
+        "priceAtVerdict": 0.365,
+        "trades": 43,
+        "wallets": 34,
+        "topWallets": [
+          {
+            "wallet": "0x4bff30af91642dc7d2b19a8664378fe55c45fc26",
+            "league": "nhl",
+            "netYesUsd": 3830.21,
+            "edge": 0,
+            "z": -2.4569093665211232,
+            "n": 16,
+            "blobId": null
+          },
+          {
+            "wallet": "0x58e40b59c4aa9843f7de8caa58c802ee0e3273f9",
+            "league": "nhl",
+            "netYesUsd": 3173.36,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xfb88f6a86b877d2704328fc9f1ed63b41f8b0e4c",
+            "league": "nhl",
+            "netYesUsd": -1000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x1ab674bbf3d8299b22527606ec46c817a3d9078e",
+            "league": "nhl",
+            "netYesUsd": 578,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x3e63b66239d398681623898efd3b9948a99d1d97",
+            "league": "nhl",
+            "netYesUsd": 539.99,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341377234",
+          "digest": "8z5QcruTJTFVzNED4uytM549rr7YdSeJ8A7k45iPWRYp",
+          "timestamp": "2026-11-04T00:18:10.282Z"
+        },
+        "sealedAt": "2026-11-04T00:18:11.219Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d-1793748000",
+      "key": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d:1793748000",
+      "version": 1,
+      "blobId": "tO4De6PfKLC-sGrC9qCypFmRqtR2aTN4APezJpc2vu8",
+      "walruscan": "https://walruscan.com/mainnet/blob/tO4De6PfKLC-sGrC9qCypFmRqtR2aTN4APezJpc2vu8",
+      "summary": "POLITICS move down on \"Will the Republicans win the Michigan Senate race in 2026?\" (YES 24% to 14%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 14% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d",
+        "eventSlug": "michigan-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Republicans win the Michigan Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.24,
+          "to": 0.135,
+          "startTs": 1793745900000,
+          "endTs": 1793748000000
+        },
+        "label": "noise",
+        "sharpShare": 0.001110210783260052,
+        "opposition": 0,
+        "forecast": 0.13503560677625923,
+        "priceAtVerdict": 0.135,
+        "trades": 164,
+        "wallets": 51,
+        "topWallets": [
+          {
+            "wallet": "0x05f6cb63d4ffdfaecd7ad8acd0765b6f6a5a25a1",
+            "league": "politics",
+            "netYesUsd": -6512.24,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "politics",
+            "netYesUsd": -5223.68,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xb2292a9487e48b3146e074bf9b86d530c9a87298",
+            "league": "politics",
+            "netYesUsd": -4344.94,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xecf9db481df375232c17331070a7439ebaf7d5ab",
+            "league": "politics",
+            "netYesUsd": 1000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe392d6cc6a012f306cef646f79114eb6f351c023",
+            "league": "politics",
+            "netYesUsd": -996,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341364698",
+          "digest": "GAV7MQSM2xvyyk5VUqiuDC3N4JGePmBMa7oQMb8KLEaB",
+          "timestamp": "2026-11-03T23:27:06.419Z"
+        },
+        "sealedAt": "2026-11-03T23:27:07.211Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4-1793748000",
+      "key": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4:1793748000",
+      "version": 1,
+      "blobId": "dEZddW4u5dTP0ymxN5rHanRFmvCQQRoDwDAXMdia8cw",
+      "walruscan": "https://walruscan.com/mainnet/blob/dEZddW4u5dTP0ymxN5rHanRFmvCQQRoDwDAXMdia8cw",
+      "summary": "POLITICS move up on \"Will the Democrats win the Michigan Senate race in 2026?\" (YES 76% to 87%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 86% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4",
+        "eventSlug": "michigan-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Michigan Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.76,
+          "to": 0.865,
+          "startTs": 1793744400000,
+          "endTs": 1793748000000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.8649988327164779,
+        "priceAtVerdict": 0.865,
+        "trades": 198,
+        "wallets": 91,
+        "topWallets": [
+          {
+            "wallet": "0x9604b357e8307b0ccc8eb5812725d2b112c6fc1d",
+            "league": "politics",
+            "netYesUsd": -25216.56,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "politics",
+            "netYesUsd": 12775.22,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd218e474776403a330142299f7796e8ba32eb5c9",
+            "league": "politics",
+            "netYesUsd": 7700,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x5f9ce1a75bf6406ba464f831b9e38fe98ce4f2bd",
+            "league": "politics",
+            "netYesUsd": 7700,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf769c6390f6d564fe4859effbddb682c62660114",
+            "league": "politics",
+            "netYesUsd": 5979.04,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341364591",
+          "digest": "CanEDc4MpHSCXqRNMrDMAfeMrcAzhGN5v1idrLgWQEaP",
+          "timestamp": "2026-11-03T23:26:40.078Z"
+        },
+        "sealedAt": "2026-11-03T23:26:41.033Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14-1793748300",
+      "key": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14:1793748300",
+      "version": 1,
+      "blobId": "cK5NIPXszT-5xnZPkPCwcDikggVdRHOmyNaRDIFmeLg",
+      "walruscan": "https://walruscan.com/mainnet/blob/cK5NIPXszT-5xnZPkPCwcDikggVdRHOmyNaRDIFmeLg",
+      "summary": "POLITICS move down on \"Will the Republicans win the Texas Senate race in 2026?\" (YES 25% to 19%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 19% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14",
+        "eventSlug": "texas-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Republicans win the Texas Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.25,
+          "to": 0.185,
+          "startTs": 1793746800000,
+          "endTs": 1793748300000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.185,
+        "priceAtVerdict": 0.185,
+        "trades": 138,
+        "wallets": 64,
+        "topWallets": [
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "politics",
+            "netYesUsd": -63549.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc6587b11a2209e46dfe3928b31c5514a8e33b784",
+            "league": "politics",
+            "netYesUsd": -22166.52,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf4baccff188321440a1ed01a5d5fd89c3e1f5933",
+            "league": "politics",
+            "netYesUsd": -7600,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x9f2fe025f84839ca81dd8e0338892605702d2ca8",
+            "league": "politics",
+            "netYesUsd": 5074.71,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xfd2b117412a698f322b0cd18d6827dad262b8e50",
+            "league": "politics",
+            "netYesUsd": -2768,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341364506",
+          "digest": "3ZGUmupy3Z88DPwgkjXVvHZ4De8SqvfbgSz1G6uhxXW7",
+          "timestamp": "2026-11-03T23:26:19.376Z"
+        },
+        "sealedAt": "2026-11-03T23:26:20.253Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417-1793748000",
+      "key": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417:1793748000",
+      "version": 1,
+      "blobId": "pw92dz4jm6z7G6DImfka3yXGF1CUC18E-2S1gv-E1xM",
+      "walruscan": "https://walruscan.com/mainnet/blob/pw92dz4jm6z7G6DImfka3yXGF1CUC18E-2S1gv-E1xM",
+      "summary": "POLITICS move up on \"Will the Democrats win the Texas Senate race in 2026?\" (YES 75% to 81%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 80% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417",
+        "eventSlug": "texas-senate-election-winner",
+        "league": "politics",
+        "question": "Will the Democrats win the Texas Senate race in 2026?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.75,
+          "to": 0.805,
+          "startTs": 1793746800000,
+          "endTs": 1793748000000
+        },
+        "label": "noise",
+        "sharpShare": 0.0006596776023213428,
+        "opposition": 0,
+        "forecast": 0.8049986905185639,
+        "priceAtVerdict": 0.805,
+        "trades": 59,
+        "wallets": 47,
+        "topWallets": [
+          {
+            "wallet": "0xc6587b11a2209e46dfe3928b31c5514a8e33b784",
+            "league": "politics",
+            "netYesUsd": 167759.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x1c3cdc2caa24eeb9434100f82ac32c22a26b1b01",
+            "league": "politics",
+            "netYesUsd": 80000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x68c24bf4a8ad4d79a6fe4b8eec6f93a02dfd1711",
+            "league": "politics",
+            "netYesUsd": 8000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd2753130a5b435b29999038995456c2fd4346c8a",
+            "league": "politics",
+            "netYesUsd": 6080,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "politics",
+            "netYesUsd": 4534.99,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341364423",
+          "digest": "ApbqsKn6stA1vL2iGmspTv2fu5ZsfVuhq7swNettkL3u",
+          "timestamp": "2026-11-03T23:25:58.903Z"
+        },
+        "sealedAt": "2026-11-03T23:25:59.692Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587-1793748000",
+      "key": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587:1793748000",
+      "version": 1,
+      "blobId": "eY2YhlTFmbkXmjH_pOj1SvQH3SpKcaxlSYofpGmsPn4",
+      "walruscan": "https://walruscan.com/mainnet/blob/eY2YhlTFmbkXmjH_pOj1SvQH3SpKcaxlSYofpGmsPn4",
+      "summary": "POLITICS move down on \"Will the Republican Party control the Senate after the 2026 Midterm elections?\" (YES 27% to 20%) is noise: only 1% of the money behind it came from wallets with a learned edge. CALIBRE forecast 20% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587",
+        "eventSlug": "which-party-will-win-the-senate-in-2026",
+        "league": "politics",
+        "question": "Will the Republican Party control the Senate after the 2026 Midterm elections?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.27,
+          "to": 0.195,
+          "startTs": 1793745600000,
+          "endTs": 1793748000000
+        },
+        "label": "noise",
+        "sharpShare": 0.013066120684428492,
+        "opposition": 0,
+        "forecast": 0.1950309362555804,
+        "priceAtVerdict": 0.195,
+        "trades": 171,
+        "wallets": 107,
+        "topWallets": [
+          {
+            "wallet": "0x6bab41a0dc40d6dd4c1a915b8c01969479fd1292",
+            "league": "politics",
+            "netYesUsd": -34133.38,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x6ffb4354cbe6e0f9989e3b55564ec5fb8646a834",
+            "league": "politics",
+            "netYesUsd": -28503.93,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "politics",
+            "netYesUsd": -23770.52,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xb5320ec9649903bb2d15bd4bb69b776a309a7028",
+            "league": "politics",
+            "netYesUsd": -9909.03,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xb6be96df81d8825c0824ba2d8a0dce5e22c3c2f8",
+            "league": "politics",
+            "netYesUsd": -7980.3,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341364341",
+          "digest": "94uMT6CJSibKrYaag9H5MxQ381ZnR1ag9rkyJ5xdemqe",
+          "timestamp": "2026-11-03T23:25:38.956Z"
+        },
+        "sealedAt": "2026-11-03T23:25:39.922Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3-1793748000",
+      "key": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3:1793748000",
+      "version": 1,
+      "blobId": "HzLRAA2D0HMAtIMslal001Lw-Ud-Xxv0stZH1jjQfmw",
+      "walruscan": "https://walruscan.com/mainnet/blob/HzLRAA2D0HMAtIMslal001Lw-Ud-Xxv0stZH1jjQfmw",
+      "summary": "POLITICS move up on \"Will the Democratic Party control the Senate after the 2026 Midterm elections?\" (YES 74% to 82%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 81% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3",
+        "eventSlug": "which-party-will-win-the-senate-in-2026",
+        "league": "politics",
+        "question": "Will the Democratic Party control the Senate after the 2026 Midterm elections?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.7400000104,
+          "to": 0.815,
+          "startTs": 1793745300000,
+          "endTs": 1793748000000
+        },
+        "label": "noise",
+        "sharpShare": 0.0011010892116139314,
+        "opposition": 0.0055548605561261954,
+        "forecast": 0.8149733862838433,
+        "priceAtVerdict": 0.815,
+        "trades": 227,
+        "wallets": 140,
+        "topWallets": [
+          {
+            "wallet": "0xde7be6d489bce070a959e0cb813128ae659b5f4b",
+            "league": "politics",
+            "netYesUsd": 73912.64,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x05f6cb63d4ffdfaecd7ad8acd0765b6f6a5a25a1",
+            "league": "politics",
+            "netYesUsd": 38335.59,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x8ed2e5858c81e56cef5f500b0dd5d70e6bd83422",
+            "league": "politics",
+            "netYesUsd": 28254.27,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xfa21179f2cef2f61cb78e8340ae62b17f9271438",
+            "league": "politics",
+            "netYesUsd": 25800,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2974bd0059e48f215c391882976e0f1b4c8c9c23",
+            "league": "politics",
+            "netYesUsd": 23612.5,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341364262",
+          "digest": "5enwxGoEjK9YJTgHBynd42AkRC5soLwSuKV4b9myiu7G",
+          "timestamp": "2026-11-03T23:25:19.756Z"
+        },
+        "sealedAt": "2026-11-03T23:25:20.535Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x16c63b7cc37f012b9f59ee164ec03877914c701d06d48291ae8d6fc08a088b0d-1793747400",
+      "key": "0x16c63b7cc37f012b9f59ee164ec03877914c701d06d48291ae8d6fc08a088b0d:1793747400",
+      "version": 1,
+      "blobId": "hf8DQN42_aOK8wm492hcfNUQ-2TyGv17gJ-r9-cSvqY",
+      "walruscan": "https://walruscan.com/mainnet/blob/hf8DQN42_aOK8wm492hcfNUQ-2TyGv17gJ-r9-cSvqY",
+      "summary": "POLITICS move up on \"2026 Balance of Power: D Senate, D House\" (YES 73% to 78%) is noise: only 4% of the money behind it came from wallets with a learned edge. CALIBRE forecast 77% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x16c63b7cc37f012b9f59ee164ec03877914c701d06d48291ae8d6fc08a088b0d",
+        "eventSlug": "balance-of-power-2026-midterms",
+        "league": "politics",
+        "question": "2026 Balance of Power: D Senate, D House",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.73,
+          "to": 0.775,
+          "startTs": 1793743800000,
+          "endTs": 1793747400000
+        },
+        "label": "noise",
+        "sharpShare": 0.04275776739208694,
+        "opposition": 0.008165733291773395,
+        "forecast": 0.7746634011189131,
+        "priceAtVerdict": 0.775,
+        "trades": 235,
+        "wallets": 121,
+        "topWallets": [
+          {
+            "wallet": "0xf02008dd334fe83c8dad61dd9a54776d7fb03212",
+            "league": "politics",
+            "netYesUsd": 18557.88,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x14d713ac083f7d97244830160c20a7af50b89467",
+            "league": "politics",
+            "netYesUsd": 17000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc301c1e034e71e1a6ce9684f029c4674a00466aa",
+            "league": "politics",
+            "netYesUsd": 11300,
+            "edge": 0,
+            "z": -1.9265028864009188,
+            "n": 22,
+            "blobId": "vT_BSWHjC4bBtMay-oZYvQbWQBX7jwlUGP-Nu0Q0Nlo"
+          },
+          {
+            "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+            "league": "politics",
+            "netYesUsd": 4383.61,
+            "edge": 0,
+            "z": -0.5047753102941502,
+            "n": 4,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe5714557d7e870942af0eaed188f1620fa33f17b",
+            "league": "politics",
+            "netYesUsd": 3700,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341361663",
+          "digest": "AFUbtDXBgdQaxND6c5rt1GLkZ8W9YJnyKMd8hiT83LTA",
+          "timestamp": "2026-11-03T23:14:43.351Z"
+        },
+        "sealedAt": "2026-11-03T23:14:44.437Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x5724051a6852f8492a217e8af6e53fef22fbeaa22a20cbfbfea49135335f512d-1793745300",
+      "key": "0x5724051a6852f8492a217e8af6e53fef22fbeaa22a20cbfbfea49135335f512d:1793745300",
+      "version": 1,
+      "blobId": "7oA3znPGy57LFBZO-7ig7AQlhcdffG0ufxDj2DkyKpk",
+      "walruscan": "https://walruscan.com/mainnet/blob/7oA3znPGy57LFBZO-7ig7AQlhcdffG0ufxDj2DkyKpk",
+      "summary": "LOL move down on \"LoL: Top Esports vs Invictus Gaming - Game 2 Winner\" (TOP ESPORTS 48% to 44%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 44% for TOP ESPORTS. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x5724051a6852f8492a217e8af6e53fef22fbeaa22a20cbfbfea49135335f512d",
+        "eventSlug": "lol-tes-ig1-2026-11-06",
+        "league": "lol",
+        "question": "LoL: Top Esports vs Invictus Gaming - Game 2 Winner",
+        "yesOutcome": "TOP ESPORTS",
+        "move": {
+          "from": 0.48000000730000003,
+          "to": 0.435,
+          "startTs": 1793742000000,
+          "endTs": 1793745300000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.43500000000000005,
+        "priceAtVerdict": 0.435,
+        "trades": 25,
+        "wallets": 22,
+        "topWallets": [
+          {
+            "wallet": "0xf536df9537ac6b7fd873d21080733e0176ebfd1a",
+            "league": "lol",
+            "netYesUsd": 1800,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd2c0bef7b7867a00ecff83b84c42b6772c365135",
+            "league": "lol",
+            "netYesUsd": 1030.03,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x3f975d4186c87b3b4a39997cc37e71cc70ca4059",
+            "league": "lol",
+            "netYesUsd": -765.52,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x21b70de5fa3532afbf51a5d177e76b1e7e17c861",
+            "league": "lol",
+            "netYesUsd": -342.09,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2b299aedcbddc5c9bb83e4284986672d672433ba",
+            "league": "lol",
+            "netYesUsd": -112,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341354105",
+          "digest": "22NVTbyFksd7VMwoRTYs2xx7bbdxiE2KRvYLSCcpx1VU",
+          "timestamp": "2026-11-03T22:43:56.797Z"
+        },
+        "sealedAt": "2026-11-03T22:43:57.780Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xea4e24b3a788b5625b13dfd72686924851ac2ae58a46d9e4af275c7444cc2e9b-1793744400",
+      "key": "0xea4e24b3a788b5625b13dfd72686924851ac2ae58a46d9e4af275c7444cc2e9b:1793744400",
+      "version": 1,
+      "blobId": "ViJS3TrgOf8AleDYHJ-UzPujkLAml5M_IZRYRIE3Qfg",
+      "walruscan": "https://walruscan.com/mainnet/blob/ViJS3TrgOf8AleDYHJ-UzPujkLAml5M_IZRYRIE3Qfg",
+      "summary": "LOL move down on \"LoL: Top Esports vs Invictus Gaming - Game 1 Winner\" (TOP ESPORTS 48% to 40%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 40% for TOP ESPORTS. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xea4e24b3a788b5625b13dfd72686924851ac2ae58a46d9e4af275c7444cc2e9b",
+        "eventSlug": "lol-tes-ig1-2026-11-06",
+        "league": "lol",
+        "question": "LoL: Top Esports vs Invictus Gaming - Game 1 Winner",
+        "yesOutcome": "TOP ESPORTS",
+        "move": {
+          "from": 0.48,
+          "to": 0.395,
+          "startTs": 1793741700000,
+          "endTs": 1793744400000
+        },
+        "label": "noise",
+        "sharpShare": 0.000012354142590076774,
+        "opposition": 0.11904782451860038,
+        "forecast": 0.395000085806942,
+        "priceAtVerdict": 0.395,
+        "trades": 995,
+        "wallets": 693,
+        "topWallets": [
+          {
+            "wallet": "0x549b491ac7f6a675b56ff0a261d147daa73ac0ae",
+            "league": "lol",
+            "netYesUsd": -164015.2,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xdaef2be2a19ad331737d06545f85615b094554e9",
+            "league": "lol",
+            "netYesUsd": -53744.24,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0224bb9eb0a5c9fd261ac9123a72cbdd5748292a",
+            "league": "lol",
+            "netYesUsd": -32770.98,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x8a8685a792c184e5c2ee8c7d4d4baba7c2c94998",
+            "league": "lol",
+            "netYesUsd": 25407.32,
+            "edge": 0,
+            "z": -1.9211958703210943,
+            "n": 45,
+            "blobId": "O1fsnem1JzzauTE8NnT1oKkRNkbGkzdzkcOgmS0_vx8"
+          },
+          {
+            "wallet": "0x3f975d4186c87b3b4a39997cc37e71cc70ca4059",
+            "league": "lol",
+            "netYesUsd": -23600,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341349025",
+          "digest": "FChQxrZ22AaAGPppEFCS7yPPFoHidchY3XUEKmD52BpZ",
+          "timestamp": "2026-11-03T22:23:14.978Z"
+        },
+        "sealedAt": "2026-11-03T22:23:15.811Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681-1793737500",
+      "key": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681:1793737500",
+      "version": 1,
+      "blobId": "d2zGU9qkb-3yBpc4djNbkN0l77XxTi6c7CJwRzQWV6k",
+      "walruscan": "https://walruscan.com/mainnet/blob/d2zGU9qkb-3yBpc4djNbkN0l77XxTi6c7CJwRzQWV6k",
+      "summary": "UCL move down on \"Will Manchester United FC vs. AS Roma end in a draw?\" (YES 23% to 14%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 14% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681",
+        "eventSlug": "ucl-mnu-rom-2026-11-03",
+        "league": "ucl",
+        "question": "Will Manchester United FC vs. AS Roma end in a draw?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.23,
+          "to": 0.145,
+          "startTs": 1793736300000,
+          "endTs": 1793737500000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.145,
+        "priceAtVerdict": 0.145,
+        "trades": 164,
+        "wallets": 80,
+        "topWallets": [
+          {
+            "wallet": "0xc23dc0eca9e1c2e293de8911b9ac254f0bcd82c8",
+            "league": "ucl",
+            "netYesUsd": -6240.77,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa797d6bd8fe6e404bb4d8e4ab3d97c38336fdede",
+            "league": "ucl",
+            "netYesUsd": -4273.5,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x1bc8b6519eb646dab62ac7be5b55920f5bb72f68",
+            "league": "ucl",
+            "netYesUsd": 902.98,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
+            "league": "ucl",
+            "netYesUsd": 889.02,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x54a2c4cfc4332d831acc3f5a860d6540982c1d43",
+            "league": "ucl",
+            "netYesUsd": -834.08,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341321366",
+          "digest": "TKrMyaR9STD4zgJKArKsbDYYhLrifbxZT7f7PgSPt1Q",
+          "timestamp": "2026-11-03T20:30:42.361Z"
+        },
+        "sealedAt": "2026-11-03T20:30:43.333Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c-1793737200",
+      "key": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c:1793737200",
+      "version": 1,
+      "blobId": "K670wnSVrO2cixFX3lNNqZC8ag_tKd8A313XrexC-Fw",
+      "walruscan": "https://walruscan.com/mainnet/blob/K670wnSVrO2cixFX3lNNqZC8ag_tKd8A313XrexC-Fw",
+      "summary": "UCL move up on \"Will AS Roma win on 2026-11-03?\" (YES 32% to 76%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 75% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c",
+        "eventSlug": "ucl-mnu-rom-2026-11-03",
+        "league": "ucl",
+        "question": "Will AS Roma win on 2026-11-03?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.32,
+          "to": 0.755,
+          "startTs": 1793736300000,
+          "endTs": 1793737200000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.7549999999999999,
+        "priceAtVerdict": 0.755,
+        "trades": 351,
+        "wallets": 244,
+        "topWallets": [
+          {
+            "wallet": "0xc23dc0eca9e1c2e293de8911b9ac254f0bcd82c8",
+            "league": "ucl",
+            "netYesUsd": 5923.85,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x5016c48436ab3efa2ab54b117d0c08fa1a4a1eeb",
+            "league": "ucl",
+            "netYesUsd": 5000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xbfd40a4fcb43d80eb4fb425f75d4fa090c61526f",
+            "league": "ucl",
+            "netYesUsd": 4927.94,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0346afae2603313d2bbee96b628536c8cbe352a5",
+            "league": "ucl",
+            "netYesUsd": 4749.47,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x00a00174cdd3f242dbc3b773cd5082ad0a5bbf76",
+            "league": "ucl",
+            "netYesUsd": -4568.34,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341318763",
+          "digest": "FVPFUBuzCHnVqRRk2yUcZe2ECFxi3PjfA1QhDHJpbv8y",
+          "timestamp": "2026-11-03T20:20:06.874Z"
+        },
+        "sealedAt": "2026-11-03T20:20:07.936Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7-1793736900",
+      "key": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7:1793736900",
+      "version": 1,
+      "blobId": "Tg7Cr_OnP84308bCykUw_MpjVOfrofLPvX-ZmxVT_XE",
+      "walruscan": "https://walruscan.com/mainnet/blob/Tg7Cr_OnP84308bCykUw_MpjVOfrofLPvX-ZmxVT_XE",
+      "summary": "UCL move down on \"Will Manchester United FC win on 2026-11-03?\" (YES 47% to 11%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 11% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7",
+        "eventSlug": "ucl-mnu-rom-2026-11-03",
+        "league": "ucl",
+        "question": "Will Manchester United FC win on 2026-11-03?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.47000001319999996,
+          "to": 0.105,
+          "startTs": 1793736000000,
+          "endTs": 1793736900000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.105,
+        "priceAtVerdict": 0.105,
+        "trades": 320,
+        "wallets": 224,
+        "topWallets": [
+          {
+            "wallet": "0xe9b710551dd82a44e79203c2394a2b10163ace7b",
+            "league": "ucl",
+            "netYesUsd": 140100.22,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
+            "league": "ucl",
+            "netYesUsd": -26846.09,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "ucl",
+            "netYesUsd": 23000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x09bed1976600971fd9f9db454a9c302c7a559c32",
+            "league": "ucl",
+            "netYesUsd": -15593.25,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": -10883.97,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341318672",
+          "digest": "Dxk7hE1N9ezj8XwHkiUPnAgFUUiK1VuwXmtSpfEyNWw1",
+          "timestamp": "2026-11-03T20:19:44.816Z"
+        },
+        "sealedAt": "2026-11-03T20:19:45.620Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x3656c904a84afd6e03092a48ec28f42d77997f1ba293402278b5ca31f2a1571f-1793728800",
+      "key": "0x3656c904a84afd6e03092a48ec28f42d77997f1ba293402278b5ca31f2a1571f:1793728800",
+      "version": 1,
+      "blobId": "t_1pv4XM4g70Ym1SfC94zlbbOvTd39PieAuXiAN_lMQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/t_1pv4XM4g70Ym1SfC94zlbbOvTd39PieAuXiAN_lMQ",
+      "summary": "UCL move down on \"Will VfB Stuttgart win on 2026-11-03?\" (YES 29% to 8%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 8% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x3656c904a84afd6e03092a48ec28f42d77997f1ba293402278b5ca31f2a1571f",
+        "eventSlug": "ucl-gal-stu-2026-11-03",
+        "league": "ucl",
+        "question": "Will VfB Stuttgart win on 2026-11-03?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.29000000020000005,
+          "to": 0.075,
+          "startTs": 1793725200000,
+          "endTs": 1793728800000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.075,
+        "priceAtVerdict": 0.075,
+        "trades": 349,
+        "wallets": 204,
+        "topWallets": [
+          {
+            "wallet": "0x09bed1976600971fd9f9db454a9c302c7a559c32",
+            "league": "ucl",
+            "netYesUsd": -29802.81,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "ucl",
+            "netYesUsd": 12680.08,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xbcbafd7f5071a0cab3ae6efae16698159e5fc950",
+            "league": "ucl",
+            "netYesUsd": -7038.77,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x67ac9e1ad7d7e74ef0215d14fc8edb538e4fedf1",
+            "league": "ucl",
+            "netYesUsd": 6172.96,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0b0e1eb890038cc0f98d26d34842bbe4d1434826",
+            "league": "ucl",
+            "netYesUsd": -5500,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341286033",
+          "digest": "Deu5w5Fm7xLrGXW7vExthXo6n9auKA9Sz9v7NWPLLBos",
+          "timestamp": "2026-11-03T18:07:17.853Z"
+        },
+        "sealedAt": "2026-11-03T18:07:18.533Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0xa058ddf32933f9113b15b8b8f46082d21cdf43d70ad84b2649870fce919a4fb3-1793728800",
+      "key": "0xa058ddf32933f9113b15b8b8f46082d21cdf43d70ad84b2649870fce919a4fb3:1793728800",
+      "version": 1,
+      "blobId": "ltKQb61x03LXlZ9JfIc1GkcV8hqR1yHoqU-oxG1GBXU",
+      "walruscan": "https://walruscan.com/mainnet/blob/ltKQb61x03LXlZ9JfIc1GkcV8hqR1yHoqU-oxG1GBXU",
+      "summary": "UCL move down on \"Will Galatasaray SK vs. VfB Stuttgart end in a draw?\" (YES 23% to 13%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 13% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0xa058ddf32933f9113b15b8b8f46082d21cdf43d70ad84b2649870fce919a4fb3",
+        "eventSlug": "ucl-gal-stu-2026-11-03",
+        "league": "ucl",
+        "question": "Will Galatasaray SK vs. VfB Stuttgart end in a draw?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.23,
+          "to": 0.125,
+          "startTs": 1793727300000,
+          "endTs": 1793728800000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.125,
+        "priceAtVerdict": 0.125,
+        "trades": 78,
+        "wallets": 47,
+        "topWallets": [
+          {
+            "wallet": "0x2fa944dc56b2b6f99088122407f2d158aaaea486",
+            "league": "ucl",
+            "netYesUsd": -2000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xa20924e5daa77c491b0700f045eff43a61f7ffbe",
+            "league": "ucl",
+            "netYesUsd": -719.99,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xbff78b1492ba01e0a0b3fa2c9e5bd0697d653a9d",
+            "league": "ucl",
+            "netYesUsd": -400,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x0d2d845a6ff64e31e04a70afce8a573940767ff5",
+            "league": "ucl",
+            "netYesUsd": -200.16,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": 128.32,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341285910",
+          "digest": "B9MM83ZnHA4cA8qsnZqBZKtgg7WoPijp5vyTqf78Byrq",
+          "timestamp": "2026-11-03T18:06:48.008Z"
+        },
+        "sealedAt": "2026-11-03T18:06:48.963Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8-1793728800",
+      "key": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8:1793728800",
+      "version": 1,
+      "blobId": "iIiJ_MYhtg5aLjcmrIRDn8a0vQj0lpVMsaBHzi8apoU",
+      "walruscan": "https://walruscan.com/mainnet/blob/iIiJ_MYhtg5aLjcmrIRDn8a0vQj0lpVMsaBHzi8apoU",
+      "summary": "UCL move up on \"Will Galatasaray SK win on 2026-11-03?\" (YES 47% to 82%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 82% for YES. Data: Polymarket public API (Tatum hourly call cap (18) reached)",
+      "data": {
+        "marketId": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8",
+        "eventSlug": "ucl-gal-stu-2026-11-03",
+        "league": "ucl",
+        "question": "Will Galatasaray SK win on 2026-11-03?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.47000000200000003,
+          "to": 0.815,
+          "startTs": 1793728200000,
+          "endTs": 1793728800000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.815,
+        "priceAtVerdict": 0.815,
+        "trades": 372,
+        "wallets": 212,
+        "topWallets": [
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "ucl",
+            "netYesUsd": -3777.53,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe674dede25584b64a53d85517008530d2ab15e2b",
+            "league": "ucl",
+            "netYesUsd": -2078.81,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x96020c20842a5175e3e0aeef7843d1dbb7bc4d02",
+            "league": "ucl",
+            "netYesUsd": 1930.32,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
+            "league": "ucl",
+            "netYesUsd": -1545,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0x073b6d355e3becc5fa66fe1676d9af40c5bf3995",
+            "league": "ucl",
+            "netYesUsd": 1000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341285817",
+          "digest": "E8C8TrJ8DVJb5v7UrAHBU72HbsQVpVV9pV3LxiBHWQE5",
+          "timestamp": "2026-11-03T18:06:25.175Z"
+        },
+        "sealedAt": "2026-11-03T18:06:25.921Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (18) reached"
+      }
+    },
+    {
+      "id": "0x97e020f5f080cfb7d23473dd45a2a3bdf91d43bafd775db8be2953df99c7b800-1793720400",
+      "key": "0x97e020f5f080cfb7d23473dd45a2a3bdf91d43bafd775db8be2953df99c7b800:1793720400",
+      "version": 1,
+      "blobId": "7clODUPS-XBZcyolGQVGaunQvNRUo704anBPDEoZLlM",
+      "walruscan": "https://walruscan.com/mainnet/blob/7clODUPS-XBZcyolGQVGaunQvNRUo704anBPDEoZLlM",
+      "summary": "DOTA2 move up on \"Dota 2: Nemiga Gaming vs CyberHero - Game 2 Winner\" (NEMIGA GAMING 32% to 42%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 42% for NEMIGA GAMING. Data: Polymarket public API (Tatum history was empty for this market; not asked again until 16:32 UTC)",
+      "data": {
+        "marketId": "0x97e020f5f080cfb7d23473dd45a2a3bdf91d43bafd775db8be2953df99c7b800",
+        "eventSlug": "dota2-nemiga-ch1-2026-11-03",
+        "league": "dota2",
+        "question": "Dota 2: Nemiga Gaming vs CyberHero - Game 2 Winner",
+        "yesOutcome": "NEMIGA GAMING",
+        "move": {
+          "from": 0.32,
+          "to": 0.42,
+          "startTs": 1793718600000,
+          "endTs": 1793720400000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.41999999999999993,
+        "priceAtVerdict": 0.42,
+        "trades": 983,
+        "wallets": 371,
+        "topWallets": [
+          {
+            "wallet": "0xf3ce7f04dde4f8c5aed19a20e5ecd8520e5ca57a",
+            "league": "dota2",
+            "netYesUsd": -9572.3,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xe16d3f2a5807999b358affd9445c3a09e45e5e30",
+            "league": "dota2",
+            "netYesUsd": -5387.14,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xd3b034d7bfb2473fb252d0414646d9786bac329e",
+            "league": "dota2",
+            "netYesUsd": 4179.53,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xc9f4bec86118be62d973fd53004efca8fed8c1e4",
+            "league": "dota2",
+            "netYesUsd": -2769.67,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          },
+          {
+            "wallet": "0xf201a19b43471261a3c1ba9247335d55270e527e",
+            "league": "dota2",
+            "netYesUsd": 2048.87,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null
+          }
+        ],
+        "checkpoint": {
+          "sequence": "341250617",
+          "digest": "GZJUdc3HceR8AHBdxZjHrqZn13SxwecLxu3L7h5QWWWu",
+          "timestamp": "2026-11-03T15:43:39.608Z"
+        },
+        "sealedAt": "2026-11-03T15:43:40.455Z",
+        "model": "v2",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 16:32 UTC"
+      }
+    },
     {
       "id": "0x7e8ead1e26f8cdfaf36b9ea8109d004512a09e4a4bd396a495a103a38da3ae4d-1793706300",
       "key": "0x7e8ead1e26f8cdfaf36b9ea8109d004512a09e4a4bd396a495a103a38da3ae4d:1793706300",

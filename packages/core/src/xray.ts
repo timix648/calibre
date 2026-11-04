@@ -152,11 +152,11 @@ export function squareMoneyShare(
 }
 
 /**
- * What the square-money replay found so far (research/square-replay, 4,355 moves in 1,662 closed sports markets): followers of
- * moves pushed mostly by proven losers did 3.8 points per bet worse than followers of clean moves, one-sided p of about 0.14.
- * Early evidence, not a finding, and the wording says so. A longer replay is running.
+ * What the square-money replay found (final run, 11,975 moves in 4,587 closed sports markets): followers of
+ * moves pushed mostly by proven losers did 3.1 points per bet worse than followers of clean moves, one-sided p = 0.073.
+ * Early evidence, not a finding, and the wording says so.
  */
-export const SQUARE_REPLAY_NOTE = "Caution signal. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.";
+export const SQUARE_REPLAY_NOTE = "Caution signal. In a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); early evidence, not conclusive.";
 
 /**
  * The caution line for a move. It describes who pushed the price and never recommends a trade: the replay of whether such
