@@ -20,6 +20,7 @@ import {
   BREAKER_FILE, TATUM_LOG_FILE, VERDICT_LEDGER_FILE, WATCH_STATE_FILE, cliArgs, memoryStore, predictionClient, readJson, sleep,
   suiClient, tatumCallsUsed, writeJson,
 } from "./lib/config.js";
+import { HourlyCapReached, TatumCap, recentlyJudged } from "./lib/cap.js";
 import { activeEvents } from "./lib/events.js";
 import type { LedgerEntry } from "./lib/ledger.js";
 import { loadIndex, loadMemoryState, skillLookup } from "./lib/wallet-index.js";
@@ -62,13 +63,22 @@ async function metered<T>(run: () => Promise<T>): Promise<T> {
   try { return await run(); }
   finally {
     const spent = (await tatumCallsUsed()).used - before;
-    const now = Date.now();
-    tatumLog = [...tatumLog.filter((t) => now - t < 3_600_000), ...Array<number>(Math.max(0, spent)).fill(now)];
+    tatumLog = cap.record(spent, Date.now());
     await writeJson(TATUM_LOG_FILE, tatumLog);
   }
 }
 
-const tatumRoom = (reserve = JUDGING_RESERVE) => callsInLastHour(tatumLog, Date.now()) < HOURLY_CAP - reserve;
+const cap = new TatumCap(HOURLY_CAP, tatumLog);
+const tatumRoom = (reserve = JUDGING_RESERVE) => cap.room(Date.now(), reserve);
+
+/** A Tatum call that must pass the hourly cap; judging may spend the reserve that discovery and history leave free. */
+async function capped<T>(run: () => Promise<T>): Promise<T> {
+  cap.require(Date.now());
+  return metered(run);
+}
+
+/** Markets a --dry run has already judged in this process (see `recentlyJudged`). */
+const dryJudged = new Map<string, number>();
 
 async function trip(marketId: string): Promise<void> {
   breaker = tripBreaker(breaker, marketId, Date.now(), BREAKER_HOLD_MS);
@@ -81,14 +91,18 @@ const clock = (ms: number) => new Date(ms).toISOString().slice(11, 16) + " UTC";
 
 async function discover(now: number): Promise<Candidate[]> {
   const out: Candidate[] = [];
+  // At the hourly cap listings come from disk only, so discovery never spends past it.
+  const cacheOnly = !tatumRoom(0);
+  if (cacheOnly) console.log(`Tatum hourly call cap (${HOURLY_CAP}) reached: using the event listings already on disk`);
+  const list = (category: "SPORTS" | "POLITICS", sort: "volume_desc" | "liquidity_desc") =>
+    metered(() => activeEvents(api, category, sort, DISCOVER_EVERY_MS, cacheOnly));
   if (SEGMENT !== "politics") {
     const events = [];
-    for (const sort of ["volume_desc", "liquidity_desc"] as const) events.push(...await metered(() => activeEvents(api, "SPORTS", sort, DISCOVER_EVERY_MS)));
+    for (const sort of ["volume_desc", "liquidity_desc"] as const) events.push(...await list("SPORTS", sort));
     out.push(...selectCandidates(events, { now, maxMarkets: MAX_MARKETS }));
   }
   if (SEGMENT !== "sports") {
-    const events = await metered(() => activeEvents(api, "POLITICS", "volume_desc", DISCOVER_EVERY_MS));
-    out.push(...selectMidtermCandidates(events, { now, maxMarkets: MAX_POLITICS }));
+    out.push(...selectMidtermCandidates(await list("POLITICS", "volume_desc"), { now, maxMarkets: MAX_POLITICS }));
   }
   return out;
 }
@@ -133,7 +147,7 @@ async function scan(store: MemoryStore): Promise<number> {
   // Candles are requested on 5-minute boundaries so that repeated runs share cached responses.
   const end = Math.ceil(now / FIVE_MIN_MS) * FIVE_MIN_MS;
   for (const c of candidates) {
-    if (now - (judged[c.marketId] ?? 0) < REJUDGE_AFTER_MS) { console.log(`  skip ${c.slug} (judged < 2h ago)`); continue; }
+    if (recentlyJudged(judged, dryJudged, c.marketId, now, REJUDGE_AFTER_MS)) { console.log(`  skip ${c.slug} (judged < 2h ago)`); continue; }
     let series;
     try { series = await priceSeries(c, end, now); }
     catch (e) {
@@ -153,7 +167,7 @@ async function scan(store: MemoryStore): Promise<number> {
       if (await judgeAndSeal(store, c, move, evidence, index, memoryState)) { sealed++; judged[c.marketId] = Date.now(); await writeJson(WATCH_STATE_FILE, judged); }
     } catch (e) {
       if (e instanceof TatumBudgetExceeded) throw e;
-      console.log(`  could not judge ${c.slug}: ${describe(e)}`);
+      console.log(`  could not judge ${c.slug}: ${e instanceof HourlyCapReached ? e.message : describe(e)}`);
     }
   }
   console.log(`${active} of ${candidates.length} markets traded in the last ${FRESH_CANDLE_MS / 60_000} minutes (price history: ${fromTatum} from Tatum, ${fromPublic} from Polymarket public)`);
@@ -166,7 +180,12 @@ async function fillsFor(c: Candidate, move: Move, evidence: Evidence): Promise<{
   if (evidence.source === "tatum") {
     let reason: string;
     try {
-      const trades = await metered(() => api.marketTradesSince(c.marketId, since, 5));
+      const trades = tatumRoom(0) ? await metered(() => api.marketTradesSince(c.marketId, since, 5)) : null;
+      if (trades === null) {
+        evidence = { source: "polymarket-public", fallbackReason: `Tatum hourly call cap (${HOURLY_CAP}) reached` };
+        const all = await publicMarketTradesSince(c.marketId, since, 5);
+        return { fills: publicTradesToFlows(all).filter((t) => t.ts >= since), evidence };
+      }
       if (trades.length > 0) {
         return { fills: trades.map((t) => ({ taker: t.taker.toLowerCase(), side: t.side, direction: t.direction, price: t.price, size: t.size })), evidence };
       }
@@ -186,12 +205,12 @@ async function judgeAndSeal(
   store: MemoryStore, c: Candidate, original: Move, evidenceIn: Evidence,
   index: WalletEdgeRow[], memoryState: Awaited<ReturnType<typeof loadMemoryState>>,
 ): Promise<boolean> {
-  const market: Market = await metered(() => api.market(c.marketId));
+  const market: Market = await capped(() => api.market(c.marketId));
   if (market.status !== "active" || market.resolution) { console.log("    market is no longer active, skipped"); return false; }
   const yesOutcome = market.outcomes[0]?.name ?? "YES";
 
   // The live price always comes from Tatum, whichever source found the move: the verdict is judged against it.
-  const live = await metered(() => api.marketPrice(c.marketId));
+  const live = await capped(() => api.marketPrice(c.marketId));
   if (live.midPrice <= 0.03 || live.midPrice >= 0.97) {
     console.log(`    live Tatum mid ${(live.midPrice * 100).toFixed(1)}% is at an extreme: the market is settling, not moving, skipped`);
     return false;
@@ -236,7 +255,7 @@ async function judgeAndSeal(
   const record = verdictRecord(data);
   console.log(`    ${verdict.label} [${evidence.source}]: sharp share ${(verdict.sharpShare * 100).toFixed(0)}%, forecast ${(verdict.forecast * 100).toFixed(1)}% vs price ${(move.to * 100).toFixed(1)}%, ${flows.length} wallets, checkpoint ${checkpoint.sequence}`);
   if (evidence.fallbackReason) console.log(`    fallback: ${evidence.fallbackReason}`);
-  if (DRY) { console.log("    dry run: not sealed"); return false; }
+  if (DRY) { dryJudged.set(c.marketId, Date.now()); console.log("    dry run: not sealed"); return false; }
 
   const t0 = Date.now();
   const stored = await store.remember(NAMESPACES.verdicts, encode(record));
