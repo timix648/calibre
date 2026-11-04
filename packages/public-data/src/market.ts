@@ -223,6 +223,19 @@ export interface TakerXray {
   status: "audited" | "pending" | "failed";
 }
 
+/**
+ * Why a market with no live move has nothing to judge because it is over: closed, or priced at a decided level. Null while it
+ * is still open and undecided. The X-ray judges live moves, so a decided market gets a plain statement instead of "no trades".
+ */
+export function decidedReason(market: Pick<ResolvedMarket, "outcomes" | "yesPrice" | "closed">): string | null {
+  const p = market.yesPrice;
+  const decided = p !== null && (p >= 0.99 || p <= 0.01);
+  if (!market.closed && !decided) return null;
+  const winner = decided ? market.outcomes[p! >= 0.99 ? 0 : 1] : null;
+  if (winner) return `This market is decided: ${winner} won. The X-ray judges live moves, so there is nothing left to judge; the wallets that traded it can still be X-rayed.`;
+  return "This market is closed. The X-ray judges live moves, so there is nothing left to judge.";
+}
+
 export interface MarketXray {
   market: {
     conditionId: string; slug: string; eventSlug: string | null; question: string; yesOutcome: string; noOutcome: string;
@@ -296,7 +309,7 @@ export function shapeMarketXray(input: {
     move: m
       ? { from: m.from, to: m.to, points: (m.to - m.from) * 100, direction: dir > 0 ? "up" : "down", startTs: m.startTs, endTs: m.endTs, fills: analysis.moveFills, settling: isSnipePrice(m.to) }
       : null,
-    noMoveReason: m ? null : analysis.noMoveReason ?? "No recent move.",
+    noMoveReason: m ? null : decidedReason(market) ?? analysis.noMoveReason ?? "No recent move.",
     takers,
     squareMoney: square ? { ...square, note: squareMoneyNote(square) } : null,
     caution: MARKET_CAUTION,

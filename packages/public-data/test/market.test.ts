@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { TimedFlowTrade } from "@calibre/core";
 import {
-  analyseFills, buildMarketXray, marketRefKey, parseMarketRef, parseProfileHandle, pickMainMarket, resolveMarket, resolveProfileHandle,
+  analyseFills, buildMarketXray, decidedReason, marketRefKey, parseMarketRef, parseProfileHandle, pickMainMarket, resolveMarket, resolveProfileHandle,
   shapeMarketXray, toResolvedMarket, toWalletXray, type ResolvedMarket, type TakerAudit, type WalletAuditResult,
 } from "../src/index.js";
 
@@ -166,6 +166,19 @@ describe("analyseFills", () => {
     const a = analyseFills(down, NOW);
     expect(a.move!.to).toBeLessThan(a.move!.from);
     expect(a.pushers.map((f) => f.wallet).sort()).toEqual(["n1", "s1"]);
+  });
+});
+
+describe("decidedReason", () => {
+  it("names the winner of a market priced at a decided level", () => {
+    expect(decidedReason({ outcomes: ["Yellow Submarine", "Natus Vincere"], yesPrice: 0, closed: false })).toContain("Natus Vincere won");
+    expect(decidedReason({ outcomes: ["A", "B"], yesPrice: 0.995, closed: true })).toContain("A won");
+  });
+  it("says a closed market without a decided price is closed", () => {
+    expect(decidedReason({ outcomes: ["A", "B"], yesPrice: 0.5, closed: true })).toContain("closed");
+  });
+  it("is null for a live, undecided market", () => {
+    expect(decidedReason({ outcomes: ["A", "B"], yesPrice: 0.62, closed: false })).toBeNull();
   });
 });
 
