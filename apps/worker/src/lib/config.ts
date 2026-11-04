@@ -79,6 +79,7 @@ export const WALLET_INDEX_FILE = `${INDEX_DIR}/wallets.json`;
 export const MEMORY_STATE_FILE = `${INDEX_DIR}/memory-state.json`;
 export const WORKER_DIR = ".cache/worker";
 export const VERDICT_LEDGER_FILE = `${WORKER_DIR}/verdicts.json`;
+export const PENDING_SEALS_FILE = `${WORKER_DIR}/pending-seals.json`;
 export const OUTCOME_LEDGER_FILE = `${WORKER_DIR}/outcomes.json`;
 export const WATCH_STATE_FILE = `${WORKER_DIR}/watch-state.json`;
 export const BREAKER_FILE = `${WORKER_DIR}/tatum-breaker.json`;

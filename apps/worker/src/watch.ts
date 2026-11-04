@@ -15,14 +15,18 @@ import {
   type VerdictWallet, type WalletEdgeRow,
 } from "../../../packages/core/src/index.js";
 import { encode, NAMESPACES, type MemoryStore } from "../../../packages/memory/src/index.js";
+import { fetchResolutions } from "../../../packages/public-data/src/index";
 import { publicMarketTradesSince } from "../../../scripts/public-source.js";
 import {
-  BREAKER_FILE, TATUM_LOG_FILE, VERDICT_LEDGER_FILE, WATCH_STATE_FILE, cliArgs, memoryStore, predictionClient, readJson, sleep,
+  BREAKER_FILE, PENDING_SEALS_FILE, TATUM_LOG_FILE, VERDICT_LEDGER_FILE, WATCH_STATE_FILE, cliArgs, memoryStore, predictionClient, readJson, sleep,
   suiClient, tatumCallsUsed, writeJson,
 } from "./lib/config.js";
 import { HourlyCapReached, TatumCap, recentlyJudged } from "./lib/cap.js";
 import { activeEvents } from "./lib/events.js";
 import type { LedgerEntry } from "./lib/ledger.js";
+import {
+  MAX_SEAL_ATTEMPTS, SEAL_TIMEOUT_MS, decideSeal, queueSeal, recordSealFailure, removeSeal, sealDelayMinutes, withTimeout, type MarketState, type PendingSeal,
+} from "./lib/pending-seals.js";
 import { loadIndex, loadMemoryState, skillLookup } from "./lib/wallet-index.js";
 
 const REJUDGE_AFTER_MS = 2 * 3_600_000;
@@ -135,6 +139,8 @@ async function priceSeries(c: Candidate, end: number, now: number): Promise<{ po
 
 async function scan(store: MemoryStore): Promise<number> {
   const now = Date.now();
+  let sealed = 0;
+  if (!DRY) sealed += await retryPendingSeals(store);
   const index = await loadIndex();
   const memoryState = await loadMemoryState();
   const judged = await readJson<WatchState>(WATCH_STATE_FILE, {});
@@ -143,7 +149,7 @@ async function scan(store: MemoryStore): Promise<number> {
   const politics = candidates.filter((c) => c.league === "politics").length;
   console.log(`${candidates.length} markets to check (${candidates.length - politics} sports, ${politics} midterms; min jump ${MIN_JUMP * 100} pts)`);
 
-  let sealed = 0, active = 0, fromTatum = 0, fromPublic = 0;
+  let active = 0, fromTatum = 0, fromPublic = 0;
   // Candles are requested on 5-minute boundaries so that repeated runs share cached responses.
   const end = Math.ceil(now / FIVE_MIN_MS) * FIVE_MIN_MS;
   for (const c of candidates) {
@@ -164,7 +170,10 @@ async function scan(store: MemoryStore): Promise<number> {
     if (!move) continue;
     console.log(`  MOVE ${c.slug} ${c.marketId.slice(0, 10)}: ${(move.from * 100).toFixed(0)}% -> ${(move.to * 100).toFixed(0)}% [${evidence.source}]`);
     try {
-      if (await judgeAndSeal(store, c, move, evidence, index, memoryState)) { sealed++; judged[c.marketId] = Date.now(); await writeJson(WATCH_STATE_FILE, judged); }
+      const result = await judgeAndSeal(store, c, move, evidence, index, memoryState);
+      // A queued verdict counts as judged too: it waits for its seal, and the market is not judged again meanwhile.
+      if (result) { judged[c.marketId] = Date.now(); await writeJson(WATCH_STATE_FILE, judged); }
+      if (result === "sealed") sealed++;
     } catch (e) {
       if (e instanceof TatumBudgetExceeded) throw e;
       console.log(`  could not judge ${c.slug}: ${e instanceof HourlyCapReached ? e.message : describe(e)}`);
@@ -204,7 +213,7 @@ async function fillsFor(c: Candidate, move: Move, evidence: Evidence): Promise<{
 async function judgeAndSeal(
   store: MemoryStore, c: Candidate, original: Move, evidenceIn: Evidence,
   index: WalletEdgeRow[], memoryState: Awaited<ReturnType<typeof loadMemoryState>>,
-): Promise<boolean> {
+): Promise<"sealed" | "queued" | false> {
   const market: Market = await capped(() => api.market(c.marketId));
   if (market.status !== "active" || market.resolution) { console.log("    market is no longer active, skipped"); return false; }
   const yesOutcome = market.outcomes[0]?.name ?? "YES";
@@ -257,22 +266,80 @@ async function judgeAndSeal(
     source: evidence.source,
     ...(evidence.source === "polymarket-public" ? { fallbackReason: evidence.fallbackReason } : {}),
   };
-  const record = verdictRecord(data);
   console.log(`    ${verdict.label} [${evidence.source}]: sharp share ${(verdict.sharpShare * 100).toFixed(0)}%, forecast ${(verdict.forecast * 100).toFixed(1)}% vs price ${(move.to * 100).toFixed(1)}%, ${flows.length} wallets, checkpoint ${checkpoint.sequence}`);
   console.log(`    square money ${(square.squareShare * 100).toFixed(0)}% of the pushing money, judged ${(square.squareCoverage * 100).toFixed(0)}% (${square.money.squareWallets} proven-losing of ${square.money.wallets} pushing wallets)`);
   if (evidence.fallbackReason) console.log(`    fallback: ${evidence.fallbackReason}`);
   if (DRY) { dryJudged.set(c.marketId, Date.now()); console.log("    dry run: not sealed"); return false; }
 
+  return sealVerdict(store, data, 1);
+}
+
+/** Verdicts whose Walrus write failed, waiting for the next passes (see `pending-seals.ts`). */
+const loadPending = () => readJson<PendingSeal[]>(PENDING_SEALS_FILE, []);
+
+/**
+ * Writes a verdict to Walrus Memory within `SEAL_TIMEOUT_MS`. On success the ledger row records when it landed and how long it
+ * waited. On failure the verdict is kept in the pending file with its original checkpoint, move and `sealedAt`, so it is not lost.
+ */
+async function sealVerdict(store: MemoryStore, data: VerdictData, attempt: number): Promise<"sealed" | "queued"> {
+  const key = verdictKey(data.marketId, data.move.endTs);
   const t0 = Date.now();
-  const stored = await store.remember(NAMESPACES.verdicts, encode(record));
-  console.log(`    sealed in ${((Date.now() - t0) / 1000).toFixed(0)}s, blob ${stored.blobId}`);
-  const ledger = await readJson<LedgerEntry[]>(VERDICT_LEDGER_FILE, []);
-  ledger.push({
-    key: verdictKey(c.marketId, move.endTs), blobId: stored.blobId, sealedAt: data.sealedAt, source: data.source,
-    ...(data.fallbackReason ? { fallbackReason: data.fallbackReason } : {}), verdict: data,
-  });
-  await writeJson(VERDICT_LEDGER_FILE, ledger);
-  return true;
+  try {
+    const stored = await withTimeout(store.remember(NAMESPACES.verdicts, encode(verdictRecord(data))), SEAL_TIMEOUT_MS, "Walrus write");
+    const sealedAt = new Date();
+    const delay = sealDelayMinutes(data.sealedAt, sealedAt.getTime());
+    console.log(`    sealed in ${((Date.now() - t0) / 1000).toFixed(0)}s, blob ${stored.blobId}${attempt > 1 ? ` (attempt ${attempt}, ${delay} min after it was judged)` : ""}`);
+    const ledger = await readJson<LedgerEntry[]>(VERDICT_LEDGER_FILE, []);
+    ledger.push({
+      key, blobId: stored.blobId, sealedAt: sealedAt.toISOString(), sealDelayMinutes: delay, source: data.source,
+      ...(data.fallbackReason ? { fallbackReason: data.fallbackReason } : {}), verdict: data,
+    });
+    await writeJson(VERDICT_LEDGER_FILE, ledger);
+    await writeJson(PENDING_SEALS_FILE, removeSeal(await loadPending(), key));
+    return "sealed";
+  } catch (e) {
+    const reason = (e as Error).message;
+    const pending = await loadPending();
+    const kept = pending.some((p) => p.key === key)
+      ? recordSealFailure(pending, key, reason, Date.now())
+      : queueSeal(pending, key, data, reason, Date.now());
+    await writeJson(PENDING_SEALS_FILE, kept);
+    console.log(`    could not seal (attempt ${attempt} of ${MAX_SEAL_ATTEMPTS}): ${reason}; kept in ${PENDING_SEALS_FILE} for the next pass`);
+    return "queued";
+  }
+}
+
+/** Which of these markets have resolved, from Polymarket's free Gamma API (no Tatum credit). A failed check marks all unknown. */
+async function marketStates(marketIds: string[]): Promise<Map<string, MarketState>> {
+  try {
+    const resolutions = await fetchResolutions(marketIds);
+    return new Map(marketIds.map((id) => [id, resolutions.get(id.toLowerCase()) ? "resolved" : "open"] as const));
+  } catch {
+    return new Map(marketIds.map((id) => [id, "unknown"] as const));
+  }
+}
+
+/** Retries the queued verdicts. A market that resolved meanwhile is dropped: nothing is sealed once the outcome is known. */
+async function retryPendingSeals(store: MemoryStore): Promise<number> {
+  const pending = await loadPending();
+  if (pending.length === 0) return 0;
+  console.log(`${pending.length} verdict(s) waiting to be sealed`);
+  const states = await marketStates([...new Set(pending.map((p) => p.data.marketId))]);
+  let sealed = 0;
+  for (const p of pending) {
+    const decision = decideSeal(p, states.get(p.data.marketId) ?? "unknown");
+    const name = p.data.eventSlug;
+    if (decision === "drop-resolved") {
+      console.log(`  ${name}: resolved before it could be sealed, dropped (not sealed after the outcome)`);
+      await writeJson(PENDING_SEALS_FILE, removeSeal(await loadPending(), p.key));
+    } else if (decision === "give-up") {
+      console.log(`  ${name}: gave up after ${p.attempts} attempts (last error: ${p.lastError}), dropped`);
+      await writeJson(PENDING_SEALS_FILE, removeSeal(await loadPending(), p.key));
+    } else if (decision === "wait") {
+      console.log(`  ${name}: could not check whether the market resolved, waiting`);
+    } else if (await sealVerdict(store, p.data, p.attempts + 1) === "sealed") sealed++;
+  }
+  return sealed;
 }
 
 const store = memoryStore();

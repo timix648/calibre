@@ -177,3 +177,23 @@ overseas basketball, CS2, LoL, Valorant, Dota 2, UFC and so on); the list was bu
 Short prefixes that double as words or countries (`col`, `chi`, `aus`, `pol`, `den`, `fif`, `ow`, ...) count only when the slug
 carries a game date. Everything else is `other`; politics keeps its own category (event tag). `other` rows stay in the index for
 transparency, are never used as a skill lookup for a market, and never get a wallet memory.
+
+# Seal retry (4 Nov 2026)
+
+A Walrus write timed out once and the verdict it carried (a 42% to 84% move) was lost, because the watcher judged the move,
+failed to seal it and moved on. Now a failed or slow write is kept.
+
+- `sealVerdict` in `apps/worker/src/watch.ts` gives a write 120 seconds (they normally take 6 to 25). If it fails or times out,
+  the verdict is saved in `.cache/worker/pending-seals.json` exactly as judged: original Sui checkpoint, move, and `sealedAt`
+  (the time of judgement). The market counts as judged, so it is not judged again for 2 hours.
+- At the start of every pass the watcher retries what is queued, at most 6 attempts in all (the first write counts as one),
+  then gives up and logs it. Before each retry it asks Polymarket's free Gamma API whether the market has resolved. If it has,
+  the verdict is dropped and the log says "resolved before it could be sealed": a verdict is never sealed once the outcome is
+  known. If that check itself fails, the pass waits instead of sealing.
+- Ledger rows (`.cache/worker/verdicts.json`) have `sealedAt`, the time the write finished, and `sealDelayMinutes`, the minutes
+  between judging and sealing (a fraction of a minute normally). The sealed envelope keeps the judgement time in `data.sealedAt`,
+  so a late seal shows what was known when the move was judged.
+- A write that timed out may still land later. The retry would then seal a second copy under the same verdict key; readers key
+  verdicts by that key, so this shows up as a duplicate memory, not a different verdict.
+- The decision logic is pure and tested in `apps/worker/src/lib/pending-seals.ts` (`apps/worker/test/pending-seals.test.ts`).
+- Not covered: a market Gamma lists as closed without a clean winner (a 50-50 split) is read as still open.
