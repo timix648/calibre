@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+.cache/
+research/
+CLAUDE.md
+node_modules/
+**/node_modules/
+apps/extension/dist/
