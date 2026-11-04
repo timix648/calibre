@@ -66,8 +66,8 @@ export default function ExtensionPage() {
       {SHOT ? (
         <figure className="overflow-hidden rounded-2xl border border-line">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={SHOT} alt="The CALIBRE panel on a Polymarket page, showing a wallet's label and record" className="w-full" />
-          <figcaption className="border-t border-line px-5 py-3 text-xs text-faint">The panel on a live Polymarket page.</figcaption>
+          <img src={SHOT} alt="The CALIBRE panel on a Polymarket profile, labelling the wallet mostly sniping: 72% of its bets were on outcomes already decided" className="w-full" />
+          <figcaption className="border-t border-line px-5 py-3 text-xs text-faint">The panel on a live Polymarket profile. This wallet looks active, but 72% of its 383 scored bets were on outcomes that were already decided, so copying it would mostly copy bets on finished games.</figcaption>
         </figure>
       ) : null}
 
