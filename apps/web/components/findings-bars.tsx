@@ -60,7 +60,7 @@ export function FindingsBars({ row, top }: { row: WideRow; top: WideRow }) {
       <text x={BEST} y={foot + 31} textAnchor="middle" fontSize={11.5} className="num" fill="var(--color-muted)">≈ {whole(row.best)}</text>
 
       <Bar x={WORST - BAR / 2} width={BAR} value={row.worst * 100} color="var(--color-bad)" delay={240} />
-      <text x={WORST} y={y(row.worst * 100) + 20} textAnchor="middle" fontSize={15} fontWeight={650} className="num" fill="var(--color-bg)">{pts(row.worst)}</text>
+      <text x={WORST} y={y(row.worst * 100) - 10} textAnchor="middle" fontSize={15} fontWeight={650} className="num" fill="var(--color-bg)">{pts(row.worst)}</text>
       <text x={WORST} y={foot} textAnchor="middle" fontSize={13} fontWeight={600} fill="var(--color-fg)">Worst third</text>
       <text x={WORST} y={foot + 16} textAnchor="middle" fontSize={11.5} fill="var(--color-bad)">past losers</text>
       <text x={WORST} y={foot + 31} textAnchor="middle" fontSize={11.5} className="num" fill="var(--color-bad)">≈ {whole(row.worst)} pts per bet</text>
