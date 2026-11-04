@@ -1,7 +1,7 @@
 import { parseGammaTime, type ResolutionLike, type TradeLike } from "@calibre/core";
 
-const DATA_API = "https://data-api.polymarket.com";
-const GAMMA_API = "https://gamma-api.polymarket.com";
+export const DATA_API = "https://data-api.polymarket.com";
+export const GAMMA_API = "https://gamma-api.polymarket.com";
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -49,7 +49,7 @@ export interface FetchOpts {
   timeoutMs?: number;
 }
 
-async function getJson<T>(url: string, opts: FetchOpts = {}): Promise<T> {
+export async function getJson<T>(url: string, opts: FetchOpts = {}): Promise<T> {
   const attempts = opts.attempts ?? 3;
   let last = "";
   for (let attempt = 0; attempt < attempts; attempt++) {
@@ -142,4 +142,29 @@ export async function fetchResolutions(conditionIds: string[], opts: FetchOpts &
   };
   await Promise.all(Array.from({ length: Math.min(opts.concurrency ?? 5, batches.length) }, worker));
   return out;
+}
+
+/**
+ * Fills of one market, newest first, paged with the Data API v2 cursor until a fill older than `sinceMs` is seen or `maxPages`
+ * pages (500 fills each) were read. Never cached. `reachedSince` says whether the pages went back as far as `sinceMs`.
+ */
+export async function fetchMarketTradesSince(
+  conditionId: string, sinceMs: number, maxPages = 4, opts: FetchOpts = {},
+): Promise<{ trades: V2Trade[]; pages: number; reachedSince: boolean }> {
+  const trades: V2Trade[] = [];
+  let cursor = "";
+  let pages = 0;
+  let reachedSince = false;
+  while (pages < maxPages) {
+    const r = await getJson<{ data?: V2Trade[]; pagination?: { has_more?: boolean; next_cursor?: string } }>(
+      `${DATA_API}/v2/trades?condition=${conditionId}&limit=500${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`, opts);
+    pages++;
+    const rows = r.data ?? [];
+    const fresh = rows.filter((t) => t.timestamp * 1000 >= sinceMs);
+    trades.push(...fresh);
+    if (fresh.length < rows.length) { reachedSince = true; break; }
+    if (!r.pagination?.has_more || !r.pagination.next_cursor) { reachedSince = true; break; }
+    cursor = r.pagination.next_cursor;
+  }
+  return { trades, pages, reachedSince };
 }

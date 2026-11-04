@@ -11,6 +11,25 @@ export type AuditResponse =
   | { ok: true; cached: boolean; result: WalletAuditResult }
   | { ok: false; status: number; code: "bad_address" | "rate_limited" | "upstream"; error: string; retryAfter?: number };
 
+/**
+ * A cached, de-duplicated audit with no per-client limit, for callers that already limit their own clients (the market X-ray
+ * audits several takers at once). Concurrent calls for one wallet share one request, and a finished audit stays cached even
+ * when the caller stopped waiting for it.
+ */
+export function getAudit(address: string): Promise<WalletAuditResult> {
+  const key = address.toLowerCase();
+  const hit = cache.get(key);
+  if (hit) return Promise.resolve(hit);
+  let pending = inflight.get(key);
+  if (!pending) {
+    pending = auditAddress(key, { maxTrades: 1000 }).then(
+      (r) => { cache.set(key, r); return r; },
+    ).finally(() => inflight.delete(key));
+    inflight.set(key, pending);
+  }
+  return pending;
+}
+
 export async function runWalletAudit(address: string, clientKey: string): Promise<AuditResponse> {
   if (!isAddress(address)) {
     return { ok: false, status: 400, code: "bad_address", error: "That is not a wallet address. It should start with 0x and have 40 hex characters." };
