@@ -1,0 +1,209 @@
+{
+  "generatedAt": "2026-11-04T05:22:29.194Z",
+  "preliminary": "40 wallets",
+  "sources": [
+    "skill-persistence-allphase.log",
+    "skill-persistence-pregame.log",
+    "skill-persistence-inplay.log"
+  ],
+  "includesTop": false,
+  "rules": {
+    "losing": {
+      "z": -2,
+      "minBets": 30
+    },
+    "positive": {
+      "z": 2,
+      "minBets": 100
+    },
+    "tooEarlyBelow": 30
+  },
+  "phases": [
+    {
+      "phase": "all",
+      "wallets": 40,
+      "labels": [
+        {
+          "label": "proven losing record",
+          "wallets": 4,
+          "meanNewEdgePts": -2.9,
+          "ci95Pts": [
+            -4.025,
+            -1.875
+          ],
+          "negative": 4,
+          "shareNegative": 1,
+          "meanOldEdgePts": -6.05
+        },
+        {
+          "label": "positive record (unproven going forward)",
+          "wallets": 1,
+          "meanNewEdgePts": 1,
+          "ci95Pts": null,
+          "negative": 0,
+          "shareNegative": 0,
+          "meanOldEdgePts": 10.4
+        },
+        {
+          "label": "no proven edge",
+          "wallets": 33,
+          "meanNewEdgePts": -0.42424242424242425,
+          "ci95Pts": [
+            -1.863636363636363,
+            0.9424242424242426
+          ],
+          "negative": 18,
+          "shareNegative": 0.5454545454545454,
+          "meanOldEdgePts": -0.3575757575757576
+        },
+        {
+          "label": "too early",
+          "wallets": 2,
+          "meanNewEdgePts": -6.75,
+          "ci95Pts": [
+            -19.7,
+            6.2
+          ],
+          "negative": 1,
+          "shareNegative": 0.5,
+          "meanOldEdgePts": 6.3500000000000005
+        },
+        {
+          "label": "all wallets",
+          "wallets": 40,
+          "meanNewEdgePts": -0.9525,
+          "ci95Pts": [
+            -2.5974999999999993,
+            0.5325
+          ],
+          "negative": 23,
+          "shareNegative": 0.575,
+          "meanOldEdgePts": -0.3224999999999999
+        }
+      ]
+    },
+    {
+      "phase": "pregame",
+      "wallets": 30,
+      "labels": [
+        {
+          "label": "proven losing record",
+          "wallets": 0,
+          "meanNewEdgePts": null,
+          "ci95Pts": null,
+          "negative": 0,
+          "shareNegative": null,
+          "meanOldEdgePts": null
+        },
+        {
+          "label": "positive record (unproven going forward)",
+          "wallets": 0,
+          "meanNewEdgePts": null,
+          "ci95Pts": null,
+          "negative": 0,
+          "shareNegative": null,
+          "meanOldEdgePts": null
+        },
+        {
+          "label": "no proven edge",
+          "wallets": 25,
+          "meanNewEdgePts": -1.388,
+          "ci95Pts": [
+            -3.412,
+            0.6360000000000002
+          ],
+          "negative": 15,
+          "shareNegative": 0.6,
+          "meanOldEdgePts": 0.008000000000000123
+        },
+        {
+          "label": "too early",
+          "wallets": 5,
+          "meanNewEdgePts": 1.4599999999999997,
+          "ci95Pts": [
+            -9.68,
+            13.879999999999999
+          ],
+          "negative": 2,
+          "shareNegative": 0.4,
+          "meanOldEdgePts": 8.959999999999999
+        },
+        {
+          "label": "all wallets",
+          "wallets": 30,
+          "meanNewEdgePts": -0.9133333333333334,
+          "ci95Pts": [
+            -3.323333333333335,
+            1.7133333333333336
+          ],
+          "negative": 17,
+          "shareNegative": 0.5666666666666667,
+          "meanOldEdgePts": 1.4999999999999998
+        }
+      ]
+    },
+    {
+      "phase": "inplay",
+      "wallets": 40,
+      "labels": [
+        {
+          "label": "proven losing record",
+          "wallets": 3,
+          "meanNewEdgePts": 0.9,
+          "ci95Pts": [
+            -4.1000000000000005,
+            10.4
+          ],
+          "negative": 2,
+          "shareNegative": 0.6666666666666666,
+          "meanOldEdgePts": -10.799999999999999
+        },
+        {
+          "label": "positive record (unproven going forward)",
+          "wallets": 1,
+          "meanNewEdgePts": -1.9,
+          "ci95Pts": null,
+          "negative": 1,
+          "shareNegative": 1,
+          "meanOldEdgePts": 4.9
+        },
+        {
+          "label": "no proven edge",
+          "wallets": 28,
+          "meanNewEdgePts": -1.7892857142857146,
+          "ci95Pts": [
+            -3.8321428571428577,
+            7.930164461608261e-17
+          ],
+          "negative": 18,
+          "shareNegative": 0.6428571428571429,
+          "meanOldEdgePts": -0.5892857142857143
+        },
+        {
+          "label": "too early",
+          "wallets": 8,
+          "meanNewEdgePts": 4.4375,
+          "ci95Pts": [
+            -4.012499999999999,
+            12.5625
+          ],
+          "negative": 3,
+          "shareNegative": 0.375,
+          "meanOldEdgePts": 0.7249999999999996
+        },
+        {
+          "label": "all wallets",
+          "wallets": 40,
+          "meanNewEdgePts": -0.3450000000000003,
+          "ci95Pts": [
+            -2.6049999999999995,
+            2.0775000000000006
+          ],
+          "negative": 24,
+          "shareNegative": 0.6,
+          "meanOldEdgePts": -0.9550000000000001
+        }
+      ]
+    }
+  ]
+}
