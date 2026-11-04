@@ -75,3 +75,9 @@ export function tripBreaker(state: BreakerState, key: string, now: number, holdM
 
 /** Number of recorded calls within the last hour; `log` holds one unix-millisecond timestamp per call. */
 export const callsInLastHour = (log: number[], now: number): number => log.filter((t) => now - t < 3_600_000).length;
+
+/**
+ * Whether a Tatum call may be made without passing the hourly cap: `log` holds one unix-millisecond timestamp per credit
+ * spent, and `reserve` calls are kept back for work that must not be starved (pass 0 to spend to the cap).
+ */
+export const hasHourlyRoom = (log: number[], now: number, cap: number, reserve = 0): boolean => callsInLastHour(log, now) < cap - reserve;

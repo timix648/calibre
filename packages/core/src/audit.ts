@@ -72,6 +72,8 @@ export type AuditFlag = "mostly sniping";
 export interface WalletAudit {
   /** Scored forecasting bets (one per wallet per market, sniping excluded), pre-game and in-play together. */
   n: number;
+  /** Edge over all scored bets, pre-game and in-play together (what the X-ray label reads). */
+  overall: EdgeSummary;
   /** Bets placed before the game or event started. */
   pregame: EdgeSummary;
   /** Bets placed once it was live (or in the last three hours before the close when no start is known). */
@@ -145,6 +147,7 @@ export function auditWallet(
 
   return {
     n: all.length,
+    overall: summariseEdge(priceEdge(all, edgeOpts)),
     pregame,
     inplay,
     sniping,

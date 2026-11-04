@@ -15,3 +15,4 @@ export * from "./grading";
 export * from "./memories";
 export * from "./discovery";
 export * from "./fallback";
+export * from "./xray";
