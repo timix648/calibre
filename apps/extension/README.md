@@ -12,6 +12,11 @@ root at the bottom right; collapse it with the dash, close it with the cross.
 
 Square money is a caution signal and early evidence, not a trade recommendation: in a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); not conclusive.
 
+## Install (no build needed)
+
+Download `calibre-extension.zip` from https://calibre-blush.vercel.app/extension, unzip it, and load the folder with **Load unpacked**
+(steps below). To refresh that zip after a change: build, then zip the contents of `dist` into `apps/web/public/calibre-extension.zip`.
+
 ## Build
 
 ```sh

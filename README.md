@@ -122,7 +122,8 @@ pnpm grade           # grade resolved verdicts
 pnpm export:site     # refresh apps/web/data from Walrus
 ```
 
-Extension: `pnpm --filter @calibre/extension build`, then load `apps/extension/dist` unpacked in `chrome://extensions`. MCP:
+Extension: download the zip from https://calibre-blush.vercel.app/extension and load it unpacked, or build it with
+`pnpm --filter @calibre/extension build` and load `apps/extension/dist`. MCP:
 `claude mcp add calibre -- pnpm --silent exec tsx apps/mcp/src/index.ts`.
 
 ## Limits

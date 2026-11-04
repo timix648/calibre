@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { FindingsBars } from "@/components/findings-bars";
-import { HowItWorks } from "@/components/how-it-works";
 import { LabelTestChart, LabelTestTable, allWallets, signedPts, validationRow } from "@/components/label-validation";
 import { SmartInput } from "@/components/smart-input";
-import { Card, H2, Stat, TableWrap } from "@/components/ui";
-import { findings, memory, verdicts } from "@/lib/data";
+import { Card, H2, TableWrap } from "@/components/ui";
+import { VerdictTrace } from "@/components/verdict-trace";
+import { findings, memory, outcomes, verdicts } from "@/lib/data";
 
 const SAMPLE_WALLET = "0x684baa57c338c2549aec0aa3f034f695d72a8409";
 
@@ -21,12 +21,6 @@ const POINTS = [
     title: "Square money is a caution, not a trade",
     body: "On any market we show how much of the latest move came from proven losers, and how much of it we could judge. In a replay of 11,975 moves, loser-driven moves did 3.1 pts worse for followers (p = 0.07); early evidence, not conclusive.",
   },
-];
-
-const PARTS = [
-  { href: "/radar", title: "Radar", body: "Recent moves, judged by who traded them and sealed on Walrus before the result." },
-  { href: `/wallet/${SAMPLE_WALLET}`, title: "Wallet X-ray", body: "Edge with error bars, sniping share and a plain-English call. Try a sample wallet." },
-  { href: "/proof", title: "Proof", body: "Memory counts, blob links and how to check them yourself." },
 ];
 
 export default function Home() {
@@ -123,58 +117,75 @@ export default function Home() {
         </Card>
       </section>
 
-      <section aria-labelledby="how">
-        <h2 id="how" className="mb-4 text-lg font-semibold tracking-tight">How it works</h2>
-        <HowItWorks />
+      <section aria-labelledby="how" className="border-t border-line pt-14 sm:pt-20">
+        <VerdictTrace />
       </section>
 
       <section aria-labelledby="sharps">
-        <h2 id="sharps" className="mb-4 text-lg font-semibold tracking-tight">Sharps vs squares, honestly</h2>
-        <ol className="grid gap-3 sm:grid-cols-3">
-          {POINTS.map((p, i) => (
-            <li key={p.title} className="rounded-xl border border-line bg-panel p-5">
-              <div className="num text-xs text-accent">0{i + 1}</div>
-              <h3 className="mt-1 font-semibold leading-snug">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
-            </li>
+        <h2 id="sharps" className="text-2xl font-semibold tracking-tight">Sharps and squares, without the hype</h2>
+        <dl className="mt-6 divide-y divide-line border-y border-line">
+          {POINTS.map((p) => (
+            <div key={p.title} className="grid gap-1 py-5 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-12">
+              <dt className="font-semibold leading-snug text-balance">{p.title}</dt>
+              <dd className="text-sm leading-relaxed text-muted text-pretty">{p.body}</dd>
+            </div>
           ))}
-        </ol>
+        </dl>
       </section>
 
       <section id="extension" className="scroll-mt-24" aria-labelledby="ext">
-        <Card className="border-accent/30">
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div>
-              <h2 id="ext" className="text-lg font-semibold tracking-tight">X-ray Polymarket as you browse</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                The Chrome extension adds a small panel to polymarket.com. On a profile it shows the wallet&apos;s X-ray; on a market it shows who pushed the latest move
-                and how much of that money came from proven losers.
-              </p>
+        <div className="grid gap-8 rounded-2xl border border-accent/25 bg-panel p-6 sm:p-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+          <div>
+            <h2 id="ext" className="text-2xl font-semibold tracking-tight">X-ray Polymarket as you browse</h2>
+            <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted text-pretty">
+              The Chrome extension adds a small panel to polymarket.com. On a profile it shows the wallet&apos;s label and record; on a market or game
+              page it shows who pushed the latest move and how much of that money came from proven losers. It reads only the page address and talks only to this
+              site.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <a href="/calibre-extension.zip" download className="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg transition hover:brightness-110 active:translate-y-px">
+                Download for Chrome
+              </a>
+              <Link href="/extension" className="text-sm text-accent underline decoration-accent/40 hover:decoration-accent">Install steps</Link>
+              <span className="num text-xs text-faint">zip, 11 KB, Chrome, Edge, Brave</span>
             </div>
-            <ol className="space-y-1.5 text-sm leading-relaxed text-muted">
-              <li><span className="num text-accent">1</span> Build it: <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">pnpm --filter @calibre/extension build</code></li>
-              <li><span className="num text-accent">2</span> Open <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">chrome://extensions</code>, turn on Developer mode</li>
-              <li><span className="num text-accent">3</span> Load unpacked, pick <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">apps/extension/dist</code></li>
-              <li><span className="num text-accent">4</span> In its options, set the API address to this site</li>
-            </ol>
           </div>
-        </Card>
+          <ol className="space-y-3 self-center text-sm leading-relaxed text-muted">
+            <li className="grid grid-cols-[1.25rem_1fr] gap-2"><span className="num text-accent">1</span><span>Unzip the download into a folder you will keep.</span></li>
+            <li className="grid grid-cols-[1.25rem_1fr] gap-2"><span className="num text-accent">2</span><span>Open <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs text-fg">chrome://extensions</code> and turn on Developer mode.</span></li>
+            <li className="grid grid-cols-[1.25rem_1fr] gap-2"><span className="num text-accent">3</span><span>Click Load unpacked and pick that folder.</span></li>
+            <li className="grid grid-cols-[1.25rem_1fr] gap-2"><span className="num text-accent">4</span><span>Open any Polymarket profile or market.</span></li>
+          </ol>
+        </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-3">
-        {PARTS.map((l) => (
-          <Link key={l.href} href={l.href} className="rounded-xl border border-line bg-panel p-5 transition hover:border-accent/60">
-            <div className="font-semibold">{l.title} <span aria-hidden className="text-accent">→</span></div>
-            <p className="mt-1 text-sm text-muted">{l.body}</p>
-          </Link>
-        ))}
+      <section aria-label="Receipts" className="rounded-2xl border border-line">
+        <dl className="grid grid-cols-2 divide-line sm:grid-cols-4 sm:divide-x">
+          <ReceiptStat label="Memories on mainnet" value={memory.total.toLocaleString("en-US")} note="Walrus Memory, Sui" />
+          <ReceiptStat label="Sealed verdicts" value={sealed.toLocaleString("en-US")} note="Before the result" />
+          <ReceiptStat label="Graded" value={outcomes.length.toLocaleString("en-US")} note="Against the market price" />
+          <ReceiptStat
+            label="Sui checkpoint"
+            value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"}
+            note={memory.checkpoint?.source === "sui-public-graphql" ? "Via Sui public GraphQL" : "Via Tatum gRPC"}
+          />
+        </dl>
+        <p className="border-t border-line px-5 py-3 text-sm text-muted">
+          Check them yourself: the <Link href="/radar" className="text-accent underline decoration-accent/40">radar</Link>, the{" "}
+          <Link href="/record" className="text-accent underline decoration-accent/40">record</Link> of every graded call, and the{" "}
+          <Link href="/proof" className="text-accent underline decoration-accent/40">proof</Link> with every blob on Walruscan.
+        </p>
       </section>
+    </div>
+  );
+}
 
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Receipts">
-        <Stat label="Memories on mainnet" value={memory.total} note="Walrus Memory, Sui" />
-        <Stat label="Sealed verdicts" value={sealed} note="Graded after resolution" />
-        <Stat label="Sui checkpoint" value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"} note={memory.checkpoint?.source === "sui-public-graphql" ? "Read through Sui public GraphQL" : "Read through Tatum gRPC"} />
-      </section>
+function ReceiptStat({ label, value, note }: { label: string; value: string; note: string }) {
+  return (
+    <div className="px-5 py-4">
+      <dt className="text-xs text-faint">{label}</dt>
+      <dd className="num mt-1 text-xl font-semibold text-fg">{value}</dd>
+      <dd className="mt-0.5 text-xs text-muted">{note}</dd>
     </div>
   );
 }

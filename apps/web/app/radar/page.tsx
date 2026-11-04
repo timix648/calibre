@@ -5,7 +5,7 @@ import { GaugeLegend, SquareGauge } from "@/components/square-gauge";
 import { SmartInput } from "@/components/smart-input";
 import { Badge, Card, ExternalLink, H2, PageTitle, TableWrap } from "@/components/ui";
 import { dataGeneratedAt, outcomeFor, verdicts } from "@/lib/data";
-import { pct, sourceLabel, utc, walruscan } from "@/lib/format";
+import { pct, utc, walruscan } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Radar",
@@ -60,7 +60,7 @@ export default function Radar() {
               return (
                 <li key={v.id} className="rounded-xl border border-line bg-panel p-4">
                   <Link href={`/move/${v.id}`} className="font-medium leading-snug text-fg underline decoration-line underline-offset-4">{d.question}</Link>
-                  <div className="mt-1 text-xs text-faint">{d.league.toUpperCase()} · {d.wallets} wallets, {d.trades} fills</div>
+                  <div className="mt-1 text-xs text-faint">{d.league.toUpperCase()} · {d.wallets} wallets, {d.trades} fills{d.source === "polymarket-public" ? " · public trade data" : " · Tatum"}</div>
                   <div className="mt-3 flex items-center justify-between gap-3">
                     <div>
                       <div className="num text-sm text-muted">{pct(d.move.from)} → {pct(d.move.to)}</div>
@@ -72,7 +72,7 @@ export default function Radar() {
                   </div>
                   <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
                     <span>{utc(d.sealedAt)}</span>
-                    {graded ? <Badge tone={graded.data.grade.gain > 0 ? "good" : "muted"}>Graded</Badge> : <Badge tone="warn">Waiting</Badge>}
+                    {graded ? <Badge tone={graded.data.grade.gain >= 0.005 ? "good" : "muted"}>{graded.data.grade.gain >= 0.005 ? "Beat the price" : graded.data.grade.gain <= -0.005 ? "Lost to the price" : "Level with the price"}</Badge> : <Badge tone="warn">Waiting</Badge>}
                     <ExternalLink href={v.walruscan || walruscan(v.blobId)}>Walruscan</ExternalLink>
                   </div>
                 </li>
@@ -81,14 +81,13 @@ export default function Radar() {
           </ul>
           <div className="hidden md:block">
           <TableWrap>
-            <table className="w-full min-w-[820px] text-sm">
+            <table className="w-full min-w-[760px] text-sm">
               <thead>
                 <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
                   <th className="py-2 pr-3 font-medium">Market</th>
                   <th className="px-3 py-2 font-medium">Move</th>
                   <th className="px-3 py-2 font-medium">Label</th>
                   <th className="px-3 py-2 font-medium">Square money</th>
-                  <th className="px-3 py-2 font-medium">Source</th>
                   <th className="px-3 py-2 font-medium">Sealed</th>
                   <th className="px-3 py-2 font-medium">Graded</th>
                   <th className="py-2 pl-3 font-medium">Receipt</th>
@@ -103,16 +102,15 @@ export default function Radar() {
                     <tr key={v.id} className="border-b border-line/60 align-top">
                       <td className="py-3 pr-3">
                         <Link href={`/move/${v.id}`} className="font-medium text-fg underline decoration-line underline-offset-4 hover:decoration-accent">{d.question}</Link>
-                        <div className="mt-0.5 text-xs text-faint">{d.league.toUpperCase()} · {d.wallets} wallets, {d.trades} fills</div>
+                        <div className="mt-0.5 text-xs text-faint">{d.league.toUpperCase()} · {d.wallets} wallets, {d.trades} fills{d.source === "polymarket-public" ? " · public trade data" : " · Tatum"}</div>
                       </td>
                       <td className="num whitespace-nowrap px-3 py-3 text-muted">{pct(d.move.from)} → {pct(d.move.to)}</td>
                       <td className="px-3 py-3"><Badge tone="accent">{d.label}</Badge><span className="ml-1.5 text-xs text-faint">{d.model ?? "v1"}</span></td>
                       <td className="num px-3 py-3 text-muted">
                         {square ? <><SquareGauge share={square.share} coverage={square.coverage} size="sm" /><span className="block text-xs text-faint">judged {pct(square.coverage)}</span></> : <span className="text-faint">not recorded</span>}
                       </td>
-                      <td className="px-3 py-3 text-muted">{sourceLabel(d.source)}</td>
                       <td className="whitespace-nowrap px-3 py-3 text-muted">{utc(d.sealedAt)}</td>
-                      <td className="px-3 py-3">{graded ? <Badge tone={graded.data.grade.gain > 0 ? "good" : "muted"}>Graded</Badge> : <Badge tone="warn">Waiting</Badge>}</td>
+                      <td className="px-3 py-3">{graded ? <Badge tone={graded.data.grade.gain >= 0.005 ? "good" : "muted"}>{graded.data.grade.gain >= 0.005 ? "Beat the price" : graded.data.grade.gain <= -0.005 ? "Lost to the price" : "Level with the price"}</Badge> : <Badge tone="warn">Waiting</Badge>}</td>
                       <td className="py-3 pl-3"><ExternalLink href={v.walruscan || walruscan(v.blobId)}>Walruscan</ExternalLink></td>
                     </tr>
                   );

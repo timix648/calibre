@@ -9,11 +9,12 @@ const NAV = [
   { href: "/record", label: "Record" },
   { href: "/proof", label: "Proof" },
   { href: "/method", label: "Method" },
-  { href: "/#extension", label: "Extension" },
+  { href: "/extension", label: "Extension" },
 ];
 
 export function SiteHeader() {
-  const home = usePathname() === "/";
+  const pathname = usePathname();
+  const home = pathname === "/";
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-bg/85 backdrop-blur">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
@@ -23,7 +24,7 @@ export function SiteHeader() {
         </Link>
         <nav aria-label="Main" className="flex items-center gap-5 text-sm text-muted">
           {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="hover:text-fg">{n.label}</Link>
+            <Link key={n.href} href={n.href} aria-current={pathname.startsWith(n.href) ? "page" : undefined} className={`transition-colors hover:text-fg ${pathname.startsWith(n.href) ? "text-fg" : ""}`}>{n.label}</Link>
           ))}
         </nav>
         {home ? null : <SmartInput className="w-full sm:ml-auto sm:w-[24rem]" placeholder="Profile, wallet, or market link" />}
