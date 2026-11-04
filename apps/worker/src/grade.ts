@@ -6,6 +6,7 @@ import {
   type OutcomeData, type ResolutionLike, type WalletEdgeRow,
 } from "../../../packages/core/src/index.js";
 import { encode, NAMESPACES } from "../../../packages/memory/src/index.js";
+import { fetchResolutions } from "../../../packages/public-data/src/index";
 import { publicWalletHistory } from "../../../scripts/public-source.js";
 import {
   OUTCOME_LEDGER_FILE, VERDICT_LEDGER_FILE, WALLET_INDEX_FILE, WORKER_DIR, cliArgs, memoryStore, predictionClient, readJson, tatumCallsUsed, writeJson,
@@ -26,19 +27,28 @@ const done = new Set(outcomes.map((o) => o.key));
 const pending = verdicts.filter((v) => !done.has(v.key) && checked[v.key] !== -1);
 console.log(`${verdicts.length} sealed verdicts, ${outcomes.length} graded, ${pending.length} waiting`);
 
-// 1. Which pending verdicts have resolved? One Tatum call per market, at most once an hour each.
+// 1. Which pending verdicts have resolved? Ask Polymarket's free Gamma API first (batched), and spend one Tatum call
+// per market only once Gamma says it has resolved; Tatum caches resolved markets forever. This keeps grading off the
+// Tatum hourly budget, which used to grow with every sealed verdict.
 const fresh: OutcomeData[] = [];
-for (const v of pending) {
-  if (!FORCE && Date.now() - (checked[v.key] ?? 0) < CHECK_EVERY_MS) continue;
-  let market;
-  try { market = await api.market(v.verdict.marketId); }
-  catch (e) {
-    if (e instanceof TatumBudgetExceeded) { console.error(e.message); break; }
-    console.log(`  ${v.verdict.marketId.slice(0, 10)}: ${(e as Error).message}`);
-    continue;
-  }
+const due = pending.filter((v) => FORCE || Date.now() - (checked[v.key] ?? 0) >= CHECK_EVERY_MS);
+const gamma = due.length ? await fetchResolutions(due.map((v) => v.verdict.marketId)).catch(() => new Map()) : new Map();
+let tatumOut = false;
+for (const v of due) {
   checked[v.key] = Date.now();
-  if (!market.resolution) { console.log(`  ${v.verdict.eventSlug}: not resolved yet (${market.status})`); continue; }
+  const pub = gamma.get(v.verdict.marketId.toLowerCase()) ?? null;
+  if (!pub) { console.log(`  ${v.verdict.eventSlug}: not resolved yet (Gamma)`); continue; }
+  let resolution: { outcome: string; outcomes: string[] } = { outcome: pub.outcome, outcomes: pub.outcomes ?? [] };
+  if (!tatumOut) {
+    try {
+      const market = await api.market(v.verdict.marketId);
+      if (market.resolution) resolution = { outcome: market.resolution.outcome, outcomes: market.outcomes.map((o) => o.name) };
+    } catch (e) {
+      if (e instanceof TatumBudgetExceeded) { console.error(`${e.message} Grading from Polymarket public data.`); tatumOut = true; }
+      else console.log(`  ${v.verdict.marketId.slice(0, 10)}: Tatum ${(e as Error).message}; using Polymarket public resolution`);
+    }
+  }
+  const market = { resolution: { outcome: resolution.outcome }, outcomes: resolution.outcomes.map((name) => ({ name })) };
   const y = yesWon(market.resolution.outcome, market.outcomes.map((o) => o.name));
   if (y === null) { console.log(`  ${v.verdict.eventSlug}: resolved "${market.resolution.outcome}", not gradable`); checked[v.key] = -1; continue; }
   const d = v.verdict;
