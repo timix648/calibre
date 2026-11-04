@@ -1,6 +1,6 @@
 # Deploying the site on Vercel
 
-`apps/web` is a Next.js 16 app inside the pnpm monorepo. It needs **no environment variables and no secrets**: the verdicts, wallet index and
+`apps/web` is a Next.js 16 app inside the pnpm monorepo. It needs **no environment variables and no secrets** (the optional paid agent API below aside): the verdicts, wallet index and
 memory counts are static JSON files in `apps/web/data/` (committed), the site makes no Tatum calls, and the live wallet audit at
 `/api/wallet/[address]` reads Polymarket's free public API.
 
@@ -19,7 +19,7 @@ memory counts are static JSON files in `apps/web/data/` (committed), the site ma
    | Build Command | `next build` (already in `apps/web/vercel.json`; `pnpm build` also works) |
    | Output Directory | leave the default (`.next`) |
    | Node.js Version | 22.x or 24.x |
-   | Environment Variables | none |
+   | Environment Variables | none for the site; `MPP_RECIPIENT` and `MPP_SECRET_KEY` only to turn on the paid API (docs/AGENT_PAYMENTS.md) |
 
 4. Click **Deploy**. The pnpm version comes from `packageManager` in the root `package.json` (10.18.3).
 
@@ -33,7 +33,7 @@ pnpm --filter @calibre/web build
 ## What runs where
 
 - Static pages: `/`, `/moves`, `/move/[id]` (one per sealed verdict), `/proof`, `/method`.
-- Serverless functions: `/api/xray/wallet/[address]`, `/api/xray/market/[ref]` and `/api/xray/handle/[handle]` (GET, CORS open so the browser extension can call them; `maxDuration` 60 s; no Tatum calls, Polymarket's free Gamma and Data APIs only; the market route returns partial results with `complete: false` after about 25 s). `/market/[ref]` is a thin page over the market route. The old `/api/wallet/[address]` (`maxDuration` 60 s, set in the route file). `/wallet/[address]` is a thin page that calls it from the browser.
+- Serverless functions: `/api/xray/wallet/[address]`, `/api/xray/market/[ref]` and `/api/xray/handle/[handle]` (GET, CORS open so the browser extension can call them; `maxDuration` 60 s; no Tatum calls, Polymarket's free Gamma and Data APIs only; the market route returns partial results with `complete: false` after about 25 s). `/market/[ref]` is a thin page over the market route. `/api/v1/xray/[address]` is the paid agent API (0.01 USDC per call over MPP on Sui): it answers 503 until `MPP_RECIPIENT` and `MPP_SECRET_KEY` are set, never caches, and is described in docs/AGENT_PAYMENTS.md. The old `/api/wallet/[address]` (`maxDuration` 60 s, set in the route file). `/wallet/[address]` is a thin page that calls it from the browser.
 - The route caches each audit in the function instance's memory for 10 minutes, de-duplicates concurrent audits of one wallet, and allows 8 uncached audits per minute per IP. This state is per instance, so on Vercel it is best effort; successful responses also carry `Cache-Control: public, s-maxage=600`, so Vercel's CDN absorbs repeat requests.
 
 ## The browser extension
