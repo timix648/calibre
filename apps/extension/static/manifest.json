@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "CALIBRE Whale X-ray for Polymarket",
+  "version": "0.1.0",
+  "description": "See whether the money behind a Polymarket move, or a wallet you are about to copy, comes from traders who reliably lose.",
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": ["storage"],
+  "background": { "service_worker": "background.js" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "content_scripts": [
+    {
+      "matches": ["https://polymarket.com/*", "https://www.polymarket.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": { "default_title": "CALIBRE X-ray options", "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png" } }
+}
