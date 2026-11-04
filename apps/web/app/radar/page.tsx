@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { verdictSquare } from "@calibre/core";
 import Link from "next/link";
 import { GaugeLegend, SquareGauge } from "@/components/square-gauge";
 import { SmartInput } from "@/components/smart-input";
@@ -41,7 +42,7 @@ export default function Radar() {
         </div>
         <p className="mb-4 text-sm leading-relaxed text-muted">
           The label is the sealed model&apos;s read of the money behind the move, from the edge it had learned for each wallet. It is not a claim that anyone behind a move is skilled:
-          past winners rarely stay ahead. The square-money share is shown when the verdict recorded it; earlier verdicts predate the measure.
+          past winners rarely stay ahead. The square-money share is recorded from model v3 onward; earlier verdicts (v1, v2) predate the measure and stay as they were sealed.
         </p>
         {rows.length === 0 ? (
           <p className="text-muted">No verdicts have been sealed yet.</p>
@@ -51,6 +52,7 @@ export default function Radar() {
             {rows.map((v) => {
               const d = v.data;
               const graded = outcomeFor(v.key);
+              const square = verdictSquare(d);
               return (
                 <li key={v.id} className="rounded-xl border border-line bg-panel p-4">
                   <Link href={`/move/${v.id}`} className="font-medium leading-snug text-fg underline decoration-line underline-offset-4">{d.question}</Link>
@@ -60,8 +62,8 @@ export default function Radar() {
                       <div className="num text-sm text-muted">{pct(d.move.from)} → {pct(d.move.to)}</div>
                       <div className="mt-1.5 flex items-center gap-1.5"><Badge tone="accent">{d.label}</Badge><span className="text-xs text-faint">{d.model ?? "v1"}</span></div>
                     </div>
-                    {d.squareMoney ? (
-                      <div className="text-center"><SquareGauge share={d.squareMoney.share} coverage={d.squareMoney.coverage} size="sm" /><div className="num text-[11px] text-faint">covers {pct(d.squareMoney.coverage)}</div></div>
+                    {square ? (
+                      <div className="text-center"><SquareGauge share={square.share} coverage={square.coverage} size="sm" /><div className="num text-[11px] text-faint">judged {pct(square.coverage)}</div></div>
                     ) : <span className="text-xs text-faint">square money not recorded</span>}
                   </div>
                   <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
@@ -92,6 +94,7 @@ export default function Radar() {
                 {rows.map((v) => {
                   const d = v.data;
                   const graded = outcomeFor(v.key);
+                  const square = verdictSquare(d);
                   return (
                     <tr key={v.id} className="border-b border-line/60 align-top">
                       <td className="py-3 pr-3">
@@ -101,7 +104,7 @@ export default function Radar() {
                       <td className="num whitespace-nowrap px-3 py-3 text-muted">{pct(d.move.from)} → {pct(d.move.to)}</td>
                       <td className="px-3 py-3"><Badge tone="accent">{d.label}</Badge><span className="ml-1.5 text-xs text-faint">{d.model ?? "v1"}</span></td>
                       <td className="num px-3 py-3 text-muted">
-                        {d.squareMoney ? <><SquareGauge share={d.squareMoney.share} coverage={d.squareMoney.coverage} size="sm" /><span className="block text-xs text-faint">covers {pct(d.squareMoney.coverage)}</span></> : <span className="text-faint">not recorded</span>}
+                        {square ? <><SquareGauge share={square.share} coverage={square.coverage} size="sm" /><span className="block text-xs text-faint">judged {pct(square.coverage)}</span></> : <span className="text-faint">not recorded</span>}
                       </td>
                       <td className="px-3 py-3 text-muted">{sourceLabel(d.source)}</td>
                       <td className="whitespace-nowrap px-3 py-3 text-muted">{utc(d.sealedAt)}</td>

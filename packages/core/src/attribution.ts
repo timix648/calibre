@@ -15,9 +15,14 @@ export interface FlowTrade {
 export const MAX_WALLET_EDGE = 0.08;
 /** The forecast never leaves the post-move price by more than this. */
 export const MAX_FORECAST_SHIFT = 0.1;
-/** Version of the judging model. v2: edge cap, alpha 0.5, weights by share of total flow, forecast cap. v1 verdicts predate it. */
-export const MODEL_VERSION = "v2";
-export type ModelVersion = "v1" | "v2";
+/**
+ * Version of the judging model. v2: edge cap, alpha 0.5, weights by share of total flow, forecast cap (v1 verdicts predate it).
+ * v3 judges exactly like v2 and also records the square-money share, its coverage and each top wallet's X-ray label in the verdict.
+ */
+export const MODEL_VERSION = "v3";
+export type ModelVersion = "v1" | "v2" | "v3";
+/** Every version that exists in Walrus, oldest first. Sealed memories are append-only, so all of them stay readable. */
+export const MODEL_VERSIONS: readonly ModelVersion[] = ["v1", "v2", "v3"];
 
 export type WalletSkill = Pick<Edge, "edge" | "effN">;
 

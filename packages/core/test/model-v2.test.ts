@@ -135,14 +135,14 @@ describe("forecast model v2", () => {
 });
 
 describe("verdict model version", () => {
-  it("is v2 for new verdicts and carried in the sealed data", () => {
-    expect(MODEL_VERSION).toBe("v2");
+  it("is v3 for new verdicts and carried in the sealed data", () => {
+    expect(MODEL_VERSION).toBe("v3");
     const d = {
       marketId: "m", eventSlug: "e", league: "cs2", question: "Q?", yesOutcome: "A", move: { from: 0.5, to: 0.6, startTs: 1, endTs: 2 },
       label: "noise", sharpShare: 0, opposition: null, forecast: 0.6, priceAtVerdict: 0.6, trades: 1, wallets: 1, topWallets: [],
       checkpoint: { sequence: "1", digest: null, timestamp: null }, sealedAt: "x", model: MODEL_VERSION,
     } satisfies VerdictData;
-    expect(verdictRecord(d).data.model).toBe("v2");
+    expect(verdictRecord(d).data.model).toBe("v3");
   });
 });
 

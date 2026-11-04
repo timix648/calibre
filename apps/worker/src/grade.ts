@@ -2,7 +2,7 @@
 //   pnpm --filter @calibre/worker grade [--force]
 import { TatumBudgetExceeded } from "../../../packages/chain/src/index.js";
 import {
-  POLITICS, gradeForecast, needsNewVersion, outcomeRecord, summariseGrades, walletKey, yesWon,
+  MODEL_VERSIONS, POLITICS, gradeForecast, needsNewVersion, outcomeRecord, summariseGrades, walletKey, yesWon,
   type OutcomeData, type ResolutionLike, type WalletEdgeRow,
 } from "../../../packages/core/src/index.js";
 import { encode, NAMESPACES } from "../../../packages/memory/src/index.js";
@@ -73,8 +73,8 @@ if (fresh.length > 0) {
 }
 
 // 3. Brier by label: CALIBRE's forecast against the market price right after the move, one table per judging model
-// (v1 verdicts predate the conservative forecast and are never pooled with v2).
-for (const model of ["v1", "v2"] as const) {
+// (v1 verdicts predate the conservative forecast and are never pooled with v2; v3 judges like v2 and adds square money).
+for (const model of MODEL_VERSIONS) {
   const graded = outcomes.filter((o) => (o.outcome.model ?? "v1") === model);
   if (graded.length === 0) continue;
   console.log(`\nmodel ${model}: label          n   forecast Brier   market Brier   gain      forecast closer`);

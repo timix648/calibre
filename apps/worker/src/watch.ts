@@ -10,7 +10,7 @@ import {
 } from "../../../packages/chain/src/index.js";
 import {
   BREAKER_HOLD_MS, MODEL_VERSION, aggregateFlows, breakerOpen, callsInLastHour, candlePoints, judgeMove, latestMove, priceSeriesFromTrades,
-  publicTradesToFlows, selectCandidates, selectMidtermCandidates, tripBreaker, verdictKey, verdictRecord, walletKey,
+  publicTradesToFlows, selectCandidates, selectMidtermCandidates, tripBreaker, verdictKey, verdictRecord, verdictSquareMoney, walletKey, walletLabeler,
   type BreakerState, type Candidate, type DataSource, type FlowTrade, type Move, type TimedFlowTrade, type VerdictData,
   type VerdictWallet, type WalletEdgeRow,
 } from "../../../packages/core/src/index.js";
@@ -227,6 +227,9 @@ async function judgeAndSeal(
   const flows = aggregateFlows(fills, skill);
   if (flows.length === 0) { console.log("    no usable trades behind the move, skipped"); return false; }
   const verdict = judgeMove(move.from, move.to, flows);
+  // Square money comes from the wallet index alone (every league pooled): no extra network call, and a wallet without an index row is not judged.
+  const labelOf = walletLabeler(index);
+  const square = verdictSquareMoney(flows, Math.sign(move.to - move.from), labelOf);
 
   const byWallet = new Map(index.filter((r) => r.league === c.league).map((r) => [r.wallet, r]));
   const topWallets: VerdictWallet[] = [...flows]
@@ -237,6 +240,7 @@ async function judgeAndSeal(
       return {
         wallet: f.wallet, league: c.league, netYesUsd: Math.round(f.netYesUsd * 100) / 100, edge: f.edge,
         z: row ? row.z : null, n: row ? row.n : null, blobId: memoryState[walletKey(f.wallet, c.league)]?.blobId ?? null,
+        label: labelOf(f.wallet),
       };
     });
 
@@ -246,6 +250,7 @@ async function judgeAndSeal(
     move, label: verdict.label, sharpShare: verdict.sharpShare,
     opposition: Number.isFinite(verdict.opposition) ? verdict.opposition : null,
     forecast: verdict.forecast, priceAtVerdict: move.to, trades: fills.length, wallets: flows.length, topWallets,
+    squareShare: square.squareShare, squareCoverage: square.squareCoverage,
     checkpoint: { sequence: checkpoint.sequence, digest: checkpoint.digest, timestamp: checkpoint.timestamp },
     sealedAt: new Date().toISOString(),
     model: MODEL_VERSION,
@@ -254,6 +259,7 @@ async function judgeAndSeal(
   };
   const record = verdictRecord(data);
   console.log(`    ${verdict.label} [${evidence.source}]: sharp share ${(verdict.sharpShare * 100).toFixed(0)}%, forecast ${(verdict.forecast * 100).toFixed(1)}% vs price ${(move.to * 100).toFixed(1)}%, ${flows.length} wallets, checkpoint ${checkpoint.sequence}`);
+  console.log(`    square money ${(square.squareShare * 100).toFixed(0)}% of the pushing money, judged ${(square.squareCoverage * 100).toFixed(0)}% (${square.money.squareWallets} proven-losing of ${square.money.wallets} pushing wallets)`);
   if (evidence.fallbackReason) console.log(`    fallback: ${evidence.fallbackReason}`);
   if (DRY) { dryJudged.set(c.marketId, Date.now()); console.log("    dry run: not sealed"); return false; }
 

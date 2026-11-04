@@ -16,6 +16,8 @@ interface SealedVerdict {
     question: string; league: string; label: string; yesOutcome: string; sharpShare: number; forecast: number; priceAtVerdict: number;
     move: { from: number; to: number; startTs: number; endTs: number };
     checkpoint: { sequence: string }; sealedAt: string; model?: string; source?: string;
+    /** Model v3: the share of the pushing money from proven losers and how much of the money was judged. Older verdicts omit both. */
+    squareShare?: number; squareCoverage?: number;
   };
 }
 
@@ -92,6 +94,9 @@ export function createServer(deps: ServerDeps = {}): McpServer {
         priceAtVerdict: Number(v.data.priceAtVerdict.toFixed(3)),
         learnedEdgeShare: Number(v.data.sharpShare.toFixed(3)),
         model: v.data.model ?? "v1",
+        squareMoney: typeof v.data.squareShare === "number" && typeof v.data.squareCoverage === "number"
+          ? { share: Number(v.data.squareShare.toFixed(3)), coverage: Number(v.data.squareCoverage.toFixed(3)) }
+          : null,
         dataSource: v.data.source ?? "tatum",
         suiCheckpoint: v.data.checkpoint.sequence,
         sealedAt: v.data.sealedAt,

@@ -2,7 +2,7 @@
 //   pnpm verify
 import { writeFile } from "node:fs/promises";
 import { latestCheckpoint } from "../packages/chain/src/index.js";
-import { summariseGrades, type OutcomeData, type VerdictData, type WalletMemoryData } from "../packages/core/src/index.js";
+import { MODEL_VERSIONS, summariseGrades, verdictSquare, type OutcomeData, type VerdictData, type WalletMemoryData } from "../packages/core/src/index.js";
 import { NAMESPACES, decode, latestByKey, type Envelope, type MemoryListing, type StoredMemory } from "../packages/memory/src/index.js";
 import { OUTCOME_LEDGER_FILE, VERDICT_LEDGER_FILE, memoryStore, readJson, suiClient, tatumCallsUsed } from "../apps/worker/src/lib/config.js";
 
@@ -43,12 +43,13 @@ const wallets = envelopes<WalletMemoryData>(walletMems, "wallet");
 const byLabel = new Map<string, number>();
 for (const v of verdicts) byLabel.set(v.data.label, (byLabel.get(v.data.label) ?? 0) + 1);
 const modelOf = (e: { model?: string }) => e.model ?? "v1";
-const gradesByModel = (["v1", "v2"] as const).map((model) => ({
+const gradesByModel = MODEL_VERSIONS.map((model) => ({
   model,
   grades: summariseGrades(outcomes.filter((o) => modelOf(o.data) === model).map((o) => ({ label: o.data.label, grade: o.data.grade }))),
 })).filter((m) => m.grades.length > 0);
-const modelCounts = (["v1", "v2"] as const).map((m) => `${m} ${verdicts.filter((v) => modelOf(v.data) === m).length}`).join(", ");
+const modelCounts = MODEL_VERSIONS.map((m) => `${m} ${verdicts.filter((v) => modelOf(v.data) === m).length}`).join(", ");
 console.log(`\nverdicts rebuilt from Walrus: ${verdicts.length} (${[...byLabel].map(([l, n]) => `${l} ${n}`).join(", ") || "none"}); by model: ${modelCounts}`);
+console.log(`verdicts that recorded square money: ${verdicts.filter((v) => verdictSquare(v.data) !== null).length} (model v3 onward)`);
 console.log(`outcomes rebuilt from Walrus: ${outcomes.length}`);
 for (const { model, grades } of gradesByModel) for (const g of grades) console.log(`  ${model} ${g.label.padEnd(10)} n=${g.n} forecast Brier ${g.forecastBrier.toFixed(4)} vs market ${g.marketBrier.toFixed(4)} (gain ${g.gain.toFixed(4)})`);
 console.log(`wallet memories decoded from a recall sample: ${wallets.length}`);

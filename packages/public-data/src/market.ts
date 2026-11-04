@@ -1,5 +1,5 @@
 import {
-  XRAY_TONE, aggregateFlows, classifySlug, isReliableLabel, isSnipePrice, latestMove, priceSeriesFromTrades, publicTradesToFlows, squareMoneyNote,
+  SQUARE_TOP_TAKERS, XRAY_TONE, aggregateFlows, classifySlug, isReliableLabel, isSnipePrice, latestMove, priceSeriesFromTrades, publicTradesToFlows, squareMoneyNote,
   squareMoneyShare, xrayLabel, xraySentence,
   type Move, type SquareMoney, type TimedFlowTrade, type WalletFlow, type XrayLabel, type XrayTone,
 } from "@calibre/core";
@@ -11,7 +11,7 @@ export const MOVE_WINDOW_MS = 6 * 3_600_000;
 /** The smallest move reported, in probability points. */
 export const MIN_MOVE = 0.04;
 /** How many of the takers pushing the move are audited. */
-export const TOP_TAKERS = 6;
+export const TOP_TAKERS = SQUARE_TOP_TAKERS;
 /** Fill pages read (500 fills each). */
 export const MAX_FILL_PAGES = 4;
 /** Total time the X-ray may take before it returns what it has. */

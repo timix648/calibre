@@ -16,3 +16,4 @@ export * from "./memories";
 export * from "./discovery";
 export * from "./fallback";
 export * from "./xray";
+export * from "./verdict-square";

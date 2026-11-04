@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { auditVerdict } from "@calibre/core";
+import { auditVerdict, verdictSquare } from "@calibre/core";
+import { SquareGauge } from "@/components/square-gauge";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
+import { XrayChip } from "@/components/xray-ui";
 import { outcomeFor, verdictById, verdicts } from "@/lib/data";
 import { MOVE_LABEL_TEXT, VERDICT_TONE, pct, pts, shortAddr, sourceLabel, suiscanCheckpoint, utc, walruscan } from "@/lib/format";
 
@@ -27,6 +29,8 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
   const proven = wallets.filter((w) => w.n !== null && w.z !== null && auditVerdict({ z: w.z, n: w.n }) === "proven edge").length;
   const unknown = wallets.filter((w) => w.n === null || w.n === 0).length;
   const shift = d.forecast - d.priceAtVerdict;
+  const square = verdictSquare(d);
+  const labelled = wallets.some((w) => w.label !== undefined);
 
   return (
     <div className="space-y-8">
@@ -52,6 +56,22 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
         <Stat label="Learned-edge share" value={pct(d.sharpShare)} note="of the money pushing the move" />
       </section>
 
+      {square ? (
+        <Card>
+          <H2 sub="Share of the money pushing this move that came from wallets with a proven losing record, read from the wallet index when the verdict was sealed. The six biggest pushers were judged; the rest count as not judged, which is why the coverage matters.">Square money</H2>
+          <div className="grid items-center gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
+            <div className="mx-auto w-full max-w-[320px]">
+              <SquareGauge share={square.share} coverage={square.coverage} />
+              <p className="num mt-1 text-center text-xs text-muted">Judged <span className="text-fg">{pct(square.coverage)}</span> of the pushing money</p>
+            </div>
+            <p className="text-sm leading-relaxed text-muted">
+              {pct(square.share)} of the money pushing the price came from wallets with a proven losing record; {pct(square.coverage)} of it belonged to wallets the index could judge.
+              A caution signal about who pushed the price, not a trade recommendation: whether such moves reverse has not been shown.
+            </p>
+          </div>
+        </Card>
+      ) : null}
+
       <Card>
         <H2 sub="The largest wallets in the move, with the record CALIBRE held for them when it sealed the verdict. Open a wallet for its full live audit.">Who traded it</H2>
         <p className="mb-4 rounded-lg border border-line bg-panel-2 px-4 py-3 text-sm leading-relaxed">
@@ -68,7 +88,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
                 <th className="px-3 py-2 text-right font-medium">Edge held</th>
                 <th className="px-3 py-2 text-right font-medium">z</th>
                 <th className="px-3 py-2 text-right font-medium">Bets</th>
-                <th className="py-2 pl-3 font-medium">Audit</th>
+                <th className="py-2 pl-3 font-medium">{labelled ? "X-ray" : "Audit"}</th>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +105,9 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
                     <td className="num px-3 py-2.5 text-right text-muted">{has ? w.z!.toFixed(1) : "n/a"}</td>
                     <td className="num px-3 py-2.5 text-right text-muted">{has ? w.n : "0"}</td>
                     <td className="py-2.5 pl-3">
-                      {verdict ? <Badge tone={VERDICT_TONE[verdict]}>{verdict}</Badge> : <Badge tone="warn">no record yet</Badge>}
+                      {labelled
+                        ? <XrayChip label={w.label ?? null} compact />
+                        : verdict ? <Badge tone={VERDICT_TONE[verdict]}>{verdict}</Badge> : <Badge tone="warn">no record yet</Badge>}
                     </td>
                   </tr>
                 );
@@ -117,7 +139,9 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
               <span className="block text-xs text-muted">
                 {model === "v1"
                   ? "Model v1 let a forecast sit far from the price. Walrus Memory is append-only, so it stays as sealed; v2 caps any forecast within 10 points of the price."
-                  : "Model v2 caps each wallet's edge at 8 points and keeps the forecast within 10 points of the price."}
+                  : model === "v2"
+                    ? "Model v2 caps each wallet's edge at 8 points and keeps the forecast within 10 points of the price."
+                    : "Model v3 judges like v2 and also records the square-money share and each top wallet's X-ray label, read from the wallet index."}
               </span>
             </Row>
             <Row k="Memory key"><span className="num break-all text-xs text-muted">{v.key}</span></Row>

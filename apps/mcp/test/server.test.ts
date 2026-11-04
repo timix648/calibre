@@ -77,6 +77,23 @@ describe("MCP server", () => {
     expect(parsed[0]).toMatchObject({ model: "v1", dataSource: "tatum" });
   });
 
+  it("latest_verdicts shows square money for v3 verdicts and null for older ones", async () => {
+    const dir = await mkdtemp(path.join(tmpdir(), "calibre-mcp-"));
+    const file = path.join(dir, "verdicts.json");
+    const data = (n: number, extra: object) => ({
+      id: `v${n}`, blobId: `blob${n}`, walruscan: `https://walruscan.com/mainnet/blob/blob${n}`,
+      data: {
+        question: `Market ${n}`, league: "nba", label: "noise", yesOutcome: "Yes", sharpShare: 0.1, forecast: 0.5, priceAtVerdict: 0.48,
+        move: { from: 0.4, to: 0.5, startTs: 1, endTs: 2 }, checkpoint: { sequence: String(100 + n) }, sealedAt: `2026-11-0${n}T00:00:00Z`, ...extra,
+      },
+    });
+    await writeFile(file, JSON.stringify({ verdicts: [data(1, { model: "v2" }), data(2, { model: "v3", squareShare: 0.2512, squareCoverage: 0.8 })] }));
+    const client = await connect({ verdictsFile: file });
+    const parsed = JSON.parse(text(await client.callTool({ name: "latest_verdicts", arguments: {} }))) as { market: string; squareMoney: unknown }[];
+    expect(parsed.find((p) => p.market === "Market 2")?.squareMoney).toEqual({ share: 0.251, coverage: 0.8 });
+    expect(parsed.find((p) => p.market === "Market 1")?.squareMoney).toBeNull();
+  });
+
   it("latest_verdicts explains a missing export", async () => {
     const client = await connect({ verdictsFile: path.join(tmpdir(), "does-not-exist.json") });
     const r = await client.callTool({ name: "latest_verdicts", arguments: {} });

@@ -1,5 +1,6 @@
 import type { ModelVersion, MoveLabel } from "./attribution";
 import type { Edge } from "./edge";
+import type { XrayLabel } from "./xray";
 import type { Grade } from "./grading";
 import type { DataSource } from "./fallback";
 import { formatPoints, leagueLabel, shortAddress, skillPhrase, skillVerdict, type SkillVerdict } from "./wording";
@@ -74,6 +75,8 @@ export interface VerdictWallet {
   n: number | null;
   /** Blob of the wallet memory this verdict relied on, when one exists. */
   blobId: string | null;
+  /** X-ray label from the wallet index when the verdict was sealed (model v3); null when the wallet had no index row, absent before v3. */
+  label?: XrayLabel | null;
 }
 
 export interface VerdictData {
@@ -102,8 +105,18 @@ export interface VerdictData {
   source?: DataSource;
   /** Why Polymarket public data was used instead of Tatum, present when `source` is `polymarket-public`. */
   fallbackReason?: string;
-  /** Share of the move-aligned money that came from wallets with a proven losing record, with how much of that money could be judged. */
+  /** Model v3: share of the money pushing the move that came from judged wallets with a proven losing record (a floor). */
+  squareShare?: number;
+  /** Model v3: share of the money pushing the move that belongs to wallets judged from the wallet index. */
+  squareCoverage?: number;
+  /** Older shape of the same two numbers. No sealed verdict is known to carry it; readers still accept it. */
   squareMoney?: { share: number; coverage: number };
+}
+
+/** Square money of a verdict, whichever shape recorded it; null for verdicts sealed before it was measured (v1 and v2). */
+export function verdictSquare(d: Pick<VerdictData, "squareShare" | "squareCoverage" | "squareMoney">): { share: number; coverage: number } | null {
+  if (typeof d.squareShare === "number" && typeof d.squareCoverage === "number") return { share: d.squareShare, coverage: d.squareCoverage };
+  return d.squareMoney ?? null;
 }
 
 export const verdictKey = (marketId: string, moveEndTs: number) => `${marketId}:${Math.floor(moveEndTs / 1000)}`;
@@ -111,6 +124,7 @@ export const verdictKey = (marketId: string, moveEndTs: number) => `${marketId}:
 const pct = (p: number) => `${Math.round(p * 100)}%`;
 
 export function verdictRecord(d: VerdictData): MemoryRecord<VerdictData> {
+  const square = verdictSquare(d);
   const dir = d.move.to >= d.move.from ? "up" : "down";
   const why: Record<MoveLabel, string> = {
     "sharp-led": `${pct(d.sharpShare)} of the money behind it came from wallets with a learned edge`,
@@ -122,7 +136,7 @@ export function verdictRecord(d: VerdictData): MemoryRecord<VerdictData> {
     kind: "verdict",
     key: verdictKey(d.marketId, d.move.endTs),
     version: 1,
-    summary: `${d.league.toUpperCase()} move ${dir} on "${d.question}" (${d.yesOutcome} ${pct(d.move.from)} to ${pct(d.move.to)}) is ${d.label}: ${why[d.label]}. CALIBRE forecast ${pct(d.forecast)} for ${d.yesOutcome}${d.source === "polymarket-public" ? `. Data: Polymarket public API (${d.fallbackReason ?? "Tatum unavailable"})` : ""}`,
+    summary: `${d.league.toUpperCase()} move ${dir} on "${d.question}" (${d.yesOutcome} ${pct(d.move.from)} to ${pct(d.move.to)}) is ${d.label}: ${why[d.label]}. CALIBRE forecast ${pct(d.forecast)} for ${d.yesOutcome}${square ? `. Square money ${pct(square.share)} of the money pushing the move (judged ${pct(square.coverage)})` : ""}${d.source === "polymarket-public" ? `. Data: Polymarket public API (${d.fallbackReason ?? "Tatum unavailable"})` : ""}`,
     data: d,
   };
 }
