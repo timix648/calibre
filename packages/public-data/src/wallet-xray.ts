@@ -8,12 +8,12 @@ export interface WalletXray extends WalletAuditResult {
     /** True only for a proven losing record: the one label that holds going forward. */
     reliable: boolean;
     sentence: string;
-    /** Why a positive record is not a recommendation; null for the other labels. */
+    /** How far the proven winning record held up in testing; null for the other labels. */
     caveat: string | null;
   };
 }
 
-export const POSITIVE_CAVEAT = "Past winners rarely stay ahead: in a study of 1,000 wallets the best third broke even afterwards.";
+export const WINNING_CAVEAT = "Rare and modest. In a test of 1,000 wallets, those with this record stayed ahead by +2.2 pts per bet on average afterwards (interval +0.5 to +4.1), mostly from in-play bets; pre-game bets alone did not show it.";
 
 /** A wallet audit with its X-ray label, plain-English sentence and reliability flag. */
 export function toWalletXray(result: WalletAuditResult): WalletXray {
@@ -25,7 +25,7 @@ export function toWalletXray(result: WalletAuditResult): WalletXray {
       tone: XRAY_TONE[label],
       reliable: isReliableLabel(label),
       sentence: xraySentence(result.audit),
-      caveat: label === "positive record (unproven going forward)" ? POSITIVE_CAVEAT : null,
+      caveat: label === "proven winning record" ? WINNING_CAVEAT : null,
     },
   };
 }

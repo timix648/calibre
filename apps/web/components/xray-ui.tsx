@@ -3,10 +3,10 @@ import { Badge } from "./ui";
 
 /** One-line meaning of each label, for tooltips and legends. */
 export const LABEL_MEANING: Record<XrayLabel, string> = {
-  "proven losing record": "Overall z of -2 or lower over at least 30 bets. The one label that holds going forward: past losers kept losing in our study.",
+  "proven losing record": "Overall z of -2 or lower over at least 30 bets. In testing, these wallets lost again (-3.8 pts per bet next, 81% of them).",
   "mostly sniping": "More than 40% of resolved bets were bought at 97 cents or more, or 3 cents or less, when the outcome was decided.",
   "too early": "Fewer than 30 scored bets.",
-  "positive record (unproven going forward)": "Overall z of 2 or more over at least 100 bets. Past winners rarely stay ahead, so this is a record, not a signal.",
+  "proven winning record": "Overall z of 2 or more over at least 100 bets. Rare; in testing these wallets stayed ahead modestly (+2.2 pts per bet next).",
   "no proven edge": "Nothing separates the record from luck.",
 };
 

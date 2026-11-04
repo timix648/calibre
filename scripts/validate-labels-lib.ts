@@ -35,7 +35,7 @@ export function parseStudyLog(text: string): LogRow[] {
 export const halves = (picks: number): { nOld: number; nNew: number } => ({ nOld: Math.floor(picks / 2), nNew: picks - Math.floor(picks / 2) });
 
 /** Labels derivable from a log: sniping needs the share of near-certain bets, which the logs do not carry. */
-export const LOG_LABELS: XrayLabel[] = ["proven losing record", "positive record (unproven going forward)", "no proven edge", "too early"];
+export const LOG_LABELS: XrayLabel[] = ["proven losing record", "proven winning record", "no proven edge", "too early"];
 
 /** The label the wallet would have had from its older half alone, by the same rules as core `xrayLabel` with sniping left out. */
 export function labelFromOlderHalf(row: Pick<LogRow, "picks" | "oldZ">): XrayLabel {
@@ -167,7 +167,7 @@ export function renderMarkdown(r: ValidationReport): string {
   out.push("");
   out.push(`- Source: the per-wallet lines of the skill-persistence study logs (${r.sources.join(", ")}). Each wallet's bets are split at the middle: the older half is what the X-ray would have known, the newer half is what happened next.`);
   out.push(`- Wallets: ${r.includesTop ? "profit-blind wallets and the top earners" : "the profit-blind sample only (wallets drawn from the same markets, not picked for profit)"}.`);
-  out.push(`- Label from the older half, with the rules of the live X-ray: proven losing record = z <= ${r.rules.losing.z} over at least ${r.rules.losing.minBets} bets; positive record = z >= ${r.rules.positive.z} over at least ${r.rules.positive.minBets} bets; too early = fewer than ${r.rules.tooEarlyBelow} bets; otherwise no proven edge. "Mostly sniping" cannot be derived from the logs and is left out.`);
+  out.push(`- Label from the older half, with the rules of the live X-ray: proven losing record = z <= ${r.rules.losing.z} over at least ${r.rules.losing.minBets} bets; proven winning record = z >= ${r.rules.positive.z} over at least ${r.rules.positive.minBets} bets; too early = fewer than ${r.rules.tooEarlyBelow} bets; otherwise no proven edge. "Mostly sniping" cannot be derived from the logs and is left out.`);
   out.push("- Edge: points won above the price paid, per bet, on one pick per market. Mean newer-half edge comes with a percentile bootstrap 95% interval (2,000 resamples over wallets, fixed seed). A wallet counts once, whatever its size.");
   out.push("- n for the label is floor(picks / 2), the size of the older half.");
   out.push("");

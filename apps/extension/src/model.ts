@@ -1,4 +1,4 @@
-import { XRAY_SHORT } from "../../../packages/core/src/xray";
+import { XRAY_SHORT, XRAY_SUBTITLE } from "../../../packages/core/src/xray";
 import type { MarketXray, WalletXray } from "../../../packages/public-data/src";
 
 export type Tone = "bad" | "warn" | "muted" | "good" | "accent";
@@ -59,7 +59,7 @@ export function walletModel(r: WalletXray): PanelModel {
       { label: "Sniping", value: pct(a.sniping.share) },
     ],
     takers: [],
-    notes: [...notes, r.xray.reliable ? "Only a proven losing record is a reliable label." : "Only a proven losing record is a reliable label; past winners rarely stay ahead."],
+    notes: [...notes, `Label check: ${XRAY_SUBTITLE[r.xray.label]}.`],
     more: { label: "Open the full X-ray", sitePath: `/wallet/${r.address}` },
   };
 }

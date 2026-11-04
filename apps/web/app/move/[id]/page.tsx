@@ -66,7 +66,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
             </div>
             <p className="text-sm leading-relaxed text-muted">
               {pct(square.share)} of the money pushing the price came from wallets with a proven losing record; {pct(square.coverage)} of it belonged to wallets the index could judge.
-              A caution signal about who pushed the price, not a trade recommendation: whether such moves reverse has not been shown.
+              Caution signal. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.
             </p>
           </div>
         </Card>

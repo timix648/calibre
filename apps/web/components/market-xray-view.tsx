@@ -193,7 +193,7 @@ function TakersCard({ r }: { r: MarketXray }) {
       </TableWrap>
       </div>
       <p className="mt-3 text-xs leading-relaxed text-faint">
-        Only the top {r.takers.length} takers by money are judged. A positive record is shown as it is, flagged as unproven going forward: past winners rarely stay ahead.
+        Only the top {r.takers.length} takers by money are judged. A proven winning record is rare and modest in testing (+2.2 pts per bet next); a proven losing record lost again (-3.8 pts).
       </p>
     </Card>
   );

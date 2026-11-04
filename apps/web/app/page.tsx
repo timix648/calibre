@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FindingsBars } from "@/components/findings-bars";
 import { HowItWorks } from "@/components/how-it-works";
+import { LabelTestChart, LabelTestTable, allWallets, signedPts, validationRow } from "@/components/label-validation";
 import { SmartInput } from "@/components/smart-input";
 import { Card, H2, Stat, TableWrap } from "@/components/ui";
 import { findings, memory, verdicts } from "@/lib/data";
@@ -10,15 +11,15 @@ const SAMPLE_WALLET = "0x684baa57c338c2549aec0aa3f034f695d72a8409";
 const POINTS = [
   {
     title: "A square is a bettor who reliably loses",
-    body: "A proven losing record is the one label that holds up: in the study, wallets that had lost to their prices kept losing, about 2 points on every bet.",
+    body: "A proven losing record is the strongest label: in testing, those wallets lost again (-3.8 pts on every next bet, 81% of them).",
   },
   {
-    title: "A sharp is hard to prove, so we do not call one",
-    body: "Past winners did not stay ahead. A positive record is shown, flagged as unproven going forward, and never sold as a signal. Leaderboard rank carries no signal either.",
+    title: "A sharp is rare, and the edge is modest",
+    body: "A proven winning record needs z of 2 or more over 100+ bets. In testing those wallets stayed ahead modestly (+2.2 pts next). Leaderboard rank carries no signal.",
   },
   {
     title: "Square money is a caution, not a trade",
-    body: "On any market we show how much of the latest move came from proven losers, and how much of it we could judge. Whether such moves reverse is a pending study, so we do not tell you to fade them.",
+    body: "On any market we show how much of the latest move came from proven losers, and how much of it we could judge. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.",
   },
 ];
 
@@ -33,16 +34,19 @@ export default function Home() {
   const w = findings.wide;
   const best = w.rows[0]!;
   const top = w.rows[w.rows.length - 1]!;
+  const losing = validationRow("proven losing record")!;
+  const winning = validationRow("proven winning record")!;
+  const everyone = allWallets()!;
   const signed = (v: number) => `${v > 0 ? "+" : v < 0 ? "-" : ""}${Math.abs(v * 100).toFixed(1)} pts`;
   return (
     <div className="space-y-14 sm:space-y-20">
       <section>
-        <p className="text-sm font-medium text-accent">Sharps vs squares, for prediction markets</p>
+        <p className="text-sm font-medium text-accent">Whale X-ray for prediction markets</p>
         <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-6xl">
-          Whale X-ray for prediction markets
+          CALIBRE&apos;s labels predict what a wallet does next
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-          Before you chase a price move or copy a whale, see whether the money behind it comes from traders who reliably lose.
+          Before you chase a price move or copy a whale, see whether the money behind it comes from traders who reliably lose. Tested on {everyone.wallets} wallets, older bets to newer ones.
         </p>
         <SmartInput large autoFocus className="mt-8 max-w-2xl" button="X-ray it" />
         <p className="mt-3 text-sm text-muted">
@@ -52,10 +56,33 @@ export default function Home() {
         </p>
       </section>
 
+      <section aria-labelledby="labeltest">
+        <Card>
+          <H2 sub={`${everyone.wallets} wallets chosen without looking at profit, sports markets. Each wallet gets the label it would have had from its older bets; the chart shows how it did on its newer ones.`}>
+            <span id="labeltest">The test: a wallet&apos;s label from its old bets, and what it did next</span>
+          </H2>
+          <LabelTestChart />
+          <ul className="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Reading">
+            <li className="rounded-lg border border-bad/30 bg-bad/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-bad">{signedPts(losing.meanNewEdgePts)} pts</span> <span className="text-muted">Proven losing record: {Math.round((losing.shareNegative ?? 0) * 100)}% of {losing.wallets} wallets lost again.</span></li>
+            <li className="rounded-lg border border-good/30 bg-good/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-good">{signedPts(winning.meanNewEdgePts)} pts</span> <span className="text-muted">Proven winning record: rare ({winning.wallets} wallets), modest.</span></li>
+            <li className="rounded-lg border border-line bg-panel-2 px-3.5 py-2.5 text-sm"><span className="num font-semibold">{signedPts(everyone.row.meanNewEdgePts)} pts</span> <span className="text-muted">All {everyone.wallets} wallets, the baseline.</span></li>
+          </ul>
+          <details className="mt-4 text-sm">
+            <summary className="cursor-pointer text-muted hover:text-fg">The same numbers as a table, with every label</summary>
+            <LabelTestTable />
+          </details>
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            Edge is how much more often bets won than the prices paid implied, per bet. The whiskers are 95% intervals. The result is mostly driven by in-play bets, and
+            older and newer bets of one wallet share its style, so this is not a trading test.{" "}
+            <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
+          </p>
+        </Card>
+      </section>
+
       <section aria-labelledby="finding">
         <Card>
-          <H2 sub={`${best.wallets} wallets chosen without looking at profit, sports markets. Each is ranked by its edge on older bets, then followed on newer ones.`}>
-            <span id="finding">The finding: past losers keep losing, past winners do not stay ahead</span>
+          <H2 sub={`The same ${best.wallets} wallets ranked by raw edge on older bets, split in thirds, then followed on newer ones: the best third breaks even, the worst third keeps losing.`}>
+            <span id="finding">The leaderboard has no signal; ranking by raw edge only finds the losers</span>
           </H2>
           <FindingsBars row={best} top={top} />
           <ul className="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Reading">

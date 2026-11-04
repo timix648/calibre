@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { AuditVerdict, EdgeSummary } from "@calibre/core";
+import { XRAY_SUBTITLE, type AuditVerdict, type EdgeSummary } from "@calibre/core";
 import type { WalletXray } from "@calibre/public-data";
 import { EdgeBar } from "./edge-bar";
 import { LuckLegend, PhaseEdgeChart } from "./edge-chart";
@@ -83,10 +83,10 @@ function Result({ r, cached }: { r: WalletXray; cached: boolean }) {
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="text-sm text-faint">X-ray</span>
           <span className="text-base"><XrayChip label={r.xray.label} /></span>
-          {r.xray.reliable ? <Badge tone="accent">Reliable label</Badge> : null}
           {r.name && !r.name.startsWith("0x") ? <span className="text-sm text-muted">{r.name}</span> : null}
         </div>
-        <p className="mt-4 text-xl font-medium leading-snug tracking-tight sm:text-2xl">{r.xray.sentence}</p>
+        <p className="mt-3 text-sm text-muted">Wallets with this label: {XRAY_SUBTITLE[r.xray.label]}.</p>
+        <p className="mt-3 text-xl font-medium leading-snug tracking-tight sm:text-2xl">{r.xray.sentence}</p>
         {r.xray.caveat ? <p className="mt-3 text-sm leading-relaxed text-warn">{r.xray.caveat}</p> : null}
         {!r.xray.reliable && !r.xray.caveat ? (
           <p className="mt-3 text-xs leading-relaxed text-faint">{LABEL_MEANING[r.xray.label]}</p>
@@ -186,8 +186,8 @@ function Result({ r, cached }: { r: WalletXray; cached: boolean }) {
         <H2>How to read this</H2>
         <ul className="space-y-2 text-sm leading-relaxed text-muted">
           <li>Edge is how much more often a wallet&apos;s bets won than the prices it paid implied. +3 points means 3 more wins per 100 bets than the prices said.</li>
-          <li><strong className="text-fg">Proven losing record</strong> is the label that holds going forward: in a study of 1,000 wallets, past losers kept losing about 2 points per bet. Past winners did not stay ahead, so a positive record is shown but flagged.</li>
-          <li>The labels: proven losing record (z of -2 or lower, 30+ bets), mostly sniping (over 40% decided-price bets), too early (under 30 bets), positive record (z of 2 or more, 100+ bets), otherwise no proven edge.</li>
+          <li>The labels were tested on 1,000 wallets: the label a wallet had from its older bets, then how it did on its newer ones. A <strong className="text-fg">proven losing record</strong> lost again (-3.8 pts per bet next, 81% of wallets); the rare <strong className="text-fg">proven winning record</strong> stayed ahead modestly (+2.2 pts). See the method page.</li>
+          <li>The labels: proven losing record (z of -2 or lower, 30+ bets), mostly sniping (over 40% decided-price bets), too early (under 30 bets), proven winning record (z of 2 or more, 100+ bets), otherwise no proven edge.</li>
           <li>One bet per market is counted; sells are scored as a bet on the other side. Only the newest 1,000 trades are read{r.truncated ? ", and this wallet has more" : ""}. Read {utc(r.firstTradeAt ? r.firstTradeAt * 1000 : null).slice(0, 10)} to {utc(r.lastTradeAt ? r.lastTradeAt * 1000 : null).slice(0, 10)}.</li>
         </ul>
       </Card>

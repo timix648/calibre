@@ -3,14 +3,15 @@ import type { WalletFlow } from "./attribution";
 
 /**
  * The X-ray label of a wallet, in the language of sports bettors: a "square" is a bettor who reliably loses, a "sharp" one who
- * reliably beats the price. The 1,000-wallet study found that past losers keep losing (about 2 points per bet) while past
- * winners do not stay ahead, so only the losing label is reliable going forward. The positive label is shown with that caveat.
+ * reliably beats the price. The labels were tested on 1,000 wallets (docs/LABEL_VALIDATION.md): the label a wallet had from its
+ * older bets predicted its newer bets. A proven losing record lost again (-3.8 points per bet, 81% of wallets); the rare, strict
+ * proven winning record stayed ahead modestly (+2.2 points); most wallets have no proven edge and did slightly worse than zero.
  */
 export type XrayLabel =
   | "proven losing record"
   | "mostly sniping"
   | "too early"
-  | "positive record (unproven going forward)"
+  | "proven winning record"
   | "no proven edge";
 
 /** Overall z at or below this, over at least `XRAY_MIN_BETS_LOSING` bets, is a proven losing record. */
@@ -18,7 +19,7 @@ export const XRAY_LOSING_Z = -2;
 export const XRAY_MIN_BETS_LOSING = 30;
 /** Fewer scored bets than this is too early to call. */
 export const XRAY_MIN_BETS = 30;
-/** Overall z at or above this, over at least `XRAY_MIN_BETS_POSITIVE` bets, is a positive record. */
+/** Overall z at or above this, over at least `XRAY_MIN_BETS_POSITIVE` bets, is a proven winning record. */
 export const XRAY_POSITIVE_Z = 2;
 export const XRAY_MIN_BETS_POSITIVE = 100;
 /** More than this share of resolved markets bought at decided prices is "mostly sniping". */
@@ -34,11 +35,11 @@ export function xrayLabelFromStats(s: { n: number; z: number; snipingShare: numb
   if (s.n >= XRAY_MIN_BETS_LOSING && s.z <= XRAY_LOSING_Z) return "proven losing record";
   if (s.snipingShare > XRAY_SNIPING_SHARE) return "mostly sniping";
   if (s.n < XRAY_MIN_BETS) return "too early";
-  if (s.z >= XRAY_POSITIVE_Z && s.n >= XRAY_MIN_BETS_POSITIVE) return "positive record (unproven going forward)";
+  if (s.z >= XRAY_POSITIVE_Z && s.n >= XRAY_MIN_BETS_POSITIVE) return "proven winning record";
   return "no proven edge";
 }
 
-/** Label order: a proven losing record first (the reliable one), then sniping, then too early, then a positive record, else no edge. */
+/** Label order: a proven losing record first, then sniping, then too early, then a proven winning record, else no proven edge. */
 export function xrayLabel(a: XrayInput): XrayLabel {
   return xrayLabelFromStats({ n: a.n, z: a.overall.z, snipingShare: a.sniping.share });
 }
@@ -47,7 +48,7 @@ export const XRAY_TONE: Record<XrayLabel, XrayTone> = {
   "proven losing record": "bad",
   "mostly sniping": "warn",
   "too early": "muted",
-  "positive record (unproven going forward)": "good",
+  "proven winning record": "good",
   "no proven edge": "muted",
 };
 
@@ -56,11 +57,23 @@ export const XRAY_SHORT: Record<XrayLabel, string> = {
   "proven losing record": "Proven losing record",
   "mostly sniping": "Mostly sniping",
   "too early": "Too early",
-  "positive record (unproven going forward)": "Positive record (unproven)",
+  "proven winning record": "Proven winning record",
   "no proven edge": "No proven edge",
 };
 
-/** Only a losing record is a reliable label: past losers keep losing, past winners do not stay ahead. */
+/**
+ * What the label validation found for each label, in a few words. The site and the browser extension both read this. The numbers
+ * are the next-half edge per bet from docs/LABEL_VALIDATION.md (1,000 profit-blind wallets, all bets).
+ */
+export const XRAY_SUBTITLE: Record<XrayLabel, string> = {
+  "proven losing record": "lost again in testing (−3.8 pts next, 81% of wallets)",
+  "mostly sniping": "bets mostly on outcomes that were already decided",
+  "too early": "fewer than 30 scored bets",
+  "proven winning record": "rare; stayed ahead modestly in testing (+2.2 pts next)",
+  "no proven edge": "most wallets; slightly below zero in testing (−1.0 pts next)",
+};
+
+/** The strongest label: 81% of wallets with a proven losing record lost again, against 38% of those with a proven winning record. */
 export const isReliableLabel = (label: XrayLabel): boolean => label === "proven losing record";
 
 const pct0 = (p: number) => `${Math.round(p * 100)}%`;
@@ -73,13 +86,13 @@ export function xraySentence(a: XrayInput): string {
   const snipeText = `${pct0(sniping)} of its resolved bets were near-certain outcomes (97 cents or more, or 3 cents or less)`;
   switch (label) {
     case "proven losing record":
-      return `Proven losing record. Over ${a.n} bets it won ${ptsAbs(a.overall.edge)} points less often than the prices it paid implied (z ${a.overall.z.toFixed(1)}). In our study of 1,000 wallets, past losers kept losing by about 2 points per bet.`;
+      return `Proven losing record. Over ${a.n} bets it won ${ptsAbs(a.overall.edge)} points less often than the prices it paid implied (z ${a.overall.z.toFixed(1)}). In our test of 1,000 wallets, those with this record lost again by about 4 points per bet afterwards (81% of them lost).`;
     case "mostly sniping":
       return `Mostly sniping. ${snipeText}, which earns a steady sliver that looks like skill but is not forecasting. Copying this wallet would mostly copy bets on decided games.`;
     case "too early":
       return `Too early to call: only ${a.n} scored ${a.n === 1 ? "bet" : "bets"}, fewer than ${XRAY_MIN_BETS}.`;
-    case "positive record (unproven going forward)":
-      return `Positive record: ${a.overall.edge >= 0 ? "+" : "-"}${ptsAbs(a.overall.edge)} points over ${a.n} bets (z ${a.overall.z.toFixed(1)}). Our study found past winners rarely stay ahead, so this does not show the edge will continue.`;
+    case "proven winning record":
+      return `Proven winning record: ${a.overall.edge >= 0 ? "+" : "-"}${ptsAbs(a.overall.edge)} points over ${a.n} bets (z ${a.overall.z.toFixed(1)}). Rare. In our test of 1,000 wallets, those with this record stayed ahead by about 2 points per bet afterwards, a modest edge driven mostly by in-play bets.`;
     default:
       return sniping >= 0.2
         ? `No proven edge. ${snipeText}: copying this wallet would mostly copy luck.`
@@ -139,13 +152,20 @@ export function squareMoneyShare(
 }
 
 /**
- * The caution line for a move. It describes who pushed the price and never recommends a trade: whether moves pushed by
- * losing wallets tend to reverse is a pending study, not a finding.
+ * What the square-money replay found so far (research/square-replay, 4,355 moves in 1,662 closed sports markets): followers of
+ * moves pushed mostly by proven losers did 3.8 points per bet worse than followers of clean moves, one-sided p of about 0.14.
+ * Early evidence, not a finding, and the wording says so. A longer replay is running.
+ */
+export const SQUARE_REPLAY_NOTE = "Caution signal. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.";
+
+/**
+ * The caution line for a move. It describes who pushed the price and never recommends a trade: the replay of whether such
+ * moves reverse is early evidence, not a finding.
  */
 export function squareMoneyNote(s: SquareMoney): string {
   if (s.alignedUsd <= 0) return "No money pushing the move could be measured.";
   const covered = `${Math.round(s.coverage * 100)}% of the money pushing this move could be judged`;
   if (s.judgedUsd <= 0) return `${covered}, so there is nothing to say about who pushed it.`;
   if (s.squareUsd <= 0) return `None of the judged money came from wallets with a proven losing record (${covered}). That does not make the move sharp: most wallets have no proven edge either way.`;
-  return `${Math.round((s.shareOfJudged ?? 0) * 100)}% of the judged money came from wallets with a proven losing record (${Math.round(s.share * 100)}% of all the money pushing the move; ${covered}). A caution signal, not a trade recommendation: whether such moves reverse has not been shown.`;
+  return `${Math.round((s.shareOfJudged ?? 0) * 100)}% of the judged money came from wallets with a proven losing record (${Math.round(s.share * 100)}% of all the money pushing the move; ${covered}). ${SQUARE_REPLAY_NOTE}`;
 }

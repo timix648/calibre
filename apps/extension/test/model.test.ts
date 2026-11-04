@@ -17,10 +17,11 @@ describe("walletModel", () => {
     expect(m.stats[1]!.value).toBe("-5.0 ± 4.0");
     expect(m.more!.sitePath).toBe(`/wallet/${wallet.address}`);
   });
-  it("flags a positive record as unproven going forward", () => {
-    const m = walletModel({ ...wallet, xray: { label: "positive record (unproven going forward)", tone: "good", reliable: false, sentence: "Positive record...", caveat: "Past winners rarely stay ahead." } });
-    expect(m.chip!.text).toBe("Positive record (unproven)");
-    expect(m.notes.join(" ")).toContain("rarely stay ahead");
+  it("shows a proven winning record with what testing found", () => {
+    const m = walletModel({ ...wallet, xray: { label: "proven winning record", tone: "good", reliable: false, sentence: "Proven winning record...", caveat: "Rare and modest." } });
+    expect(m.chip!.text).toBe("Proven winning record");
+    expect(m.notes.join(" ")).toContain("Rare and modest.");
+    expect(m.notes.join(" ")).toContain("rare; stayed ahead modestly in testing (+2.2 pts next)");
   });
   it("explains a wallet without trades", () => {
     const m = walletModel({ ...wallet, tradesFetched: 0 });

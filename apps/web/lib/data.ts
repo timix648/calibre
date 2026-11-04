@@ -1,9 +1,11 @@
-import type { AuditVerdict, MoveLabel, OutcomeData, VerdictData } from "@calibre/core";
+import type { AuditVerdict, MoveLabel, OutcomeData, VerdictData, XrayLabel } from "@calibre/core";
 import verdictsFile from "../data/verdicts.json";
 import outcomesFile from "../data/outcomes.json";
 import walletIndexFile from "../data/wallet-index.json";
 import memoryFile from "../data/memory.json";
 import findingsFile from "../data/findings.json";
+import labelValidationFile from "../data/label-validation.json";
+import replayFile from "../data/replay.json";
 
 export interface SealedRecord<T> {
   id: string;
@@ -89,3 +91,34 @@ export const dataGeneratedAt = verdictsFile.generatedAt;
 
 export const verdictById = (id: string) => verdicts.find((v) => v.id === id);
 export const outcomeFor = (verdictKey: string) => outcomes.find((o) => o.data.verdictKey === verdictKey);
+
+export interface ValidationLabel {
+  label: XrayLabel;
+  wallets: number;
+  meanOldEdgePts: number;
+  meanNewEdgePts: number;
+  ci95Pts: [number, number] | null;
+  negative: number;
+  shareNegative: number | null;
+}
+
+/** The label validation (docs/LABEL_VALIDATION.md): the label from a wallet's older bets against its edge on the newer ones. */
+export const labelValidation = labelValidationFile as unknown as {
+  generatedAt: string;
+  phases: { phase: "all" | "pregame" | "inplay"; wallets: number; labels: ValidationLabel[] }[];
+};
+
+/** The square-money replay (research SQUARE_REPORT.md): follow edge of loser-driven moves against clean ones. */
+export const replay = replayFile as unknown as {
+  generatedAt: string;
+  markets: number;
+  moves: number;
+  labeledMoves: number;
+  minMovePts: number;
+  windowMinutes: number;
+  continuationMinutes: number;
+  rows: { group: string; moves: number; followEdgePts: number; ci95Pts: [number, number] }[];
+  differencePts: number;
+  pOneSided: number;
+  byPhase: { phase: string; loserMoves: number; loserEdgePts: number; cleanMoves: number; cleanEdgePts: number }[];
+};

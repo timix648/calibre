@@ -20,7 +20,7 @@ describe("indexXrayLabel", () => {
   });
   it("is too early under 30 pooled bets, and a positive record only at z >= 2 over 100+ bets", () => {
     expect(indexXrayLabel([row("w", -0.3, 0.05, 12)])).toBe("too early");
-    expect(indexXrayLabel([row("w", 0.1, 0.04, 150)])).toBe("positive record (unproven going forward)");
+    expect(indexXrayLabel([row("w", 0.1, 0.04, 150)])).toBe("proven winning record");
     expect(indexXrayLabel([row("w", 0.1, 0.04, 90)])).toBe("no proven edge");
   });
   it("never says mostly sniping: the index has no sniping share", () => {

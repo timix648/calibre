@@ -16,7 +16,7 @@ export interface IndexedEdge {
  * X-ray label from a wallet's wallet-index rows (one per league), pooled into one record: bets add up, the pooled edge is
  * the bet-weighted mean and its standard error combines the leagues as independent. Rows without a scored bet are ignored,
  * and a wallet with none is not judged (null). The index holds pre-game bets only (recency weighted) and has no sniping share,
- * so this label can say "proven losing record", "too early", "positive record" or "no proven edge", but never "mostly sniping".
+ * so this label can say "proven losing record", "too early", "proven winning record" or "no proven edge", but never "mostly sniping".
  */
 export function indexXrayLabel(rows: Pick<IndexedEdge, "edge" | "se" | "n">[]): XrayLabel | null {
   let n = 0, edgeSum = 0, varSum = 0;

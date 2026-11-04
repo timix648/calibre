@@ -1,6 +1,49 @@
-# Finding: on Polymarket sports, past winners don't stay ahead, but past losers keep losing
+# Findings: the labels predict what a wallet does next; the leaderboard does not
 
-## Wide study, 1,000 profit-blind wallets (3 Nov 2026, the headline)
+## Label validation, 1,000 profit-blind wallets (4 Nov 2026, the headline)
+Question: does the label a wallet would have had from its **older** bets say anything about its **newer** bets? Each wallet's bets
+are split at the middle; the older half is what the X-ray would have known, the newer half is what happened next. Wallets are the
+profit-blind sample of the wide study (983 with a result line), not picked for profit. Labels use the live rules: proven losing
+record = z of -2 or lower over 30+ bets; proven winning record = z of 2 or more over 100+ bets; too early = under 30 bets; else
+no proven edge. Edge is points won above the price paid, per bet. Intervals are percentile bootstrap 95% over wallets (2,000
+resamples, fixed seed). Full tables, by phase: `docs/LABEL_VALIDATION.md`; code: `scripts/validate-labels.ts`.
+
+| Label from the older half | Wallets | Next-half edge, pts per bet | 95% interval | Negative next half |
+|---|---:|---:|---|---:|
+| **proven losing record** | 57 | **-3.8** | -5.1 to -2.4 | 81% (46/57) |
+| **proven winning record** (rare, strict) | 40 | **+2.2** | +0.5 to +4.1 | 38% (15/40) |
+| no proven edge | 801 | -1.0 | -1.3 to -0.7 | 60% |
+| all wallets | 983 | -1.1 | -1.5 to -0.7 | 61% |
+
+- A proven losing record is the strongest label: those wallets lost again by about 4 points per bet, against about 1 for everyone.
+- A proven winning record is rare and the effect is modest: those wallets stayed ahead by about 2 points per bet, and 38% of them had a
+  negative next half.
+- Both results are mostly driven by in-play bets. Losing label: in-play -3.5 [-5.1, -2.0] (47 wallets), pre-game -1.2 [-3.8, +1.6] (21
+  wallets). Winning label: in-play +0.9 [-1.2, +3.1] (15 wallets), pre-game -1.0 [-3.1, +1.3] (11 wallets). Split by phase the samples are
+  small and the winning label is not significant in either, so it is weaker evidence than the losing label.
+- Caveats: older and newer halves of one wallet share its style, so this is not a clean out-of-sample trading test; wallets trade the
+  same events, so the intervals are optimistic; edge is measured against the price paid and ignores fees and bet size.
+
+## Square-money replay (4 Nov 2026): early evidence, not conclusive
+Question: when a market moves mostly because proven losers pushed it, does following the move pay worse? `scripts/square-replay.ts`
+replays 4,355 real moves of 6 points or more within 60 minutes, in 1,662 closed sports markets. For each move the six biggest takers
+are labeled using **only bets that resolved before the move**. The follow edge is the final result minus the price at the end of the
+move, in the move's direction (negative: the move overshot).
+
+| Moves pushed by | Moves | Follow edge, pts [95% CI] |
+|---|---:|---|
+| proven losers (50% or more of the labeled flow) | 176 | -3.4 [-9.7, +2.7] |
+| mixed | 226 | +1.4 [-4.2, +7.1] |
+| no proven losers (clean) | 1,357 | +0.3 [-1.9, +2.6] |
+| all labeled moves | 1,759 | +0.1 [-1.9, +2.1] |
+
+- Difference, loser-driven minus clean: **-3.8 pts**, one-sided permutation p about 0.14. The interval for loser-driven moves spans
+  zero, so this is **early evidence, not conclusive**. Followers of loser-driven moves did worse in the replay; that is all it says.
+- A longer replay (6,000 markets) is running. CALIBRE shows square money as a caution signal and never tells anyone to trade against it.
+
+---
+
+## Earlier: wide study of 1,000 wallets, best and worst thirds (3 Nov 2026)
 Same method as below (`scripts/wide-study.sh`, already-decided bets at ≥0.97/≤0.03 excluded), with 1,000 wallets sampled
 without regard to profit from 2,000 random sports markets, plus the 25 top earners. Full report: `research/wide-study`
 on the build machine; summary:
@@ -15,8 +58,8 @@ on the build machine; summary:
 
 - With enough wallets, track records do persist, but almost entirely on the **losing** side: wallets in the best third
   roughly break even afterwards, while wallets in the worst third keep losing about 2 points per bet.
-- No group showed a reliably **positive** future edge, so copying past winners is not supported; avoiding (or fading)
-  proven losers is.
+- No third showed a reliably **positive** future edge. The stricter label above (z of 2 or more over 100+ bets) does show a modest one, so
+  a rare proven winning record carries some information, while ranking wallets by raw edge does not.
 - The profit leaderboard carries no persistent signal.
 - The 40-wallet study below lacked the power to see this; it is kept as the record of how the method was corrected.
 

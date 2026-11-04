@@ -34,7 +34,7 @@ describe("labelFromOlderHalf", () => {
     expect(halves(61)).toEqual({ nOld: 30, nNew: 31 });
     expect(labelFromOlderHalf({ picks: 60, oldZ: -2 })).toBe("proven losing record");
     expect(labelFromOlderHalf({ picks: 59, oldZ: -3 })).toBe("too early");
-    expect(labelFromOlderHalf({ picks: 200, oldZ: 2 })).toBe("positive record (unproven going forward)");
+    expect(labelFromOlderHalf({ picks: 200, oldZ: 2 })).toBe("proven winning record");
     expect(labelFromOlderHalf({ picks: 199, oldZ: 3 })).toBe("no proven edge");
     expect(labelFromOlderHalf({ picks: 400, oldZ: -1.9 })).toBe("no proven edge");
   });
@@ -61,7 +61,7 @@ describe("validatePhase", () => {
     expect(by["proven losing record"]!.wallets).toBe(1);
     expect(by["proven losing record"]!.meanNewEdgePts).toBeCloseTo(-2, 9);
     expect(by["proven losing record"]!.shareNegative).toBe(1);
-    expect(by["positive record (unproven going forward)"]!.wallets).toBe(1);
+    expect(by["proven winning record"]!.wallets).toBe(1);
     expect(by["too early"]!.wallets).toBe(1);
     expect(by["no proven edge"]!.wallets).toBe(1);
     expect(by["all wallets"]!.wallets).toBe(4);

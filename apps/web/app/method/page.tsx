@@ -1,18 +1,34 @@
 import type { Metadata } from "next";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { Card, H2, PageTitle } from "@/components/ui";
+import { LabelTestTable, allWallets, signedPts, validationRow } from "@/components/label-validation";
+import { Card, H2, PageTitle, TableWrap } from "@/components/ui";
+import { replay } from "@/lib/data";
 import { Markdown } from "@/lib/markdown";
 
 export const metadata: Metadata = { title: "Method" };
 
-// Read at build time from the exported copy of docs/FINDINGS.md (written by `pnpm export:site`).
-async function findingsMarkdown(): Promise<string> {
-  return readFile(path.join(process.cwd(), "data", "FINDINGS.md"), "utf8");
+// Read at build time from the exported copy of docs/FINDINGS.md (written by `pnpm export:site`). The label validation and the
+// replay have their own cards above, so only the earlier studies, from "## Earlier" on, are rendered here.
+async function earlierStudies(): Promise<string> {
+  const md = await readFile(path.join(process.cwd(), "data", "FINDINGS.md"), "utf8");
+  const at = md.indexOf("\n## Earlier");
+  return at < 0 ? md : `# Earlier studies\n${md.slice(at)}`;
 }
 
+const fixed = (v: number) => (v < 0 ? "\u2212" : v > 0 ? "+" : "") + Math.abs(v).toFixed(1);
+
 export default async function Method() {
-  const md = await findingsMarkdown();
+  const md = await earlierStudies();
+  const everyone = allWallets()!;
+  const all = everyone.row;
+  const lose = validationRow("proven losing record")!;
+  const win = validationRow("proven winning record")!;
+  const loseIn = validationRow("proven losing record", "inplay")!;
+  const losePre = validationRow("proven losing record", "pregame")!;
+  const winIn = validationRow("proven winning record", "inplay")!;
+  const winPre = validationRow("proven winning record", "pregame")!;
+  const ci = (r: { ci95Pts: [number, number] | null }) => (r.ci95Pts ? `${signedPts(r.ci95Pts[0])} to ${signedPts(r.ci95Pts[1])}` : "n/a");
   return (
     <div className="space-y-8">
       <PageTitle
@@ -44,22 +60,88 @@ export default async function Method() {
             The wallet X-ray puts every wallet in one of five labels, read in this order from its overall record (pre-game and in-play together, one bet per market, sniping excluded):
           </p>
           <ul>
-            <li><strong>Proven losing record</strong>: overall z of -2 or lower over at least 30 bets. This is the reliable label. In the 1,000-wallet study, wallets in the worst third kept losing about 2 points per bet afterwards.</li>
+            <li><strong>Proven losing record</strong>: overall z of -2 or lower over at least 30 bets. Lost again in testing ({signedPts(lose.meanNewEdgePts)} pts next, {Math.round((lose.shareNegative ?? 0) * 100)}% of wallets).</li>
             <li><strong>Mostly sniping</strong>: more than 40% of resolved markets were bought at 97 cents or more, or 3 cents or less.</li>
             <li><strong>Too early</strong>: under 30 scored bets.</li>
-            <li><strong>Positive record (unproven going forward)</strong>: overall z of 2 or more over at least 100 bets. It is shown, and flagged, because past winners did not stay ahead.</li>
+            <li><strong>Proven winning record</strong>: overall z of 2 or more over at least 100 bets. Rare; stayed ahead modestly in testing ({signedPts(win.meanNewEdgePts)} pts next).</li>
             <li><strong>No proven edge</strong>: everything else.</li>
           </ul>
           <p>
             <strong>Square money</strong> on a market is the share of the money pushing its latest move (4 points or more in the last 6 hours) that came from wallets labeled proven losing record.
             Only the six biggest takers are audited, so every figure comes with its <strong>coverage</strong>: the share of the pushing money that could be judged.
-            It is a caution signal. A replay study of whether such moves reverse is pending, so CALIBRE does not recommend fading them.
+            It is a caution signal, not a trade recommendation: see the replay below, which is early evidence and not conclusive.
           </p>
         </div>
       </Card>
 
       <Card>
-        <H2 sub="The write-up from the repository, docs/FINDINGS.md, rendered as is. It was corrected on 3 Nov 2026 after a stricter test.">The study, and its correction</H2>
+        <H2 sub={`Do the labels predict? Each wallet gets the label it would have had from its older bets; the table shows its edge on its newer bets. ${lose.wallets + win.wallets} of the ${everyone.wallets} wallets earned one of the two proven labels.`}>
+          Label validation: the labels predict what a wallet does next
+        </H2>
+        <LabelTestTable />
+        <div className="prose-calibre mt-4">
+          <p>
+            <strong>Reading it.</strong> A proven losing record is the strongest label: {lose.wallets} wallets, {signedPts(lose.meanNewEdgePts)} pts per bet on their next bets (interval {ci(lose)}),
+            against {signedPts(all.meanNewEdgePts)} for all wallets. A proven winning record is rare and modest: {win.wallets} wallets, {signedPts(win.meanNewEdgePts)} pts (interval {ci(win)}).
+            Most wallets (the &quot;no proven edge&quot; row) did slightly worse than zero.
+          </p>
+          <p><strong>Method.</strong></p>
+          <ul>
+            <li>Source: the per-wallet lines of the 1,000-wallet skill-persistence study (profit-blind wallets drawn from random sports markets, already-decided bets at 97 cents or more, or 3 cents or less, excluded). 983 wallets have a result line.</li>
+            <li>Each wallet&apos;s bets are split at the middle. The older half is what the X-ray would have known; the newer half is what happened next. The label comes from the older half with the live rules.</li>
+            <li>Edge is points won above the price paid, per bet, one pick per market. Intervals are 95% bootstrap over wallets (2,000 resamples, fixed seed); each wallet counts once.</li>
+            <li>The sniping label cannot be derived from the study logs and is left out.</li>
+          </ul>
+          <p><strong>Caveats.</strong></p>
+          <ul>
+            <li>The result is mostly driven by in-play bets. By phase, the losing label: in-play {signedPts(loseIn.meanNewEdgePts)} ({ci(loseIn)}, {loseIn.wallets} wallets), pre-game {signedPts(losePre.meanNewEdgePts)} ({ci(losePre)}, {losePre.wallets} wallets). The winning label: in-play {signedPts(winIn.meanNewEdgePts)} ({ci(winIn)}, {winIn.wallets} wallets), pre-game {signedPts(winPre.meanNewEdgePts)} ({ci(winPre)}, {winPre.wallets} wallets). The winning label is not significant in either phase on its own.</li>
+            <li>Older and newer halves of the same wallet share its style, and wallets trade the same events, so the intervals are optimistic. This is a test of whether labels carry information, not a trading backtest.</li>
+            <li>Edge ignores fees, bet size and bankroll. It is not profit.</li>
+          </ul>
+        </div>
+      </Card>
+
+      <Card>
+        <H2 sub={`${replay.moves.toLocaleString("en-US")} real moves of ${replay.minMovePts} points or more within ${replay.windowMinutes} minutes, in ${replay.markets.toLocaleString("en-US")} closed sports markets. The six biggest takers of each move are labeled using only bets that resolved before the move.`}>
+          Square-money replay: early evidence, not conclusive
+        </H2>
+        <TableWrap>
+          <table className="mt-1 w-full min-w-[460px] text-sm">
+            <thead>
+              <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
+                <th className="py-2 pr-3 font-medium">Moves pushed by</th>
+                <th className="px-3 py-2 text-right font-medium">Moves</th>
+                <th className="py-2 pl-3 text-right font-medium">Follow edge, pts [95% CI]</th>
+              </tr>
+            </thead>
+            <tbody>
+              {replay.rows.map((r, i) => (
+                <tr key={r.group} className="border-b border-line/60">
+                  <td className={`py-2 pr-3 ${i === 0 ? "font-medium" : ""}`}>{r.group}</td>
+                  <td className="num px-3 py-2 text-right text-muted">{r.moves.toLocaleString("en-US")}</td>
+                  <td className={`num py-2 pl-3 text-right ${i === 0 ? "text-bad" : "text-muted"}`}>{fixed(r.followEdgePts)} [{fixed(r.ci95Pts[0])}, {fixed(r.ci95Pts[1])}]</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </TableWrap>
+        <div className="prose-calibre mt-4">
+          <p>
+            <strong>Reading it.</strong> Following a loser-driven move did {fixed(replay.differencePts)} pts worse than following a clean one (one-sided permutation p about {replay.pOneSided.toFixed(2)}).
+            The interval for loser-driven moves spans zero, so this is <strong>early evidence, not conclusive</strong>. A longer replay (6,000 markets) is running.
+          </p>
+          <ul>
+            <li>Follow edge is the final result minus the price at the end of the move, in the move&apos;s direction. Negative means the move overshot.</li>
+            <li>A move counts as loser-driven when proven losers are 50% or more of the labeled flow; &quot;mixed&quot; sits between that and none. {replay.labeledMoves.toLocaleString("en-US")} of the {replay.moves.toLocaleString("en-US")} moves had takers with enough resolved bets to label.</li>
+            <li>By phase: pre-game, loser-driven {replay.byPhase[0]!.loserMoves} moves at {fixed(replay.byPhase[0]!.loserEdgePts)} against {fixed(replay.byPhase[0]!.cleanEdgePts)} for clean ones; in-play, {replay.byPhase[1]!.loserMoves} moves at {fixed(replay.byPhase[1]!.loserEdgePts)} against {fixed(replay.byPhase[1]!.cleanEdgePts)}.</li>
+            <li>Moves in the same market, and markets on the same event, are not independent, so the interval and the p-value are optimistic. Only 176 moves were loser-driven.</li>
+            <li>CALIBRE shows square money as a caution signal about who pushed the price. It does not tell anyone what to trade.</li>
+          </ul>
+        </div>
+      </Card>
+
+      <Card>
+        <H2 sub="The earlier sections of docs/FINDINGS.md, rendered as is. The first study was corrected on 3 Nov 2026 after a stricter test.">The earlier studies, and their correction</H2>
         <Markdown source={md} skipFirstHeading />
       </Card>
 
@@ -68,7 +150,7 @@ export default async function Method() {
         <div className="prose-calibre"><ul>
           <li>A wallet audit reads at most the newest 1,000 trades. Older history is not counted.</li>
           <li>Polymarket accounts trade through a proxy wallet, and one person can run several wallets. The audit sees an address, not a person.</li>
-          <li>A past record, even a proven one, does not predict a future one. The study above found that it mostly did not.</li>
+          <li>A past record is not a promise. The label test found a proven losing record predicts well, a proven winning record only modestly, and raw edge or leaderboard rank not at all.</li>
           <li>Edge is measured against the price paid. It ignores fees, bet size and bankroll, so it is not profit.</li>
           <li>Resolutions and start times come from Polymarket&apos;s Gamma API. A market without a start time treats the last 3 hours before its close as in-play.</li>
           <li>Verdicts sealed before model v2 can carry forecasts far from the price. They stay as sealed because Walrus Memory is append-only.</li>

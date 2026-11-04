@@ -1,5 +1,5 @@
 import {
-  SQUARE_TOP_TAKERS, XRAY_TONE, aggregateFlows, classifySlug, isReliableLabel, isSnipePrice, latestMove, priceSeriesFromTrades, publicTradesToFlows, squareMoneyNote,
+  SQUARE_REPLAY_NOTE, SQUARE_TOP_TAKERS, XRAY_TONE, aggregateFlows, classifySlug, isReliableLabel, isSnipePrice, latestMove, priceSeriesFromTrades, publicTradesToFlows, squareMoneyNote,
   squareMoneyShare, xrayLabel, xraySentence,
   type Move, type SquareMoney, type TimedFlowTrade, type WalletFlow, type XrayLabel, type XrayTone,
 } from "@calibre/core";
@@ -244,8 +244,7 @@ export interface MarketXray {
   source: "polymarket-public";
 }
 
-export const MARKET_CAUTION =
-  "Square money is a caution signal, not a trade recommendation. Only a proven losing record is a reliable label: past winners rarely stay ahead, and whether moves pushed by losing wallets reverse has not been shown. Only the biggest takers are judged, so read the coverage.";
+export const MARKET_CAUTION = `${SQUARE_REPLAY_NOTE} Only the biggest takers are judged, so read the coverage.`;
 
 export type TakerAudit = { status: "audited"; result: WalletAuditResult } | { status: "pending" } | { status: "failed" };
 

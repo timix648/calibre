@@ -31,12 +31,12 @@ describe("xrayLabel", () => {
     expect(xrayLabel(input(0, 0))).toBe("too early");
   });
   it("shows a positive record only at z >= 2 over 100+ bets", () => {
-    expect(xrayLabel(input(2, 100))).toBe("positive record (unproven going forward)");
+    expect(xrayLabel(input(2, 100))).toBe("proven winning record");
     expect(xrayLabel(input(2.5, 99))).toBe("no proven edge");
     expect(xrayLabel(input(1.9, 500))).toBe("no proven edge");
   });
   it("treats only the losing label as reliable", () => {
-    const all: XrayLabel[] = ["proven losing record", "mostly sniping", "too early", "positive record (unproven going forward)", "no proven edge"];
+    const all: XrayLabel[] = ["proven losing record", "mostly sniping", "too early", "proven winning record", "no proven edge"];
     expect(all.filter(isReliableLabel)).toEqual(["proven losing record"]);
   });
 });
@@ -46,9 +46,10 @@ describe("xraySentence", () => {
     expect(xraySentence(input(0.4, 200, 0.41 - 0.2))).toContain("copying this wallet would mostly copy luck");
     expect(xraySentence(input(0.4, 200, 0.25))).toContain("25% of its resolved bets were near-certain outcomes");
   });
-  it("flags the positive label as unproven going forward and never recommends fading", () => {
+  it("describes the winning label by what testing found and never recommends fading", () => {
     const s = xraySentence(input(3, 200));
-    expect(s).toContain("past winners rarely stay ahead");
+    expect(s).toContain("Proven winning record");
+    expect(s).toContain("stayed ahead by about 2 points per bet");
     expect(xraySentence(input(-3, 200)).toLowerCase()).not.toContain("fade");
   });
   it("reports the numbers of a losing record", () => {
@@ -92,7 +93,8 @@ describe("squareMoneyShare", () => {
   });
   it("words the note as a caution, not a trade", () => {
     const note = squareMoneyNote(squareMoneyShare(flows, { a: "proven losing record", b: "no proven edge" }, 1));
-    expect(note).toContain("caution signal, not a trade recommendation");
+    expect(note).toContain("Caution signal. In a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.");
+    expect(note.toLowerCase()).not.toMatch(/fade/);
     expect(note).toContain("90%");
   });
 });

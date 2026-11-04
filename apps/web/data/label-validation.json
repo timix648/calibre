@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T11:50:39.381Z",
+  "generatedAt": "2026-11-04T11:56:41.304Z",
   "preliminary": null,
   "sources": [
     "wide-all.log",
@@ -36,7 +36,7 @@
           "meanOldEdgePts": -9.070175438596491
         },
         {
-          "label": "positive record (unproven going forward)",
+          "label": "proven winning record",
           "wallets": 40,
           "meanNewEdgePts": 2.1799999999999997,
           "ci95Pts": [
@@ -102,7 +102,7 @@
           "meanOldEdgePts": -10.595238095238095
         },
         {
-          "label": "positive record (unproven going forward)",
+          "label": "proven winning record",
           "wallets": 11,
           "meanNewEdgePts": -1,
           "ci95Pts": [
@@ -168,7 +168,7 @@
           "meanOldEdgePts": -9.734042553191493
         },
         {
-          "label": "positive record (unproven going forward)",
+          "label": "proven winning record",
           "wallets": 15,
           "meanNewEdgePts": 0.8666666666666667,
           "ci95Pts": [

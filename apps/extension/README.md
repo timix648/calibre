@@ -3,14 +3,14 @@
 A small panel on polymarket.com that shows the X-ray from a CALIBRE site:
 
 - **Profile pages** (`/profile/0x…`, or `/@username`, which is looked up through Polymarket's public profile search): the wallet's label
-  (proven losing record, mostly sniping, too early, positive record, no proven edge), edge with its error band, and sniping share.
+  (proven losing record, mostly sniping, too early, proven winning record, no proven edge), with what the label test found for it, edge with its error band, and sniping share.
 - **Event and market pages** (`/event/<slug>[/<market-slug>]`, `/market/<slug>`): the latest move of 4 points or more in the last
   6 hours, the share of the pushing money that came from wallets with a proven losing record (with its coverage), and the biggest takers.
 
 It follows Polymarket's single-page navigation, so the panel updates when you click from page to page. The panel lives in a closed shadow
 root at the bottom right; collapse it with the dash, close it with the cross.
 
-Square money is a caution signal, not a trade recommendation. Only a proven losing record is a reliable label.
+Square money is a caution signal and early evidence, not a trade recommendation: in a replay of 4,355 moves, loser-driven moves did 3.8 pts worse for followers; not yet conclusive.
 
 ## Build
 

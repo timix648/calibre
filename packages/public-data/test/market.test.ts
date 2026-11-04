@@ -204,10 +204,10 @@ describe("shapeMarketXray", () => {
     expect(r.squareMoney!.share).toBeLessThan(r.squareMoney!.shareOfJudged!);
     expect(r.squareMoney!.coverage).toBeGreaterThan(0.2);
     expect(r.squareMoney!.coverage).toBeLessThan(1);
-    expect(r.squareMoney!.note).toContain("caution signal, not a trade recommendation");
+    expect(r.squareMoney!.note).toContain("Caution signal. In a replay of 4,355 moves");
     expect(r.complete).toBe(false);
     expect(r.elapsedMs).toBe(5000);
-    expect(r.caution).toContain("not a trade recommendation");
+    expect(r.caution).toContain("3.8 pts worse for followers; not yet conclusive");
     expect(r.market.url).toBe("https://polymarket.com/event/nba-phi-det-2026-11-04");
   });
   it("is complete when every audit finished", () => {
@@ -232,9 +232,9 @@ describe("toWalletXray", () => {
     const loser = toWalletXray(walletResult("0xa", -3, 120));
     expect(loser.xray).toMatchObject({ label: "proven losing record", reliable: true, tone: "bad", caveat: null });
     const winner = toWalletXray(walletResult("0xb", 3, 300));
-    expect(winner.xray.label).toBe("positive record (unproven going forward)");
+    expect(winner.xray.label).toBe("proven winning record");
     expect(winner.xray.reliable).toBe(false);
-    expect(winner.xray.caveat).toContain("rarely stay ahead");
+    expect(winner.xray.caveat).toContain("+2.2 pts per bet");
   });
 });
 

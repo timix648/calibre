@@ -41,7 +41,7 @@ export function SiteFooter() {
           Data: Polymarket public API for live X-rays, Tatum Prediction Markets API and Sui gRPC for the sealed verdicts, Walrus Memory on Sui mainnet for the receipts.
         </p>
         <p className="mt-2 text-xs text-faint">
-          Edge is measured against the price paid. It is a record to audit, not advice. Only a proven losing record is a reliable label; square money is a caution signal, not a trade recommendation.
+          Edge is measured against the price paid. It is a record to audit, not advice. The labels were tested on 1,000 wallets; square money is a caution signal and early evidence, not a trade recommendation.
         </p>
       </div>
     </footer>
