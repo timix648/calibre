@@ -1,7 +1,7 @@
 import type { FetchReply } from "./background";
 import { marketModel, walletModel } from "./model";
 import { Panel } from "./panel";
-import { apiPath, detectPage, sitePath, targetKey, type PageTarget } from "./urls";
+import { apiPath, DEFAULT_API_BASE, detectPage, sitePath, targetKey, type PageTarget } from "./urls";
 
 type MarketXray = Parameters<typeof marketModel>[0];
 type WalletXray = Parameters<typeof walletModel>[0];
@@ -25,7 +25,7 @@ const errorText = (r: FetchReply): string => {
   return body?.error ?? `The CALIBRE API answered ${r.status}.`;
 };
 
-const siteUrl = (path: string): string => `${apiBase || "http://localhost:3000"}${path}`;
+const siteUrl = (path: string): string => `${apiBase || DEFAULT_API_BASE}${path}`;
 
 async function load(target: PageTarget, gen: number): Promise<void> {
   const retry = () => { if (gen === generation) void run(target); };

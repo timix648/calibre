@@ -33,7 +33,7 @@ After changing the code, run the build again and press the reload icon on the ex
 
 ## Point it at the deployed site
 
-The panel's data comes from the site's `/api/xray/*` routes, which answer GET with open CORS. The default is `http://localhost:3000`.
+The panel's data comes from the site's `/api/xray/*` routes, which answer GET with open CORS. The default is the live site, `https://calibre-blush.vercel.app`; set `http://localhost:3000` in the options for local development.
 To use the deployed site, open the extension's **options** (click the toolbar icon, or Details, then Extension options), enter its address
 (for example `https://your-site.vercel.app`), press **Save**, and **Test** to confirm it answers. The address is stored in `chrome.storage.sync`.
 

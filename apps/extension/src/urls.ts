@@ -48,7 +48,7 @@ export function targetKey(t: PageTarget | null): string {
   return t.kind === "wallet" ? `w:${t.address}` : t.kind === "handle" ? `h:${t.handle.toLowerCase()}` : `m:${t.slug}/${t.marketSlug ?? ""}`;
 }
 
-export const DEFAULT_API_BASE = "http://localhost:3000";
+export const DEFAULT_API_BASE = "https://calibre-blush.vercel.app";
 
 /** The API base as stored: trimmed, no trailing slash, http or https only. Null when it is not a usable URL. */
 export function normalizeApiBase(input: string): string | null {
