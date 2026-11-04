@@ -171,6 +171,22 @@ export async function publicMarketTradesSince(conditionId: string, sinceMs: numb
   return out;
 }
 
+/** All fills of a closed market (newest first), up to `maxPages` pages of 500, cached forever (closed markets don't change). */
+export async function publicMarketTradesAll(conditionId: string, maxPages = 10): Promise<V2Trade[]> {
+  return cached(`mtrades-all:${conditionId}:${maxPages}`, async () => {
+    const out: V2Trade[] = [];
+    let cursor = "";
+    for (let page = 0; page < maxPages; page++) {
+      const r = await getJson(`https://data-api.polymarket.com/v2/trades?condition=${conditionId}&limit=500${cursor ? `&cursor=${cursor}` : ""}`) as
+        { data?: V2Trade[]; pagination?: { has_more?: boolean; next_cursor?: string } };
+      out.push(...(r.data ?? []));
+      if (!r.pagination?.has_more || !r.pagination.next_cursor) break;
+      cursor = r.pagination.next_cursor;
+    }
+    return out;
+  });
+}
+
 /** Tags of Polymarket events by slug (an empty list for a slug Gamma does not know), looked up 25 per request and cached. */
 export async function publicEventTags(slugs: string[]): Promise<Map<string, string[]>> {
   const out = new Map<string, string[]>();
