@@ -9,6 +9,7 @@ import { GaugeLegend, SquareGauge } from "./square-gauge";
 import { SquareBar, XrayChip } from "./xray-ui";
 import { Badge, Card, ExternalLink, H2, Stat, TableWrap } from "./ui";
 import { pct, shortAddr, span, usd } from "@/lib/format";
+import { SourceStrip } from "./source-strip";
 import { gaugeZone } from "@/lib/gauge";
 
 type Reply = { ok: true; cached: boolean; result: MarketXray } | { ok: false; code: string; error: string };
@@ -67,6 +68,7 @@ function Result({ r, cached, onRefresh }: { r: MarketXray; cached: boolean; onRe
           {cached ? "Cached, under 10 min old" : "Live"}
           {r.market.closed ? " · market closed" : ""}
         </p>
+        <div className="mt-3"><SourceStrip anchor={r.anchor} fills={r.source} /></div>
       </div>
 
       {!r.complete ? (

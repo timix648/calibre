@@ -9,7 +9,9 @@ const config: NextConfig = {
   poweredByHeader: false,
   agentRules: false,
   // The workspace packages are TypeScript sources; Next compiles them with the app.
-  transpilePackages: ["@calibre/core", "@calibre/public-data"],
+  transpilePackages: ["@calibre/core", "@calibre/public-data", "@calibre/chain"],
+  // Tatum's Sui gateway speaks native gRPC; grpc-js runs as a normal Node module on the server, not bundled.
+  serverExternalPackages: ["@grpc/grpc-js", "@protobuf-ts/grpc-transport"],
   turbopack: { root },
   outputFileTracingRoot: root,
 };

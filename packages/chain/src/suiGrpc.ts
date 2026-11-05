@@ -72,3 +72,27 @@ export async function anchorCheckpoint(
     return { ...(await fallback()), source: "sui-public-graphql", fallbackReason: reason };
   }
 }
+
+export interface TransactionCheck {
+  digest: string;
+  success: boolean;
+  checkpoint: string | null;
+  timestamp: string | null;
+}
+
+/** Reads a transaction's execution status and checkpoint through a Sui gRPC client (one query: 2 Tatum credits). */
+export async function transactionStatus(client: SuiGrpcClient, digest: string): Promise<TransactionCheck> {
+  const { response } = await client.ledgerService.getTransaction({
+    digest,
+    readMask: { paths: ["digest", "effects.status", "checkpoint", "timestamp"] },
+  });
+  const tx = response.transaction;
+  if (!tx) throw new Error("Sui gRPC returned no transaction");
+  const ts = tx.timestamp;
+  return {
+    digest: tx.digest ?? digest,
+    success: tx.effects?.status?.success === true,
+    checkpoint: tx.checkpoint !== undefined ? tx.checkpoint.toString() : null,
+    timestamp: ts?.seconds !== undefined ? new Date(Number(ts.seconds) * 1000 + Math.floor((ts.nanos ?? 0) / 1e6)).toISOString() : null,
+  };
+}

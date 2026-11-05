@@ -191,7 +191,7 @@ export default function Proof() {
         </p>
         <pre className="num mt-3 overflow-x-auto cut bg-black/40 p-4 text-sm">{`pnpm install\ncp .env.example .env   # add your Tatum and Walrus Memory keys\npnpm verify`}</pre>
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          This website makes no Tatum calls and holds no keys: the figures above are static files exported by <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">pnpm export:site</code>, and the wallet audit reads Polymarket&apos;s free public API.
+          The figures above are static files exported from Walrus Memory by <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">pnpm export:site</code>. Live X-rays run on the server: each is stamped with a Sui checkpoint through Tatum&apos;s gRPC, market X-rays read their fills from Tatum&apos;s Prediction Markets API, and every source is labelled on the result.
         </p>
       </Card>
     </div>

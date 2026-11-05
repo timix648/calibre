@@ -5,6 +5,7 @@ import { Receipt } from "mppx";
 import { Mppx } from "mppx/server";
 import { isAddress } from "@calibre/public-data";
 import { CORS_HEADERS, apiError, clientKey } from "./api";
+import { confirmPaymentViaTatum } from "./tatum";
 import { runWalletXray, type WalletXrayResponse } from "./xray-service";
 
 /** What one paid call costs, in USDC (a decimal string: the protocol never uses floating point for money). */
@@ -152,6 +153,16 @@ export interface PaidXrayDeps {
   env?: Env;
   runXray?: (address: string, client: string) => Promise<WalletXrayResponse>;
   payments?: Payments;
+  /** Reads the settled payment back through Tatum's Sui gRPC; null when Tatum cannot answer. */
+  confirm?: (digest: string) => Promise<Awaited<ReturnType<typeof confirmPaymentViaTatum>>>;
+}
+
+/** The payment transaction as Tatum's Sui gRPC reports it, retried once because a just-settled transaction may still be indexing. */
+async function tatumConfirmation(digest: string, confirm: NonNullable<PaidXrayDeps["confirm"]>) {
+  const first = await confirm(digest);
+  if (first) return first;
+  await new Promise((r) => setTimeout(r, 1500));
+  return confirm(digest);
 }
 
 /** A Payment credential rides in the Authorization header. */
@@ -206,6 +217,7 @@ export async function handlePaidXray(request: Request, address: string, deps: Pa
   xray ??= await runXray(address.toLowerCase(), client);
   if (!xray.ok) return withCors(result.withReceipt(apiError(xray.status, xray.code, xray.error, xray.retryAfter)));
   const digest = receiptDigest(result.withReceipt(new Response(null)));
+  const tatum = digest ? await tatumConfirmation(digest, deps.confirm ?? confirmPaymentViaTatum).catch(() => null) : null;
   return withCors(
     result.withReceipt(
       paid({
@@ -213,7 +225,11 @@ export async function handlePaidXray(request: Request, address: string, deps: Pa
         cached: xray.cached,
         result: xray.result,
         receipt: digest
-          ? { method: "sui", digest, amount: PRICE_USDC, currency: "USDC", network: settings.config.network, explorer: `https://suiscan.xyz/${settings.config.network}/tx/${digest}` }
+          ? {
+              method: "sui", digest, amount: PRICE_USDC, currency: "USDC", network: settings.config.network, explorer: `https://suiscan.xyz/${settings.config.network}/tx/${digest}`,
+              // Read back through Tatum's Sui gRPC: success and the checkpoint that finalised the payment (null if Tatum could not answer).
+              tatum: tatum ? { confirmed: tatum.success, checkpoint: tatum.checkpoint, timestamp: tatum.timestamp, source: tatum.source } : null,
+            }
           : null,
       }),
     ),

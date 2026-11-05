@@ -10,8 +10,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@calibre/chain": "workspace:*",
     "@calibre/core": "workspace:*",
     "@calibre/public-data": "workspace:*",
+    "@grpc/grpc-js": "1.14.7",
+    "@mysten/sui": "2.38.0",
+    "@protobuf-ts/grpc-transport": "2.11.1",
     "@suimpp/mpp": "0.9.0",
     "mppx": "0.17.0",
     "next": "16.4.4",

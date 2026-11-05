@@ -2,6 +2,10 @@ import { XRAY_TONE, isReliableLabel, xrayLabel, xraySentence, type XrayLabel, ty
 import type { WalletAuditResult } from "./audit";
 
 export interface WalletXray extends WalletAuditResult {
+  /** Set by the server that ran the X-ray: the Sui checkpoint it was read at. */
+  anchor?: import("./market").XrayAnchor | null;
+  /** Tatum's Prediction Markets API view of the wallet, when the server could ask it. */
+  tatum?: { openValueUsd: number | null; marketsTraded: number | null; source: "tatum" } | null;
   xray: {
     label: XrayLabel;
     tone: XrayTone;

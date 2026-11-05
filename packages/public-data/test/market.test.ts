@@ -288,3 +288,9 @@ describe("buildMarketXray", () => {
     expect(result.fills.read).toBe(4);
   }, 10_000);
 });
+
+describe("decidedReason wording", () => {
+  it("says a Yes/No market resolved, rather than that 'No won'", () => {
+    expect(decidedReason({ outcomes: ["Yes", "No"], yesPrice: 0.001, closed: true })).toContain("it resolved No");
+  });
+});

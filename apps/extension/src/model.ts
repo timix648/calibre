@@ -37,6 +37,14 @@ const pts = (p: number) => `${p >= 0 ? "+" : "-"}${Math.abs(p * 100).toFixed(1)}
 const short = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 const usd = (v: number) => `$${Math.round(v).toLocaleString("en-US")}`;
 
+/** Where the X-ray's data came from: the Sui checkpoint it was read at, and Tatum's part in it. */
+function sourceNotes(anchor: MarketXray["anchor"], extra: string | null): string[] {
+  const out: string[] = [];
+  if (extra) out.push(extra);
+  if (anchor) out.push(`Read at Sui checkpoint ${Number(anchor.sequence).toLocaleString("en-US")} via ${anchor.source === "tatum-grpc" ? "Tatum Sui gRPC" : "Sui public GraphQL (Tatum paused)"}.`);
+  return out;
+}
+
 export function walletModel(r: WalletXray): PanelModel {
   const a = r.audit;
   const notes: string[] = [];
@@ -59,7 +67,13 @@ export function walletModel(r: WalletXray): PanelModel {
       { label: "Sniping", value: pct(a.sniping.share) },
     ],
     takers: [],
-    notes: [...notes, `Label check: ${XRAY_SUBTITLE[r.xray.label]}.`],
+    notes: [
+      ...notes,
+      `Label check: ${XRAY_SUBTITLE[r.xray.label]}.`,
+      ...sourceNotes(r.anchor, r.tatum && (r.tatum.openValueUsd !== null || r.tatum.marketsTraded !== null)
+        ? `Tatum: ${r.tatum.openValueUsd !== null ? `${usd(r.tatum.openValueUsd)} in open positions` : ""}${r.tatum.openValueUsd !== null && r.tatum.marketsTraded !== null ? ", " : ""}${r.tatum.marketsTraded !== null ? `${r.tatum.marketsTraded.toLocaleString("en-US")} markets traded` : ""}.`
+        : null),
+    ],
     more: { label: "Open the full X-ray", sitePath: `/wallet/${r.address}` },
   };
 }
@@ -75,6 +89,7 @@ export function marketModel(r: MarketXray, sitePath: string): PanelModel {
   if (m.settling) notes.push("The price ended at a decided level: this looks like the market settling, not repricing.");
   if (!r.complete) notes.push("Partial result: some takers were still being audited.");
   notes.push(r.caution);
+  notes.push(...sourceNotes(r.anchor, r.source === "tatum" ? "Fills from Tatum's Prediction Markets API." : "Fills from Polymarket's public Data API (Tatum fallback)."));
   return {
     ...base,
     chip: sq ? { text: sq.squareWallets > 0 ? `${pct(sq.shareOfJudged ?? 0)} of judged money from proven losers` : "No proven losers among the judged money", tone: sq.squareWallets > 0 ? "bad" : "muted" } : undefined,

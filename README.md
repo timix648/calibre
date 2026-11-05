@@ -40,8 +40,19 @@ Every figure is a plain sum over the study outputs (`scripts/scale-stats.ts`), n
 | **Paid agent API** (`/api/v1/xray/<address>`) | The wallet X-ray for agents at 0.01 USDC per call over MPP on Sui. Gasless for the buyer. |
 | **MCP server** (`apps/mcp`) | `wallet_audit` and `latest_verdicts` for Claude Code or any MCP client. No keys needed. |
 
-The site holds no keys and makes no Tatum calls: wallet and market X-rays read Polymarket's free public APIs at request time, and the
-radar, record and proof pages read files exported from Walrus Memory.
+Every X-ray runs live on the server, and Tatum is in each one:
+
+- **Stamped through Tatum's Sui gRPC.** Each wallet and market X-ray says which Sui checkpoint it was read at (one gRPC query,
+  2 credits, shared by all X-rays in a 15-second window).
+- **Market X-rays read their fills from Tatum's Prediction Markets API** (100 credits a page, cached per market), with
+  Polymarket's public Data API as the labelled fallback.
+- **Wallet X-rays add Tatum's live view of the wallet:** open-position value and lifetime markets traded (50 credits each).
+  The scored record itself comes from the wallet's full trade history on Polymarket's free Data API.
+- **Paid agent calls are confirmed through Tatum's Sui gRPC:** the receipt carries the checkpoint that finalised the payment.
+
+The server counts every Tatum request at its listed credit price against a daily budget and pauses Tatum after a plan error,
+so the site never stops: when Tatum cannot answer, the free source takes over and the page says which one answered.
+The radar, record and proof pages read files exported from Walrus Memory.
 
 ## Does the label mean anything? The evidence
 

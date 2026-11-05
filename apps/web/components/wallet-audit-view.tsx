@@ -10,6 +10,7 @@ import { LoadingNote, WalletSkeleton } from "./skeletons";
 import { Badge, Card, H2, TableWrap } from "./ui";
 import { LABEL_MEANING, XrayChip } from "./xray-ui";
 import { VERDICT_TONE, pct, pts, utc } from "@/lib/format";
+import { SourceStrip } from "./source-strip";
 import { edgeRange } from "@/lib/gauge";
 
 type ApiReply =
@@ -106,6 +107,7 @@ function Result({ r, cached }: { r: WalletXray; cached: boolean }) {
             note={`${r.truncated ? "Newest 1,000 of more" : "Whole history"} · ${cached ? "cached" : "live"}`}
           />
         </dl>
+        <div className="mt-5"><SourceStrip anchor={r.anchor} tatumWallet={r.tatum} /></div>
       </Card>
 
       {scored ? (

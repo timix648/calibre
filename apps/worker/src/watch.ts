@@ -42,6 +42,12 @@ const MIN_JUMP = Number(args.get("min-jump") ?? 0.05);
 const MAX_MARKETS = Number(args.get("max-markets") ?? 16);
 const MAX_POLITICS = Number(args.get("max-politics") ?? 14);
 const SEGMENT = args.get("segment") ?? "all";
+/**
+ * Where the 10-minute scan reads prices. "public" (default): Polymarket's free fills scan every market, and Tatum confirms each
+ * detected move with its own price history, then supplies the trades, market and live price behind the verdict. "tatum": Tatum
+ * for every scan as well, which costs about 20 times more credits for the same verdicts (research/TATUM_BUDGET.md).
+ */
+const SCAN = args.get("scan") === "tatum" ? "tatum" : "public";
 const HOURLY_CAP = Number(args.get("tatum-hourly") ?? 50);
 const DISCOVER_EVERY_MS = Number(args.get("discover-every") ?? 60) * 60_000;
 const LOOP_MINUTES = args.has("loop") ? Number(args.get("loop") === "true" ? 10 : args.get("loop")) : 0;
@@ -98,8 +104,15 @@ async function discover(now: number): Promise<Candidate[]> {
   // At the hourly cap listings come from disk only, so discovery never spends past it.
   const cacheOnly = !tatumRoom(0);
   if (cacheOnly) console.log(`Tatum hourly call cap (${HOURLY_CAP}) reached: using the event listings already on disk`);
-  const list = (category: "SPORTS" | "POLITICS", sort: "volume_desc" | "liquidity_desc") =>
-    metered(() => activeEvents(api, category, sort, DISCOVER_EVERY_MS, cacheOnly));
+  // If Tatum cannot answer (plan limit, outage), discovery uses the listings already on disk rather than stopping the watcher.
+  const list = async (category: "SPORTS" | "POLITICS", sort: "volume_desc" | "liquidity_desc") => {
+    try { return await metered(() => activeEvents(api, category, sort, DISCOVER_EVERY_MS, cacheOnly)); }
+    catch (e) {
+      if (e instanceof TatumBudgetExceeded || cacheOnly) throw e;
+      console.log(`Tatum event listing failed (${describe(e)}): using the listings already on disk`);
+      return activeEvents(api, category, sort, DISCOVER_EVERY_MS, true);
+    }
+  };
   if (SEGMENT !== "politics") {
     const events = [];
     for (const sort of ["volume_desc", "liquidity_desc"] as const) events.push(...await list("SPORTS", sort));
@@ -115,9 +128,10 @@ async function discover(now: number): Promise<Candidate[]> {
  * Price points of a market over the last two hours. Tatum first; when it is empty for an active market, failing, paused
  * by the breaker or out of its hourly allowance, the points come from Polymarket's public fills (5-minute closes).
  */
-async function priceSeries(c: Candidate, end: number, now: number): Promise<{ points: ReturnType<typeof candlePoints>; evidence: Evidence }> {
+async function priceSeries(c: Candidate, end: number, now: number, mode: "tatum" | "public" = SCAN): Promise<{ points: ReturnType<typeof candlePoints>; evidence: Evidence }> {
   let reason: string;
-  if (breakerOpen(breaker, c.marketId, now)) reason = `Tatum history was empty for this market; not asked again until ${clock(breaker[c.marketId]!)}`;
+  if (mode === "public") reason = "scanned with Polymarket public fills";
+  else if (breakerOpen(breaker, c.marketId, now)) reason = `Tatum history was empty for this market; not asked again until ${clock(breaker[c.marketId]!)}`;
   else if (!tatumRoom()) reason = `Tatum hourly call cap (${HOURLY_CAP}) reached`;
   else {
     try {
@@ -166,11 +180,20 @@ async function scan(store: MemoryStore): Promise<number> {
     const last = points.at(-1);
     if (!last || now - last.ts > FRESH_CANDLE_MS) continue;
     active++;
-    const move = latestMove(points, { minJump: MIN_JUMP, windowMs: 60 * 60_000 });
+    let move = latestMove(points, { minJump: MIN_JUMP, windowMs: 60 * 60_000 });
     if (!move) continue;
-    console.log(`  MOVE ${c.slug} ${c.marketId.slice(0, 10)}: ${(move.from * 100).toFixed(0)}% -> ${(move.to * 100).toFixed(0)}% [${evidence.source}]`);
+    let ev = evidence;
+    if (SCAN === "public") {
+      // Confirm the move on Tatum's own price history (one 200-credit request) before judging; the verdict then rests on Tatum data.
+      const confirmed = await priceSeries(c, end, now, "tatum").catch((e) => { if (e instanceof TatumBudgetExceeded) throw e; return null; });
+      const tatumMove = confirmed?.evidence.source === "tatum" ? latestMove(confirmed.points, { minJump: MIN_JUMP, windowMs: 60 * 60_000 }) : null;
+      if (confirmed?.evidence.source === "tatum" && !tatumMove) { console.log(`  ${c.slug}: Tatum's history does not show the move; skipped`); continue; }
+      if (tatumMove) { move = tatumMove; ev = confirmed!.evidence; fromTatum++; }
+      else ev = { ...evidence, fallbackReason: confirmed?.evidence.fallbackReason ?? evidence.fallbackReason };
+    }
+    console.log(`  MOVE ${c.slug} ${c.marketId.slice(0, 10)}: ${(move.from * 100).toFixed(0)}% -> ${(move.to * 100).toFixed(0)}% [${ev.source}]`);
     try {
-      const result = await judgeAndSeal(store, c, move, evidence, index, memoryState);
+      const result = await judgeAndSeal(store, c, move, ev, index, memoryState);
       // A queued verdict counts as judged too: it waits for its seal, and the market is not judged again meanwhile.
       if (result) { judged[c.marketId] = Date.now(); await writeJson(WATCH_STATE_FILE, judged); }
       if (result === "sealed") sealed++;

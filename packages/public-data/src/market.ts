@@ -232,11 +232,17 @@ export function decidedReason(market: Pick<ResolvedMarket, "outcomes" | "yesPric
   const decided = p !== null && (p >= 0.99 || p <= 0.01);
   if (!market.closed && !decided) return null;
   const winner = decided ? market.outcomes[p! >= 0.99 ? 0 : 1] : null;
-  if (winner) return `This market is decided: ${winner} won. The X-ray judges live moves, so there is nothing left to judge; the wallets that traded it can still be X-rayed.`;
+  const verdict = winner && /^(yes|no)$/i.test(winner) ? `it resolved ${winner}` : `${winner} won`;
+  if (winner) return `This market is decided: ${verdict}. The X-ray judges live moves, so there is nothing left to judge; the wallets that traded it can still be X-rayed.`;
   return "This market is closed. The X-ray judges live moves, so there is nothing left to judge.";
 }
 
+/** The Sui checkpoint an X-ray was read at: through Tatum's Sui gRPC, or Sui's public GraphQL when Tatum cannot answer. */
+export interface XrayAnchor { sequence: string; timestamp: string | null; source: "tatum-grpc" | "sui-public-graphql"; readAt: string }
+
 export interface MarketXray {
+  /** Set by the server that ran the X-ray. */
+  anchor?: XrayAnchor | null;
   market: {
     conditionId: string; slug: string; eventSlug: string | null; question: string; yesOutcome: string; noOutcome: string;
     yesPrice: number | null; closed: boolean; url: string;
@@ -256,7 +262,8 @@ export interface MarketXray {
   complete: boolean;
   fetchedAt: string;
   elapsedMs: number;
-  source: "polymarket-public";
+  /** Where the fills came from: Tatum's Prediction Markets API first, Polymarket's public Data API as the labelled fallback. */
+  source: "tatum" | "polymarket-public";
 }
 
 export const MARKET_CAUTION = `${SQUARE_REPLAY_NOTE} Only the biggest takers are judged, so read the coverage.`;
@@ -273,6 +280,7 @@ export function shapeMarketXray(input: {
   topTakers?: number;
   startedAt: number;
   now: number;
+  source?: "tatum" | "polymarket-public";
 }): MarketXray {
   const { market, analysis, audits, names, fills } = input;
   const dir = analysis.move ? Math.sign(analysis.move.to - analysis.move.from) || 1 : 1;
@@ -317,7 +325,7 @@ export function shapeMarketXray(input: {
     complete: takers.every((t) => t.status === "audited"),
     fetchedAt: new Date(input.now).toISOString(),
     elapsedMs: input.now - input.startedAt,
-    source: "polymarket-public",
+    source: input.source ?? "polymarket-public",
   };
 }
 
@@ -331,6 +339,11 @@ export interface BuildMarketXrayOptions {
   budgetMs?: number;
   now?: () => number;
   fetch?: FetchOpts;
+  /**
+   * The preferred source of the market's recent fills (Tatum's Prediction Markets API on the website). Return null when it
+   * cannot answer; the X-ray then reads Polymarket's public fills and says so.
+   */
+  preferredFills?: (conditionId: string, sinceMs: number) => Promise<TimedFlowTrade[] | null>;
 }
 
 const timedOut = Symbol("timeout");
@@ -349,14 +362,26 @@ export async function buildMarketXray(ref: MarketRef, opts: BuildMarketXrayOptio
 
   const market = await resolveMarket(ref, fetchOpts);
   const since = startedAt - MOVE_WINDOW_MS;
-  const read = await fetchMarketTradesSince(market.conditionId, since, MAX_FILL_PAGES, fetchOpts);
-  const fills = publicTradesToFlows(read.trades);
+  const preferred = opts.preferredFills ? await opts.preferredFills(market.conditionId, since).catch(() => null) : null;
   const names = new Map<string, string>();
-  for (const t of read.trades) {
-    const n = t.name || t.pseudonym;
-    if (n) names.set(t.proxy_wallet.toLowerCase(), n);
+  let fills: TimedFlowTrade[];
+  let read: { count: number; pages: number; reachedSince: boolean };
+  let source: "tatum" | "polymarket-public";
+  if (preferred && preferred.length > 0) {
+    fills = preferred;
+    read = { count: preferred.length, pages: Math.ceil(preferred.length / 100), reachedSince: true };
+    source = "tatum";
+  } else {
+    const pub = await fetchMarketTradesSince(market.conditionId, since, MAX_FILL_PAGES, fetchOpts);
+    fills = publicTradesToFlows(pub.trades);
+    for (const t of pub.trades) {
+      const n = t.name || t.pseudonym;
+      if (n) names.set(t.proxy_wallet.toLowerCase(), n);
+    }
+    read = { count: pub.trades.length, pages: pub.pages, reachedSince: pub.reachedSince };
+    source = "polymarket-public";
   }
-  const stamps = read.trades.map((t) => t.timestamp * 1000);
+  const stamps = fills.map((t) => t.ts);
   const analysis = analyseFills(fills, startedAt);
 
   const audits = new Map<string, TakerAudit>();
@@ -378,9 +403,9 @@ export async function buildMarketXray(ref: MarketRef, opts: BuildMarketXrayOptio
   }));
 
   return shapeMarketXray({
-    market, analysis, audits, names, startedAt, now: clock(),
+    market, analysis, audits, names, startedAt, now: clock(), source,
     fills: {
-      read: read.trades.length, pages: read.pages,
+      read: read.count, pages: read.pages,
       oldestTs: stamps.length ? Math.min(...stamps) : null, newestTs: stamps.length ? Math.max(...stamps) : null,
       reachedWindowStart: read.reachedSince,
     },

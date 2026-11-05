@@ -2,6 +2,7 @@ import {
   PublicApiError, RateLimiter, TtlCache, buildMarketXray, isAddress, marketRefKey, parseMarketRef, resolveProfileHandle, toWalletXray,
   type MarketRef, type MarketXray, type WalletXray,
 } from "@calibre/public-data";
+import { anchor, tatumMarketFills, tatumWalletSnapshot } from "./tatum";
 import { getAudit, runWalletAudit } from "./wallet-service";
 
 const CACHE_MS = 10 * 60_000;
@@ -25,7 +26,9 @@ export type WalletXrayResponse =
 export async function runWalletXray(address: string, clientKey: string): Promise<WalletXrayResponse> {
   const res = await runWalletAudit(address, clientKey);
   if (!res.ok) return res;
-  return { ok: true, cached: res.cached, result: toWalletXray(res.result) };
+  // The record comes from Polymarket's full trade history; Tatum adds its live view of the wallet and the checkpoint stamp.
+  const [stamp, tatum] = await Promise.all([anchor(), tatumWalletSnapshot(address)]);
+  return { ok: true, cached: res.cached, result: { ...toWalletXray(res.result), anchor: stamp, tatum } };
 }
 
 export type MarketXrayResponse =
@@ -49,7 +52,7 @@ export async function runMarketXray(ref: MarketRef | null, clientKey: string): P
   }
   const key = marketRefKey(ref);
   const hit = complete.get(key) ?? partial.get(key);
-  if (hit) return { ok: true, cached: true, result: hit };
+  if (hit) return { ok: true, cached: true, result: { ...hit, anchor: await anchor() } };
 
   let pending = inflight.get(key);
   if (!pending) {
@@ -57,13 +60,14 @@ export async function runMarketXray(ref: MarketRef | null, clientKey: string): P
     if (wait > 0) {
       return { ok: false, status: 429, code: "rate_limited", error: `Too many market X-rays from this connection. Try again in ${wait} seconds.`, retryAfter: wait };
     }
-    pending = buildMarketXray(ref, { audit: getAudit, budgetMs: MARKET_BUDGET_MS })
+    pending = buildMarketXray(ref, { audit: getAudit, budgetMs: MARKET_BUDGET_MS, preferredFills: (id, since) => tatumMarketFills(id, since) })
       .then((r) => { (r.complete ? complete : partial).set(key, r); return r; })
       .finally(() => inflight.delete(key));
     inflight.set(key, pending);
   }
   try {
-    return { ok: true, cached: false, result: await pending };
+    const [result, stamp] = await Promise.all([pending, anchor()]);
+    return { ok: true, cached: false, result: { ...result, anchor: stamp } };
   } catch (e) {
     if (e instanceof PublicApiError && e.status === 404) return { ok: false, status: 404, code: "not_found", error: `Polymarket has no market for that reference (${e.message}).` };
     const detail = e instanceof PublicApiError ? e.message : "unexpected error";
