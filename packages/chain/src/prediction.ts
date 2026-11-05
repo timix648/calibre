@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { creditCost } from "./credits.js";
 
 export const PREDICTION_BASE = "https://api.tatum.io/v4/data/prediction";
 
@@ -97,11 +98,15 @@ export interface PredictionClientOptions {
    */
   callBudget?: number;
   budgetFile?: string;
+  /** Hard cap on credits at Tatum's listed prices, counted with the calls in `budgetFile`. */
+  creditBudget?: number;
 }
 
 export class TatumBudgetExceeded extends Error {
-  constructor(readonly used: number, readonly budget: number) {
-    super(`Tatum call budget exhausted (${used}/${budget}). Raise TATUM_CALL_BUDGET deliberately if this is intended.`);
+  constructor(readonly used: number, readonly budget: number, readonly unit: "calls" | "credits" = "calls") {
+    super(unit === "credits"
+      ? `Tatum credit budget reached (${used}/${budget} credits). Raise TATUM_CREDIT_BUDGET deliberately if this is intended.`
+      : `Tatum call budget exhausted (${used}/${budget}). Raise TATUM_CALL_BUDGET deliberately if this is intended.`);
   }
 }
 
@@ -146,19 +151,33 @@ export class PredictionClient {
   }
 
   private used: number | null = null;
+  private credits = 0;
 
-  /** Count one network call against the budget; throws before the call when the budget is spent. */
-  private async spend(): Promise<void> {
+  /**
+   * Count one network call against the budgets; throws before the call when either is spent. Calls are counted one each, and
+   * credits at Tatum's listed price for the path (creditCost), so the guard matches what Tatum actually charges.
+   */
+  private async spend(path: string): Promise<void> {
     const budget = this.opts.callBudget;
     if (budget === undefined) return;
     if (this.used === null) {
-      try { this.used = (JSON.parse(await readFile(this.opts.budgetFile ?? "", "utf8")) as { used: number }).used; }
-      catch { this.used = 0; }
+      try {
+        const saved = JSON.parse(await readFile(this.opts.budgetFile ?? "", "utf8")) as { used: number; credits?: number };
+        this.used = saved.used;
+        this.credits = saved.credits ?? 0;
+      } catch { this.used = 0; this.credits = 0; }
     }
+    const cost = creditCost(path);
     if (this.used >= budget) throw new TatumBudgetExceeded(this.used, budget);
+    const creditBudget = this.opts.creditBudget;
+    if (creditBudget !== undefined && this.credits + cost > creditBudget) throw new TatumBudgetExceeded(this.credits, creditBudget, "credits");
     this.used++;
-    if (this.opts.budgetFile) await writeFile(this.opts.budgetFile, JSON.stringify({ used: this.used, budget }));
+    this.credits += cost;
+    if (this.opts.budgetFile) await writeFile(this.opts.budgetFile, JSON.stringify({ used: this.used, budget, credits: this.credits, creditBudget }));
   }
+
+  /** Credits spent so far at Tatum's listed prices (0 until the first call when a budget is set). */
+  get creditsUsed(): number { return this.credits; }
 
   /** Network calls counted so far (null until the first call when a budget is set). */
   get callsUsed(): number | null { return this.used; }
@@ -191,7 +210,7 @@ export class PredictionClient {
     if (hit !== null) return hit;
 
     for (let attempt = 0; ; attempt++) {
-      await this.spend();
+      await this.spend(path);
       await this.throttle();
       const res = await this.fetchImpl(PREDICTION_BASE + path, { headers: { "x-api-key": this.apiKey } });
       if (res.ok) {

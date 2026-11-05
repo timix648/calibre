@@ -128,9 +128,17 @@ async function discover(now: number): Promise<Candidate[]> {
  * Price points of a market over the last two hours. Tatum first; when it is empty for an active market, failing, paused
  * by the breaker or out of its hourly allowance, the points come from Polymarket's public fills (5-minute closes).
  */
+/**
+ * Tatum's price history has answered empty for busy markets (checked 5 Nov 2026). After three empty answers in a row the watcher
+ * stops asking for an hour, so it does not pay 200 credits a request for nothing; Polymarket's fills are used meanwhile.
+ */
+let historyEmptyStreak = 0;
+let historySkipUntil = 0;
+
 async function priceSeries(c: Candidate, end: number, now: number, mode: "tatum" | "public" = SCAN): Promise<{ points: ReturnType<typeof candlePoints>; evidence: Evidence }> {
   let reason: string;
   if (mode === "public") reason = "scanned with Polymarket public fills";
+  else if (now < historySkipUntil) reason = `Tatum price history has been answering empty; not asked again until ${clock(historySkipUntil)}`;
   else if (breakerOpen(breaker, c.marketId, now)) reason = `Tatum history was empty for this market; not asked again until ${clock(breaker[c.marketId]!)}`;
   else if (!tatumRoom()) reason = `Tatum hourly call cap (${HOURLY_CAP}) reached`;
   else {
@@ -138,7 +146,8 @@ async function priceSeries(c: Candidate, end: number, now: number, mode: "tatum"
       const candles = await metered(() => api.marketHistory(c.marketId, {
         interval: "5m", start: new Date(end - HISTORY_WINDOW_MS).toISOString(), end: new Date(end).toISOString(),
       }));
-      if (candles.length > 0) return { points: candlePoints(candles), evidence: { source: "tatum" } };
+      if (candles.length > 0) { historyEmptyStreak = 0; return { points: candlePoints(candles), evidence: { source: "tatum" } }; }
+      if (++historyEmptyStreak >= 3) { historySkipUntil = now + 60 * 60_000; historyEmptyStreak = 0; }
       await trip(c.marketId);
       reason = "Tatum history returned no candles for an active market";
     } catch (e) {
@@ -373,8 +382,8 @@ do {
     if (e instanceof TatumBudgetExceeded) { console.error(e.message); process.exit(1); }
     throw e;
   }
-  const { used, budget } = await tatumCallsUsed();
-  console.log(`verdicts sealed this run: ${sealed}. Tatum calls used: ${used}/${budget} (${callsInLastHour(tatumLog, Date.now())} in the last hour)`);
+  const { used, budget, credits, creditBudget } = await tatumCallsUsed();
+  console.log(`verdicts sealed this run: ${sealed}. Tatum: ${credits.toLocaleString("en-US")}/${creditBudget.toLocaleString("en-US")} credits, ${used}/${budget} calls (${callsInLastHour(tatumLog, Date.now())} in the last hour)`);
   if (LOOP_MINUTES > 0) await sleep(LOOP_MINUTES * 60_000);
 } while (LOOP_MINUTES > 0);
 process.exit(0);

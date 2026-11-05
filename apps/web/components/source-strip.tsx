@@ -8,8 +8,9 @@ const usd = (v: number) => `$${Math.round(v).toLocaleString("en-US")}`;
  * public fallback), where the fills came from, and Tatum's view of the wallet when there is one.
  */
 export function SourceStrip({
-  anchor, fills, tatumWallet,
+  anchor, fills, tatumWallet, tatumMarket,
 }: {
+  tatumMarket?: { yesPrice: number | null; status: string; volume: number } | null;
   anchor?: XrayAnchor | null;
   fills?: "tatum" | "polymarket-public";
   tatumWallet?: { openValueUsd: number | null; marketsTraded: number | null } | null;
@@ -29,6 +30,13 @@ export function SourceStrip({
           {anchor.source === "tatum-grpc" ? " via Tatum Sui gRPC" : " via Sui public GraphQL (Tatum paused)"}
         </>
       ),
+    });
+  }
+  if (tatumMarket && tatumMarket.yesPrice !== null) {
+    items.push({
+      key: "tatum-market",
+      tatum: true,
+      body: <>Tatum live price: YES <span className="num text-fg">{(tatumMarket.yesPrice * 100).toFixed(1)}%</span>{tatumMarket.volume > 0 ? <>, <span className="num text-fg">{usd(tatumMarket.volume)}</span> traded</> : null}</>,
     });
   }
   if (fills) {

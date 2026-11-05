@@ -6,7 +6,7 @@ import { latestCheckpoint, latestCheckpointPublic, tatumSuiClient, transactionSt
  * Tatum on the website. Every X-ray is stamped with the latest Sui checkpoint read through Tatum's Sui gRPC gateway, market
  * X-rays read their fills from Tatum's Prediction Markets API, wallet X-rays add Tatum's open-position value and markets-traded
  * count, and paid calls have their payment confirmed through Tatum's gRPC. Each request is counted at Tatum's listed credit
- * price against a daily budget (TATUM_DAILY_CREDITS, default 150,000), and a plan error (402) pauses Tatum for 15 minutes.
+ * price against a daily budget (TATUM_DAILY_CREDITS, default 20,000: raise it on a paid plan), and a plan error (402) pauses Tatum for 15 minutes.
  * Whenever Tatum cannot answer, the free source takes over and the result says which one answered.
  *
  * The meter lives in each server instance's memory, so the budget is per instance; at this site's traffic that is one or two.
@@ -14,7 +14,7 @@ import { latestCheckpoint, latestCheckpointPublic, tatumSuiClient, transactionSt
 
 const KEY = process.env.TATUM_API_KEY?.trim() || null;
 const API = "https://api.tatum.io/v4/data/prediction";
-const meter = new CreditMeter({ dailyBudget: Number(process.env.TATUM_DAILY_CREDITS ?? 150_000) || 150_000 });
+const meter = new CreditMeter({ dailyBudget: Number(process.env.TATUM_DAILY_CREDITS ?? 20_000) || 20_000 });
 const PAUSE_ON_PLAN_ERROR_MS = 15 * 60_000;
 
 export type AnchorSource = "tatum-grpc" | "sui-public-graphql";
@@ -31,7 +31,7 @@ const noteFailure = (e: unknown): void => {
 
 /** Status of the Tatum integration on this instance, for the diagnostics route. Never includes the key. */
 export function tatumStatus() {
-  return { configured: KEY !== null, ...meter.state() };
+  return { configured: KEY !== null, ...meter.state(), tradesFeedSkippedUntil: tradesFeedSkipUntil > Date.now() ? new Date(tradesFeedSkipUntil).toISOString() : null };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -83,6 +83,13 @@ async function tatumGet<T>(path: string, cost: number): Promise<T | null> {
   }
 }
 
+/**
+ * Tatum's trades feed has been answering empty for busy markets (checked 5 Nov 2026). After an empty first page the feed is skipped
+ * for 30 minutes, so the site stops paying 100 credits a request for nothing; the X-ray uses Polymarket's fills meanwhile.
+ */
+const FEED_SKIP_MS = 30 * 60_000;
+let tradesFeedSkipUntil = 0;
+
 interface TatumTrade { side: "yes" | "no"; direction: "buy" | "sell"; price: number; size: number; taker: string; timestamp: string }
 
 /**
@@ -90,6 +97,7 @@ interface TatumTrade { side: "yes" | "no"; direction: "buy" | "sell"; price: num
  * cannot answer (no key, budget used, plan error, empty), so the caller falls back to Polymarket's public fills.
  */
 export async function tatumMarketFills(conditionId: string, sinceMs: number, maxPages = 3): Promise<TimedFlowTrade[] | null> {
+  if (Date.now() < tradesFeedSkipUntil) return null;
   const out: TimedFlowTrade[] = [];
   let cursor: string | undefined;
   for (let page = 0; page < maxPages; page++) {
@@ -104,10 +112,29 @@ export async function tatumMarketFills(conditionId: string, sinceMs: number, max
       if (ts < sinceMs) { older = true; continue; }
       out.push({ taker: t.taker.toLowerCase(), side: t.side, direction: t.direction, price: t.price, size: t.size, ts });
     }
+    if (page === 0 && (body.data ?? []).length === 0) { tradesFeedSkipUntil = Date.now() + FEED_SKIP_MS; return null; }
     cursor = body.pagination?.cursor;
     if (older || !cursor || (body.data ?? []).length === 0) break;
   }
   return out.length > 0 ? out : null;
+}
+
+export interface TatumMarketSnapshot { yesPrice: number | null; status: string; volume: number; source: "tatum" }
+const MARKET_TTL_MS = 2 * 60_000;
+const marketCache = new Map<string, { at: number; value: TatumMarketSnapshot }>();
+
+/** Tatum's live view of a market: the YES price, status and volume (100 credits, cached 2 minutes per market). */
+export async function tatumMarketSnapshot(conditionId: string): Promise<TatumMarketSnapshot | null> {
+  const hit = marketCache.get(conditionId);
+  if (hit && Date.now() - hit.at < MARKET_TTL_MS) return hit.value;
+  const res = await tatumGet<{ data?: { status?: string; volume?: number; outcomes?: { name: string; price: number }[] } }>(`/markets/${conditionId}`, TATUM_CREDITS.market);
+  const body = res?.data;
+  if (!body) return null;
+  const yes = body.outcomes?.find((o) => /^yes$/i.test(o.name)) ?? body.outcomes?.[0];
+  const snap: TatumMarketSnapshot = { yesPrice: typeof yes?.price === "number" ? yes.price : null, status: body.status ?? "unknown", volume: body.volume ?? 0, source: "tatum" };
+  marketCache.set(conditionId, { at: Date.now(), value: snap });
+  if (marketCache.size > 500) marketCache.delete(marketCache.keys().next().value!);
+  return snap;
 }
 
 const WALLET_TTL_MS = 10 * 60_000;

@@ -2,7 +2,7 @@ import {
   PublicApiError, RateLimiter, TtlCache, buildMarketXray, isAddress, marketRefKey, parseMarketRef, resolveProfileHandle, toWalletXray,
   type MarketRef, type MarketXray, type WalletXray,
 } from "@calibre/public-data";
-import { anchor, tatumMarketFills, tatumWalletSnapshot } from "./tatum";
+import { anchor, tatumMarketFills, tatumMarketSnapshot, tatumWalletSnapshot } from "./tatum";
 import { getAudit, runWalletAudit } from "./wallet-service";
 
 const CACHE_MS = 10 * 60_000;
@@ -52,7 +52,10 @@ export async function runMarketXray(ref: MarketRef | null, clientKey: string): P
   }
   const key = marketRefKey(ref);
   const hit = complete.get(key) ?? partial.get(key);
-  if (hit) return { ok: true, cached: true, result: { ...hit, anchor: await anchor() } };
+  if (hit) {
+    const [stamp, tatumMarket] = await Promise.all([anchor(), tatumMarketSnapshot(hit.market.conditionId)]);
+    return { ok: true, cached: true, result: { ...hit, anchor: stamp, tatumMarket } };
+  }
 
   let pending = inflight.get(key);
   if (!pending) {
@@ -67,7 +70,8 @@ export async function runMarketXray(ref: MarketRef | null, clientKey: string): P
   }
   try {
     const [result, stamp] = await Promise.all([pending, anchor()]);
-    return { ok: true, cached: false, result: { ...result, anchor: stamp } };
+    const tatumMarket = await tatumMarketSnapshot(result.market.conditionId);
+    return { ok: true, cached: false, result: { ...result, anchor: stamp, tatumMarket } };
   } catch (e) {
     if (e instanceof PublicApiError && e.status === 404) return { ok: false, status: 404, code: "not_found", error: `Polymarket has no market for that reference (${e.message}).` };
     const detail = e instanceof PublicApiError ? e.message : "unexpected error";

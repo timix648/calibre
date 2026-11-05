@@ -1,7 +1,7 @@
 # Deploying the site on Vercel
 
 `apps/web` is a Next.js 16 app inside the pnpm monorepo. It needs **no environment variables and no secrets** (the optional paid agent API below aside): the verdicts, wallet index and
-memory counts are static JSON files in `apps/web/data/` (committed), the live X-rays call Tatum (set `TATUM_API_KEY`, optionally `TATUM_DAILY_CREDITS`, default 150,000), and the live wallet audit at
+memory counts are static JSON files in `apps/web/data/` (committed), the live X-rays call Tatum (set `TATUM_API_KEY`, optionally `TATUM_DAILY_CREDITS`, default 20,000 a day per instance), and the live wallet audit at
 `/api/wallet/[address]` reads Polymarket's free public API.
 
 ## One-time setup

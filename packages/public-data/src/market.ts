@@ -243,6 +243,8 @@ export interface XrayAnchor { sequence: string; timestamp: string | null; source
 export interface MarketXray {
   /** Set by the server that ran the X-ray. */
   anchor?: XrayAnchor | null;
+  /** Tatum's live view of the market (YES price, status, volume), when the server could ask it. */
+  tatumMarket?: { yesPrice: number | null; status: string; volume: number; source: "tatum" } | null;
   market: {
     conditionId: string; slug: string; eventSlug: string | null; question: string; yesOutcome: string; noOutcome: string;
     yesPrice: number | null; closed: boolean; url: string;

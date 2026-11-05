@@ -120,6 +120,6 @@ if (fresh.length > 0) {
   console.log(`wallet memories re-versioned: ${written}`);
 }
 
-const { used, budget } = await tatumCallsUsed();
-console.log(`Tatum calls used: ${used}/${budget}`);
+const { used, budget, credits, creditBudget } = await tatumCallsUsed();
+console.log(`Tatum: ${credits.toLocaleString("en-US")}/${creditBudget.toLocaleString("en-US")} credits, ${used}/${budget} calls`);
 process.exit(0);

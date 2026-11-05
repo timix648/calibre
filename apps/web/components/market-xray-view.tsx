@@ -68,7 +68,7 @@ function Result({ r, cached, onRefresh }: { r: MarketXray; cached: boolean; onRe
           {cached ? "Cached, under 10 min old" : "Live"}
           {r.market.closed ? " · market closed" : ""}
         </p>
-        <div className="mt-3"><SourceStrip anchor={r.anchor} fills={r.source} /></div>
+        <div className="mt-3"><SourceStrip anchor={r.anchor} fills={r.source} tatumMarket={r.tatumMarket} /></div>
       </div>
 
       {!r.complete ? (
