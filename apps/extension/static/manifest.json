@@ -14,5 +14,5 @@
       "run_at": "document_idle"
     }
   ],
-  "action": { "default_title": "CALIBRE X-ray options", "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png" } }
+  "action": { "default_title": "CALIBRE Whale X-ray", "default_popup": "popup.html", "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png" } }
 }

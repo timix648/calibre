@@ -17,6 +17,12 @@ declare namespace chrome {
     }
     const sync: Area;
   }
+  namespace tabs {
+    interface Tab { id?: number }
+    function query(info: { active?: boolean; currentWindow?: boolean }): Promise<Tab[]>;
+    function sendMessage(tabId: number, message: unknown): Promise<unknown>;
+    function create(props: { url: string }): Promise<Tab>;
+  }
   namespace action {
     const onClicked: { addListener(cb: () => void): void };
   }

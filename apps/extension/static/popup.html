@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CALIBRE Whale X-ray</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; width: 340px; color: #e7eaf0; font: 13px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(360px 200px at 0% 0%, rgba(94,234,212,.10), transparent 70%), #06070a;
+    }
+    header { display: flex; align-items: center; gap: 9px; padding: 14px 16px 12px; border-bottom: 1px solid #1d232e; }
+    header img { width: 22px; height: 22px; }
+    .brand { font-weight: 700; letter-spacing: .14em; font-size: 12px; }
+    .tag { margin-left: auto; font: 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase;
+      color: #5eead4; background: rgba(94,234,212,.12); padding: 3px 12px 3px 8px; clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+    main { padding: 14px 16px 16px; }
+    .state { position: relative; padding-top: 10px; border-top: 1px solid #1d232e; }
+    .state::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: #5eead4; }
+    .label { font: 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; color: #5d6676; }
+    .title { margin-top: 3px; font-weight: 600; font-size: 14px; }
+    .text { margin: 4px 0 0; color: #a0a8b6; }
+    .btn { all: unset; box-sizing: border-box; display: inline-block; cursor: pointer; padding: 8px 14px; font-weight: 600; font-size: 12.5px; transition: background .2s, transform .1s;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+    .btn:active { transform: translateY(1px); }
+    form .btn { flex: none; white-space: nowrap; }
+    .primary { background: #5eead4; color: #06070a; }
+    .primary:hover { background: #7ff0dd; }
+    .ghost { background: #12161d; color: #e7eaf0; }
+    .ghost:hover { background: #1b2029; }
+    .row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    form { margin-top: 18px; }
+    input { width: 100%; padding: 9px 11px; background: #0c0f14; color: #e7eaf0; border: 1px solid #1d232e; font: inherit;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+    input:focus { outline: none; border-color: #5eead4; }
+    .err { color: #e5484d; min-height: 1.4em; margin: 6px 0 0; font-size: 12px; }
+    footer { display: flex; justify-content: space-between; padding: 10px 16px 12px; border-top: 1px solid #1d232e; font-size: 12px; }
+    footer a { color: #8f98a8; text-decoration: none; }
+    footer a:hover { color: #5eead4; }
+    main > * { animation: rise .45s cubic-bezier(.2,.8,.2,1) both; }
+    main > *:nth-child(2) { animation-delay: 60ms; } main > *:nth-child(3) { animation-delay: 120ms; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { main > * { animation: none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icons/icon48.png" alt="">
+    <span class="brand">CALIBRE</span>
+    <span class="tag">Whale X-ray</span>
+  </header>
+  <main>
+    <section class="state" aria-live="polite">
+      <div class="label" id="state-label">This tab</div>
+      <div class="title" id="state-title">Checking…</div>
+      <p class="text" id="state-text"></p>
+      <div class="row" id="state-actions"></div>
+    </section>
+    <form id="lookup">
+      <div class="label">X-ray anything</div>
+      <div class="row" style="flex-wrap: nowrap">
+        <input id="q" type="text" autocomplete="off" spellcheck="false" placeholder="Profile, @handle, wallet or market link" aria-label="Profile, handle, wallet or market link">
+        <button class="btn primary" type="submit">X-ray</button>
+      </div>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+  </main>
+  <footer>
+    <a href="#" id="site">Open the CALIBRE site</a>
+    <a href="#" id="settings">Settings</a>
+  </footer>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -91,7 +91,8 @@ export default function ExtensionPage() {
           <h2 className="text-lg font-semibold tracking-tight">If the panel does not appear</h2>
           <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
             <li>Reload the Polymarket tab once after installing.</li>
-            <li>Open the extension&apos;s options (Details, then Extension options) and press <strong className="font-medium text-fg">Test</strong>: it checks that this site answers.</li>
+            <li>Click the CALIBRE icon in the toolbar: it says whether the panel is active on this tab, and <strong className="font-medium text-fg">Show the panel</strong> brings back one you closed.</li>
+            <li>Still nothing? Open <strong className="font-medium text-fg">Settings</strong> from that popup and press <strong className="font-medium text-fg">Test connection</strong>: it checks that this site answers.</li>
             <li>A wallet audit reads up to 1,000 trades and can take a few seconds the first time.</li>
           </ul>
         </div>

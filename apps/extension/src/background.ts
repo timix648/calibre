@@ -32,4 +32,3 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   return true; // the response is sent asynchronously
 });
 
-chrome.action.onClicked.addListener(() => { void chrome.runtime.openOptionsPage(); });

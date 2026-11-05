@@ -13,7 +13,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(join(dist, "icons"), { recursive: true });
 
 await build({
-  entryPoints: { content: join(root, "src/content.ts"), background: join(root, "src/background.ts"), options: join(root, "src/options.ts") },
+  entryPoints: { content: join(root, "src/content.ts"), background: join(root, "src/background.ts"), options: join(root, "src/options.ts"), popup: join(root, "src/popup.ts") },
   outdir: dist,
   bundle: true,
   format: "iife",

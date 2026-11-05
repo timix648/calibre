@@ -32,7 +32,7 @@ manifest names exists.
 1. Start the site the panel talks to: `pnpm --filter @calibre/web dev` (it listens on `http://localhost:3000`), or use a deployed one.
 2. Open `chrome://extensions` and turn on **Developer mode**.
 3. Click **Load unpacked** and choose the `apps/extension/dist` folder.
-4. Open any Polymarket profile or event page. The panel appears at the bottom right.
+4. Open any Polymarket profile or event page. The panel appears at the bottom right. Click the toolbar icon for a popup that shows what the panel is doing on this tab, reopens a closed panel, and X-rays any pasted link.
 
 After changing the code, run the build again and press the reload icon on the extension's card.
 

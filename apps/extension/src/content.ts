@@ -81,6 +81,22 @@ function check(): void {
 
 // Polymarket is a single-page app: the URL changes without a page load. The content script runs in an isolated world and cannot
 // see the page's history calls, so it listens for the events that do reach it and also polls the URL, which is cheap and robust.
+// The toolbar popup asks what this page is and can bring back a panel the user closed.
+chrome.runtime.onMessage.addListener((raw, _sender, sendResponse) => {
+  const message = raw as { type?: string } | null;
+  if (message?.type === "calibre:status") {
+    sendResponse({ type: "calibre:status", kind: detectPage(location.href)?.kind ?? null, visible: panel.visible });
+    return false;
+  }
+  if (message?.type === "calibre:show") {
+    currentKey = "";
+    check();
+    sendResponse({ ok: true });
+    return false;
+  }
+  return false;
+});
+
 window.addEventListener("popstate", check);
 window.addEventListener("hashchange", check);
 (window as unknown as { navigation?: EventTarget }).navigation?.addEventListener("navigatesuccess", check);

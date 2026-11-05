@@ -169,6 +169,11 @@ export class Panel {
   /** Whether the user closed the panel (it stays closed on this page until the URL changes). */
   closed = false;
 
+  /** Whether the panel is on the page right now. */
+  get visible(): boolean {
+    return this.host.isConnected;
+  }
+
   mount(): void {
     if (!this.host.isConnected && !this.closed) document.documentElement.append(this.host);
   }
