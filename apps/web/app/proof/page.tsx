@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CountUp } from "@/components/count-up";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
-import { dataGeneratedAt, grades, memory, outcomes, verdicts, walletIndex } from "@/lib/data";
+import { dataGeneratedAt, grades, memory, outcomes, tatumStamped, verdicts, walletIndex } from "@/lib/data";
 import { pct, shortAddr, suiscanCheckpoint, utc } from "@/lib/format";
 
 export const metadata: Metadata = { title: "Proof" };
@@ -32,9 +32,9 @@ export default function Proof() {
         <Stat label="Sealed verdicts" value={verdicts.length} />
         <Stat label="Graded outcomes" value={outcomes.length} />
         <Stat
-          label="Sui checkpoint"
-          value={memory.checkpoint ? <ExternalLink href={suiscanCheckpoint(memory.checkpoint.sequence)}>{Number(memory.checkpoint.sequence).toLocaleString("en-US")}</ExternalLink> : "n/a"}
-          note={memory.checkpoint?.timestamp ? `${utc(memory.checkpoint.timestamp)}, via ${memory.checkpoint.source === "sui-public-graphql" ? "Sui public GraphQL (Tatum gRPC unavailable)" : "Tatum gRPC"}` : undefined}
+          label="Stamped via Tatum gRPC"
+          value={<><CountUp value={tatumStamped} /><span className="text-muted"> / {verdicts.length}</span></>}
+          note="Every sealed verdict carries a Sui checkpoint read through Tatum's Sui gRPC gateway"
         />
       </section>
 
@@ -187,7 +187,7 @@ export default function Proof() {
       <Card>
         <H2>Verify it yourself</H2>
         <p className="text-sm leading-relaxed text-muted">
-          The repository includes a script that lists every memory in each namespace, decodes the sealed verdicts and outcomes, checks that the counts agree, reads the latest Sui checkpoint through Tatum (or Sui's public GraphQL when Tatum is unavailable), and writes the result to <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">docs/PROOF.md</code>.
+          The repository includes a script that lists every memory in each namespace, decodes the sealed verdicts and outcomes, checks that the counts agree, reads the latest Sui checkpoint through Tatum's Sui gRPC (with Sui's public GraphQL as a labelled fallback), and writes the result to <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">docs/PROOF.md</code>.
         </p>
         <pre className="num mt-3 overflow-x-auto cut bg-black/40 p-4 text-sm">{`pnpm install\ncp .env.example .env   # add your Tatum and Walrus Memory keys\npnpm verify`}</pre>
         <p className="mt-3 text-sm leading-relaxed text-muted">

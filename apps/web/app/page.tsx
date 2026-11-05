@@ -6,7 +6,7 @@ import { Card, H2, TableWrap } from "@/components/ui";
 import { CountUp } from "@/components/count-up";
 import { ScaleBand } from "@/components/scale-band";
 import { VerdictTrace } from "@/components/verdict-trace";
-import { findings, memory, outcomes, verdicts } from "@/lib/data";
+import { findings, memory, outcomes, tatumStamped, verdicts } from "@/lib/data";
 
 const SAMPLE_WALLET = "0x684baa57c338c2549aec0aa3f034f695d72a8409";
 
@@ -184,11 +184,7 @@ export default function Home() {
           <ReceiptStat label="Memories on mainnet" value={memory.total.toLocaleString("en-US")} note="Walrus Memory, Sui" />
           <ReceiptStat label="Sealed verdicts" value={sealed.toLocaleString("en-US")} note="Before the result" />
           <ReceiptStat label="Graded" value={outcomes.length.toLocaleString("en-US")} note="Against the market price" />
-          <ReceiptStat
-            label="Sui checkpoint"
-            value={memory.checkpoint ? Number(memory.checkpoint.sequence).toLocaleString("en-US") : "n/a"}
-            note={memory.checkpoint?.source === "sui-public-graphql" ? "Via Sui public GraphQL" : "Via Tatum gRPC"}
-          />
+          <ReceiptStat label="Stamped via Tatum gRPC" value={`${tatumStamped}`} note={`of ${verdicts.length} verdicts, Sui checkpoint via Tatum`} />
         </dl>
         <p className="border-t border-line px-5 py-3 text-sm text-muted">
           Check them yourself: the <Link href="/radar" className="text-accent underline decoration-accent/40">radar</Link>, the{" "}

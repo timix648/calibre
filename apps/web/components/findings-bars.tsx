@@ -53,7 +53,7 @@ export function FindingsBars({ row, top }: { row: WideRow; top: WideRow }) {
       ))}
       <text x={34} y={13} fontSize={11} fill="var(--color-faint)">Edge on their next bets, points per bet</text>
 
-      <Bar x={BEST - BAR / 2} width={BAR} value={row.best * 100} color="var(--color-muted)" delay={80} />
+      <Bar x={BEST - BAR / 2} width={BAR} value={row.best * 100} color="var(--color-ash)" delay={80} />
       <text x={BEST} y={ZERO - 8} textAnchor="middle" fontSize={15} fontWeight={650} className="num" fill="var(--color-fg)">{pts(row.best)}</text>
       <text x={BEST} y={foot} textAnchor="middle" fontSize={13} fontWeight={600} fill="var(--color-fg)">Best third</text>
       <text x={BEST} y={foot + 16} textAnchor="middle" fontSize={11.5} fill="var(--color-muted)">past winners</text>

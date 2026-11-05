@@ -153,7 +153,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
           <p className="text-sm leading-relaxed">
             <strong>{sourceLabel(d.source)}.</strong>{" "}
             {d.source === "polymarket-public"
-              ? <>The trades behind this move came from Polymarket&apos;s public Data API because Tatum&apos;s trade history was unavailable for this market{d.fallbackReason ? ` (${d.fallbackReason})` : ""}.{d.checkpoint.source === "sui-public-graphql" ? " The checkpoint was read through Sui's public GraphQL because Tatum's gateway was unavailable." : " The checkpoint was still read through Tatum."}</>
+              ? <>The market was found through Tatum&apos;s Prediction Markets API and the checkpoint was read through Tatum&apos;s Sui gRPC. The trades behind the move came from Polymarket&apos;s public Data API {d.fallbackReason?.includes("hourly call cap") ? "because the watcher had used its hourly allowance of Tatum calls, a cap set to stretch the free plan" : d.fallbackReason?.includes("empty") ? "because Tatum's price history was empty for this market at the time" : "as a fallback"}{d.fallbackReason ? ` (${d.fallbackReason})` : ""}.{d.checkpoint.source === "sui-public-graphql" ? " This verdict's checkpoint came from Sui's public GraphQL." : ""}</>
               : "The prices and trades behind this move came from Tatum's Prediction Markets API."}
           </p>
 

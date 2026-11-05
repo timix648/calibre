@@ -62,8 +62,8 @@ instances, so on Vercel a spent digest could in principle be presented again to 
 `DigestStore` interface (`has(digest)`, `set(digest)`) over Redis, a KV or a database and pass it to `paymentsFor` in
 `apps/web/lib/paid-xray.ts`.
 
-**Verification goes through the public Sui fullnode**, not through Tatum. `@suimpp/mpp` builds a `SuiGrpcClient` for `MPP_RPC_URL`, and in our spike
-Tatum's Sui gateway only answered native gRPC (docs/SPIKES.md), so pointing `MPP_RPC_URL` at it is untested and probably will not work. Tatum stays the source for the sealed verdicts.
+**Payment verification uses the default Sui fullnode.** `@suimpp/mpp` builds its client for `MPP_RPC_URL` over gRPC-web, while Tatum's Sui
+gateway speaks native gRPC (docs/SPIKES.md), which CALIBRE uses through `@grpc/grpc-js` to stamp every sealed verdict with its checkpoint.
 
 ### 2. The buyer (pays the money): fund this
 

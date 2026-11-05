@@ -131,3 +131,6 @@ export const replay = replayFile as unknown as {
   pOneSided: number;
   byPhase: { phase: string; loserMoves: number; loserEdgePts: number; cleanMoves: number; cleanEdgePts: number }[];
 };
+
+/** Sealed verdicts whose Sui checkpoint was read through Tatum's gRPC gateway (all verdicts sealed before the public fallback existed). */
+export const tatumStamped = verdicts.filter((v) => (v.data.checkpoint as { source?: string }).source !== "sui-public-graphql").length;

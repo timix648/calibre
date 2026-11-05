@@ -6,12 +6,13 @@
   --color-panel-2: #12161d;
   --color-line: #1d232e;
   --color-line-strong: #3a4352;
+  --color-ash: #a3a3a3;
   --color-fg: #e7eaf0;
   --color-muted: #8f98a8;
   --color-faint: #5d6676;
   --color-accent: #5eead4;
   --color-good: #4ade80;
-  --color-bad: #fb7185;
+  --color-bad: #e5484d;
   --color-warn: #fbbf24;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;

@@ -41,7 +41,7 @@ export function LabelTestChart() {
   const cols = [
     { x: 78, name: ["Proven losing", "record"], row: losing, color: "var(--color-bad)" },
     { x: 180, name: ["Proven winning", "record"], row: winning, color: "var(--color-good)" },
-    { x: 282, name: ["All", "wallets"], row: all, color: "var(--color-muted)" },
+    { x: 282, name: ["All", "wallets"], row: all, color: "var(--color-ash)" },
   ];
   const BAR = 56;
   const label = `Edge on the next bets, points per bet, with the 95% interval. ${cols.map((c) => `${c.name.join(" ")}: ${signedPts(c.row.meanNewEdgePts)}, ${c.row.wallets} wallets`).join(". ")}.`;
@@ -63,7 +63,7 @@ export function LabelTestChart() {
         return (
           <g key={c.name.join("")}>
             <rect
-              x={c.x - BAR / 2} y={v >= 0 ? ZERO - h : ZERO} width={BAR} height={h} rx={3} fill={c.color} opacity={0.85}
+              x={c.x - BAR / 2} y={v >= 0 ? ZERO - h : ZERO} width={BAR} height={h} rx={3} fill={c.color} opacity={1}
               className="bar-grow" style={{ animationDelay: `${80 + i * 90}ms`, transformOrigin: `${c.x}px ${ZERO}px` }}
             />
             <line x1={c.x} x2={c.x} y1={y(hi)} y2={y(lo)} stroke="var(--color-fg)" strokeWidth={1.6} />

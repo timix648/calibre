@@ -22,6 +22,8 @@ on a live move is sealed on Walrus Memory before the result is known, and graded
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
 | **59 verdicts** | sealed on Walrus Memory mainnet before the result was known; 48 graded, 378 memories in all |
+| **59 of 59 verdicts** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway |
+| **643 Tatum API calls** | by the mainnet watcher to find and track live markets, inside a budget built to last the free plan |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
 Every figure is a plain sum over the study outputs (`scripts/scale-stats.ts`), not an estimate.
@@ -91,14 +93,18 @@ on Walruscan. Current counts: 59 verdicts, 48 outcomes, 271 wallet records.
 
 ## How Tatum is used
 
-- **Prediction Markets API** (`/v4/data/prediction`): market discovery, price history and trades for the watcher, and the
-  resolution check for grading (`packages/chain/src/prediction.ts`, budgeted, cached, retried).
-- **Sui gRPC gateway** (`sui-mainnet-grpc.gateway.tatum.io`): the latest checkpoint stamped into every sealed verdict
-  (`packages/chain/src/suiGrpc.ts`).
+- **Sui gRPC gateway** (`sui-mainnet-grpc.gateway.tatum.io`), over native gRPC with `@grpc/grpc-js`: the Sui checkpoint
+  that proves when each verdict was sealed. **All 59 sealed verdicts were stamped through it.** This is what makes a verdict a
+  receipt: the checkpoint shows it existed before the market resolved (`packages/chain/src/suiGrpc.ts`).
+- **Prediction Markets API** (`/v4/data/prediction`): the watcher's market discovery (sports and politics events by volume
+  and liquidity), price history, trades and the resolution check before grading. 643 calls on mainnet
+  (`packages/chain/src/prediction.ts`: budgeted per hour, cached, retried, with a circuit breaker).
 
-Each has a labelled fallback, and the site says which source answered. When Tatum's trade history was down during the
-hackathon, trades came from Polymarket's public Data API. When the free credits ran out, resolutions came from Gamma and the
-checkpoint from Sui's public GraphQL.
+The free plan is finite, so CALIBRE spends Tatum calls where they matter most and labels every fallback. The watcher capped
+itself at 18 Tatum calls an hour and took trade fills from Polymarket's public Data API once the hour's allowance was used
+(each verdict records which source it used). Grading asks Polymarket's free Gamma API which markets have resolved before
+spending a Tatum call. The latest export, made after the free credits were used up, read its checkpoint from Sui's public
+GraphQL and says so; the sealed verdicts themselves all carry Tatum checkpoints.
 
 ## Agent payments
 
