@@ -9,9 +9,9 @@ that pushed the price, scores each one against the prices it actually paid on it
 whether the move came from proven losers, from the rare proven winner, or from wallets with no record either way. Every judgement
 on a live move is sealed on Walrus Memory before the result is known, and graded in public afterwards.
 
-![The CALIBRE panel on a Polymarket profile, labelling the wallet mostly sniping](apps/web/public/extension-panel.png)
+![The CALIBRE panel on a Polymarket profile up $1.3M, labelling the wallet no proven edge](apps/web/public/extension-panel.png)
 
-*The Chrome extension on a live Polymarket profile: 72% of this wallet's bets were on outcomes already decided.*
+*The Chrome extension on a live Polymarket profile: up $1.3M, yet over 656 bets its edge is within what luck produces.*
 
 ## By the numbers
 

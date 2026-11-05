@@ -66,8 +66,8 @@ export default function ExtensionPage() {
       {SHOT ? (
         <figure className="overflow-hidden chamfer">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={SHOT} alt="The CALIBRE panel on a Polymarket profile, labelling the wallet mostly sniping: 72% of its bets were on outcomes already decided" className="w-full" />
-          <figcaption className="border-t border-line px-5 py-3 text-xs text-faint">The panel on a live Polymarket profile. This wallet looks active, but 72% of its 383 scored bets were on outcomes that were already decided, so copying it would mostly copy bets on finished games.</figcaption>
+          <img src={SHOT} alt="The CALIBRE panel on a Polymarket profile up $1.3M, labelling the wallet no proven edge: its record is within what luck produces" className="w-full" />
+          <figcaption className="border-t border-line px-5 py-3 text-xs text-faint">The panel on a live Polymarket profile. This wallet is up $1.3M, but over 656 scored bets its edge (+2.4 ± 3.9 points) is within what luck produces, so copying it would mostly copy luck.</figcaption>
         </figure>
       ) : null}
 
