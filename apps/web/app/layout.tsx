@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { RevealObserver } from "@/components/reveal-observer";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import "./globals.css";
 
@@ -22,10 +23,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SiteHeader />
-        <main id="main" className="mx-auto max-w-5xl px-4 pb-4 pt-8 sm:px-6 sm:pt-12">
+        <main id="main" className="mx-auto max-w-[1240px] px-5 pb-4 pt-10 sm:px-8 sm:pt-14">
           {children}
         </main>
         <SiteFooter />
+        <RevealObserver />
       </body>
     </html>
   );

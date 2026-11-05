@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { pts } from "@/lib/format";
 
 /**
@@ -17,16 +18,18 @@ export function EdgeBar({
   return (
     <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={text} className="h-[22px] w-full min-w-[140px] max-w-[260px]">
       <title>{text}</title>
-      {known ? <rect x={x(-(high! - low!) / 2)} y={4} width={Math.max(1, x((high! - low!) / 2) - x(-(high! - low!) / 2))} height={H - 8} rx={3} fill="var(--color-muted)" opacity={0.14} /> : null}
+      {known ? <rect className="edge-band" x={x(-(high! - low!) / 2)} y={4} width={Math.max(1, x((high! - low!) / 2) - x(-(high! - low!) / 2))} height={H - 8} rx={3} fill="var(--color-muted)" opacity={0.14} /> : null}
       <line x1={x(-0.2)} x2={x(-0.2)} y1={H / 2 - 3} y2={H / 2 + 3} stroke="var(--color-line)" />
       <line x1={x(0.2)} x2={x(0.2)} y1={H / 2 - 3} y2={H / 2 + 3} stroke="var(--color-line)" />
       <line x1={W / 2} x2={W / 2} y1={2} y2={H - 2} stroke="var(--color-faint)" strokeDasharray="2 2" />
       {known ? (
         <>
-          <line x1={x(low!)} x2={x(high!)} y1={H / 2} y2={H / 2} stroke={color} strokeWidth={2} strokeLinecap="round" />
-          <line x1={x(low!)} x2={x(low!)} y1={H / 2 - 5} y2={H / 2 + 5} stroke={color} strokeWidth={2} />
-          <line x1={x(high!)} x2={x(high!)} y1={H / 2 - 5} y2={H / 2 + 5} stroke={color} strokeWidth={2} />
-          <circle cx={x(edge)} cy={H / 2} r={4} fill={color} />
+          <g className="edge-band">
+            <line x1={x(low!)} x2={x(high!)} y1={H / 2} y2={H / 2} stroke={color} strokeWidth={2} strokeLinecap="round" />
+            <line x1={x(low!)} x2={x(low!)} y1={H / 2 - 5} y2={H / 2 + 5} stroke={color} strokeWidth={2} />
+            <line x1={x(high!)} x2={x(high!)} y1={H / 2 - 5} y2={H / 2 + 5} stroke={color} strokeWidth={2} />
+          </g>
+          <circle className="edge-dot" style={{ "--from": `${W / 2 - x(edge)}px` } as CSSProperties} cx={x(edge)} cy={H / 2} r={4} fill={color} />
         </>
       ) : null}
     </svg>

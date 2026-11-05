@@ -1,51 +1,60 @@
 import type { ReactNode } from "react";
+import { CountUp } from "./count-up";
 
 type Tone = "good" | "bad" | "muted" | "warn" | "accent";
 
 const TONES: Record<Tone, string> = {
-  good: "border-good/40 bg-good/10 text-good",
-  bad: "border-bad/40 bg-bad/10 text-bad",
-  warn: "border-warn/40 bg-warn/10 text-warn",
-  accent: "border-accent/40 bg-accent/10 text-accent",
-  muted: "border-line bg-panel-2 text-muted",
+  good: "bg-good/12 text-good",
+  bad: "bg-bad/12 text-bad",
+  warn: "bg-warn/12 text-warn",
+  accent: "bg-accent/12 text-accent",
+  muted: "bg-white/[0.05] text-muted",
 };
 
+/** A small cut-corner tag (not a pill): the label of a wallet, a verdict or a state. */
 export function Badge({ tone = "muted", children }: { tone?: Tone; children: ReactNode }) {
   return (
-    <span className={`inline-flex items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-medium ${TONES[tone]}`}>
+    <span className={`chamfer-tag inline-flex items-center whitespace-nowrap px-2.5 py-0.5 text-xs font-medium ${TONES[tone]}`}>
       {children}
     </span>
   );
 }
 
-export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-xl border border-line bg-panel p-5 sm:p-6 ${className}`}>{children}</section>;
+/** An open section framed by corner brackets; it rises into view as it scrolls in. */
+export function Card({ children, className = "", reveal = "up" }: { children: ReactNode; className?: string; reveal?: "up" | "left" | "right" }) {
+  return <section data-reveal={reveal} className={`plate ${className}`}>{children}</section>;
 }
 
 export function H2({ children, sub }: { children: ReactNode; sub?: ReactNode }) {
   return (
-    <div className="mb-4">
-      <h2 className="text-lg font-semibold tracking-tight">{children}</h2>
-      {sub ? <p className="mt-1 text-sm leading-relaxed text-muted">{sub}</p> : null}
+    <div className="mb-5">
+      <h2 className="flex items-center gap-3 text-xl font-semibold tracking-tight">
+        <span aria-hidden className="h-[3px] w-5 shrink-0 bg-accent [clip-path:polygon(0_0,100%_0,80%_100%,0_100%)]" />
+        {children}
+      </h2>
+      {sub ? <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">{sub}</p> : null}
     </div>
   );
 }
 
-export function PageTitle({ title, sub }: { title: ReactNode; sub?: ReactNode }) {
+/** A page heading: a tab with the section name, then a large title. */
+export function PageTitle({ title, sub, tab }: { title: ReactNode; sub?: ReactNode; tab?: string }) {
   return (
-    <header className="mb-8">
-      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h1>
-      {sub ? <p className="mt-2 max-w-3xl leading-relaxed text-muted">{sub}</p> : null}
+    <header className="mb-10">
+      <span className="tab">{tab ?? (typeof title === "string" ? title : "CALIBRE")}</span>
+      <h1 className="mt-4 text-3xl font-semibold leading-[1.05] tracking-[-0.02em] sm:text-5xl">{title}</h1>
+      {sub ? <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted sm:text-lg">{sub}</p> : null}
     </header>
   );
 }
 
+/** A measurement, not a tile: a hairline with an accent segment, the label, then a value that counts up when it is a number. */
 export function Stat({ label, value, note }: { label: string; value: ReactNode; note?: ReactNode }) {
   return (
-    <div className="rounded-lg border border-line bg-panel-2 px-4 py-3">
-      <div className="text-xs uppercase tracking-wide text-faint">{label}</div>
-      <div className="num mt-1 text-xl font-semibold">{value}</div>
-      {note ? <div className="mt-1 text-xs text-muted">{note}</div> : null}
+    <div className="measure">
+      <div className="num text-[11px] uppercase tracking-[0.14em] text-faint">{label}</div>
+      <div className="num mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">{typeof value === "number" ? <CountUp value={value} /> : value}</div>
+      {note ? <div className="mt-1.5 text-xs leading-snug text-muted">{note}</div> : null}
     </div>
   );
 }

@@ -31,7 +31,7 @@ export default async function Method() {
   const ci = (r: { ci95Pts: [number, number] | null }) => (r.ci95Pts ? `${signedPts(r.ci95Pts[0])} to ${signedPts(r.ci95Pts[1])}` : "n/a");
   return (
     <div className="space-y-8">
-      <PageTitle
+      <PageTitle tab="How it is measured"
         title="Method"
         sub="How CALIBRE measures a wallet's record, what the study found, and what none of it can show."
       />

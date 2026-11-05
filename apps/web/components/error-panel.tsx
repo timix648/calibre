@@ -45,7 +45,7 @@ export function ErrorPanel({
 }: { code?: FailureCode; message?: string; onRetry?: () => void; retryAfter?: number | null; home?: boolean }) {
   const c = COPY[code];
   return (
-    <div role="alert" className="rounded-xl border border-line bg-panel p-5 sm:p-6">
+    <div role="alert" className="plate">
       <div className="flex items-start gap-4">
         <span aria-hidden className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-warn/40 bg-warn/10 text-warn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

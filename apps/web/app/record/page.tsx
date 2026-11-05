@@ -54,7 +54,7 @@ export default function Record() {
   const { rows, summary } = record;
   return (
     <div className="space-y-8">
-      <PageTitle
+      <PageTitle tab="Graded calls"
         title="CALIBRE's own record"
         sub="Every verdict CALIBRE has sealed on Walrus before the result was known, with its grade once the market resolves. The grade compares CALIBRE's forecast with the market price at the time of the verdict, on the same result. Nothing here is edited after the fact: a verdict that turns out wrong stays on the list."
       />
@@ -125,7 +125,7 @@ export default function Record() {
           <>
             <ul className="space-y-3 md:hidden">
               {rows.map((r) => (
-                <li key={r.id} className="rounded-xl border border-line bg-panel p-4">
+                <li key={r.id} className="plate p-4 sm:p-5">
                   <Link href={`/move/${r.id}`} className="font-medium leading-snug text-fg underline decoration-line underline-offset-4">{r.question}</Link>
                   <div className="mt-1 text-xs text-faint">{r.league.toUpperCase()} · sealed {utc(r.sealedAt)}</div>
                   <div className="mt-3 flex items-center justify-between gap-3">

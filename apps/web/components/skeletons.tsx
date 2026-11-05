@@ -8,7 +8,7 @@ export function Bone({ className = "" }: { className?: string }) {
 }
 
 function Panel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div aria-hidden className={`rounded-xl border border-line bg-panel p-5 sm:p-6 ${className}`}>{children}</div>;
+  return <div aria-hidden className={`plate ${className}`}>{children}</div>;
 }
 
 /** The live X-ray routes take a while. This says so, counts the seconds and shows an indeterminate bar. */
@@ -19,7 +19,7 @@ export function LoadingNote({ what, usually }: { what: string; usually: string }
     return () => clearInterval(t);
   }, []);
   return (
-    <div role="status" aria-live="polite" className="rounded-xl border border-line bg-panel px-4 py-3">
+    <div role="status" aria-live="polite" className="plate px-4 py-3">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <p className="text-sm text-fg">{what}</p>
         <p className="num text-xs text-faint">{seconds} s · usually {usually}</p>

@@ -12,7 +12,7 @@ export default async function MarketPage({
   const marketSlug = Array.isArray(market) ? market[0] : market;
   return (
     <div className="space-y-6">
-      <PageTitle
+      <PageTitle tab="Market X-ray"
         title="Market X-ray"
         sub="Who pushed the latest move in this market, and how much of that money came from traders with a proven losing record."
       />

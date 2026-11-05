@@ -16,7 +16,7 @@ export default function Radar() {
   const rows = [...verdicts].sort((a, b) => b.data.sealedAt.localeCompare(a.data.sealedAt));
   return (
     <div className="space-y-8">
-      <PageTitle
+      <PageTitle tab="Live moves"
         title="Radar"
         sub="Recent price moves, judged by who traded them. Each verdict was written to Walrus Memory with a Sui checkpoint before the result was known, and is graded when the market resolves."
       />
@@ -58,7 +58,7 @@ export default function Radar() {
               const graded = outcomeFor(v.key);
               const square = verdictSquare(d);
               return (
-                <li key={v.id} className="rounded-xl border border-line bg-panel p-4">
+                <li key={v.id} className="plate p-4 sm:p-5">
                   <Link href={`/move/${v.id}`} className="font-medium leading-snug text-fg underline decoration-line underline-offset-4">{d.question}</Link>
                   <div className="mt-1 text-xs text-faint">{d.league.toUpperCase()} · {d.wallets} wallets, {d.trades} fills{d.source === "polymarket-public" ? " · public trade data" : " · Tatum"}</div>
                   <div className="mt-3 flex items-center justify-between gap-3">

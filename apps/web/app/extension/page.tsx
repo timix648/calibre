@@ -24,7 +24,7 @@ const PAGES = [
 export default function ExtensionPage() {
   return (
     <div className="space-y-12">
-      <PageTitle
+      <PageTitle tab="For Chrome"
         title="Chrome extension"
         sub="The X-ray as a small panel on polymarket.com, so you see who is behind a move or a wallet without leaving the page."
       />
@@ -50,7 +50,7 @@ export default function ExtensionPage() {
           </ol>
         </div>
 
-        <aside className="self-start rounded-2xl border border-line bg-panel p-5 text-sm leading-relaxed text-muted">
+        <aside className="self-start chamfer p-6 text-sm leading-relaxed text-muted">
           <h2 className="font-semibold text-fg">What it can see</h2>
           <ul className="mt-3 space-y-2">
             <li>Runs only on polymarket.com, and asks for one permission: storage, for its settings.</li>
@@ -64,7 +64,7 @@ export default function ExtensionPage() {
       </section>
 
       {SHOT ? (
-        <figure className="overflow-hidden rounded-2xl border border-line">
+        <figure className="overflow-hidden chamfer">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={SHOT} alt="The CALIBRE panel on a Polymarket profile, labelling the wallet mostly sniping: 72% of its bets were on outcomes already decided" className="w-full" />
           <figcaption className="border-t border-line px-5 py-3 text-xs text-faint">The panel on a live Polymarket profile. This wallet looks active, but 72% of its 383 scored bets were on outcomes that were already decided, so copying it would mostly copy bets on finished games.</figcaption>

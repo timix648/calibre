@@ -35,9 +35,9 @@ export function VerdictTrace() {
   const judged = d.squareCoverage ?? null;
   const square = d.squareShare ?? null;
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12">
-      <div>
-        <h2 id="how" className="text-2xl font-semibold tracking-tight text-balance">One real verdict, start to finish</h2>
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
+      <div className="lg:sticky lg:top-24 lg:self-start">
+        <h2 id="how" className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">One real verdict, start to finish</h2>
         <p className="mt-3 text-sm leading-relaxed text-muted text-pretty">
           This is how every move on the radar is handled, shown with an actual verdict from the record rather than a diagram. It was written to
           Walrus Memory with a Sui checkpoint before the market resolved{o ? ", then graded when it did" : ""}.
@@ -53,7 +53,7 @@ export function VerdictTrace() {
         </Link>
       </div>
 
-      <ol className="relative before:absolute before:bottom-3 before:left-3 before:top-3 before:w-px before:bg-line" aria-label="How a verdict is made">
+      <ol data-stagger className="relative before:absolute before:bottom-3 before:left-3 before:top-3 before:w-px before:bg-line" aria-label="How a verdict is made">
         <Step n={1} title="The price moves" value={<>{d.question} <span className="num whitespace-nowrap text-accent">{pct(d.move.from)} → {pct(d.move.to)}</span></>}>
           {up ? "Up" : "Down"} {Math.abs(Math.round((d.move.to - d.move.from) * 100))} points in {span(d.move.endTs - d.move.startTs)}.
         </Step>

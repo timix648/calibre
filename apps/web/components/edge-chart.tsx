@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { clearOfLuck } from "@/lib/gauge";
 import { pts } from "@/lib/format";
 
@@ -27,10 +28,10 @@ export function PhaseEdgeChart({
     label ?? (known ? `Edge ${pts(edge)} points per bet, band ${pts(low)} to ${pts(high)}, ${clear ? "outside" : "inside"} the luck band` : "No scored bets");
   const ticks = [-range, -range / 2, 0, range / 2, range].map((t) => Math.round(t * 1000) / 10);
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={text} className="block h-auto w-full max-w-[26rem]">
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={text} className="block h-auto w-full max-w-[40rem]">
       <title>{text}</title>
       {luck !== null ? (
-        <rect x={x(-luck)} y={8} width={Math.max(1, x(luck) - x(-luck))} height={38} rx={5} fill="var(--color-muted)" opacity={0.16} />
+        <rect className="edge-band" x={x(-luck)} y={8} width={Math.max(1, x(luck) - x(-luck))} height={38} rx={5} fill="var(--color-muted)" opacity={0.16} />
       ) : null}
       {ticks.map((t) => (
         <g key={t}>
@@ -40,10 +41,12 @@ export function PhaseEdgeChart({
       ))}
       {known ? (
         <>
+          <g className="edge-band">
           <line x1={x(low!)} x2={x(high!)} y1={MID} y2={MID} stroke={color} strokeWidth={3} strokeLinecap="round" />
           <line x1={x(low!)} x2={x(low!)} y1={MID - 7} y2={MID + 7} stroke={color} strokeWidth={2.5} strokeLinecap="round" />
           <line x1={x(high!)} x2={x(high!)} y1={MID - 7} y2={MID + 7} stroke={color} strokeWidth={2.5} strokeLinecap="round" />
-          <circle cx={x(edge)} cy={MID} r={5.5} fill={color} stroke="var(--color-bg)" strokeWidth={2} />
+          </g>
+          <circle className="edge-dot" style={{ "--from": `${CX - x(edge)}px` } as CSSProperties} cx={x(edge)} cy={MID} r={5.5} fill={color} stroke="var(--color-bg)" strokeWidth={2} />
         </>
       ) : (
         <text x={CX} y={MID + 4} textAnchor="middle" fontSize={12} fill="var(--color-muted)">No scored bets</text>

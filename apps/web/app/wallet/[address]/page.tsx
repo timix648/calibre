@@ -15,7 +15,7 @@ export default async function WalletPage({ params }: { params: Promise<{ address
   const valid = ADDRESS.test(address);
   return (
     <div className="space-y-6">
-      <PageTitle
+      <PageTitle tab="Wallet X-ray"
         title="Wallet X-ray"
         sub={
           valid ? (

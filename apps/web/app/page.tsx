@@ -3,6 +3,7 @@ import { FindingsBars } from "@/components/findings-bars";
 import { LabelTestChart, LabelTestTable, allWallets, signedPts, validationRow } from "@/components/label-validation";
 import { SmartInput } from "@/components/smart-input";
 import { Card, H2, TableWrap } from "@/components/ui";
+import { CountUp } from "@/components/count-up";
 import { ScaleBand } from "@/components/scale-band";
 import { VerdictTrace } from "@/components/verdict-trace";
 import { findings, memory, outcomes, verdicts } from "@/lib/data";
@@ -35,9 +36,10 @@ export default function Home() {
   const signed = (v: number) => `${v > 0 ? "+" : v < 0 ? "-" : ""}${Math.abs(v * 100).toFixed(1)} pts`;
   return (
     <div className="space-y-14 sm:space-y-20">
-      <section>
-        <p className="text-sm font-medium text-accent">Whale X-ray for prediction markets</p>
-        <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-6xl">
+      <section className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)]">
+        <div>
+        <span className="tab">Whale X-ray for prediction markets</span>
+        <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.03em] sm:text-7xl">
           CALIBRE&apos;s labels predict what a wallet does next
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
@@ -49,44 +51,64 @@ export default function Home() {
           <Link className="text-accent underline" href={`/wallet/${SAMPLE_WALLET}`}>Try a sample wallet</Link>, or open the{" "}
           <Link className="text-accent underline" href="/radar">radar</Link>.
         </p>
+        </div>
+        <figure className="hero-panel relative mx-auto hidden w-full max-w-[340px] lg:block" aria-label="The CALIBRE extension panel on a real Polymarket wallet">
+          <span aria-hidden className="absolute -inset-10 -z-10 bg-[radial-gradient(closest-side,rgb(94_234_212/0.16),transparent)]" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/panel-live.png" width={340} height={378} alt="The extension labels the Polymarket wallet SpecStavok mostly sniping: 72% of its bets were on outcomes already decided." className="w-full" />
+          <figcaption className="num mt-3 text-[11px] uppercase tracking-[0.14em] text-faint">The extension, on a real wallet</figcaption>
+        </figure>
       </section>
 
       <ScaleBand />
 
       <section aria-labelledby="labeltest">
-        <Card>
+        <Card reveal="left">
           <H2 sub={`${everyone.wallets} wallets chosen without looking at profit, sports markets. Each wallet gets the label it would have had from its older bets; the chart shows how it did on its newer ones.`}>
             <span id="labeltest">The test: a wallet&apos;s label from its old bets, and what it did next</span>
           </H2>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-center">
           <LabelTestChart />
-          <ul className="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Reading">
-            <li className="rounded-lg border border-bad/30 bg-bad/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-bad">{signedPts(losing.meanNewEdgePts)} pts</span> <span className="text-muted">Proven losing record: {Math.round((losing.shareNegative ?? 0) * 100)}% of {losing.wallets} wallets lost again.</span></li>
-            <li className="rounded-lg border border-good/30 bg-good/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-good">{signedPts(winning.meanNewEdgePts)} pts</span> <span className="text-muted">Proven winning record: rare ({winning.wallets} wallets), modest.</span></li>
-            <li className="rounded-lg border border-line bg-panel-2 px-3.5 py-2.5 text-sm"><span className="num font-semibold">{signedPts(everyone.row.meanNewEdgePts)} pts</span> <span className="text-muted">All {everyone.wallets} wallets, the baseline.</span></li>
+          <div>
+          <ul data-stagger className="grid gap-2" aria-label="Reading">
+            <li className="cut bg-bad/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-bad">{signedPts(losing.meanNewEdgePts)} pts</span> <span className="text-muted">Proven losing record: {Math.round((losing.shareNegative ?? 0) * 100)}% of {losing.wallets} wallets lost again.</span></li>
+            <li className="cut bg-good/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-good">{signedPts(winning.meanNewEdgePts)} pts</span> <span className="text-muted">Proven winning record: rare ({winning.wallets} wallets), modest.</span></li>
+            <li className="cut bg-white/[0.035] px-3.5 py-2.5 text-sm"><span className="num font-semibold">{signedPts(everyone.row.meanNewEdgePts)} pts</span> <span className="text-muted">All {everyone.wallets} wallets, the baseline.</span></li>
           </ul>
-          <details className="mt-4 text-sm">
-            <summary className="cursor-pointer text-muted hover:text-fg">The same numbers as a table, with every label</summary>
-            <LabelTestTable />
-          </details>
           <p className="mt-4 text-sm leading-relaxed text-muted">
             Edge is how much more often bets won than the prices paid implied, per bet. The whiskers are 95% intervals. The result is mostly driven by in-play bets, and
             older and newer bets of one wallet share its style, so this is not a trading test.{" "}
             <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
           </p>
+          </div>
+          </div>
+          <details className="mt-4 text-sm">
+            <summary className="cursor-pointer text-muted hover:text-fg">The same numbers as a table, with every label</summary>
+            <LabelTestTable />
+          </details>
         </Card>
       </section>
 
       <section aria-labelledby="finding">
-        <Card>
+        <Card reveal="right">
           <H2 sub={`The same ${best.wallets} wallets ranked by raw edge on older bets, split in thirds, then followed on newer ones: the best third breaks even, the worst third keeps losing.`}>
             <span id="finding">The leaderboard has no signal; ranking by raw edge only finds the losers</span>
           </H2>
-          <FindingsBars row={best} top={top} />
-          <ul className="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Reading">
-            <li className="rounded-lg border border-line bg-panel-2 px-3.5 py-2.5 text-sm"><span className="num font-semibold">≈ 0</span> <span className="text-muted">Past winners do not stay ahead.</span></li>
-            <li className="rounded-lg border border-bad/30 bg-bad/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-bad">{signed(best.worst)}</span> <span className="text-muted">Past losers lose about 2 pts per bet.</span></li>
-            <li className="rounded-lg border border-line bg-panel-2 px-3.5 py-2.5 text-sm"><span className="font-semibold">No signal</span> <span className="text-muted">in the profit leaderboard (p {top.p}).</span></li>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-center">
+          <div className="lg:order-2"><FindingsBars row={best} top={top} /></div>
+          <div>
+          <ul data-stagger className="grid gap-2" aria-label="Reading">
+            <li className="cut bg-white/[0.035] px-3.5 py-2.5 text-sm"><span className="num font-semibold">≈ 0</span> <span className="text-muted">Past winners do not stay ahead.</span></li>
+            <li className="cut bg-bad/10 px-3.5 py-2.5 text-sm"><span className="num font-semibold text-bad">{signed(best.worst)}</span> <span className="text-muted">Past losers lose about 2 pts per bet.</span></li>
+            <li className="cut bg-white/[0.035] px-3.5 py-2.5 text-sm"><span className="font-semibold">No signal</span> <span className="text-muted">in the profit leaderboard (p {top.p}).</span></li>
           </ul>
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            Edge is how much more often bets won than the prices paid implied. Already-decided bets (97 cents or more, 3 cents or less) are excluded.
+            Wallets trade the same events, so the p-values are optimistic.{" "}
+            <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
+          </p>
+          </div>
+          </div>
           <details className="mt-4 text-sm">
             <summary className="cursor-pointer text-muted hover:text-fg">All five samples, with the same numbers</summary>
             <TableWrap>
@@ -112,21 +134,16 @@ export default function Home() {
               </table>
             </TableWrap>
           </details>
-          <p className="mt-4 text-sm leading-relaxed text-muted">
-            Edge is how much more often bets won than the prices paid implied. Already-decided bets (97 cents or more, 3 cents or less) are excluded.
-            Wallets trade the same events, so the p-values are optimistic.{" "}
-            <Link href="/method" className="text-accent underline">Read the method and limits</Link>.
-          </p>
         </Card>
       </section>
 
-      <section aria-labelledby="how" className="border-t border-line pt-14 sm:pt-20">
+      <section aria-labelledby="how" data-reveal="left" className="border-t border-line pt-14 sm:pt-20">
         <VerdictTrace />
       </section>
 
-      <section aria-labelledby="sharps">
+      <section aria-labelledby="sharps" data-reveal="right">
         <h2 id="sharps" className="text-2xl font-semibold tracking-tight">Sharps and squares, without the hype</h2>
-        <dl className="mt-6 divide-y divide-line border-y border-line">
+        <dl data-stagger className="mt-6 divide-y divide-line border-y border-line">
           {POINTS.map((p) => (
             <div key={p.title} className="grid gap-1 py-5 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-12">
               <dt className="font-semibold leading-snug text-balance">{p.title}</dt>
@@ -136,8 +153,8 @@ export default function Home() {
         </dl>
       </section>
 
-      <section id="extension" className="scroll-mt-24" aria-labelledby="ext">
-        <div className="grid gap-8 rounded-2xl border border-accent/25 bg-panel p-6 sm:p-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+      <section id="extension" data-reveal="left" className="scroll-mt-24" aria-labelledby="ext">
+        <div className="grid gap-8 chamfer p-6 sm:p-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <div>
             <h2 id="ext" className="text-2xl font-semibold tracking-tight">X-ray Polymarket as you browse</h2>
             <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted text-pretty">
@@ -162,7 +179,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Receipts" className="rounded-2xl border border-line">
+      <section aria-label="Receipts" data-reveal="up" className="chamfer">
         <dl className="grid grid-cols-2 divide-line sm:grid-cols-4 sm:divide-x">
           <ReceiptStat label="Memories on mainnet" value={memory.total.toLocaleString("en-US")} note="Walrus Memory, Sui" />
           <ReceiptStat label="Sealed verdicts" value={sealed.toLocaleString("en-US")} note="Before the result" />
@@ -187,7 +204,7 @@ function ReceiptStat({ label, value, note }: { label: string; value: string; not
   return (
     <div className="px-5 py-4">
       <dt className="text-xs text-faint">{label}</dt>
-      <dd className="num mt-1 text-xl font-semibold text-fg">{value}</dd>
+      <dd className="num mt-1 text-xl font-semibold text-fg">{/^[\d,]+$/.test(value) ? <CountUp value={Number(value.replace(/,/g, ""))} /> : value}</dd>
       <dd className="mt-0.5 text-xs text-muted">{note}</dd>
     </div>
   );

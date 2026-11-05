@@ -37,7 +37,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
       <div>
         <Link href="/radar" className="text-sm text-muted hover:text-fg">← Radar</Link>
         <div className="mt-3">
-          <PageTitle
+          <PageTitle tab="Sealed verdict"
             title={d.question}
             sub={
               <>
@@ -74,7 +74,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
 
       <Card>
         <H2 sub="The largest wallets in the move, with the record CALIBRE held for them when it sealed the verdict. Open a wallet for its full live audit.">Who traded it</H2>
-        <p className="mb-4 rounded-lg border border-line bg-panel-2 px-4 py-3 text-sm leading-relaxed">
+        <p className="mb-4 cut bg-white/[0.035] px-4 py-3 text-sm leading-relaxed">
           {proven === 0
             ? <>Of the {wallets.length} largest wallets here, <strong>none has a proven edge</strong> by CALIBRE&apos;s rules (z of 2 or more over at least 100 bets).{unknown > 0 ? ` ${unknown} had no scored record yet.` : ""} The label above describes edge CALIBRE had learned, not a claim that anyone behind this move is skilled.</>
             : <>{proven} of the {wallets.length} largest wallets have a proven edge by CALIBRE&apos;s rules (z of 2 or more over at least 100 bets).</>}

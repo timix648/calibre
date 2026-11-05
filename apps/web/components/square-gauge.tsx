@@ -1,4 +1,6 @@
-import { GAUGE_ZONES, arcPath, clamp01, gaugeZone, polar } from "@/lib/gauge";
+import type { CSSProperties } from "react";
+import { GAUGE_ZONES, arcPath, clamp01, gaugeZone } from "@/lib/gauge";
+import { CountUp } from "./count-up";
 
 const CX = 120;
 const CY = 118;
@@ -19,7 +21,6 @@ export function SquareGauge({
   const c = Math.max(s, clamp01(coverage));
   const zone = gaugeZone(s);
   const label = `Square money ${Math.round(s * 100)}% of the money pushing the move, ${zone.label.toLowerCase()}. ${Math.round(c * 100)}% of that money could be judged.`;
-  const tip = polar(CX, CY, R, s);
   const big = size === "lg";
   return (
     <svg
@@ -51,10 +52,14 @@ export function SquareGauge({
           strokeLinecap="butt"
         />
       ) : null}
-      <circle cx={tip.x} cy={tip.y} r={STROKE / 2 + 2.5} fill="var(--color-bg)" stroke={zone.color} strokeWidth={2.5} />
+      {/* The needle starts at zero (the left end) and sweeps clockwise to the reading. */}
+      <g className="needle" style={{ "--a": `${s * 180}deg`, "--ox": `${CX}px`, "--oy": `${CY}px` } as CSSProperties}>
+        <line x1={CX - R + STROKE / 2 + 4} y1={CY} x2={CX - R + STROKE / 2 + 22} y2={CY} stroke={zone.color} strokeWidth={2.5} strokeLinecap="round" />
+        <circle cx={CX - R} cy={CY} r={STROKE / 2 + 2.5} fill="var(--color-bg)" stroke={zone.color} strokeWidth={2.5} />
+      </g>
 
       <text x={CX} y={CY - 6} textAnchor="middle" className="num" fontSize={36} fontWeight={650} fill="var(--color-fg)">
-        {Math.round(s * 100)}%
+        <CountUp svg value={Math.round(s * 100)} suffix="%" duration={1400} />
       </text>
       <text x={CX} y={CY + 14} textAnchor="middle" fontSize={12} fontWeight={600} fill={zone.color} letterSpacing="0.06em">
         {zone.label.toUpperCase()}

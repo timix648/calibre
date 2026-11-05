@@ -7,30 +7,48 @@ const CSS = `
   position: fixed; right: 16px; bottom: 16px; z-index: 2147483647; width: 340px; max-width: calc(100vw - 32px);
   max-height: min(70vh, 560px); display: flex; flex-direction: column;
   font: 13px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #e7eaf0;
-  background: #11141a; border: 1px solid #232935; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.45);
+  background:
+    linear-gradient(#5eead4, #5eead4) top right / 18px 1px, linear-gradient(#5eead4, #5eead4) top right / 1px 18px,
+    linear-gradient(#3a4352, #3a4352) bottom left / 18px 1px, linear-gradient(#3a4352, #3a4352) bottom left / 1px 18px,
+    radial-gradient(420px 220px at 0% 0%, rgba(94,234,212,.09), transparent 70%), #090b0f;
+  background-repeat: no-repeat;
+  border: 1px solid #1d232e;
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+  animation: cal-in .55s cubic-bezier(.2,.8,.2,1) both;
 }
-.head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid #232935; }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: #5eead4; flex: none; }
-.brand { font-weight: 600; letter-spacing: .01em; }
+@keyframes cal-in { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+.body > * { animation: cal-rise .5s cubic-bezier(.2,.8,.2,1) both; }
+.body > *:nth-child(2) { animation-delay: 50ms; } .body > *:nth-child(3) { animation-delay: 100ms; }
+.body > *:nth-child(4) { animation-delay: 150ms; } .body > *:nth-child(5) { animation-delay: 200ms; }
+.body > *:nth-child(6) { animation-delay: 250ms; } .body > *:nth-child(n+7) { animation-delay: 300ms; }
+@keyframes cal-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.head { display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 18px; border-bottom: 1px solid #1d232e; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #5eead4; flex: none; box-shadow: 0 0 0 0 rgba(94,234,212,.6); animation: cal-ping 2.4s ease-out infinite; }
+@keyframes cal-ping { 0% { box-shadow: 0 0 0 0 rgba(94,234,212,.55); } 70%, 100% { box-shadow: 0 0 0 7px rgba(94,234,212,0); } }
+.brand { font-weight: 700; letter-spacing: .14em; font-size: 12px; }
 .sp { flex: 1; }
 button.icon { all: unset; cursor: pointer; padding: 2px 7px; border-radius: 6px; color: #8f98a8; font-size: 15px; line-height: 1; }
 button.icon:hover, button.icon:focus-visible { background: #1d222c; color: #e7eaf0; }
-.body { padding: 12px; overflow: auto; }
+.body { padding: 14px 16px 16px; overflow: auto; }
 .collapsed .body { display: none; }
 .title { color: #8f98a8; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
 .sub { margin-top: 2px; font-weight: 600; overflow-wrap: anywhere; }
-.chip { display: inline-block; margin-top: 8px; padding: 2px 9px; border-radius: 999px; border: 1px solid #232935; font-size: 12px; font-weight: 600; background: #161a22; color: #8f98a8; }
-.chip.bad { color: #fb7185; border-color: rgba(251,113,133,.4); background: rgba(251,113,133,.1); }
-.chip.warn { color: #fbbf24; border-color: rgba(251,191,36,.4); background: rgba(251,191,36,.1); }
-.chip.good { color: #4ade80; border-color: rgba(74,222,128,.4); background: rgba(74,222,128,.1); }
-.chip.accent { color: #5eead4; border-color: rgba(94,234,212,.4); background: rgba(94,234,212,.1); }
+.chip { display: inline-block; margin-top: 8px; padding: 2px 10px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,.05); color: #8f98a8;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); }
+.chip.bad { color: #fb7185; background: rgba(251,113,133,.1); }
+.chip.warn { color: #fbbf24; background: rgba(251,191,36,.1); }
+.chip.good { color: #4ade80; background: rgba(74,222,128,.1); }
+.chip.accent { color: #5eead4; background: rgba(94,234,212,.1); }
 .lead { margin: 8px 0 0; color: #c3c9d4; }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
-.stat { background: #161a22; border: 1px solid #232935; border-radius: 8px; padding: 6px 8px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+.stat { position: relative; padding-top: 8px; border-top: 1px solid #1d232e; }
+.stat::before { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 18px; background: #5eead4; }
 .stat b { display: block; font: 600 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .stat span { color: #8f98a8; font-size: 11px; }
-.bar { display: flex; height: 10px; margin-top: 10px; border-radius: 999px; overflow: hidden; border: 1px solid #232935; background: #161a22; }
-.bar i { display: block; height: 100%; }
+.bar { display: flex; height: 8px; margin-top: 12px; overflow: hidden; background: #12161d;
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%); }
+.bar i { display: block; height: 100%; transform-origin: left; animation: cal-grow 1s cubic-bezier(.2,.8,.2,1) .2s both; }
+@keyframes cal-grow { from { transform: scaleX(0); } to { transform: none; } }
 .bar .sq { background: #fb7185; }
 .bar .jd { background: rgba(93,102,118,.7); }
 .takers { list-style: none; margin: 10px 0 0; padding: 0; }
@@ -41,13 +59,17 @@ button.icon:hover, button.icon:focus-visible { background: #1d222c; color: #e7ea
 .takers .chip { margin: 0; font-size: 11px; white-space: nowrap; }
 .note { margin: 8px 0 0; color: #5d6676; font-size: 11px; }
 .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-.btn { all: unset; display: inline-block; cursor: pointer; padding: 5px 10px; border-radius: 8px; border: 1px solid #232935; background: #161a22; color: #e7eaf0; font-size: 12px; }
-.btn:hover, .btn:focus-visible { border-color: #5eead4; }
-.btn.primary { background: #5eead4; color: #0a0c10; border-color: #5eead4; font-weight: 600; }
+.btn { all: unset; display: inline-block; cursor: pointer; padding: 6px 12px; background: #12161d; color: #e7eaf0; font-size: 12px; transition: background .2s, transform .1s;
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); }
+.btn:active { transform: translateY(1px); }
+.btn:hover, .btn:focus-visible { background: #1b2029; }
+.btn.primary { background: #5eead4; color: #06070a; font-weight: 600; }
+.btn.primary:hover { background: #7ff0dd; }
 .err { color: #fb7185; margin: 0; }
 .load { color: #8f98a8; margin: 0; }
 .pulse { height: 10px; margin-top: 8px; border-radius: 6px; background: #1d222c; animation: p 1.2s ease-in-out infinite; }
 @keyframes p { 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .wrap, .body > *, .bar i, .dot { animation: none !important; } }
 `;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
@@ -55,6 +77,28 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: 
   if (cls) node.className = cls;
   if (text !== undefined) node.textContent = text;
   return node;
+}
+
+/** Counts the numbers in a stat ("383", "+0.6 ± 4.6", "72%") up from zero, keeping their format. */
+function countUp(node: HTMLElement, text: string): void {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const parts = text.split(/(d[d,]*(?:.d+)?)/);
+  if (parts.length < 2) return;
+  const start = performance.now();
+  const step = (now: number) => {
+    const t = Math.min(1, (now - start) / 900);
+    const k = 1 - Math.pow(1 - t, 4);
+    node.textContent = parts.map((p, i) => {
+      if (i % 2 === 0) return p;
+      const n = Number(p.replace(/,/g, ""));
+      const d = p.includes(".") ? p.split(".")[1]!.length : 0;
+      return (n * k).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: p.includes(",") });
+    }).join("");
+    if (t < 1) raf = requestAnimationFrame(step);
+  };
+  let raf = requestAnimationFrame(step);
+  // Always land on the real value, even if the page pauses animation frames.
+  setTimeout(() => { cancelAnimationFrame(raf); node.textContent = text; }, 1300);
 }
 
 const chipEl = (c: ChipModel): HTMLSpanElement => el("span", `chip ${c.tone satisfies Tone}`, c.text);
@@ -158,7 +202,9 @@ export class Panel {
       const stats = el("div", "stats");
       for (const s of model.stats) {
         const box = el("div", "stat");
-        box.append(el("b", undefined, s.value), el("span", undefined, s.label));
+        const value = el("b", undefined, s.value);
+        countUp(value, s.value);
+        box.append(value, el("span", undefined, s.label));
         stats.append(box);
       }
       out.push(stats);

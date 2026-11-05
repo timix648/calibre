@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CountUp } from "@/components/count-up";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
 import { dataGeneratedAt, grades, memory, outcomes, verdicts, walletIndex } from "@/lib/data";
-import { pct, shortAddr, sourceLabel, suiscanCheckpoint, utc } from "@/lib/format";
+import { pct, shortAddr, suiscanCheckpoint, utc } from "@/lib/format";
 
 export const metadata: Metadata = { title: "Proof" };
 
@@ -16,16 +17,18 @@ const PAYMENT = {
   to: "0x6b2e6674d9f19c45ababd054fac1dfa3e3cbe8e7f4d58084bda4c4a1460ef5cf",
 };
 
+const SHOWN = 10;
+
 export default function Proof() {
   return (
     <div className="space-y-8">
-      <PageTitle
+      <PageTitle tab="On-chain receipts"
         title="Proof"
         sub={`Everything here is rebuilt from Walrus Memory on Sui mainnet, not from a private database. Exported ${utc(dataGeneratedAt)}.`}
       />
 
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Totals">
-        <Stat label="Memories" value={memory.total} note="Across four namespaces" />
+      <section data-stagger className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4" aria-label="Totals">
+        <Stat label="Memories" value={memory.total} note={`Across ${memory.namespaces.filter((n) => n.memories > 0).length} namespaces`} />
         <Stat label="Sealed verdicts" value={verdicts.length} />
         <Stat label="Graded outcomes" value={outcomes.length} />
         <Stat
@@ -37,31 +40,24 @@ export default function Proof() {
 
       <Card>
         <H2 sub="Walrus Memory has no update or delete: a wallet's record is a new version that supersedes the old one.">Memories per namespace</H2>
-        <TableWrap>
-          <table className="w-full min-w-[420px] text-sm">
-            <thead>
-              <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
-                <th className="py-2 pr-3 font-medium">Namespace</th>
-                <th className="px-3 py-2 text-right font-medium">Memories</th>
-                <th className="py-2 pl-3 font-medium">Holds</th>
-              </tr>
-            </thead>
-            <tbody>
-              {memory.namespaces.map((n) => (
-                <tr key={n.name} className="border-b border-line/60">
-                  <td className="num py-2.5 pr-3">{n.name}</td>
-                  <td className="num px-3 py-2.5 text-right">{n.memories}</td>
-                  <td className="py-2.5 pl-3 text-muted">{HOLDS[n.name] ?? ""}</td>
-                </tr>
-              ))}
-              <tr>
-                <td className="py-2.5 pr-3 font-semibold">Total</td>
-                <td className="num px-3 py-2.5 text-right font-semibold">{memory.total}</td>
-                <td />
-              </tr>
-            </tbody>
-          </table>
-        </TableWrap>
+        <ul data-stagger className="space-y-5">
+          {memory.namespaces.filter((n) => n.memories > 0).map((n) => {
+            const max = Math.max(...memory.namespaces.map((x) => x.memories));
+            return (
+              <li key={n.name} className="grid gap-x-6 gap-y-1.5 sm:grid-cols-[14rem_1fr_4rem] sm:items-center">
+                <div>
+                  <div className="num text-sm text-fg">{n.name}</div>
+                  <div className="text-xs text-muted">{HOLDS[n.name] ?? ""}</div>
+                </div>
+                <div className="h-3 bg-white/[0.04] [clip-path:polygon(0_0,100%_0,calc(100%-6px)_100%,0_100%)]">
+                  <div className="bar-x h-full bg-accent/70" style={{ width: `${(n.memories / max) * 100}%` }} />
+                </div>
+                <div className="num text-right text-lg font-semibold"><CountUp value={n.memories} /></div>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="num mt-6 border-t border-line pt-3 text-sm text-muted">Total <span className="text-fg"><CountUp value={memory.total} /></span> memories on mainnet</p>
       </Card>
 
       <Card>
@@ -76,19 +72,17 @@ export default function Proof() {
                   <th className="py-2 pr-3 font-medium">Market</th>
                   <th className="px-3 py-2 font-medium">Label</th>
                   <th className="px-3 py-2 font-medium">Model</th>
-                  <th className="px-3 py-2 font-medium">Data source</th>
                   <th className="px-3 py-2 text-right font-medium">Forecast / price</th>
                   <th className="px-3 py-2 font-medium">Checkpoint</th>
                   <th className="py-2 pl-3 font-medium">Blob</th>
                 </tr>
               </thead>
               <tbody>
-                {verdicts.map((v) => (
+                {verdicts.slice(0, SHOWN).map((v) => (
                   <tr key={v.id} className="border-b border-line/60 align-top">
                     <td className="py-2.5 pr-3"><Link className="underline decoration-line underline-offset-4 hover:decoration-accent" href={`/move/${v.id}`}>{v.data.question}</Link></td>
                     <td className="px-3 py-2.5"><Badge tone="accent">{v.data.label}</Badge></td>
                     <td className="num px-3 py-2.5 text-muted">{v.data.model ?? "v1"}</td>
-                    <td className="px-3 py-2.5 text-muted">{sourceLabel(v.data.source)}</td>
                     <td className="num whitespace-nowrap px-3 py-2.5 text-right text-muted">{pct(v.data.forecast, 1)} / {pct(v.data.priceAtVerdict, 1)}</td>
                     <td className="num px-3 py-2.5"><ExternalLink href={suiscanCheckpoint(v.data.checkpoint.sequence)}>{v.data.checkpoint.sequence}</ExternalLink></td>
                     <td className="py-2.5 pl-3"><ExternalLink href={v.walruscan}>{v.blobId.slice(0, 8)}…</ExternalLink></td>
@@ -98,6 +92,39 @@ export default function Proof() {
             </table>
           </TableWrap>
         )}
+        {verdicts.length > SHOWN ? (
+          <details className="group mt-2">
+            <summary className="num cursor-pointer list-none py-3 text-sm text-accent hover:text-fg">
+              <span className="inline-block transition-transform group-open:rotate-90">›</span> Show the other {verdicts.length - SHOWN} sealed verdicts
+            </summary>
+            <TableWrap>
+              <table className="w-full min-w-[760px] text-sm">
+                <thead className="sr-only">
+                  <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-faint">
+                    <th className="py-2 pr-3 font-medium">Market</th>
+                    <th className="px-3 py-2 font-medium">Label</th>
+                    <th className="px-3 py-2 font-medium">Model</th>
+                    <th className="px-3 py-2 text-right font-medium">Forecast / price</th>
+                    <th className="px-3 py-2 font-medium">Checkpoint</th>
+                    <th className="py-2 pl-3 font-medium">Blob</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {verdicts.slice(SHOWN).map((v) => (
+                    <tr key={v.id} className="border-b border-line/60 align-top">
+                      <td className="py-2.5 pr-3"><Link className="underline decoration-line underline-offset-4 hover:decoration-accent" href={`/move/${v.id}`}>{v.data.question}</Link></td>
+                      <td className="px-3 py-2.5"><Badge tone="accent">{v.data.label}</Badge></td>
+                      <td className="num px-3 py-2.5 text-muted">{v.data.model ?? "v1"}</td>
+                      <td className="num whitespace-nowrap px-3 py-2.5 text-right text-muted">{pct(v.data.forecast, 1)} / {pct(v.data.priceAtVerdict, 1)}</td>
+                      <td className="num px-3 py-2.5"><ExternalLink href={suiscanCheckpoint(v.data.checkpoint.sequence)}>{v.data.checkpoint.sequence}</ExternalLink></td>
+                      <td className="py-2.5 pl-3"><ExternalLink href={v.walruscan}>{v.blobId.slice(0, 8)}…</ExternalLink></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableWrap>
+          </details>
+        ) : null}
         <h3 className="mt-6 text-sm font-semibold">Graded outcomes</h3>
         {grades.length === 0 ? (
           <p className="mt-1 text-sm leading-relaxed text-muted">No sealed verdict has resolved yet, so nothing is graded. Grades appear here as markets resolve.</p>
@@ -162,7 +189,7 @@ export default function Proof() {
         <p className="text-sm leading-relaxed text-muted">
           The repository includes a script that lists every memory in each namespace, decodes the sealed verdicts and outcomes, checks that the counts agree, reads the latest Sui checkpoint through Tatum (or Sui's public GraphQL when Tatum is unavailable), and writes the result to <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">docs/PROOF.md</code>.
         </p>
-        <pre className="num mt-3 overflow-x-auto rounded-lg border border-line bg-bg p-4 text-sm">{`pnpm install\ncp .env.example .env   # add your Tatum and Walrus Memory keys\npnpm verify`}</pre>
+        <pre className="num mt-3 overflow-x-auto cut bg-black/40 p-4 text-sm">{`pnpm install\ncp .env.example .env   # add your Tatum and Walrus Memory keys\npnpm verify`}</pre>
         <p className="mt-3 text-sm leading-relaxed text-muted">
           This website makes no Tatum calls and holds no keys: the figures above are static files exported by <code className="num rounded border border-line bg-panel-2 px-1.5 py-0.5 text-xs">pnpm export:site</code>, and the wallet audit reads Polymarket&apos;s free public API.
         </p>

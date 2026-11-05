@@ -70,7 +70,7 @@ function Result({ r, cached, onRefresh }: { r: MarketXray; cached: boolean; onRe
       </div>
 
       {!r.complete ? (
-        <div role="status" className="flex flex-wrap items-center gap-3 rounded-xl border border-warn/40 bg-warn/10 px-4 py-3 text-sm text-warn">
+        <div role="status" className="flex flex-wrap items-center gap-3 cut bg-warn/10 px-4 py-3 text-sm text-warn">
           <span>Partial result: some wallet audits were still running when the time ran out, so those takers are not judged yet.</span>
           <button onClick={onRefresh} className="rounded-lg border border-warn/40 px-3 py-1 hover:bg-warn/10">Check again</button>
         </div>
@@ -114,7 +114,7 @@ function MoveCard({ r }: { r: MarketXray }) {
       <Stat label="Fills in the move" value={m.fills.toLocaleString("en-US")} note={`${r.fills.read} read in ${r.fills.pages} page${r.fills.pages === 1 ? "" : "s"}`} />
       <Stat label="Pushed by" value={r.squareMoney ? `${r.squareMoney.wallets} wallets` : "n/a"} note={`${usd(r.squareMoney?.alignedUsd ?? 0)} on ${m.direction === "up" ? yes : r.market.noOutcome}`} />
       {m.settling ? (
-        <p className="col-span-full rounded-lg border border-line bg-panel-2 px-4 py-3 text-sm text-muted">
+        <p className="col-span-full cut bg-white/[0.035] px-4 py-3 text-sm text-muted">
           The price ended at a decided level (97 cents or more, or 3 cents or less). This looks like the market settling on a result, not repricing.
         </p>
       ) : null}
@@ -219,7 +219,7 @@ function TakerRow({ t, price }: { t: TakerXray; price: (p: number) => string }) 
 
 function TakerCard({ t }: { t: TakerXray }) {
   return (
-    <li className="rounded-lg border border-line bg-panel-2 p-3">
+    <li className="cut bg-white/[0.035] p-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <Link href={`/wallet/${t.address}`} className="num text-sm text-accent underline decoration-accent/40">{shortAddr(t.address)}</Link>
