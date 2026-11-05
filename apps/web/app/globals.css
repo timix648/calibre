@@ -144,11 +144,16 @@ body { isolation: isolate; }
 .hero-panel:hover { transform: none; animation-play-state: paused; }
 @keyframes float { 50% { translate: 0 -10px; } }
 
+/* The logo's small drop drifts; on hover it lifts a little further. */
+.logo-small { animation: drip 4.5s ease-in-out infinite; transform-box: fill-box; }
+@keyframes drip { 50% { transform: translateY(-1.5px); } }
+.group:hover .logo-small { animation-duration: 1.6s; }
+
 .link-sweep { background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; transition: background-size 0.35s ease; }
 .link-sweep:hover { background-size: 100% 1px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-in, .needle, .edge-dot, .edge-band, .bar-x, .hero-panel { animation: none; }
+  .page-in, .needle, .edge-dot, .edge-band, .bar-x, .hero-panel, .logo-small { animation: none; }
   .needle { transform: rotate(var(--a)); }
   .reveal-ready [data-reveal]:not(.is-in), .reveal-ready [data-stagger]:not(.is-in) > * { opacity: 1; transform: none; }
   .plate, .measure::after { transition: none; }

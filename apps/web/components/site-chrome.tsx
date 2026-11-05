@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Logo } from "./logo";
 import { SmartInput } from "./smart-input";
 
 const NAV = [
@@ -18,8 +19,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-bg/85 backdrop-blur">
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-x-6 gap-y-3 px-5 py-3 sm:px-8">
-        <Link href="/" className="flex items-center gap-2 text-base font-semibold tracking-tight">
-          <span aria-hidden className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
+        <Link href="/" className="group flex items-center gap-2.5 text-base font-semibold tracking-[0.06em]">
+          <Logo size={26} />
           CALIBRE
         </Link>
         <nav aria-label="Main" className="flex items-center gap-5 text-sm text-muted">

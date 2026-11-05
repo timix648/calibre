@@ -23,8 +23,9 @@ const CSS = `
 .body > *:nth-child(6) { animation-delay: 250ms; } .body > *:nth-child(n+7) { animation-delay: 300ms; }
 @keyframes cal-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .head { display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 18px; border-bottom: 1px solid #1d232e; }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: #5eead4; flex: none; box-shadow: 0 0 0 0 rgba(94,234,212,.6); animation: cal-ping 2.4s ease-out infinite; }
-@keyframes cal-ping { 0% { box-shadow: 0 0 0 0 rgba(94,234,212,.55); } 70%, 100% { box-shadow: 0 0 0 7px rgba(94,234,212,0); } }
+.mark { display: inline-flex; flex: none; }
+.mark .small { animation: cal-drip 4.5s ease-in-out infinite; transform-box: fill-box; }
+@keyframes cal-drip { 50% { transform: translateY(-1.5px); } }
 .brand { font-weight: 700; letter-spacing: .14em; font-size: 12px; }
 .sp { flex: 1; }
 button.icon { all: unset; cursor: pointer; padding: 2px 7px; border-radius: 6px; color: #8f98a8; font-size: 15px; line-height: 1; }
@@ -69,8 +70,30 @@ button.icon:hover, button.icon:focus-visible { background: #1d222c; color: #e7ea
 .load { color: #8f98a8; margin: 0; }
 .pulse { height: 10px; margin-top: 8px; border-radius: 6px; background: #1d222c; animation: p 1.2s ease-in-out infinite; }
 @keyframes p { 50% { opacity: .45; } }
-@media (prefers-reduced-motion: reduce) { .wrap, .body > *, .bar i, .dot { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .wrap, .body > *, .bar i, .mark .small { animation: none !important; } }
 `;
+
+const SVG = "http://www.w3.org/2000/svg";
+const svg = (tag: string, attrs: Record<string, string>, ...kids: SVGElement[]): SVGElement => {
+  const n = document.createElementNS(SVG, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  n.append(...kids);
+  return n;
+};
+
+/** The CALIBRE mark, built node by node (no innerHTML, so pages that enforce Trusted Types cannot block it): two lit drops. */
+function logo(): SVGElement {
+  const stop = (o: string, c: string) => svg("stop", { offset: o, "stop-color": c });
+  const hi = (cx: string, cy: string, rx: string, ry: string) =>
+    svg("ellipse", { cx, cy, rx, ry, transform: `rotate(-40 ${cx} ${cy})`, fill: "#fff", "fill-opacity": ".92" });
+  return svg("svg", { viewBox: "0 0 64 64", width: "18", height: "18", "aria-hidden": "true" },
+    svg("defs", {}, svg("radialGradient", { id: "calibre-drop", cx: ".32", cy: ".3", r: ".85" }, stop("0", "#c4fdf3"), stop(".42", "#5eead4"), stop("1", "#0f7a6a"))),
+    svg("circle", { cx: "27", cy: "38", r: "19", fill: "url(#calibre-drop)" }),
+    svg("path", { d: "M41.57 43.3A15.5 15.5 0 0 1 31.01 52.97", fill: "none", stroke: "#fff", "stroke-opacity": ".45", "stroke-width": "2.2", "stroke-linecap": "round" }),
+    hi("20", "30", "5.6", "3.2"),
+    svg("g", { class: "small" }, svg("circle", { cx: "50", cy: "15", r: "8.5", fill: "url(#calibre-drop)" }), hi("47", "12", "2.6", "1.5")),
+  );
+}
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -126,7 +149,9 @@ export class Panel {
     this.wrap.setAttribute("role", "complementary");
     this.wrap.setAttribute("aria-label", "CALIBRE Whale X-ray");
     const head = el("div", "head");
-    head.append(el("span", "dot"), el("span", "brand", "CALIBRE"), el("span", "sp"));
+    const mark = el("span", "mark");
+    mark.append(logo());
+    head.append(mark, el("span", "brand", "CALIBRE"), el("span", "sp"));
     const collapse = el("button", "icon", "–");
     collapse.title = "Collapse";
     collapse.setAttribute("aria-label", "Collapse or expand the panel");
