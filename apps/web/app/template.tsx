@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 
 // The order of the main sections: moving to one further along slides the page in from the right, going back from the left.
-const ORDER = ["/", "/radar", "/record", "/proof", "/method", "/extension"];
+const ORDER = ["/", "/radar", "/record", "/proof", "/method", "/extension", "/agents"];
 const rank = (p: string) => {
   if (p === "/") return 0;
   const i = ORDER.findIndex((o) => o !== "/" && p.startsWith(o));

@@ -11,6 +11,7 @@ const NAV = [
   { href: "/proof", label: "Proof" },
   { href: "/method", label: "Method" },
   { href: "/extension", label: "Extension" },
+  { href: "/agents", label: "Agents" },
 ];
 
 export function SiteHeader() {
@@ -23,7 +24,8 @@ export function SiteHeader() {
           <Logo size={26} />
           CALIBRE
         </Link>
-        <nav aria-label="Main" className="flex items-center gap-5 text-sm text-muted">
+        {/* Wraps rather than overflowing: six items do not fit on one line at 375px. */}
+        <nav aria-label="Main" className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} aria-current={pathname.startsWith(n.href) ? "page" : undefined} className={`transition-colors hover:text-fg ${pathname.startsWith(n.href) ? "text-fg" : ""}`}>{n.label}</Link>
           ))}
