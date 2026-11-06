@@ -6,7 +6,8 @@ import { Card, H2, TableWrap } from "@/components/ui";
 import { CountUp } from "@/components/count-up";
 import { ScaleBand } from "@/components/scale-band";
 import { VerdictTrace } from "@/components/verdict-trace";
-import { findings, memory, outcomes, tatumStamped, verdicts } from "@/lib/data";
+import { findings, memory, tatumStampedIn } from "@/lib/data";
+import { liveRecord } from "@/lib/live-record";
 
 const SAMPLE_WALLET = "0x684baa57c338c2549aec0aa3f034f695d72a8409";
 
@@ -25,8 +26,16 @@ const POINTS = [
   },
 ];
 
-export default function Home() {
-  const sealed = memory.namespaces.find((n) => n.name === "calibre-verdicts")?.memories ?? verdicts.length;
+// Re-render at most every ten minutes, so a verdict sealed on Walrus appears without anything being deployed.
+export const revalidate = 600;
+// The Walrus recall takes 8 to 13 seconds; give the render room for a slow one.
+export const maxDuration = 60;
+
+export default async function Home() {
+  const { verdicts, outcomes } = await liveRecord();
+  const tatumStamped = tatumStampedIn(verdicts);
+  // The live count is the record itself; the namespace inventory is only a fallback for an export that predates it.
+  const sealed = Math.max(verdicts.length, memory.namespaces.find((n) => n.name === "calibre-verdicts")?.memories ?? 0);
   const w = findings.wide;
   const best = w.rows[0]!;
   const top = w.rows[w.rows.length - 1]!;

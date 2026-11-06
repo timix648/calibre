@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CountUp } from "@/components/count-up";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
-import { dataGeneratedAt, grades, memory, outcomes, tatumStamped, verdicts, walletIndex } from "@/lib/data";
+import { memory, walletIndex } from "@/lib/data";
+import { liveRecord } from "@/lib/live-record";
+import { tatumStampedIn } from "@/lib/data";
 import { pct, shortAddr, suiscanCheckpoint, utc } from "@/lib/format";
 
 export const metadata: Metadata = { title: "Proof" };
@@ -19,12 +21,19 @@ const PAYMENT = {
 
 const SHOWN = 10;
 
-export default function Proof() {
+// Re-render at most every ten minutes, so a verdict sealed on Walrus appears without anything being deployed.
+export const revalidate = 600;
+// The Walrus recall takes 8 to 13 seconds; give the render room for a slow one.
+export const maxDuration = 60;
+
+export default async function Proof() {
+  const { verdicts, outcomes, grades, generatedAt, source } = await liveRecord();
+  const tatumStamped = tatumStampedIn(verdicts);
   return (
     <div className="space-y-8">
       <PageTitle tab="On-chain receipts"
         title="Proof"
-        sub={`Everything here is rebuilt from Walrus Memory on Sui mainnet, not from a private database. Exported ${utc(dataGeneratedAt)}.`}
+        sub={`Everything here is rebuilt from Walrus Memory on Sui mainnet, not from a private database. ${source === "walrus" ? "Read from Walrus" : "Exported"} ${utc(generatedAt)}.`}
       />
 
       <section data-stagger className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4" aria-label="Totals">

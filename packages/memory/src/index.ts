@@ -1,2 +1,3 @@
-export * from "./envelope.js";
-export * from "./store.js";
+export * from "./envelope";
+export * from "./store";
+export * from "./rebuild";

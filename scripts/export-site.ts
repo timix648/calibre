@@ -8,13 +8,12 @@ import { anchorCheckpoint } from "../packages/chain/src/index.js";
 import {
   auditVerdict, summariseGrades, type OutcomeData, type VerdictData, type WalletEdgeRow,
 } from "../packages/core/src/index.js";
-import { NAMESPACES, decode, latestByKey, type Envelope, type StoredMemory } from "../packages/memory/src/index.js";
+import { NAMESPACES, RECALL_QUERIES, recallAll, sealed, walruscan, type StoredMemory } from "../packages/memory/src/index.js";
 import { MEMORY_STATE_FILE, WALLET_INDEX_FILE, memoryStore, readJson, suiClient } from "../apps/worker/src/lib/config.js";
 
 const OUT = "apps/web/data";
 const MAX_INDEX_ROWS = 300;
 const MIN_INDEX_BETS = 30;
-const walruscan = (blobId: string) => `https://walruscan.com/mainnet/blob/${blobId}`;
 
 const store = memoryStore();
 
@@ -25,30 +24,9 @@ const relayer = await store.listNamespaces();
 const namespaces = [...listed].map(([name, memories]) => ({ name, memories, relayerCount: relayer.find((n) => n.name === name)?.memoryCount ?? 0 }));
 const total = namespaces.reduce((s, n) => s + n.memories, 0);
 
-// 2. Verdicts and outcomes, recalled by meaning and decoded (recall returns at most 100 per query)
-async function recallAll(namespace: string, queries: string[]): Promise<StoredMemory[]> {
-  const byBlob = new Map<string, StoredMemory>();
-  for (const query of queries) for (const m of await store.recall({ query, namespace, limit: 100 })) byBlob.set(m.blobId, m);
-  return [...byBlob.values()];
-}
-const verdictMems = await recallAll(NAMESPACES.verdicts, ["CALIBRE verdict on a market move", "sharp-led move", "noise move wallets with a learned edge", "contested move", "mixed move"]);
-const outcomeMems = await recallAll(NAMESPACES.outcomes, ["market resolved verdict forecast Brier against the market price", "beat the market price", "lost to the market price"]);
-
-interface Sealed<T> { id: string; key: string; version: number; blobId: string; walruscan: string; summary: string; data: T }
-function sealed<T>(mems: StoredMemory[], kind: string): Sealed<T>[] {
-  const blobOf = new Map<string, string>();
-  const texts: string[] = [];
-  for (const m of mems) {
-    const e = decode(m.text);
-    if (e?.kind !== kind) continue;
-    texts.push(m.text);
-    blobOf.set(`${e.key}:${e.version}`, m.blobId);
-  }
-  return [...latestByKey<T>(texts, kind).values()].map((e: Envelope<T>) => {
-    const blobId = blobOf.get(`${e.key}:${e.version}`) ?? "";
-    return { id: e.key.replace(/:/g, "-"), key: e.key, version: e.version, blobId, walruscan: walruscan(blobId), summary: e.summary, data: e.data };
-  });
-}
+// 2. Verdicts and outcomes, recalled by meaning and decoded (shared with the website: packages/memory/src/rebuild.ts)
+const verdictMems = await recallAll(store, NAMESPACES.verdicts, RECALL_QUERIES.verdicts);
+const outcomeMems = await recallAll(store, NAMESPACES.outcomes, RECALL_QUERIES.outcomes);
 const verdicts = sealed<VerdictData>(verdictMems, "verdict").sort((a, b) => b.data.sealedAt.localeCompare(a.data.sealedAt));
 const outcomes = sealed<OutcomeData>(outcomeMems, "outcome").sort((a, b) => b.data.gradedAt.localeCompare(a.data.gradedAt));
 

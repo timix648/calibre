@@ -98,8 +98,12 @@ export const findings = findingsFile as unknown as {
 
 export const dataGeneratedAt = verdictsFile.generatedAt;
 
-export const verdictById = (id: string) => verdicts.find((v) => v.id === id);
-export const outcomeFor = (verdictKey: string) => outcomes.find((o) => o.data.verdictKey === verdictKey);
+/**
+ * Lookups over a record. They default to the committed export, so anything still reading the files keeps working; the pages
+ * that read Walrus at request time (lib/live-record.ts) pass the live lists in.
+ */
+export const verdictById = (id: string, from: SealedRecord<VerdictData>[] = verdicts) => from.find((v) => v.id === id);
+export const outcomeFor = (verdictKey: string, from: SealedRecord<OutcomeData>[] = outcomes) => from.find((o) => o.data.verdictKey === verdictKey);
 
 export interface ValidationLabel {
   label: XrayLabel;
@@ -133,4 +137,7 @@ export const replay = replayFile as unknown as {
 };
 
 /** Sealed verdicts whose Sui checkpoint was read through Tatum's gRPC gateway (all verdicts sealed before the public fallback existed). */
-export const tatumStamped = verdicts.filter((v) => (v.data.checkpoint as { source?: string }).source !== "sui-public-graphql").length;
+/** How many verdicts carry a checkpoint read through Tatum rather than the public Sui fallback. */
+export const tatumStampedIn = (from: SealedRecord<VerdictData>[]) =>
+  from.filter((v) => (v.data.checkpoint as { source?: string }).source !== "sui-public-graphql").length;
+export const tatumStamped = tatumStampedIn(verdicts);

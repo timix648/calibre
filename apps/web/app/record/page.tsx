@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SquareGauge } from "@/components/square-gauge";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
-import { dataGeneratedAt, outcomes, verdicts } from "@/lib/data";
+import { liveRecord } from "@/lib/live-record";
 import { pct, utc } from "@/lib/format";
 import { buildRecord, type RecordRow } from "@/lib/record";
 
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description: "Every verdict CALIBRE sealed before the result was known, with its grade once the market resolves: forecast against the market price.",
 };
 
-const record = buildRecord(verdicts, outcomes);
 const brier = (x: number | null) => (x === null ? "n/a" : x.toFixed(3));
 
 function Result({ row }: { row: RecordRow }) {
@@ -50,7 +49,14 @@ function Scores({ row }: { row: RecordRow }) {
   );
 }
 
-export default function Record() {
+// Re-render at most every ten minutes, so a verdict sealed on Walrus appears without anything being deployed.
+export const revalidate = 600;
+// The Walrus recall takes 8 to 13 seconds; give the render room for a slow one.
+export const maxDuration = 60;
+
+export default async function Record() {
+  const { verdicts, outcomes, generatedAt, source } = await liveRecord();
+  const record = buildRecord(verdicts, outcomes);
   const { rows, summary } = record;
   return (
     <div className="space-y-8">
@@ -117,7 +123,7 @@ export default function Record() {
       <section aria-labelledby="all-verdicts">
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
           <h2 id="all-verdicts" className="text-lg font-semibold tracking-tight">Every sealed verdict</h2>
-          <span className="text-xs text-faint">Exported {utc(dataGeneratedAt)}</span>
+          <span className="text-xs text-faint">{source === "walrus" ? "Read from Walrus" : "Exported"} {utc(generatedAt)}</span>
         </div>
         {rows.length === 0 ? (
           <p className="text-muted">No verdicts have been sealed yet.</p>

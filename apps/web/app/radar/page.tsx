@@ -4,7 +4,8 @@ import Link from "next/link";
 import { GaugeLegend, SquareGauge } from "@/components/square-gauge";
 import { SmartInput } from "@/components/smart-input";
 import { Badge, Card, ExternalLink, H2, PageTitle, TableWrap } from "@/components/ui";
-import { dataGeneratedAt, outcomeFor, verdicts } from "@/lib/data";
+import { outcomeFor as outcomeForIn } from "@/lib/data";
+import { liveRecord } from "@/lib/live-record";
 import { pct, utc, walruscan } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -12,7 +13,14 @@ export const metadata: Metadata = {
   description: "Recent price moves on Polymarket, judged by who traded them and sealed on Walrus before the result.",
 };
 
-export default function Radar() {
+// Re-render at most every ten minutes, so a verdict sealed on Walrus appears without anything being deployed.
+export const revalidate = 600;
+// The Walrus recall takes 8 to 13 seconds; give the render room for a slow one.
+export const maxDuration = 60;
+
+export default async function Radar() {
+  const { verdicts, outcomes, generatedAt, source } = await liveRecord();
+  const outcomeFor = (key: string) => outcomeForIn(key, outcomes);
   const rows = [...verdicts].sort((a, b) => b.data.sealedAt.localeCompare(a.data.sealedAt));
   return (
     <div className="space-y-8">
@@ -38,7 +46,7 @@ export default function Radar() {
       <section aria-labelledby="sealed">
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
           <h2 id="sealed" className="text-lg font-semibold tracking-tight">Sealed verdicts</h2>
-          <span className="text-xs text-faint">Exported {utc(dataGeneratedAt)}</span>
+          <span className="text-xs text-faint">{source === "walrus" ? "Read from Walrus" : "Exported"} {utc(generatedAt)}</span>
         </div>
         <p className="mb-3 text-sm">
           <Link href="/record" className="text-accent underline decoration-accent/40 hover:decoration-accent">See CALIBRE&apos;s own record</Link>

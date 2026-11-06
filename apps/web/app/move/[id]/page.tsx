@@ -6,9 +6,12 @@ import { SquareGauge } from "@/components/square-gauge";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
 import { XrayChip } from "@/components/xray-ui";
 import { outcomeFor, verdictById, verdicts } from "@/lib/data";
+import { liveRecord } from "@/lib/live-record";
 import { MOVE_LABEL_TEXT, VERDICT_TONE, pct, pts, shortAddr, sourceLabel, suiscanCheckpoint, utc, walruscan } from "@/lib/format";
 
-export const dynamicParams = false;
+
+// Pre-render the verdicts that existed at build time; `dynamicParams` lets one sealed since then render on demand.
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return verdicts.map((v) => ({ id: v.id }));
@@ -20,11 +23,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 export default async function MovePage({ params }: { params: Promise<{ id: string }> }) {
-  const v = verdictById((await params).id);
+  const { id } = await params;
+  // Look in the live record first, so a verdict sealed since the last export has a page too.
+  const rec = await liveRecord();
+  const v = verdictById(id, rec.verdicts) ?? verdictById(id);
   if (!v) notFound();
   const d = v.data;
   const model = d.model ?? "v1";
-  const graded = outcomeFor(v.key);
+  const graded = outcomeFor(v.key, rec.outcomes);
   const wallets = d.topWallets;
   const proven = wallets.filter((w) => w.n !== null && w.z !== null && auditVerdict({ z: w.z, n: w.n }) === "proven edge").length;
   const unknown = wallets.filter((w) => w.n === null || w.n === 0).length;

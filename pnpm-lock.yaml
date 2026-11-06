@@ -79,6 +79,9 @@ importers:
       '@calibre/mcp':
         specifier: workspace:*
         version: link:../mcp
+      '@calibre/memory':
+        specifier: workspace:*
+        version: link:../../packages/memory
       '@calibre/public-data':
         specifier: workspace:*
         version: link:../../packages/public-data
@@ -88,6 +91,9 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: 1.32.2
         version: 1.32.2(@cfworker/json-schema@4.1.6)(zod@4.6.7)
+      '@mysten-incubation/memwal':
+        specifier: 0.1.12
+        version: 0.1.12(@mysten/seal@1.5.2(@mysten/sui@2.38.0(typescript@5.9.3)))(@mysten/sui@2.38.0(typescript@5.9.3))(zod@4.6.7)
       '@mysten/sui':
         specifier: 2.38.0
         version: 2.38.0(typescript@5.9.3)
