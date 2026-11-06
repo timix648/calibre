@@ -61,7 +61,14 @@ export function priceSeriesFromTrades(trades: TimedFlowTrade[], bucketMs = 5 * 6
 /** Circuit breaker: when each key may be tried again, in unix milliseconds. */
 export type BreakerState = Record<string, number>;
 
-export const BREAKER_HOLD_MS = 60 * 60_000;
+/**
+ * How long a market is left alone after Tatum answered with nothing for it. This was an hour while Tatum's history looked
+ * dead across the board, where the point was to stop paying 200 credits a time for an empty answer. Now that the history
+ * works (the `midpoint` feed), an empty answer is usually a market whose candles have not appeared yet, and an hour-long
+ * lockout means its next move is judged on Polymarket data when Tatum could have confirmed it. Ten minutes is long enough
+ * to stop a market being hammered and short enough that one quiet moment does not cost the confirmation.
+ */
+export const BREAKER_HOLD_MS = 10 * 60_000;
 
 export const breakerOpen = (state: BreakerState, key: string, now: number): boolean => (state[key] ?? 0) > now;
 
