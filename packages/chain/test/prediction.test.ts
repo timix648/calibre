@@ -29,6 +29,21 @@ describe("PredictionClient", () => {
     expect(f.calls[0]!.url).toBe("https://api.tatum.io/v4/data/prediction/events?platform=polymarket&status=closed&category=SPORTS&sort=newest");
   });
 
+  it("asks price history for the midpoint feed, because Tatum's candlesticks default is empty for Polymarket", async () => {
+    const f = fakeFetch([{ status: 200, body: { data: { candles: [{ timestamp: "2026-11-06T09:30:00.000Z", close: 0.555 }] } } }]);
+    const c = new PredictionClient("k", { fetch: f.fn, sleep: noSleep });
+    const candles = await c.marketHistory("0xabc", { interval: "5m", start: "2026-11-06T09:00:00Z", end: "2026-11-06T11:00:00Z" });
+    expect(candles).toHaveLength(1);
+    expect(f.calls[0]!.url).toContain("source=midpoint");
+  });
+
+  it("lets a caller ask for the candlesticks feed explicitly", async () => {
+    const f = fakeFetch([{ status: 200, body: { data: { candles: [] } } }]);
+    const c = new PredictionClient("k", { fetch: f.fn, sleep: noSleep });
+    await c.marketHistory("0xabc", { interval: "1h", start: "a", end: "b", source: "candlesticks" });
+    expect(f.calls[0]!.url).toContain("source=candlesticks");
+  });
+
   it("retries 429 and 5xx, then succeeds", async () => {
     const f = fakeFetch([{ status: 429, body: {} }, { status: 503, body: {} }, { status: 200, body: { data: [{ rank: 1 }] } }]);
     const c = new PredictionClient("k", { fetch: f.fn, sleep: noSleep });

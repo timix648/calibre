@@ -2,9 +2,10 @@
 //   pnpm --filter @calibre/worker watch [--min-jump 0.05] [--max-markets 16] [--max-politics 14] [--loop 10] [--dry]
 //                                       [--segment sports|politics|all] [--tatum-hourly 50] [--discover-every 60]
 //
-// Tatum is the primary source. When its history or trades come back empty (or fail) for an active market, the same data
-// is read from Polymarket's free public API and every verdict says so (`source`, `fallbackReason`). A market whose Tatum
-// history came back empty is not asked again for 60 minutes, so a broken endpoint does not burn credits.
+// Tatum is the primary source: every move is confirmed against Tatum's own price history (the `midpoint` feed) before it is
+// judged, and a move Tatum's history does not show is skipped. Tatum's trades feed is still returning no fills for any
+// Polymarket market, so the fills behind a verdict come from Polymarket's free public API and every verdict says so
+// (`source`, `fallbackReason`). A feed that comes back empty is not asked again for 60 minutes, so it cannot burn credits.
 import {
   PredictionApiError, TatumBudgetExceeded, anchorCheckpoint, type Market, type PredictionClient,
 } from "../../../packages/chain/src/index.js";
@@ -129,8 +130,9 @@ async function discover(now: number): Promise<Candidate[]> {
  * by the breaker or out of its hourly allowance, the points come from Polymarket's public fills (5-minute closes).
  */
 /**
- * Tatum's price history has answered empty for busy markets (checked 5 Nov 2026). After three empty answers in a row the watcher
- * stops asking for an hour, so it does not pay 200 credits a request for nothing; Polymarket's fills are used meanwhile.
+ * Kept as a guard, not as a workaround. The empty answers seen on 3 to 5 Nov 2026 came from asking Tatum's default
+ * `candlesticks` feed, which is dead for Polymarket; the client now asks for `midpoint`, which returns full series. If a feed
+ * ever empties again, three empty answers in a row stop the asking for an hour rather than paying 200 credits for nothing.
  */
 let historyEmptyStreak = 0;
 let historySkipUntil = 0;

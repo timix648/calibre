@@ -39,9 +39,18 @@ const market = top?.markets?.[0] ? { id: top.markets[0], question: top.title } :
 if (market?.id) {
   const end = new Date();
   const start = new Date(end.getTime() - 2 * 3_600_000);
-  const h = await get(`/markets/${market.id}/history?interval=5m&start=${start.toISOString()}&end=${end.toISOString()}`, TATUM_CREDITS.marketHistory);
-  const candles = (h.body?.data ?? h.body ?? []) as unknown[];
-  line("Prediction: price history", h.status === 200 && Array.isArray(candles) && candles.length > 0, `HTTP ${h.status}, ${Array.isArray(candles) ? candles.length : "?"} candles for "${market.question?.slice(0, 40)}" (${h.ms} ms)`);
+  // Both feeds, because they disagree: `candlesticks` (Tatum's default) has returned zero candles for every Polymarket market
+  // since Polymarket retired its v1 Data API, while `midpoint` returns a full series. The watcher asks for midpoint.
+  for (const source of ["midpoint", "candlesticks"] as const) {
+    const h = await get(
+      `/markets/${market.id}/history?interval=5m&start=${start.toISOString()}&end=${end.toISOString()}&source=${source}`,
+      TATUM_CREDITS.marketHistory,
+    );
+    const candles = (h.body?.data?.candles ?? h.body?.data ?? []) as unknown[];
+    const n = Array.isArray(candles) ? candles.length : "?";
+    line(`Prediction: price history (${source})`, h.status === 200 && Array.isArray(candles) && candles.length > 0,
+      `HTTP ${h.status}, ${n} candles for "${market.question?.slice(0, 40)}" (${h.ms} ms)`);
+  }
   const tr = await get(`/markets/${market.id}/trades?limit=100`, TATUM_CREDITS.marketTradesPage);
   const trades = (tr.body?.data ?? []) as unknown[];
   line("Prediction: trades", tr.status === 200 && trades.length > 0, `HTTP ${tr.status}, ${trades.length} trades (${tr.ms} ms)`);
@@ -53,6 +62,13 @@ const v = await get(`/wallets/${WALLET}/value`, TATUM_CREDITS.walletValue);
 line("Prediction: wallet value", v.status === 200 && typeof v.body?.data?.value === "number", `HTTP ${v.status}, value ${v.body?.data?.value ?? "n/a"} (${v.ms} ms)`);
 const mt = await get(`/wallets/${WALLET}/markets-traded`, TATUM_CREDITS.walletMarketsTraded);
 line("Prediction: markets traded", mt.status === 200 && typeof mt.body?.data?.traded === "number", `HTTP ${mt.status}, traded ${mt.body?.data?.traded ?? "n/a"} (${mt.ms} ms)`);
+// /portfolio answers 200 where the two above answer 500, but every figure comes back 0 even for the busiest wallets in our
+// index, so it is reported and not used: a wallet line of "$0, 0 positions" for an active trader would be worse than none.
+const pf = await get(`/wallets/${WALLET}/portfolio`, 200);
+const pd = pf.body?.data ?? {};
+const allZero = pf.status === 200 && (pd.activeNotional ?? 0) === 0 && (pd.closedPositions ?? 0) === 0 && (pd.totalPnl ?? 0) === 0;
+line("Prediction: wallet portfolio", pf.status === 200 && !allZero,
+  `HTTP ${pf.status}, ${allZero ? "every figure 0 (no usable data)" : `notional ${pd.activeNotional}, closed ${pd.closedPositions}`} (${pf.ms} ms)`);
 
 console.log(`\nCredits spent by this check (at Tatum's listed prices): about ${credits}`);
 process.exit(0);

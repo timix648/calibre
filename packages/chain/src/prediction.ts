@@ -8,7 +8,14 @@ export const PREDICTION_BASE = "https://api.tatum.io/v4/data/prediction";
 export type Platform = "polymarket" | "kalshi";
 export type EventStatus = "active" | "closed" | "resolved";
 export type EventSort = "volume_desc" | "liquidity_desc" | "endingSoon" | "newest";
-export type Interval = "1m" | "5m" | "15m" | "1h" | "1d";
+export type Interval = "1m" | "5m" | "15m" | "1h" | "4h" | "1d" | "1w";
+/**
+ * Which price feed the history endpoint reads. Tatum's default, `candlesticks`, is built from Polymarket's trade feed and has
+ * answered with zero candles for every Polymarket market since Polymarket retired its v1 Data API (checked 6 Nov 2026, from the
+ * busiest market down to live esports). `midpoint` is derived from the orderbook, is Polymarket-only, and returns full series;
+ * its candles carry `volume: 0`, which nothing here reads. CALIBRE is Polymarket-only, so `midpoint` is the default.
+ */
+export type HistorySource = "candlesticks" | "midpoint";
 
 export interface PredictionEvent {
   id: string;
@@ -262,8 +269,10 @@ export class PredictionClient {
     return this.get<{ data: MarketTrade[]; pagination: { cursor?: string } }>(`/markets/${id}/trades${qs({ limit: 100, ...p })}`);
   }
 
-  async marketHistory(id: string, p: { interval: Interval; start: string; end: string }) {
-    return (await this.get<{ data: { candles: Candle[] } }>(`/markets/${id}/history${qs(p)}`, { ttlMs: 10 * 60_000 })).data.candles;
+  /** Price candles. `source` defaults to `midpoint`: Tatum's `candlesticks` default returns nothing for Polymarket (see HistorySource). */
+  async marketHistory(id: string, p: { interval: Interval; start: string; end: string; source?: HistorySource }) {
+    const q = { source: "midpoint" as HistorySource, ...p };
+    return (await this.get<{ data: { candles: Candle[] } }>(`/markets/${id}/history${qs(q)}`, { ttlMs: 10 * 60_000 })).data.candles;
   }
 
   /** Live YES bid/ask/mid. Never cached: it is read at the moment a verdict is judged. */
