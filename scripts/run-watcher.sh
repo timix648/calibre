@@ -41,14 +41,6 @@ grade_loop() {
 
 watch_loop & WATCH_PID=$!
 grade_loop & GRADE_PID=$!
-
-# Publishing: export what has been sealed and push it, so the live site keeps up without anyone doing it by hand.
-# Off unless PUBLISH=1, because it needs push rights on this machine. See scripts/publish-loop.sh.
-PUBLISH_PID=""
-if [ "${PUBLISH:-0}" = "1" ]; then
-  bash scripts/publish-loop.sh & PUBLISH_PID=$!
-fi
-
-echo "$(date -u +%FT%TZ) started watch=$WATCH_PID grade=$GRADE_PID publish=${PUBLISH_PID:-off} tatum_hourly=$TATUM_HOURLY" | tee -a .cache/logs/watch.log
-trap 'kill $WATCH_PID $GRADE_PID ${PUBLISH_PID:-} 2>/dev/null; exit 0' INT TERM HUP
+echo "$(date -u +%FT%TZ) started watch=$WATCH_PID grade=$GRADE_PID tatum_hourly=$TATUM_HOURLY" | tee -a .cache/logs/watch.log
+trap 'kill $WATCH_PID $GRADE_PID 2>/dev/null; exit 0' INT TERM HUP
 wait
