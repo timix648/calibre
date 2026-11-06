@@ -38,7 +38,7 @@ Every figure is a plain sum over the study outputs (`scripts/scale-stats.ts`), n
 | **Record** (`/record`) | Every sealed verdict with its grade once the market resolved. |
 | **Chrome extension** (`apps/extension`) | The same X-ray as a panel on polymarket.com profile, event, sports and esports pages. |
 | **Paid agent API** (`/api/v1/xray/<address>`) | The wallet X-ray for agents at 0.01 USDC per call over MPP on Sui. Gasless for the buyer. |
-| **MCP server** (`apps/mcp`) | `wallet_audit` and `latest_verdicts` for Claude Code or any MCP client. No keys needed. |
+| **MCP server** (`/api/mcp`, and `apps/mcp` over stdio) | `wallet_audit` and `latest_verdicts` for Claude Code or any MCP client, over a URL or locally. No keys needed. |
 
 Every X-ray runs live on the server, and Tatum is in each one:
 
@@ -136,7 +136,7 @@ checkpoint 341674249, 0.01 USDC from the agent to the API's wallet, gas price 0.
 | `apps/worker` | `watch` (judge and seal moves), `grade` (seal outcomes), `index` (wallet records). |
 | `apps/web` | Next.js site and the free and paid APIs. |
 | `apps/extension` | Chrome MV3 panel for polymarket.com. |
-| `apps/mcp` | MCP server over stdio. |
+| `apps/mcp` | The MCP tools. Served over stdio from here, and over HTTP at `/api/mcp` by `apps/web` from the same `createServer`. |
 | `scripts` | The studies (`skill-persistence.ts`, `validate-labels.ts`, `square-replay.ts`), `verify.ts`, `export-site.ts`, `agent-pay-demo.ts`. |
 
 ## Run it
@@ -157,8 +157,15 @@ pnpm export:site     # refresh apps/web/data from Walrus
 ```
 
 Extension: download the zip from https://calibre-blush.vercel.app/extension and load it unpacked, or build it with
-`pnpm --filter @calibre/extension build` and load `apps/extension/dist`. MCP:
-`claude mcp add calibre -- pnpm --silent exec tsx apps/mcp/src/index.ts`.
+`pnpm --filter @calibre/extension build` and load `apps/extension/dist`.
+
+MCP, hosted, nothing to install:
+
+```
+claude mcp add --transport http calibre https://calibre-blush.vercel.app/api/mcp
+```
+
+Or locally over stdio: `claude mcp add calibre -- pnpm --silent exec tsx apps/mcp/src/index.ts`.
 
 ## Limits
 

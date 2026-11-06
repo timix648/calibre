@@ -1,14 +1,9 @@
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { RateLimiter, TtlCache, auditAddress, isAddress, type WalletAuditResult } from "@calibre/public-data";
 import { z } from "zod";
-import { auditReport } from "./format.js";
+import { auditReport } from "./format";
 
-/** The exported verdicts the website shows (written by `pnpm export:site`). */
-export const VERDICTS_FILE = fileURLToPath(new URL("../../web/data/verdicts.json", import.meta.url));
-
-interface SealedVerdict {
+export interface SealedVerdict {
   id: string;
   blobId: string;
   walruscan: string;
@@ -26,7 +21,14 @@ const text = (t: string, isError = false): TextResult => ({ content: [{ type: "t
 
 export interface ServerDeps {
   audit?: (address: string) => Promise<WalletAuditResult>;
-  verdictsFile?: string;
+  /**
+   * The sealed verdicts. Supplied by the caller rather than read here, because this module is bundled into the website as
+   * well: the stdio server in index.ts reads the exported JSON from disk, and the website imports it at build time (a
+   * serverless function has no repository to read). Keeping `node:fs` out of here is what lets both share these tools.
+   */
+  verdicts?: () => Promise<SealedVerdict[]> | SealedVerdict[];
+  /** Identifies the caller to the rate limiter, so one visitor cannot use up everyone's audits. Defaults to "stdio". */
+  clientId?: () => string;
 }
 
 /** The CALIBRE MCP server: `wallet_audit(address)` and `latest_verdicts(limit)`. */
@@ -34,7 +36,6 @@ export function createServer(deps: ServerDeps = {}): McpServer {
   const cache = new TtlCache<WalletAuditResult>(10 * 60_000, 200);
   const limiter = new RateLimiter(20, 60_000);
   const audit = deps.audit ?? ((address: string) => auditAddress(address, { maxTrades: 1000 }));
-  const file = deps.verdictsFile ?? VERDICTS_FILE;
   const server = new McpServer({ name: "calibre", version: "0.1.0" });
 
   server.registerTool(
@@ -54,7 +55,7 @@ export function createServer(deps: ServerDeps = {}): McpServer {
       try {
         let result = cache.get(key);
         if (!result) {
-          const wait = limiter.hit("stdio");
+          const wait = limiter.hit(deps.clientId?.() ?? "stdio");
           if (wait > 0) return text(`Too many audits in a short time. Try again in ${wait} seconds.`, true);
           result = await audit(key);
           cache.set(key, result);
@@ -79,7 +80,8 @@ export function createServer(deps: ServerDeps = {}): McpServer {
     async ({ limit }) => {
       let rows: SealedVerdict[];
       try {
-        rows = (JSON.parse(await readFile(file, "utf8")) as { verdicts: SealedVerdict[] }).verdicts;
+        if (!deps.verdicts) return text("This server was started without the exported verdicts.", true);
+        rows = await deps.verdicts();
       } catch {
         return text("No exported verdicts found. Run `pnpm export:site` in the CALIBRE repository first.", true);
       }

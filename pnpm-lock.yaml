@@ -76,12 +76,18 @@ importers:
       '@calibre/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@calibre/mcp':
+        specifier: workspace:*
+        version: link:../mcp
       '@calibre/public-data':
         specifier: workspace:*
         version: link:../../packages/public-data
       '@grpc/grpc-js':
         specifier: 1.14.7
         version: 1.14.7
+      '@modelcontextprotocol/sdk':
+        specifier: 1.32.2
+        version: 1.32.2(@cfworker/json-schema@4.1.6)(zod@4.6.7)
       '@mysten/sui':
         specifier: 2.38.0
         version: 2.38.0(typescript@5.9.3)
@@ -103,6 +109,9 @@ importers:
       react-dom:
         specifier: 19.3.1
         version: 19.3.1(react@19.3.1)
+      zod:
+        specifier: 4.6.7
+        version: 4.6.7
     devDependencies:
       '@tailwindcss/postcss':
         specifier: 4.3.4

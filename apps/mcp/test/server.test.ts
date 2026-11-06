@@ -1,4 +1,4 @@
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -6,7 +6,7 @@ import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { auditWallet, type ResolutionLike, type TradeLike } from "@calibre/core";
 import type { WalletAuditResult } from "@calibre/public-data";
 import { describe, expect, it, vi } from "vitest";
-import { createServer, type ServerDeps } from "../src/server.js";
+import { createServer, type SealedVerdict, type ServerDeps } from "../src/server.js";
 
 async function connect(deps: ServerDeps) {
   const server = createServer(deps);
@@ -32,6 +32,9 @@ function fakeAudit(): WalletAuditResult {
     firstTradeAt: 1, lastTradeAt: 2, fetchedAt: "2026-11-03T00:00:00.000Z", source: "polymarket-public",
   };
 }
+
+/** Reads verdicts from a file the test wrote, the way the stdio entry point does. */
+const fromFile = async (f: string) => (JSON.parse(await readFile(f, "utf8")) as { verdicts: SealedVerdict[] }).verdicts;
 
 describe("MCP server", () => {
   it("lists both tools", async () => {
@@ -70,7 +73,7 @@ describe("MCP server", () => {
       },
     });
     await writeFile(file, JSON.stringify({ verdicts: [row(1), row(3), row(2)] }));
-    const client = await connect({ verdictsFile: file });
+    const client = await connect({ verdicts: () => fromFile(file) });
     const r = await client.callTool({ name: "latest_verdicts", arguments: { limit: 2 } });
     const parsed = JSON.parse(text(r)) as { market: string; model: string; dataSource: string }[];
     expect(parsed.map((p) => p.market)).toEqual(["Market 3", "Market 2"]);
@@ -88,14 +91,14 @@ describe("MCP server", () => {
       },
     });
     await writeFile(file, JSON.stringify({ verdicts: [data(1, { model: "v2" }), data(2, { model: "v3", squareShare: 0.2512, squareCoverage: 0.8 })] }));
-    const client = await connect({ verdictsFile: file });
+    const client = await connect({ verdicts: () => fromFile(file) });
     const parsed = JSON.parse(text(await client.callTool({ name: "latest_verdicts", arguments: {} }))) as { market: string; squareMoney: unknown }[];
     expect(parsed.find((p) => p.market === "Market 2")?.squareMoney).toEqual({ share: 0.251, coverage: 0.8 });
     expect(parsed.find((p) => p.market === "Market 1")?.squareMoney).toBeNull();
   });
 
   it("latest_verdicts explains a missing export", async () => {
-    const client = await connect({ verdictsFile: path.join(tmpdir(), "does-not-exist.json") });
+    const client = await connect({ verdicts: () => fromFile(path.join(tmpdir(), "does-not-exist.json")) });
     const r = await client.callTool({ name: "latest_verdicts", arguments: {} });
     expect(r.isError).toBe(true);
   });
