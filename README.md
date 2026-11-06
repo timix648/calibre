@@ -21,8 +21,8 @@ on a live move is sealed on Walrus Memory before the result is known, and graded
 | **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
-| **59 verdicts** | sealed on Walrus Memory mainnet before the result was known; 48 graded, 378 memories in all |
-| **59 of 59 verdicts** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway |
+| **62 verdicts** | sealed on Walrus Memory mainnet before the result was known; 48 graded, 381 memories in all |
+| **62 of 62 verdicts** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway |
 | **643 Tatum API calls** | by the mainnet watcher to find and track live markets, inside a budget built to last the free plan |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
@@ -100,12 +100,12 @@ Walrus Memory (`@mysten-incubation/memwal`, Sui mainnet) is the system of record
 
 The proof page and the radar are rebuilt from Walrus alone: `pnpm verify` lists each namespace, recalls and decodes every verdict
 and outcome, checks that each outcome has its verdict, and writes [`docs/PROOF.md`](docs/PROOF.md). Every row links to its blob
-on Walruscan. Current counts: 59 verdicts, 48 outcomes, 271 wallet records.
+on Walruscan. Current counts: 62 verdicts, 48 outcomes, 271 wallet records.
 
 ## How Tatum is used
 
 - **Sui gRPC gateway** (`sui-mainnet-grpc.gateway.tatum.io`), over native gRPC with `@grpc/grpc-js`: the Sui checkpoint
-  that proves when each verdict was sealed. **All 59 sealed verdicts were stamped through it.** This is what makes a verdict a
+  that proves when each verdict was sealed. **All 62 sealed verdicts were stamped through it.** This is what makes a verdict a
   receipt: the checkpoint shows it existed before the market resolved (`packages/chain/src/suiGrpc.ts`).
 - **Prediction Markets API** (`/v4/data/prediction`): the watcher's market discovery (sports and politics events by volume
   and liquidity), price history, trades and the resolution check before grading. 643 calls on mainnet

@@ -1,6 +1,282 @@
 {
-  "generatedAt": "2026-11-04T20:36:38.848Z",
+  "generatedAt": "2026-11-06T12:47:28.095Z",
   "verdicts": [
+    {
+      "id": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c-1793967000",
+      "key": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c:1793967000",
+      "version": 1,
+      "blobId": "WO9NEmVqD5smovKuIp03IgAhvPrM-mXzIdLhM2lQxOQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/WO9NEmVqD5smovKuIp03IgAhvPrM-mXzIdLhM2lQxOQ",
+      "summary": "CS2 move up on \"Counter-Strike: FURIA vs BetBoom Team - Map 2 Winner\" (FURIA 61% to 73%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 70% for FURIA. Square money 0% of the money pushing the move (judged 23%). Data: Polymarket public API (Tatum history was empty for this market; not asked again until 13:00 UTC)",
+      "data": {
+        "marketId": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c",
+        "eventSlug": "cs2-furia-bb3-2026-11-06",
+        "league": "cs2",
+        "question": "Counter-Strike: FURIA vs BetBoom Team - Map 2 Winner",
+        "yesOutcome": "FURIA",
+        "move": {
+          "from": 0.6100000853,
+          "to": 0.725,
+          "startTs": 1793966100000,
+          "endTs": 1793967000000
+        },
+        "label": "contested",
+        "sharpShare": 0.16707631630994463,
+        "opposition": 4.086709128728566,
+        "forecast": 0.6989217552470328,
+        "priceAtVerdict": 0.725,
+        "trades": 283,
+        "wallets": 205,
+        "topWallets": [
+          {
+            "wallet": "0x0259b2054f046fe0ee8f3e075fdb85fc3ba9769e",
+            "league": "cs2",
+            "netYesUsd": -37236.83,
+            "edge": 0.018805784621603597,
+            "z": 0.4287912816223134,
+            "n": 44,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x997cb45c25e94b4ee58c234ce1f211496a0d51f3",
+            "league": "cs2",
+            "netYesUsd": 16693.02,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xf377b9fb12a4b7507a4f997461a73eb30b564159",
+            "league": "cs2",
+            "netYesUsd": -3900,
+            "edge": 0,
+            "z": -0.032412407438019854,
+            "n": 18,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x462d515e957253d2fa79a1f808e6e99eb2eece9b",
+            "league": "cs2",
+            "netYesUsd": 3720,
+            "edge": 0,
+            "z": -1.6062442489810933,
+            "n": 28,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x56c9fbdeccf198f1f5ad95ace39b24f5f7fb0d9e",
+            "league": "cs2",
+            "netYesUsd": 3012.02,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.23424896024480873,
+        "checkpoint": {
+          "sequence": "342269646",
+          "digest": "3JYmaUT4pns8EM2w85g7budUkvKnA9kGT4wLWHJfruWa",
+          "timestamp": "2026-11-06T12:11:24.055Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-06T12:11:05.803Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history was empty for this market; not asked again until 13:00 UTC"
+      }
+    },
+    {
+      "id": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da-1793963700",
+      "key": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da:1793963700",
+      "version": 1,
+      "blobId": "cdt8JaUI8Ho3JSaUd0MsdJMOwRaO7epT2Gjeo_-xeUY",
+      "walruscan": "https://walruscan.com/mainnet/blob/cdt8JaUI8Ho3JSaUd0MsdJMOwRaO7epT2Gjeo_-xeUY",
+      "summary": "CS2 move up on \"Counter-Strike: FURIA vs BetBoom Team - Map 1 Winner\" (FURIA 49% to 61%) is mixed: 20% of the money behind it came from wallets with a learned edge. CALIBRE forecast 60% for FURIA. Square money 0% of the money pushing the move (judged 40%). Data: Polymarket public API (Tatum history returned no candles for an active market)",
+      "data": {
+        "marketId": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da",
+        "eventSlug": "cs2-furia-bb3-2026-11-06",
+        "league": "cs2",
+        "question": "Counter-Strike: FURIA vs BetBoom Team - Map 1 Winner",
+        "yesOutcome": "FURIA",
+        "move": {
+          "from": 0.49,
+          "to": 0.605,
+          "startTs": 1793963400000,
+          "endTs": 1793963700000
+        },
+        "label": "mixed",
+        "sharpShare": 0.20229839465363933,
+        "opposition": 0.13188319074284793,
+        "forecast": 0.5977299450211496,
+        "priceAtVerdict": 0.605,
+        "trades": 296,
+        "wallets": 185,
+        "topWallets": [
+          {
+            "wallet": "0x56c9fbdeccf198f1f5ad95ace39b24f5f7fb0d9e",
+            "league": "cs2",
+            "netYesUsd": 8304.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x823dd0c85a04676ceb4894891605e597ca98f85b",
+            "league": "cs2",
+            "netYesUsd": -2000,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xef2684030d14a67c2a30a3e4fc00eed7a99505ba",
+            "league": "cs2",
+            "netYesUsd": -1557.36,
+            "edge": 0,
+            "z": -0.04304956389397351,
+            "n": 14,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x01e6e3c5cfe50943e7721398054cb1e22032e7e0",
+            "league": "cs2",
+            "netYesUsd": -1548.65,
+            "edge": 0.013960270083973672,
+            "z": 0.3364268636339078,
+            "n": 33,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x6e2c0e9474af7d720e5aba2a5b0bb6f723b7787c",
+            "league": "cs2",
+            "netYesUsd": 1420,
+            "edge": 0.03475033639087122,
+            "z": 1.2976836871520894,
+            "n": 5,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.4047808864279906,
+        "checkpoint": {
+          "sequence": "342256111",
+          "digest": "FN4BvZY84HRyHn7ThGzsetB7DdqU7c9EAvqmahfyLtBq",
+          "timestamp": "2026-11-06T11:17:26.274Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-06T11:17:07.722Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history returned no candles for an active market"
+      }
+    },
+    {
+      "id": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031-1793899500",
+      "key": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031:1793899500",
+      "version": 1,
+      "blobId": "-CCQDMvpG6K-9DEeAJMpeLbBRzRhANwCvPGaL-s6TUI",
+      "walruscan": "https://walruscan.com/mainnet/blob/-CCQDMvpG6K-9DEeAJMpeLbBRzRhANwCvPGaL-s6TUI",
+      "summary": "UEL move up on \"Will AC Sparta Praha win on 2026-11-05?\" (YES 12% to 18%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 18% for YES. Square money 0% of the money pushing the move (judged 55%). Data: Polymarket public API (Tatum history returned no candles for an active market)",
+      "data": {
+        "marketId": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031",
+        "eventSlug": "uel-spp-bou-2026-11-05",
+        "league": "uel",
+        "question": "Will AC Sparta Praha win on 2026-11-05?",
+        "yesOutcome": "YES",
+        "move": {
+          "from": 0.1199999939,
+          "to": 0.175,
+          "startTs": 1793895900000,
+          "endTs": 1793899500000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.175,
+        "priceAtVerdict": 0.175,
+        "trades": 61,
+        "wallets": 36,
+        "topWallets": [
+          {
+            "wallet": "0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6",
+            "league": "uel",
+            "netYesUsd": -832.48,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x0346afae2603313d2bbee96b628536c8cbe352a5",
+            "league": "uel",
+            "netYesUsd": 521,
+            "edge": 0,
+            "z": -1.2113062740091542,
+            "n": 2,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x7ea571c40408f340c1c8fc8eaacebab53c1bde7b",
+            "league": "uel",
+            "netYesUsd": 300.2,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xea8755c67c0f4a43190f846a6b09d06437731ad7",
+            "league": "uel",
+            "netYesUsd": -298.7,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "uel",
+            "netYesUsd": 268.49,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.5450793182952649,
+        "checkpoint": {
+          "sequence": "341988305",
+          "digest": "6JbqZ2KnYB7F1Soa76cWYRZsMpvaJ3dw832QQRGSu2Bk",
+          "timestamp": "2026-11-05T17:30:17.426Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-05T17:29:59.503Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum history returned no candles for an active market"
+      }
+    },
     {
       "id": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30-1793823000",
       "key": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30:1793823000",
