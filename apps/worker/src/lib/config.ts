@@ -2,7 +2,7 @@ import "./root.js";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { PredictionClient, tatumSuiClient } from "../../../../packages/chain/src/index.js";
+import { PredictionClient, budgetsFromEnv, tatumSuiClient } from "../../../../packages/chain/src/index.js";
 import { WalrusMemoryStore } from "../../../../packages/memory/src/index.js";
 import { need } from "../../../../scripts/env.js";
 
@@ -14,7 +14,7 @@ export function predictionClient(opts: { maxRetries?: number } = {}): Prediction
   return new PredictionClient(need("TATUM_API_KEY"), {
     ...opts,
     callBudget: tatumBudget(),
-    creditBudget: Number(process.env.TATUM_CREDIT_BUDGET ?? 95_000),
+    creditBudget: budgetsFromEnv().watcherTotal,
     budgetFile: TATUM_BUDGET_FILE,
     cacheDir: ".cache/tatum",
   });
@@ -35,7 +35,7 @@ export function memoryStore(): WalrusMemoryStore {
 /** Tatum calls made so far across runs, from the budget file. */
 export async function tatumCallsUsed(): Promise<{ used: number; budget: number; credits: number; creditBudget: number }> {
   const used = await readJson<{ used: number; credits?: number }>(TATUM_BUDGET_FILE, { used: 0 });
-  return { used: used.used, budget: tatumBudget(), credits: used.credits ?? 0, creditBudget: Number(process.env.TATUM_CREDIT_BUDGET ?? 95_000) };
+  return { used: used.used, budget: tatumBudget(), credits: used.credits ?? 0, creditBudget: budgetsFromEnv().watcherTotal };
 }
 
 /** A Tatum response already on disk, regardless of age (the cache key is the request path). */

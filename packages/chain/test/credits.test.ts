@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CreditMeter, TATUM_CREDITS, creditCost } from "../src/credits.js";
+import { CreditMeter, TATUM_CREDITS, budgetsFromEnv, creditCost, tatumBudgets } from "../src/credits.js";
 
 describe("Tatum credit prices", () => {
   it("prices requests as Tatum's reference lists them", () => {
@@ -43,5 +43,29 @@ describe("CreditMeter", () => {
     t = Date.parse("2026-11-06T00:01:00Z");
     expect(m.allow(100)).toBe(true);
     expect(m.state()).toMatchObject({ day: "2026-11-06", spent: 0 });
+  });
+});
+
+describe("tatumBudgets", () => {
+  it("gives a free key a budget it can actually afford", () => {
+    const b = tatumBudgets({ allowance: 100_000, days: 11 });
+    expect(b.watcherTotal + b.siteDaily * 11).toBeLessThanOrEqual(100_000);
+  });
+
+  it("splits a half-share of the paid plan the way the cost model measured", () => {
+    expect(tatumBudgets({ allowance: 2_000_000, days: 11 })).toEqual({ siteDaily: 122_000, watcherTotal: 317_746 });
+  });
+
+  it("never spends more than the allowance over the period", () => {
+    for (const allowance of [50_000, 100_000, 1_000_000, 2_000_000, 4_000_000]) {
+      const b = tatumBudgets({ allowance, days: 11 });
+      expect(b.watcherTotal + b.siteDaily * 11).toBeLessThanOrEqual(allowance);
+    }
+  });
+
+  it("prefers an explicit setting over the plan default", () => {
+    expect(budgetsFromEnv({ TATUM_PLAN: "starter", TATUM_DAILY_CREDITS: "5000" }).siteDaily).toBe(5_000);
+    expect(budgetsFromEnv({}).allowance).toBe(100_000);
+    expect(budgetsFromEnv({ TATUM_PLAN: "starter" }).allowance).toBe(4_000_000);
   });
 });

@@ -1,5 +1,5 @@
 import type { TimedFlowTrade } from "@calibre/core";
-import { CreditMeter, TATUM_CREDITS } from "@calibre/chain/src/credits";
+import { CreditMeter, TATUM_CREDITS, budgetsFromEnv } from "@calibre/chain/src/credits";
 import { latestCheckpoint, latestCheckpointPublic, tatumSuiClient, transactionStatus, type TransactionCheck } from "@calibre/chain/src/suiGrpc";
 
 /**
@@ -14,7 +14,9 @@ import { latestCheckpoint, latestCheckpointPublic, tatumSuiClient, transactionSt
 
 const KEY = process.env.TATUM_API_KEY?.trim() || null;
 const API = "https://api.tatum.io/v4/data/prediction";
-const meter = new CreditMeter({ dailyBudget: Number(process.env.TATUM_DAILY_CREDITS ?? 20_000) || 20_000 });
+// The daily budget follows the plan rather than a copied-in number: TATUM_DAILY_CREDITS wins if set, otherwise it is worked
+// out from TATUM_PLAN (free | starter) or TATUM_PLAN_CREDITS over TATUM_BUDGET_DAYS. See packages/chain/src/credits.ts.
+const meter = new CreditMeter({ dailyBudget: budgetsFromEnv().siteDaily });
 const PAUSE_ON_PLAN_ERROR_MS = 15 * 60_000;
 
 export type AnchorSource = "tatum-grpc" | "sui-public-graphql";

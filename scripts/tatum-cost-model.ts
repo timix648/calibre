@@ -183,4 +183,8 @@ console.log(`X-rays a day entirely on Tatum before anything falls back to free d
 
 console.log(`\nNote: these are worst cases. Every figure above assumes no cache hit, and the site caches the checkpoint 15 s,`);
 console.log(`market snapshots 2 min and wallet snapshots 10 min, so real traffic lands well under this.`);
-console.log(`The hard stops in the code: TATUM_DAILY_CREDITS (site, default 20,000/day) and TATUM_CREDIT_BUDGET (watcher, default 95,000).`);
+console.log(`The hard stops in the code: TATUM_DAILY_CREDITS (site) and TATUM_CREDIT_BUDGET (watcher), both derived from the plan.`);
+console.log(`\nWhy the caps matter beyond running out: Tatum's pricing FAQ says "You will be automatically upgraded to the next`);
+console.log(`tier until you reach the highest available pricing tier", and that with auto-upgrade disabled "your API keys will`);
+console.log(`cease to function until the next reset cycle". So overspending is a bigger invoice, not a free stop. Check which of`);
+console.log(`those two behaviours is set on the account before relying on either.`);
