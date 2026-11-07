@@ -194,17 +194,20 @@ async function scan(store: MemoryStore): Promise<number> {
     let move = latestMove(points, { minJump: MIN_JUMP, windowMs: 60 * 60_000 });
     if (!move) continue;
     let ev = evidence;
+    // Tracked apart from `ev.source`, which fillsFor may later change: while Tatum's trades endpoint returns nothing, a
+    // move Tatum confirmed still ends up with Polymarket fills, and the verdict should say both things.
+    let confirmedByTatum = false;
     if (SCAN === "public") {
       // Confirm the move on Tatum's own price history (one 200-credit request) before judging; the verdict then rests on Tatum data.
       const confirmed = await priceSeries(c, end, now, "tatum").catch((e) => { if (e instanceof TatumBudgetExceeded) throw e; return null; });
       const tatumMove = confirmed?.evidence.source === "tatum" ? latestMove(confirmed.points, { minJump: MIN_JUMP, windowMs: 60 * 60_000 }) : null;
       if (confirmed?.evidence.source === "tatum" && !tatumMove) { console.log(`  ${c.slug}: Tatum's history does not show the move; skipped`); continue; }
-      if (tatumMove) { move = tatumMove; ev = confirmed!.evidence; fromTatum++; }
+      if (tatumMove) { move = tatumMove; ev = confirmed!.evidence; confirmedByTatum = true; fromTatum++; }
       else ev = { ...evidence, fallbackReason: confirmed?.evidence.fallbackReason ?? evidence.fallbackReason };
     }
     console.log(`  MOVE ${c.slug} ${c.marketId.slice(0, 10)}: ${(move.from * 100).toFixed(0)}% -> ${(move.to * 100).toFixed(0)}% [${ev.source}]`);
     try {
-      const result = await judgeAndSeal(store, c, move, ev, index, memoryState);
+      const result = await judgeAndSeal(store, c, move, ev, index, memoryState, confirmedByTatum);
       // A queued verdict counts as judged too: it waits for its seal, and the market is not judged again meanwhile.
       if (result) { judged[c.marketId] = Date.now(); await writeJson(WATCH_STATE_FILE, judged); }
       if (result === "sealed") sealed++;
@@ -246,7 +249,7 @@ async function fillsFor(c: Candidate, move: Move, evidence: Evidence): Promise<{
 
 async function judgeAndSeal(
   store: MemoryStore, c: Candidate, original: Move, evidenceIn: Evidence,
-  index: WalletEdgeRow[], memoryState: Awaited<ReturnType<typeof loadMemoryState>>,
+  index: WalletEdgeRow[], memoryState: Awaited<ReturnType<typeof loadMemoryState>>, confirmedByTatum = false,
 ): Promise<"sealed" | "queued" | false> {
   const market: Market = await capped(() => api.market(c.marketId));
   if (market.status !== "active" || market.resolution) { console.log("    market is no longer active, skipped"); return false; }
@@ -299,6 +302,7 @@ async function judgeAndSeal(
     model: MODEL_VERSION,
     source: evidence.source,
     ...(evidence.source === "polymarket-public" ? { fallbackReason: evidence.fallbackReason } : {}),
+    ...(confirmedByTatum ? { moveConfirmedBy: "tatum" as const } : {}),
   };
   console.log(`    ${verdict.label} [${evidence.source}]: sharp share ${(verdict.sharpShare * 100).toFixed(0)}%, forecast ${(verdict.forecast * 100).toFixed(1)}% vs price ${(move.to * 100).toFixed(1)}%, ${flows.length} wallets, checkpoint ${checkpoint.sequence}`);
   console.log(`    square money ${(square.squareShare * 100).toFixed(0)}% of the pushing money, judged ${(square.squareCoverage * 100).toFixed(0)}% (${square.money.squareWallets} proven-losing of ${square.money.wallets} pushing wallets)`);

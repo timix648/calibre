@@ -7,7 +7,7 @@ import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/com
 import { XrayChip } from "@/components/xray-ui";
 import { outcomeFor, verdictById, verdicts } from "@/lib/data";
 import { liveRecord } from "@/lib/live-record";
-import { MOVE_LABEL_TEXT, VERDICT_TONE, pct, pts, shortAddr, sourceLabel, suiscanCheckpoint, utc, walruscan } from "@/lib/format";
+import { MOVE_LABEL_TEXT, VERDICT_TONE, pct, pts, shortAddr, sourceLabel, evidenceLabel, suiscanCheckpoint, utc, walruscan } from "@/lib/format";
 
 
 // Pre-render the verdicts that existed at build time; `dynamicParams` lets one sealed since then render on demand.
@@ -157,7 +157,7 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
         <Card>
           <H2>Data source</H2>
           <p className="text-sm leading-relaxed">
-            <strong>{sourceLabel(d.source)}.</strong>{" "}
+            <strong>{evidenceLabel(d)}.</strong>{" "}
             {d.source === "polymarket-public"
               ? <>The market was found through Tatum&apos;s Prediction Markets API and the checkpoint was read through Tatum&apos;s Sui gRPC. The trades behind the move came from Polymarket&apos;s public Data API {d.fallbackReason?.includes("hourly call cap") ? "because the watcher had used its hourly allowance of Tatum calls, a cap set to stretch the free plan" : d.fallbackReason?.includes("empty") ? "because Tatum's price history was empty for this market at the time" : "as a fallback"}{d.fallbackReason ? ` (${d.fallbackReason})` : ""}.{d.checkpoint.source === "sui-public-graphql" ? " This verdict's checkpoint came from Sui's public GraphQL." : ""}</>
               : "The prices and trades behind this move came from Tatum's Prediction Markets API."}

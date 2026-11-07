@@ -105,6 +105,12 @@ export interface VerdictData {
   source?: DataSource;
   /** Why Polymarket public data was used instead of Tatum, present when `source` is `polymarket-public`. */
   fallbackReason?: string;
+  /**
+   * Whether Tatum's own price history confirmed this move before it was judged. `source` above says where the FILLS came
+   * from, which is a different question: while Tatum's trades endpoint returns nothing, a verdict can be confirmed by Tatum
+   * and still have Polymarket fills. Absent on verdicts sealed before the field existed.
+   */
+  moveConfirmedBy?: "tatum";
   /** Model v3: share of the money pushing the move that came from judged wallets with a proven losing record (a floor). */
   squareShare?: number;
   /** Model v3: share of the money pushing the move that belongs to wallets judged from the wallet index. */

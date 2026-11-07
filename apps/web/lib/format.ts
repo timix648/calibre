@@ -39,6 +39,16 @@ export function sourceLabel(source: string | undefined): string {
   return source === "polymarket-public" ? "Polymarket public API (fallback)" : "Tatum Prediction Markets API";
 }
 
+/**
+ * What the fills say, and separately whether Tatum confirmed the move. The two differ: Tatum's trades endpoint returns
+ * nothing for Polymarket, so a move Tatum's price history confirmed still carries Polymarket fills, and saying only
+ * "Polymarket public API" would undersell what actually happened.
+ */
+export function evidenceLabel(v: { source?: string; moveConfirmedBy?: string }): string {
+  const fills = sourceLabel(v.source);
+  return v.moveConfirmedBy === "tatum" ? `Move confirmed on Tatum price history; fills from ${fills.replace(" (fallback)", "")}` : fills;
+}
+
 /** "45 min" or "2 h 10 min" for a span in milliseconds. */
 export function span(ms: number): string {
   const min = Math.max(1, Math.round(ms / 60_000));
