@@ -52,14 +52,14 @@ export function SquareGauge({
           strokeLinecap="butt"
         />
       ) : null}
-      {/* The needle starts at zero (the left end) and sweeps clockwise to the reading. */}
+      {/* The needle sweeps the dial and settles on the reading: see .needle in globals.css for why it sweeps first. */}
       <g className="needle" style={{ "--a": `${s * 180}deg`, "--ox": `${CX}px`, "--oy": `${CY}px` } as CSSProperties}>
         <line x1={CX - R + STROKE / 2 + 4} y1={CY} x2={CX - R + STROKE / 2 + 22} y2={CY} stroke={zone.color} strokeWidth={2.5} strokeLinecap="round" />
         <circle cx={CX - R} cy={CY} r={STROKE / 2 + 2.5} fill="var(--color-bg)" stroke={zone.color} strokeWidth={2.5} />
       </g>
 
       <text x={CX} y={CY - 6} textAnchor="middle" className="num" fontSize={36} fontWeight={650} fill="var(--color-fg)">
-        <CountUp svg value={Math.round(s * 100)} suffix="%" duration={1400} />
+        <CountUp svg value={Math.round(s * 100)} suffix="%" duration={1700} />
       </text>
       <text x={CX} y={CY + 14} textAnchor="middle" fontSize={12} fontWeight={600} fill={zone.color} letterSpacing="0.06em">
         {zone.label.toUpperCase()}

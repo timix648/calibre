@@ -129,8 +129,18 @@ body { isolation: isolate; }
 [data-stagger] > *:nth-child(n + 7) { transition-delay: 420ms; }
 
 /* The gauge needle sweeps from zero to its reading; the edge dot slides out from zero. */
-.needle { transform-box: view-box; transform-origin: var(--ox) var(--oy); animation: needle 1.4s cubic-bezier(0.34, 1.32, 0.5, 1) 0.15s both; }
-@keyframes needle { from { transform: rotate(0deg); } to { transform: rotate(var(--a)); } }
+/*
+ * The needle sweeps the whole dial and settles on the reading, the way a real instrument does on power-up. It used to run
+ * from zero to the reading, which showed nothing at all on the 94% of verdicts whose square-money share is exactly 0: the
+ * needle animated from 0deg to 0deg. Sweeping the dial first means the gauge always reads as live, and a zero is a zero
+ * the instrument arrived at rather than one it might have failed to draw.
+ */
+.needle { transform-box: view-box; transform-origin: var(--ox) var(--oy); animation: needle 1.7s cubic-bezier(0.33, 0, 0.2, 1) 0.15s both; }
+@keyframes needle {
+  0% { transform: rotate(0deg); }
+  42% { transform: rotate(180deg); }
+  100% { transform: rotate(var(--a)); }
+}
 .edge-dot { animation: edge-dot 1s cubic-bezier(0.34, 1.4, 0.5, 1) 0.2s both; }
 @keyframes edge-dot { from { transform: translateX(var(--from)); opacity: 0.2; } to { transform: none; opacity: 1; } }
 .edge-band { transform-box: fill-box; transform-origin: center; animation: edge-band 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
