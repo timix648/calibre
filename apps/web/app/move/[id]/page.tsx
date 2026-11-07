@@ -133,6 +133,12 @@ export default async function MovePage({ params }: { params: Promise<{ id: strin
           <dl className="space-y-3 text-sm">
             <Row k="Sealed in Walrus Memory">
               <ExternalLink href={v.walruscan || walruscan(v.blobId)}>{v.blobId}</ExternalLink>
+              <span className="block text-xs text-muted">
+                Walruscan shows that this blob exists on Sui mainnet and the transactions that stored it, not the text
+                inside it: Walrus Memory encrypts every memory. What it proves is that the record existed before the market
+                resolved. The verdict above is that record, decrypted, and <code className="num">pnpm verify</code> rebuilds
+                the proof page from Walrus alone rather than from anything stored here.
+              </span>
             </Row>
             <Row k="Sui checkpoint">
               <ExternalLink href={suiscanCheckpoint(d.checkpoint.sequence)}>{d.checkpoint.sequence}</ExternalLink>

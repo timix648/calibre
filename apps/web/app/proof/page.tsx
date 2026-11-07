@@ -70,7 +70,7 @@ export default async function Proof() {
       </Card>
 
       <Card>
-        <H2 sub="The verdicts sealed so far. Each links to its receipt and to the blob on Walruscan.">Sealed verdicts</H2>
+        <H2 sub="The verdicts sealed so far. Each links to its receipt and to the blob on Walruscan, which shows that the blob exists on Sui mainnet and when it was stored, not the text inside it: Walrus Memory encrypts every memory. The content you see here is that record, read back out of Walrus and decrypted.">Sealed verdicts</H2>
         {verdicts.length === 0 ? (
           <p className="text-sm text-muted">None yet.</p>
         ) : (
