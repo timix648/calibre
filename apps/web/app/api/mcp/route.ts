@@ -23,7 +23,29 @@ function clientId(req: Request): string {
   return fwd?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "anonymous";
 }
 
+/**
+ * A person who pastes this URL into a browser gets a plain GET with `Accept: text/html`, which the MCP transport correctly
+ * refuses with 406 "Client must accept text/event-stream" — correct, and indistinguishable from a broken endpoint. Answer
+ * those with something readable instead; a real MCP client always sends `text/event-stream` and never reaches this.
+ */
+function browserGet(req: Request): Response | null {
+  if (req.method !== "GET") return null;
+  const accept = req.headers.get("accept") ?? "";
+  if (accept.includes("text/event-stream")) return null;
+  return Response.json({
+    name: "calibre",
+    description: "CALIBRE's MCP server: audit a Polymarket wallet's record, and read the verdicts sealed in Walrus Memory.",
+    transport: "streamable-http",
+    tools: ["wallet_audit", "latest_verdicts"],
+    add: "claude mcp add --transport http calibre https://calibre-blush.vercel.app/api/mcp",
+    note: "This endpoint speaks JSON-RPC over HTTP POST. Opening it in a browser is not an error; point an MCP client at it.",
+    docs: "https://calibre-blush.vercel.app/agents",
+  });
+}
+
 async function handle(req: Request): Promise<Response> {
+  const friendly = browserGet(req);
+  if (friendly) return friendly;
   const server = createServer({ verdicts, clientId: () => clientId(req) });
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined, // stateless: nothing survives between requests here
