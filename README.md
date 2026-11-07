@@ -23,7 +23,7 @@ on a live move is sealed on Walrus Memory before the result is known, and graded
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
 | **62 verdicts** | sealed on Walrus Memory mainnet before the result was known; 48 graded, 381 memories in all |
 | **62 of 62 verdicts** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway |
-| **643 Tatum API calls** | by the mainnet watcher to find and track live markets, inside a budget built to last the free plan |
+| **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
 Every figure is a plain sum over the study outputs (`scripts/scale-stats.ts`), not an estimate.
@@ -46,7 +46,8 @@ Every X-ray runs live on the server, and Tatum is in each one:
   2 credits, shared by all X-rays in a 15-second window).
 - **Market X-rays read their fills from Tatum's Prediction Markets API** (100 credits a page, cached per market), with
   Polymarket's public Data API as the labelled fallback.
-- **Wallet X-rays add Tatum's live view of the wallet:** open-position value and lifetime markets traded (50 credits each).
+- **Wallet X-rays ask Tatum for the wallet's open-position value and markets traded** (50 credits each). That endpoint is
+  currently returning 500, so the line is omitted rather than faked, and the page says why.
   The scored record itself comes from the wallet's full trade history on Polymarket's free Data API.
 - **Paid agent calls are confirmed through Tatum's Sui gRPC:** the receipt carries the checkpoint that finalised the payment.
 
@@ -104,18 +105,36 @@ on Walruscan. Current counts: 62 verdicts, 48 outcomes, 271 wallet records.
 
 ## How Tatum is used
 
-- **Sui gRPC gateway** (`sui-mainnet-grpc.gateway.tatum.io`), over native gRPC with `@grpc/grpc-js`: the Sui checkpoint
-  that proves when each verdict was sealed. **All 62 sealed verdicts were stamped through it.** This is what makes a verdict a
-  receipt: the checkpoint shows it existed before the market resolved (`packages/chain/src/suiGrpc.ts`).
-- **Prediction Markets API** (`/v4/data/prediction`): the watcher's market discovery (sports and politics events by volume
-  and liquidity), price history, trades and the resolution check before grading. 643 calls on mainnet
-  (`packages/chain/src/prediction.ts`: budgeted per hour, cached, retried, with a circuit breaker).
+CALIBRE runs on a paid **Tatum Starter plan** (4,000,000 credits a month), bought on 7 November 2026 after the free
+100,000 ran out. Tatum is not decoration here; these are the places the product stops working without it.
 
-The free plan is finite, so CALIBRE spends Tatum calls where they matter most and labels every fallback. The watcher capped
-itself at 18 Tatum calls an hour and took trade fills from Polymarket's public Data API once the hour's allowance was used
-(each verdict records which source it used). Grading asks Polymarket's free Gamma API which markets have resolved before
-spending a Tatum call. The latest export, made after the free credits were used up, read its checkpoint from Sui's public
-GraphQL and says so; the sealed verdicts themselves all carry Tatum checkpoints.
+- **The move gate.** The watcher finds a candidate move on free data, then asks Tatum's price history whether it happened.
+  A move Tatum's own history does not show is dropped before anything is judged or sealed (`apps/worker/src/watch.ts`).
+  Two independent sources have to agree before a verdict exists.
+- **Sui gRPC gateway** (`sui-mainnet-grpc.gateway.tatum.io`), native gRPC with `@grpc/grpc-js` and `@protobuf-ts/grpc-transport`
+  — Tatum's Sui JSON-RPC is deprecated and returns 404. This is the checkpoint that proves when each verdict was sealed:
+  it existed before the market resolved (`packages/chain/src/suiGrpc.ts`). Every X-ray on the site is stamped the same way.
+- **Prediction Markets API** (`/v4/data/prediction`): market discovery by volume and liquidity, the live price shown on a
+  market X-ray, and the resolution check before grading (`packages/chain/src/prediction.ts`: priced per request, cached,
+  retried, with a circuit breaker).
+- **Paid agent calls** are confirmed on chain through Tatum's Sui gRPC before the X-ray is released.
+
+**Price history needs `source=midpoint`.** Tatum's default `candlesticks` feed returns HTTP 200 with zero candles for every
+Polymarket market, at every interval and range — almost certainly because it is built on the Polymarket v1 Data API retired
+on 2 November 2026. `midpoint` comes off the orderbook and returns a full series. That one parameter is the difference
+between the move gate working and silently never firing. It cost three days to find.
+
+**Spending is budgeted, not hoped for.** Every request is counted at Tatum's listed credit price — a price history request
+is 200, a market lookup 100, a gRPC query 2 — against a daily cap worked out from the plan
+(`packages/chain/src/credits.ts`; `scripts/tatum-cost-model.ts` measures it). Measured on the live mainnet watcher:
+502 credits per judged move, about 26,000 a day. Past the daily cap the site serves free Polymarket data rather than
+overspending, and says so on the page.
+
+**Endpoints that do not work, checked against each one's own reference page on 6 November 2026:** market `/trades` returns
+200 with zero rows on every documented parameter shape, including on a market taking 34 fills that minute;
+`/wallets/{a}/trades`, `/value`, `/markets-traded`, `/positions` and `/top-traders` all return 500. So the fills behind a
+verdict — which wallets pushed the move — come from Polymarket's free Data API, and every verdict records which source it
+used and why.
 
 ## Agent payments
 
