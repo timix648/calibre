@@ -10,7 +10,7 @@
  * wrong, only older. `source` says which one a page is showing, so the site can be honest about it.
  */
 import type { OutcomeData, VerdictData } from "@calibre/core";
-import { FAST_RECALL_QUERIES, NAMESPACES, RECALL_LIMIT, WalrusMemoryStore, sealed } from "@calibre/memory";
+import { NAMESPACES, RECALL_QUERIES, WalrusMemoryStore, recallAll, sealed } from "@calibre/memory";
 import { grades as staticGrades, outcomes as staticOutcomes, dataGeneratedAt as staticGeneratedAt, verdicts as staticVerdicts, type SealedRecord } from "./data";
 
 export type RecordSource = "walrus" | "exported-file";
@@ -28,10 +28,10 @@ export interface LiveRecord {
 const REVALIDATE_MS = 10 * 60_000;
 /**
  * A recall that has not answered in this long is treated as a failure, so a page is never left hanging. One query per
- * namespace takes 8 to 13 seconds against the mainnet relayer, so 30 leaves room for a slow day without risking the
- * function's own limit.
+ * namespace takes 8 to 13 seconds against the mainnet relayer and they run together, so 45 leaves room for a slow day
+ * while staying inside the page's own 60-second limit.
  */
-const TIMEOUT_MS = 30_000;
+const TIMEOUT_MS = 45_000;
 
 const fallback = (note: string | null): LiveRecord => ({
   verdicts: staticVerdicts,
@@ -57,19 +57,15 @@ async function read(): Promise<LiveRecord> {
   if (!s) return fallback("Walrus keys are not set on this deployment");
 
   const deadline = new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`recall took longer than ${TIMEOUT_MS / 1000}s`)), TIMEOUT_MS));
-  // One query each, in parallel: the merged set the export uses takes about a minute, which no page can wait for.
+  // The same merged query set the export uses, so the site sees past the 100-per-query ceiling. They run together, which
+  // keeps the whole thing to about the time of the slowest single query rather than the sum of all of them.
   const [verdictMems, outcomeMems] = await Promise.race([
     Promise.all([
-      s.recall({ query: FAST_RECALL_QUERIES.verdicts, namespace: NAMESPACES.verdicts, limit: RECALL_LIMIT }),
-      s.recall({ query: FAST_RECALL_QUERIES.outcomes, namespace: NAMESPACES.outcomes, limit: RECALL_LIMIT }),
+      recallAll(s, NAMESPACES.verdicts, RECALL_QUERIES.verdicts),
+      recallAll(s, NAMESPACES.outcomes, RECALL_QUERIES.outcomes),
     ]),
     deadline,
   ]);
-
-  // At the ceiling one query can no longer see everything, and the exported file (built from the merged queries) is better.
-  if (verdictMems.length >= RECALL_LIMIT || outcomeMems.length >= RECALL_LIMIT) {
-    return fallback("the namespace has outgrown a single recall; the export merges several queries");
-  }
 
   const verdicts = sealed<VerdictData>(verdictMems, "verdict").sort((a, b) => b.data.sealedAt.localeCompare(a.data.sealedAt));
   const outcomes = sealed<OutcomeData>(outcomeMems, "outcome").sort((a, b) => b.data.gradedAt.localeCompare(a.data.gradedAt));

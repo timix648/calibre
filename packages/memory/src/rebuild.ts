@@ -39,11 +39,28 @@ export interface Sealed<T> {
   data: T;
 }
 
-/** Every memory several queries reach, merged by blob id so a memory two queries both find is counted once. */
-export async function recallAll(store: MemoryStore, namespace: string, queries: readonly string[]): Promise<StoredMemory[]> {
+/**
+ * Every memory several queries reach, merged by blob id so a memory two queries both find is counted once. Needed because
+ * `limit` is capped at 100 server-side (checked: 150 and 200 both return 100), so one query cannot see a namespace that has
+ * outgrown that.
+ *
+ * `concurrency` queries at a time. Not one at a time, because each takes 8 to 13 seconds against the mainnet relayer and a
+ * page cannot wait a minute; not all at once either, because eight concurrent recalls make the relayer answer
+ * `504 Recall timed out during seal_decrypt`. Two is what the relayer takes without complaint.
+ */
+export async function recallAll(
+  store: MemoryStore,
+  namespace: string,
+  queries: readonly string[],
+  opts: { concurrency?: number } = {},
+): Promise<StoredMemory[]> {
+  const concurrency = Math.max(1, opts.concurrency ?? 2);
   const byBlob = new Map<string, StoredMemory>();
-  for (const query of queries) {
-    for (const m of await store.recall({ query, namespace, limit: 100 })) byBlob.set(m.blobId, m);
+  for (let i = 0; i < queries.length; i += concurrency) {
+    const batch = await Promise.all(
+      queries.slice(i, i + concurrency).map((query) => store.recall({ query, namespace, limit: RECALL_LIMIT })),
+    );
+    for (const memories of batch) for (const m of memories) byBlob.set(m.blobId, m);
   }
   return [...byBlob.values()];
 }
