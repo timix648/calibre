@@ -21,8 +21,8 @@ on a live move is sealed on Walrus Memory before the result is known, and graded
 | **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
-| **62 verdicts** | sealed on Walrus Memory mainnet before the result was known; 48 graded, 381 memories in all |
-| **62 of 62 verdicts** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway |
+| **100+ verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 85+ graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
+| **Every sealed verdict** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway, 100+ so far |
 | **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
@@ -82,7 +82,7 @@ carries no persistent signal at all (rank correlation -0.04, p 0.57).
 Difference -3.1 pts, one-sided permutation p = 0.073, mostly in-play. That is why square money is shown as a caution and CALIBRE
 never tells anyone to trade against it.
 
-**3. The sealed forecasts so far are level with the market.** 48 verdicts are graded on mainnet. Under the current models (v2
+**3. The sealed forecasts so far are level with the market.** 85+ verdicts are graded on mainnet and the number keeps rising. Under the current models (v2
 and v3, 46 verdicts) CALIBRE's forecast and the market price score within 0.001 Brier of each other; the 2 graded verdicts of
 the first model are too few to count. The forecast is deliberately conservative (it moves the price at most 10 points): the
 product is the X-ray, not a price prediction, and the record is public so this can be checked.
@@ -101,7 +101,7 @@ Walrus Memory (`@mysten-incubation/memwal`, Sui mainnet) is the system of record
 
 The proof page and the radar are rebuilt from Walrus alone: `pnpm verify` lists each namespace, recalls and decodes every verdict
 and outcome, checks that each outcome has its verdict, and writes [`docs/PROOF.md`](docs/PROOF.md). Every row links to its blob
-on Walruscan. Current counts: 62 verdicts, 48 outcomes, 271 wallet records.
+on Walruscan. The counts move as the watcher runs: see https://calibre-blush.vercel.app/proof for the live figures, which the site reads from Walrus itself rather than from a file in this repository.
 
 ## How Tatum is used
 
