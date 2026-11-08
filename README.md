@@ -2,7 +2,7 @@
 
 Before you chase a price move or copy a whale, see whether the money behind it comes from traders who reliably lose.
 
-**Live:** https://calibre-blush.vercel.app · **Demo video (2:44):** https://youtu.be/-FlnLNTNff0
+**Live:** https://calibre-blush.vercel.app · **Demo video (2:44):** https://youtu.be/-FlnLNTNff0 · **Write-up:** https://dev.to/0xgenzero/who-is-really-behind-that-polymarket-move-3jga
 Built for **Total Recall: Tatum x Walrus Memory** (Track 01, Markets & Sports Prediction)
 
 On Polymarket a market jumps 8 points and everyone asks who knows something. Usually nobody does. CALIBRE looks at the wallets
