@@ -12,9 +12,14 @@ cd "$(dirname "$0")/.."
 chmod 600 .env
 mkdir -p .cache/logs
 
-TATUM_HOURLY="${TATUM_HOURLY:-18}"     # ~1,350 calls left on the guard / ~72 hours of watching (3 days)
-MIN_JUMP="${MIN_JUMP:-0.04}"
-LOOP_MIN="${LOOP_MIN:-10}"
+# These three are read from the environment first, then from .env, then from the defaults below. The script used to read
+# the environment only, which was a trap: TATUM_HOURLY in .env looked like it was configuring the watcher while line 26
+# quietly passed the default 18 on the command line, and the flag beats the file. Set it in either place now.
+_preset_hourly="${TATUM_HOURLY:-}"; _preset_jump="${MIN_JUMP:-}"; _preset_loop="${LOOP_MIN:-}"
+set -a; . ./.env; set +a
+TATUM_HOURLY="${_preset_hourly:-${TATUM_HOURLY:-18}}"
+MIN_JUMP="${_preset_jump:-${MIN_JUMP:-0.04}}"
+LOOP_MIN="${_preset_loop:-${LOOP_MIN:-10}}"
 
 trim() { # keep logs under ~20 MB
   local f="$1"; [ -f "$f" ] && [ "$(stat -c %s "$f")" -gt 20000000 ] && tail -c 5000000 "$f" > "$f.tmp" && mv "$f.tmp" "$f"; true
