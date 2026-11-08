@@ -1,53 +1,1878 @@
 {
-  "generatedAt": "2026-11-06T12:47:28.095Z",
+  "generatedAt": "2026-11-08T11:51:29.973Z",
   "outcomes": [
     {
-      "id": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448-1793817000",
-      "key": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448:1793817000",
+      "id": "0x9948cd75ccf2da92bd52f95c73e0bb6bd554c3104e2aa2dc6e598d510fc957d2-1794127200",
+      "key": "0x9948cd75ccf2da92bd52f95c73e0bb6bd554c3104e2aa2dc6e598d510fc957d2:1794127200",
       "version": 1,
-      "blobId": "LLxlgPP0CVSnmn9ey0JXkJgYTiR9g8wIA7NHxpFL-c8",
-      "walruscan": "https://walruscan.com/mainnet/blob/LLxlgPP0CVSnmn9ey0JXkJgYTiR9g8wIA7NHxpFL-c8",
-      "summary": "\"Will Liverpool FC win on 2026-11-04?\" resolved NO. The mixed verdict forecast 54% (Brier 0.287) and lost to the market price 54% (Brier 0.286)",
+      "blobId": "G1ilChXT-d-r3ysTO-3Q_ga6s2Mxayw-rsjKQFLu_yc",
+      "walruscan": "https://walruscan.com/mainnet/blob/G1ilChXT-d-r3ysTO-3Q_ga6s2Mxayw-rsjKQFLu_yc",
+      "summary": "\"Counter-Strike: TheMongolz vs MOUZ - Map 2 Winner\" resolved MOUZ. The mixed verdict forecast 16% (Brier 0.026) and lost to the market price 16% (Brier 0.024)",
       "data": {
-        "verdictKey": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448:1793817000",
-        "marketId": "0x00bf60ca050d9b85b354bcdbb72c1de9a6856ac1ab42b5a10a93efd5c2030448",
-        "question": "Will Liverpool FC win on 2026-11-04?",
+        "verdictKey": "0x9948cd75ccf2da92bd52f95c73e0bb6bd554c3104e2aa2dc6e598d510fc957d2:1794127200",
+        "marketId": "0x9948cd75ccf2da92bd52f95c73e0bb6bd554c3104e2aa2dc6e598d510fc957d2",
+        "question": "Counter-Strike: TheMongolz vs MOUZ - Map 2 Winner",
         "label": "mixed",
-        "resolution": "NO",
+        "resolution": "MOUZ",
         "yesWon": 0,
-        "forecast": 0.5358376087731507,
-        "priceAtVerdict": 0.535,
+        "forecast": 0.16025152626308733,
+        "priceAtVerdict": 0.155,
         "grade": {
-          "forecastBrier": 0.2871219429757281,
-          "marketBrier": 0.286225,
-          "gain": -0.0008969429757280656
+          "forecastBrier": 0.02568055166964897,
+          "marketBrier": 0.024025,
+          "gain": -0.0016555516696489699
         },
-        "gradedAt": "2026-11-04T20:19:31.924Z",
+        "gradedAt": "2026-11-08T09:54:40.334Z",
         "model": "v3"
       }
     },
     {
-      "id": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0-1793816400",
-      "key": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0:1793816400",
+      "id": "0xbdb8c3278301383a8462cc06dbbefe34c6cfbbccd246382581d33d4dbf0d05ee-1794123300",
+      "key": "0xbdb8c3278301383a8462cc06dbbefe34c6cfbbccd246382581d33d4dbf0d05ee:1794123300",
       "version": 1,
-      "blobId": "WzPyiqJ0baMTUTHzbEbTLPFrobZJ39CpZPtARI3BSuo",
-      "walruscan": "https://walruscan.com/mainnet/blob/WzPyiqJ0baMTUTHzbEbTLPFrobZJ39CpZPtARI3BSuo",
-      "summary": "\"Will Fenerbahçe SK vs. Liverpool FC end in a draw?\" resolved NO. The noise verdict forecast 27% (Brier 0.076) and beat the market price 28% (Brier 0.076)",
+      "blobId": "VbxeRIx39QKaGkuj5bZOKGn8w7MJYw7WTy8B9WF-7mc",
+      "walruscan": "https://walruscan.com/mainnet/blob/VbxeRIx39QKaGkuj5bZOKGn8w7MJYw7WTy8B9WF-7mc",
+      "summary": "\"Counter-Strike: TheMongolz vs MOUZ - Map 1 Winner\" resolved MOUZ. The mixed verdict forecast 25% (Brier 0.064) and lost to the market price 25% (Brier 0.060)",
       "data": {
-        "verdictKey": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0:1793816400",
-        "marketId": "0x001a2e52d94f5cf26c6401504e5d3f6764b21bbb80dbbbd66b301eeaac09b6e0",
-        "question": "Will Fenerbahçe SK vs. Liverpool FC end in a draw?",
+        "verdictKey": "0xbdb8c3278301383a8462cc06dbbefe34c6cfbbccd246382581d33d4dbf0d05ee:1794123300",
+        "marketId": "0xbdb8c3278301383a8462cc06dbbefe34c6cfbbccd246382581d33d4dbf0d05ee",
+        "question": "Counter-Strike: TheMongolz vs MOUZ - Map 1 Winner",
+        "label": "mixed",
+        "resolution": "MOUZ",
+        "yesWon": 0,
+        "forecast": 0.25286898317496825,
+        "priceAtVerdict": 0.245,
+        "grade": {
+          "forecastBrier": 0.06394272265194238,
+          "marketBrier": 0.060024999999999995,
+          "gain": -0.0039177226519423874
+        },
+        "gradedAt": "2026-11-08T08:53:43.534Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x6f7c7339576ea474b2c80a1550bde5bf25d7ebe2e5f41981369fa5baad73da08-1794114300",
+      "key": "0x6f7c7339576ea474b2c80a1550bde5bf25d7ebe2e5f41981369fa5baad73da08:1794114300",
+      "version": 1,
+      "blobId": "QcTWTNKpChi0gMQGIIbDSUc8qpcovyuKJRezu1OSmck",
+      "walruscan": "https://walruscan.com/mainnet/blob/QcTWTNKpChi0gMQGIIbDSUc8qpcovyuKJRezu1OSmck",
+      "summary": "\"Wyoming vs. UNLV\" resolved WYOMING. The contested verdict forecast 67% (Brier 0.109) and beat the market price 66% (Brier 0.119)",
+      "data": {
+        "verdictKey": "0x6f7c7339576ea474b2c80a1550bde5bf25d7ebe2e5f41981369fa5baad73da08:1794114300",
+        "marketId": "0x6f7c7339576ea474b2c80a1550bde5bf25d7ebe2e5f41981369fa5baad73da08",
+        "question": "Wyoming vs. UNLV",
+        "label": "contested",
+        "resolution": "WYOMING",
+        "yesWon": 1,
+        "forecast": 0.6702428908615254,
+        "priceAtVerdict": 0.655,
+        "grade": {
+          "forecastBrier": 0.10873975102736382,
+          "marketBrier": 0.11902499999999998,
+          "gain": 0.010285248972636163
+        },
+        "gradedAt": "2026-11-08T07:52:40.170Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x5f7aee57a511cd2a9311d7306555a62d82128d48295046ca89ef071b761e3acd-1794114300",
+      "key": "0x5f7aee57a511cd2a9311d7306555a62d82128d48295046ca89ef071b761e3acd:1794114300",
+      "version": 1,
+      "blobId": "pjkEVvU8YypT8Wi_TXOWjiUM93nX9iPVYzjCGpXLAeA",
+      "walruscan": "https://walruscan.com/mainnet/blob/pjkEVvU8YypT8Wi_TXOWjiUM93nX9iPVYzjCGpXLAeA",
+      "summary": "\"Counter-Strike: Natus Vincere vs BetBoom Team - Map 2 Winner\" resolved NATUS VINCERE. The sharp-led verdict forecast 67% (Brier 0.111) and lost to the market price 69% (Brier 0.099)",
+      "data": {
+        "verdictKey": "0x5f7aee57a511cd2a9311d7306555a62d82128d48295046ca89ef071b761e3acd:1794114300",
+        "marketId": "0x5f7aee57a511cd2a9311d7306555a62d82128d48295046ca89ef071b761e3acd",
+        "question": "Counter-Strike: Natus Vincere vs BetBoom Team - Map 2 Winner",
+        "label": "sharp-led",
+        "resolution": "NATUS VINCERE",
+        "yesWon": 1,
+        "forecast": 0.6664797095604978,
+        "priceAtVerdict": 0.685,
+        "grade": {
+          "forecastBrier": 0.11123578413484987,
+          "marketBrier": 0.09922499999999997,
+          "gain": -0.012010784134849906
+        },
+        "gradedAt": "2026-11-08T06:51:25.245Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x124ead443303ebc5a044c54f6b75d20a56916597e57714764a9ffd496f297a34-1794108300",
+      "key": "0x124ead443303ebc5a044c54f6b75d20a56916597e57714764a9ffd496f297a34:1794108300",
+      "version": 1,
+      "blobId": "nC8gKNUuYVmOk7mwjmiujQDZsyQnEWph6Vzf7W85nU8",
+      "walruscan": "https://walruscan.com/mainnet/blob/nC8gKNUuYVmOk7mwjmiujQDZsyQnEWph6Vzf7W85nU8",
+      "summary": "\"Spread: Iowa (-20.5)\" resolved NORTHWESTERN. The contested verdict forecast 57% (Brier 0.328) and beat the market price 61% (Brier 0.366)",
+      "data": {
+        "verdictKey": "0x124ead443303ebc5a044c54f6b75d20a56916597e57714764a9ffd496f297a34:1794108300",
+        "marketId": "0x124ead443303ebc5a044c54f6b75d20a56916597e57714764a9ffd496f297a34",
+        "question": "Spread: Iowa (-20.5)",
+        "label": "contested",
+        "resolution": "NORTHWESTERN",
+        "yesWon": 0,
+        "forecast": 0.5723730283700069,
+        "priceAtVerdict": 0.605,
+        "grade": {
+          "forecastBrier": 0.32761088360545276,
+          "marketBrier": 0.366025,
+          "gain": 0.038414116394547226
+        },
+        "gradedAt": "2026-11-08T04:49:11.252Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xb8c1d8b624de2e5a4f90c5be070d5330854a1ce7e745176498146b78d2a02d4f-1794107700",
+      "key": "0xb8c1d8b624de2e5a4f90c5be070d5330854a1ce7e745176498146b78d2a02d4f:1794107700",
+      "version": 1,
+      "blobId": "Ql9E8cQNy1mDIpVEx1jM6SCDu-floiJt7bquVIxzmew",
+      "walruscan": "https://walruscan.com/mainnet/blob/Ql9E8cQNy1mDIpVEx1jM6SCDu-floiJt7bquVIxzmew",
+      "summary": "\"Spread: Warriors (-6.5)\" resolved WARRIORS. The contested verdict forecast 33% (Brier 0.443) and beat the market price 33% (Brier 0.456)",
+      "data": {
+        "verdictKey": "0xb8c1d8b624de2e5a4f90c5be070d5330854a1ce7e745176498146b78d2a02d4f:1794107700",
+        "marketId": "0xb8c1d8b624de2e5a4f90c5be070d5330854a1ce7e745176498146b78d2a02d4f",
+        "question": "Spread: Warriors (-6.5)",
+        "label": "contested",
+        "resolution": "WARRIORS",
+        "yesWon": 1,
+        "forecast": 0.33429684033310214,
+        "priceAtVerdict": 0.325,
+        "grade": {
+          "forecastBrier": 0.4431606967904913,
+          "marketBrier": 0.45562500000000006,
+          "gain": 0.012464303209508754
+        },
+        "gradedAt": "2026-11-08T04:49:10.877Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e-1794107700",
+      "key": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e:1794107700",
+      "version": 1,
+      "blobId": "7PpD2-LGSfSwtYOCurHF-S4cQpyWW3PVqDAlNHvx_6Y",
+      "walruscan": "https://walruscan.com/mainnet/blob/7PpD2-LGSfSwtYOCurHF-S4cQpyWW3PVqDAlNHvx_6Y",
+      "summary": "\"Miami (FL) vs. Notre Dame\" resolved NOTRE DAME. The noise verdict forecast 23% (Brier 0.051) and lost to the market price 22% (Brier 0.050)",
+      "data": {
+        "verdictKey": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e:1794107700",
+        "marketId": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e",
+        "question": "Miami (FL) vs. Notre Dame",
+        "label": "noise",
+        "resolution": "NOTRE DAME",
+        "yesWon": 0,
+        "forecast": 0.22529280802627777,
+        "priceAtVerdict": 0.224,
+        "grade": {
+          "forecastBrier": 0.050756849348365246,
+          "marketBrier": 0.050176000000000005,
+          "gain": -0.0005808493483652408
+        },
+        "gradedAt": "2026-11-08T04:49:10.525Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xc16c77055edb93df8dfb44e705b0d66a8eee5e03ee7738000069c21349874971-1794106800",
+      "key": "0xc16c77055edb93df8dfb44e705b0d66a8eee5e03ee7738000069c21349874971:1794106800",
+      "version": 1,
+      "blobId": "ZmWtaORRebrt1pY4yx9fuLThFttXDT8Wp2JVHrlrzzk",
+      "walruscan": "https://walruscan.com/mainnet/blob/ZmWtaORRebrt1pY4yx9fuLThFttXDT8Wp2JVHrlrzzk",
+      "summary": "\"Spread: Rockets (-6.5)\" resolved SUNS. The noise verdict forecast 44% (Brier 0.189) and lost to the market price 44% (Brier 0.189)",
+      "data": {
+        "verdictKey": "0xc16c77055edb93df8dfb44e705b0d66a8eee5e03ee7738000069c21349874971:1794106800",
+        "marketId": "0xc16c77055edb93df8dfb44e705b0d66a8eee5e03ee7738000069c21349874971",
+        "question": "Spread: Rockets (-6.5)",
+        "label": "noise",
+        "resolution": "SUNS",
+        "yesWon": 0,
+        "forecast": 0.43500000000000005,
+        "priceAtVerdict": 0.435,
+        "grade": {
+          "forecastBrier": 0.18922500000000006,
+          "marketBrier": 0.189225,
+          "gain": -5.551115123125783e-17
+        },
+        "gradedAt": "2026-11-08T04:49:10.524Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x41d36fad9fb624b579c38715a3b66c0021629eaa5b7052d173da36fb07d2a333-1794106800",
+      "key": "0x41d36fad9fb624b579c38715a3b66c0021629eaa5b7052d173da36fb07d2a333:1794106800",
+      "version": 1,
+      "blobId": "QesAUJsCtQwNb-kV6Mu7cjT9IbzPNyCMOED8hp9bAUg",
+      "walruscan": "https://walruscan.com/mainnet/blob/QesAUJsCtQwNb-kV6Mu7cjT9IbzPNyCMOED8hp9bAUg",
+      "summary": "\"Rockets vs. Suns\" resolved SUNS. The contested verdict forecast 67% (Brier 0.443) and beat the market price 69% (Brier 0.469)",
+      "data": {
+        "verdictKey": "0x41d36fad9fb624b579c38715a3b66c0021629eaa5b7052d173da36fb07d2a333:1794106800",
+        "marketId": "0x41d36fad9fb624b579c38715a3b66c0021629eaa5b7052d173da36fb07d2a333",
+        "question": "Rockets vs. Suns",
+        "label": "contested",
+        "resolution": "SUNS",
+        "yesWon": 0,
+        "forecast": 0.665761764019572,
+        "priceAtVerdict": 0.685,
+        "grade": {
+          "forecastBrier": 0.44323872643045226,
+          "marketBrier": 0.46922500000000006,
+          "gain": 0.025986273569547802
+        },
+        "gradedAt": "2026-11-08T04:49:10.221Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x3937bae65b8a97293442b3b253a699103dc403b3d3790f5e354d1c378a1514e6-1794106800",
+      "key": "0x3937bae65b8a97293442b3b253a699103dc403b3d3790f5e354d1c378a1514e6:1794106800",
+      "version": 1,
+      "blobId": "56qUcC0T0hwI5K8p_RS86kl4wQIKlq97SSSKcXIan4E",
+      "walruscan": "https://walruscan.com/mainnet/blob/56qUcC0T0hwI5K8p_RS86kl4wQIKlq97SSSKcXIan4E",
+      "summary": "\"Magic vs. Warriors\" resolved WARRIORS. The contested verdict forecast 8% (Brier 0.006) and beat the market price 12% (Brier 0.013)",
+      "data": {
+        "verdictKey": "0x3937bae65b8a97293442b3b253a699103dc403b3d3790f5e354d1c378a1514e6:1794106800",
+        "marketId": "0x3937bae65b8a97293442b3b253a699103dc403b3d3790f5e354d1c378a1514e6",
+        "question": "Magic vs. Warriors",
+        "label": "contested",
+        "resolution": "WARRIORS",
+        "yesWon": 0,
+        "forecast": 0.07697236895475729,
+        "priceAtVerdict": 0.115,
+        "grade": {
+          "forecastBrier": 0.005924745582507283,
+          "marketBrier": 0.013225,
+          "gain": 0.007300254417492717
+        },
+        "gradedAt": "2026-11-08T04:49:09.866Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e-1794100200",
+      "key": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e:1794100200",
+      "version": 1,
+      "blobId": "3KkH2nRSU6fp-EhJt1TrcuosGmiEBm2ZQwvC0t3DaZ8",
+      "walruscan": "https://walruscan.com/mainnet/blob/3KkH2nRSU6fp-EhJt1TrcuosGmiEBm2ZQwvC0t3DaZ8",
+      "summary": "\"Miami (FL) vs. Notre Dame\" resolved NOTRE DAME. The sharp-led verdict forecast 20% (Brier 0.040) and lost to the market price 18% (Brier 0.031)",
+      "data": {
+        "verdictKey": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e:1794100200",
+        "marketId": "0x06fc010836a50d778fad4088e20766a0776bcf61cbdf2e9c77d656535f421f9e",
+        "question": "Miami (FL) vs. Notre Dame",
+        "label": "sharp-led",
+        "resolution": "NOTRE DAME",
+        "yesWon": 0,
+        "forecast": 0.20021331644739457,
+        "priceAtVerdict": 0.175,
+        "grade": {
+          "forecastBrier": 0.04008537208286456,
+          "marketBrier": 0.030624999999999996,
+          "gain": -0.00946037208286456
+        },
+        "gradedAt": "2026-11-08T04:49:09.591Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x1e21f43d92f35874e1a291120039ee3ed1e41d8e0413f9abbe3a6b3af1e3d3b2-1794099300",
+      "key": "0x1e21f43d92f35874e1a291120039ee3ed1e41d8e0413f9abbe3a6b3af1e3d3b2:1794099300",
+      "version": 1,
+      "blobId": "VTCdEOX3XT24EuIw_7lU4zujAIMpfHG4b3MQkDu9dIc",
+      "walruscan": "https://walruscan.com/mainnet/blob/VTCdEOX3XT24EuIw_7lU4zujAIMpfHG4b3MQkDu9dIc",
+      "summary": "\"Iowa vs. Northwestern\" resolved IOWA. The sharp-led verdict forecast 71% (Brier 0.084) and lost to the market price 77% (Brier 0.055)",
+      "data": {
+        "verdictKey": "0x1e21f43d92f35874e1a291120039ee3ed1e41d8e0413f9abbe3a6b3af1e3d3b2:1794099300",
+        "marketId": "0x1e21f43d92f35874e1a291120039ee3ed1e41d8e0413f9abbe3a6b3af1e3d3b2",
+        "question": "Iowa vs. Northwestern",
+        "label": "sharp-led",
+        "resolution": "IOWA",
+        "yesWon": 1,
+        "forecast": 0.7094331460686324,
+        "priceAtVerdict": 0.765,
+        "grade": {
+          "forecastBrier": 0.08442909660357271,
+          "marketBrier": 0.055224999999999996,
+          "gain": -0.02920409660357272
+        },
+        "gradedAt": "2026-11-08T04:49:09.268Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x36019140140aa0eef916d4260d4c37d3b92b32e6f226bed0af8690f40c595f1d-1794106800",
+      "key": "0x36019140140aa0eef916d4260d4c37d3b92b32e6f226bed0af8690f40c595f1d:1794106800",
+      "version": 1,
+      "blobId": "j8bi_RiFPbDJ3BCS2MYOZcutVL8TpoY7V2UU18-h2hk",
+      "walruscan": "https://walruscan.com/mainnet/blob/j8bi_RiFPbDJ3BCS2MYOZcutVL8TpoY7V2UU18-h2hk",
+      "summary": "\"Spread: Knicks (-3.5)\" resolved KNICKS. The noise verdict forecast 94% (Brier 0.004) and lost to the market price 94% (Brier 0.004)",
+      "data": {
+        "verdictKey": "0x36019140140aa0eef916d4260d4c37d3b92b32e6f226bed0af8690f40c595f1d:1794106800",
+        "marketId": "0x36019140140aa0eef916d4260d4c37d3b92b32e6f226bed0af8690f40c595f1d",
+        "question": "Spread: Knicks (-3.5)",
+        "label": "noise",
+        "resolution": "KNICKS",
+        "yesWon": 1,
+        "forecast": 0.9394491039282045,
+        "priceAtVerdict": 0.94,
+        "grade": {
+          "forecastBrier": 0.003666411015097384,
+          "marketBrier": 0.0036000000000000064,
+          "gain": -0.0000664110150973775
+        },
+        "gradedAt": "2026-11-08T03:47:21.390Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7-1794106800",
+      "key": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7:1794106800",
+      "version": 1,
+      "blobId": "Olq0ou5KZeiYwVtivklHZZep4mu_Nj4CLSCO91-S-E8",
+      "walruscan": "https://walruscan.com/mainnet/blob/Olq0ou5KZeiYwVtivklHZZep4mu_Nj4CLSCO91-S-E8",
+      "summary": "\"Spread: Hawks (-6.5)\" resolved NETS. The noise verdict forecast 11% (Brier 0.012) and lost to the market price 11% (Brier 0.012)",
+      "data": {
+        "verdictKey": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7:1794106800",
+        "marketId": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7",
+        "question": "Spread: Hawks (-6.5)",
+        "label": "noise",
+        "resolution": "NETS",
+        "yesWon": 0,
+        "forecast": 0.11030156720503882,
+        "priceAtVerdict": 0.11,
+        "grade": {
+          "forecastBrier": 0.012166435727887696,
+          "marketBrier": 0.0121,
+          "gain": -0.0000664357278876964
+        },
+        "gradedAt": "2026-11-08T03:47:21.122Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x15dbfce79727c9dc8f1ef3974a6cd8f3a6944f81ee8517fb4d648370cbb64c46-1794102000",
+      "key": "0x15dbfce79727c9dc8f1ef3974a6cd8f3a6944f81ee8517fb4d648370cbb64c46:1794102000",
+      "version": 1,
+      "blobId": "FG44P6xy7JguRmjY8yedw5nBnDLanKMenn64ZqMptac",
+      "walruscan": "https://walruscan.com/mainnet/blob/FG44P6xy7JguRmjY8yedw5nBnDLanKMenn64ZqMptac",
+      "summary": "\"Spread: Thunder (-11.5)\" resolved THUNDER. The noise verdict forecast 69% (Brier 0.096) and tied the market price 69% (Brier 0.096)",
+      "data": {
+        "verdictKey": "0x15dbfce79727c9dc8f1ef3974a6cd8f3a6944f81ee8517fb4d648370cbb64c46:1794102000",
+        "marketId": "0x15dbfce79727c9dc8f1ef3974a6cd8f3a6944f81ee8517fb4d648370cbb64c46",
+        "question": "Spread: Thunder (-11.5)",
+        "label": "noise",
+        "resolution": "THUNDER",
+        "yesWon": 1,
+        "forecast": 0.69,
+        "priceAtVerdict": 0.69,
+        "grade": {
+          "forecastBrier": 0.09610000000000003,
+          "marketBrier": 0.09610000000000003,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-08T03:47:21.119Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xacd69be5b7845305f71c41aab1656da2c13f265558ac9de7c526b62bb02dd503-1794101400",
+      "key": "0xacd69be5b7845305f71c41aab1656da2c13f265558ac9de7c526b62bb02dd503:1794101400",
+      "version": 1,
+      "blobId": "H1pqQX7A9CqEzUdOCTY9v21ADPi3k2ZoDxB9XSE3sgc",
+      "walruscan": "https://walruscan.com/mainnet/blob/H1pqQX7A9CqEzUdOCTY9v21ADPi3k2ZoDxB9XSE3sgc",
+      "summary": "\"Wizards vs. Thunder\" resolved THUNDER. The mixed verdict forecast 12% (Brier 0.015) and beat the market price 13% (Brier 0.016)",
+      "data": {
+        "verdictKey": "0xacd69be5b7845305f71c41aab1656da2c13f265558ac9de7c526b62bb02dd503:1794101400",
+        "marketId": "0xacd69be5b7845305f71c41aab1656da2c13f265558ac9de7c526b62bb02dd503",
+        "question": "Wizards vs. Thunder",
+        "label": "mixed",
+        "resolution": "THUNDER",
+        "yesWon": 0,
+        "forecast": 0.12435772502790765,
+        "priceAtVerdict": 0.125,
+        "grade": {
+          "forecastBrier": 0.015464843774116688,
+          "marketBrier": 0.015625,
+          "gain": 0.0001601562258833119
+        },
+        "gradedAt": "2026-11-08T03:47:20.935Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7-1794099300",
+      "key": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7:1794099300",
+      "version": 1,
+      "blobId": "y7cVsX3-nv__JQqrOOSYjqoYFR7NVmnlAVCwYtNFwHo",
+      "walruscan": "https://walruscan.com/mainnet/blob/y7cVsX3-nv__JQqrOOSYjqoYFR7NVmnlAVCwYtNFwHo",
+      "summary": "\"Spread: Hawks (-6.5)\" resolved NETS. The contested verdict forecast 31% (Brier 0.096) and lost to the market price 22% (Brier 0.046)",
+      "data": {
+        "verdictKey": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7:1794099300",
+        "marketId": "0x619c0b9ea7fa6523fd1aa67bd43a4495205e3fd01a1fd87d8315edecd96caca7",
+        "question": "Spread: Hawks (-6.5)",
+        "label": "contested",
+        "resolution": "NETS",
+        "yesWon": 0,
+        "forecast": 0.3093362293523935,
+        "priceAtVerdict": 0.215,
+        "grade": {
+          "forecastBrier": 0.0956889027899566,
+          "marketBrier": 0.046224999999999995,
+          "gain": -0.04946390278995661
+        },
+        "gradedAt": "2026-11-08T03:47:19.865Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xc3a51e1d780d4860b1a49e5309c1dc7c71401c3c1eaf65f1cb491ce584cd26ce-1794099300",
+      "key": "0xc3a51e1d780d4860b1a49e5309c1dc7c71401c3c1eaf65f1cb491ce584cd26ce:1794099300",
+      "version": 1,
+      "blobId": "cqUj1-GcLsTcc-HNFqEjHPxrZLsN9pcH16rC3Qxt3YM",
+      "walruscan": "https://walruscan.com/mainnet/blob/cqUj1-GcLsTcc-HNFqEjHPxrZLsN9pcH16rC3Qxt3YM",
+      "summary": "\"Nets vs. Hawks\" resolved HAWKS. The contested verdict forecast 57% (Brier 0.322) and beat the market price 57% (Brier 0.331)",
+      "data": {
+        "verdictKey": "0xc3a51e1d780d4860b1a49e5309c1dc7c71401c3c1eaf65f1cb491ce584cd26ce:1794099300",
+        "marketId": "0xc3a51e1d780d4860b1a49e5309c1dc7c71401c3c1eaf65f1cb491ce584cd26ce",
+        "question": "Nets vs. Hawks",
+        "label": "contested",
+        "resolution": "HAWKS",
+        "yesWon": 0,
+        "forecast": 0.567138456583461,
+        "priceAtVerdict": 0.575,
+        "grade": {
+          "forecastBrier": 0.32164602893587024,
+          "marketBrier": 0.33062499999999995,
+          "gain": 0.008978971064129704
+        },
+        "gradedAt": "2026-11-08T03:47:19.590Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xf2d13566a9df68e02659caa41a52ca54e17abd59bd8bfa66386d334d06f8427e-1794099300",
+      "key": "0xf2d13566a9df68e02659caa41a52ca54e17abd59bd8bfa66386d334d06f8427e:1794099300",
+      "version": 1,
+      "blobId": "-KwTGoIIT4DvCRyanZn_do8tQ_jlJ8Ms9vyNlEM8qoo",
+      "walruscan": "https://walruscan.com/mainnet/blob/-KwTGoIIT4DvCRyanZn_do8tQ_jlJ8Ms9vyNlEM8qoo",
+      "summary": "\"Kentucky vs. Tennessee\" resolved TENNESSEE. The contested verdict forecast 30% (Brier 0.087) and lost to the market price 30% (Brier 0.087)",
+      "data": {
+        "verdictKey": "0xf2d13566a9df68e02659caa41a52ca54e17abd59bd8bfa66386d334d06f8427e:1794099300",
+        "marketId": "0xf2d13566a9df68e02659caa41a52ca54e17abd59bd8bfa66386d334d06f8427e",
+        "question": "Kentucky vs. Tennessee",
+        "label": "contested",
+        "resolution": "TENNESSEE",
+        "yesWon": 0,
+        "forecast": 0.29569817009399746,
+        "priceAtVerdict": 0.295,
+        "grade": {
+          "forecastBrier": 0.08743740779693865,
+          "marketBrier": 0.08702499999999999,
+          "gain": -0.0004124077969386575
+        },
+        "gradedAt": "2026-11-08T03:47:19.589Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x9df3a4ac14aa91d88f83d6e740242a4f454432de8530b0854d41aa7b69d71d4c-1794092700",
+      "key": "0x9df3a4ac14aa91d88f83d6e740242a4f454432de8530b0854d41aa7b69d71d4c:1794092700",
+      "version": 1,
+      "blobId": "_DpFS04RovuWEtOkWvvmlexi21wWPLZoGNnUBqZaoPE",
+      "walruscan": "https://walruscan.com/mainnet/blob/_DpFS04RovuWEtOkWvvmlexi21wWPLZoGNnUBqZaoPE",
+      "summary": "\"LoL: Invictus Gaming vs Gen.G - Game 2 Winner\" resolved Gen.G. The sharp-led verdict forecast 25% (Brier 0.064) and beat the market price 26% (Brier 0.065)",
+      "data": {
+        "verdictKey": "0x9df3a4ac14aa91d88f83d6e740242a4f454432de8530b0854d41aa7b69d71d4c:1794092700",
+        "marketId": "0x9df3a4ac14aa91d88f83d6e740242a4f454432de8530b0854d41aa7b69d71d4c",
+        "question": "LoL: Invictus Gaming vs Gen.G - Game 2 Winner",
+        "label": "sharp-led",
+        "resolution": "Gen.G",
+        "yesWon": 0,
+        "forecast": 0.25340471370901857,
+        "priceAtVerdict": 0.255,
+        "grade": {
+          "forecastBrier": 0.06421394892994967,
+          "marketBrier": 0.065025,
+          "gain": 0.0008110510700503337
+        },
+        "gradedAt": "2026-11-08T01:45:37.968Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xde921c6efe8bbee6e289dc273a38e4610b04066e29d3d6ced1d2930bdc76f545-1794092100",
+      "key": "0xde921c6efe8bbee6e289dc273a38e4610b04066e29d3d6ced1d2930bdc76f545:1794092100",
+      "version": 1,
+      "blobId": "l-G7dqX3tZszWSJFa_wX64m0Nux4_tpDsvidrXshzss",
+      "walruscan": "https://walruscan.com/mainnet/blob/l-G7dqX3tZszWSJFa_wX64m0Nux4_tpDsvidrXshzss",
+      "summary": "\"Spread: Nuggets (-6.5)\" resolved NUGGETS. The contested verdict forecast 86% (Brier 0.018) and lost to the market price 87% (Brier 0.018)",
+      "data": {
+        "verdictKey": "0xde921c6efe8bbee6e289dc273a38e4610b04066e29d3d6ced1d2930bdc76f545:1794092100",
+        "marketId": "0xde921c6efe8bbee6e289dc273a38e4610b04066e29d3d6ced1d2930bdc76f545",
+        "question": "Spread: Nuggets (-6.5)",
+        "label": "contested",
+        "resolution": "NUGGETS",
+        "yesWon": 1,
+        "forecast": 0.8645094013889632,
+        "priceAtVerdict": 0.865,
+        "grade": {
+          "forecastBrier": 0.0183577023119771,
+          "marketBrier": 0.018225,
+          "gain": -0.00013270231197709884
+        },
+        "gradedAt": "2026-11-08T01:45:37.747Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x5e040f34cd9226fca0b8f77dbb40a10d0bb080d14677f20952db80d26f052d57-1794092100",
+      "key": "0x5e040f34cd9226fca0b8f77dbb40a10d0bb080d14677f20952db80d26f052d57:1794092100",
+      "version": 1,
+      "blobId": "BtgA-CL84V45qev911NZh4Er7u-xi-zXmNVmy-sE9q4",
+      "walruscan": "https://walruscan.com/mainnet/blob/BtgA-CL84V45qev911NZh4Er7u-xi-zXmNVmy-sE9q4",
+      "summary": "\"Nuggets vs. Pacers\" resolved NUGGETS. The contested verdict forecast 92% (Brier 0.007) and lost to the market price 93% (Brier 0.006)",
+      "data": {
+        "verdictKey": "0x5e040f34cd9226fca0b8f77dbb40a10d0bb080d14677f20952db80d26f052d57:1794092100",
+        "marketId": "0x5e040f34cd9226fca0b8f77dbb40a10d0bb080d14677f20952db80d26f052d57",
+        "question": "Nuggets vs. Pacers",
+        "label": "contested",
+        "resolution": "NUGGETS",
+        "yesWon": 1,
+        "forecast": 0.9172628365356483,
+        "priceAtVerdict": 0.925,
+        "grade": {
+          "forecastBrier": 0.006845438218126849,
+          "marketBrier": 0.005624999999999994,
+          "gain": -0.001220438218126855
+        },
+        "gradedAt": "2026-11-08T01:45:37.745Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xdde72120f1cb96485001d6cfe2a6e3b05e17fc0aef5c86ce752c27404a216430-1794090300",
+      "key": "0xdde72120f1cb96485001d6cfe2a6e3b05e17fc0aef5c86ce752c27404a216430:1794090300",
+      "version": 1,
+      "blobId": "5xNRrqo-YWsbboHi7imCqg1qyEaaFBGZGMSDdUmgXB4",
+      "walruscan": "https://walruscan.com/mainnet/blob/5xNRrqo-YWsbboHi7imCqg1qyEaaFBGZGMSDdUmgXB4",
+      "summary": "\"LoL: Invictus Gaming vs Gen.G - Game 1 Winner\" resolved GEN.G. The mixed verdict forecast 4% (Brier 0.002) and lost to the market price 4% (Brier 0.001)",
+      "data": {
+        "verdictKey": "0xdde72120f1cb96485001d6cfe2a6e3b05e17fc0aef5c86ce752c27404a216430:1794090300",
+        "marketId": "0xdde72120f1cb96485001d6cfe2a6e3b05e17fc0aef5c86ce752c27404a216430",
+        "question": "LoL: Invictus Gaming vs Gen.G - Game 1 Winner",
+        "label": "mixed",
+        "resolution": "GEN.G",
+        "yesWon": 0,
+        "forecast": 0.04283188320342989,
+        "priceAtVerdict": 0.035,
+        "grade": {
+          "forecastBrier": 0.0018345702187522598,
+          "marketBrier": 0.0012250000000000002,
+          "gain": -0.0006095702187522596
+        },
+        "gradedAt": "2026-11-08T01:45:37.742Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc-1794093300",
+      "key": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc:1794093300",
+      "version": 1,
+      "blobId": "gfcg9KexRnyhvmnQ4fcA33r8_y8PSingeUt8APgYfQw",
+      "walruscan": "https://walruscan.com/mainnet/blob/gfcg9KexRnyhvmnQ4fcA33r8_y8PSingeUt8APgYfQw",
+      "summary": "\"Alabama vs. LSU\" resolved ALABAMA. The sharp-led verdict forecast 52% (Brier 0.227) and lost to the market price 53% (Brier 0.226)",
+      "data": {
+        "verdictKey": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc:1794093300",
+        "marketId": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc",
+        "question": "Alabama vs. LSU",
+        "label": "sharp-led",
+        "resolution": "ALABAMA",
+        "yesWon": 1,
+        "forecast": 0.5233194299052729,
+        "priceAtVerdict": 0.525,
+        "grade": {
+          "forecastBrier": 0.22722436590583403,
+          "marketBrier": 0.225625,
+          "gain": -0.0015993659058340381
+        },
+        "gradedAt": "2026-11-08T00:43:59.649Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x7eab496372bd9eac267fe25f1c44b1bd58500360323f8a30c65efdab6c197667-1794092100",
+      "key": "0x7eab496372bd9eac267fe25f1c44b1bd58500360323f8a30c65efdab6c197667:1794092100",
+      "version": 1,
+      "blobId": "zmqPEYyaPIyRAWblxzLBhK6Cn-vz_ojqkWIPky6JqDM",
+      "walruscan": "https://walruscan.com/mainnet/blob/zmqPEYyaPIyRAWblxzLBhK6Cn-vz_ojqkWIPky6JqDM",
+      "summary": "\"Texas A&M vs. South Carolina\" resolved SOUTH CAROLINA. The contested verdict forecast 39% (Brier 0.156) and lost to the market price 38% (Brier 0.144)",
+      "data": {
+        "verdictKey": "0x7eab496372bd9eac267fe25f1c44b1bd58500360323f8a30c65efdab6c197667:1794092100",
+        "marketId": "0x7eab496372bd9eac267fe25f1c44b1bd58500360323f8a30c65efdab6c197667",
+        "question": "Texas A&M vs. South Carolina",
+        "label": "contested",
+        "resolution": "SOUTH CAROLINA",
+        "yesWon": 0,
+        "forecast": 0.3947386684349928,
+        "priceAtVerdict": 0.38,
+        "grade": {
+          "forecastBrier": 0.15581861635783117,
+          "marketBrier": 0.1444,
+          "gain": -0.011418616357831174
+        },
+        "gradedAt": "2026-11-08T00:43:59.648Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x08d5e7d85d76b0a11376cac0bb85268229a557727f1328ec93f7f40515cf007e-1794092100",
+      "key": "0x08d5e7d85d76b0a11376cac0bb85268229a557727f1328ec93f7f40515cf007e:1794092100",
+      "version": 1,
+      "blobId": "6AXuVKUHona-kPMEC6-UoI38xvye2mF-c79UEIdb1xo",
+      "walruscan": "https://walruscan.com/mainnet/blob/6AXuVKUHona-kPMEC6-UoI38xvye2mF-c79UEIdb1xo",
+      "summary": "\"Oregon vs. Ohio State\" resolved Oregon. The mixed verdict forecast 58% (Brier 0.179) and lost to the market price 62% (Brier 0.148)",
+      "data": {
+        "verdictKey": "0x08d5e7d85d76b0a11376cac0bb85268229a557727f1328ec93f7f40515cf007e:1794092100",
+        "marketId": "0x08d5e7d85d76b0a11376cac0bb85268229a557727f1328ec93f7f40515cf007e",
+        "question": "Oregon vs. Ohio State",
+        "label": "mixed",
+        "resolution": "Oregon",
+        "yesWon": 1,
+        "forecast": 0.5767583055629623,
+        "priceAtVerdict": 0.615,
+        "grade": {
+          "forecastBrier": 0.17913353190993483,
+          "marketBrier": 0.148225,
+          "gain": -0.03090853190993484
+        },
+        "gradedAt": "2026-11-08T00:43:59.360Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc-1794085800",
+      "key": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc:1794085800",
+      "version": 1,
+      "blobId": "UVjNU4wSDkO7ZDayk3oih1UuqZOlaSs6EdHWRthKO2s",
+      "walruscan": "https://walruscan.com/mainnet/blob/UVjNU4wSDkO7ZDayk3oih1UuqZOlaSs6EdHWRthKO2s",
+      "summary": "\"Alabama vs. LSU\" resolved ALABAMA. The contested verdict forecast 33% (Brier 0.451) and beat the market price 33% (Brier 0.456)",
+      "data": {
+        "verdictKey": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc:1794085800",
+        "marketId": "0xe5d357fae62d4ef13ab61cd8ab943e7e6270df00f32bb1e501f42f5f420cd3fc",
+        "question": "Alabama vs. LSU",
+        "label": "contested",
+        "resolution": "ALABAMA",
+        "yesWon": 1,
+        "forecast": 0.32873996312597153,
+        "priceAtVerdict": 0.325,
+        "grade": {
+          "forecastBrier": 0.45059003710412204,
+          "marketBrier": 0.45562500000000006,
+          "gain": 0.005034962895878015
+        },
+        "gradedAt": "2026-11-08T00:43:58.953Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x6557d4a85169abfdb3f52baf6b2ba152d517807547a6f116fa33933e8de51121-1794084600",
+      "key": "0x6557d4a85169abfdb3f52baf6b2ba152d517807547a6f116fa33933e8de51121:1794084600",
+      "version": 1,
+      "blobId": "4u0y-d8xi51ta4_-LQbBwzObscImoCVuaAYH1Qk-n0I",
+      "walruscan": "https://walruscan.com/mainnet/blob/4u0y-d8xi51ta4_-LQbBwzObscImoCVuaAYH1Qk-n0I",
+      "summary": "\"Will Paris Saint-Germain FC vs. ES Troyes AC end in a draw?\" resolved NO. The contested verdict forecast 5% (Brier 0.002) and lost to the market price 5% (Brier 0.002)",
+      "data": {
+        "verdictKey": "0x6557d4a85169abfdb3f52baf6b2ba152d517807547a6f116fa33933e8de51121:1794084600",
+        "marketId": "0x6557d4a85169abfdb3f52baf6b2ba152d517807547a6f116fa33933e8de51121",
+        "question": "Will Paris Saint-Germain FC vs. ES Troyes AC end in a draw?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.04523920835597745,
+        "priceAtVerdict": 0.045,
+        "grade": {
+          "forecastBrier": 0.00204658597267554,
+          "marketBrier": 0.002025,
+          "gain": -0.00002158597267554012
+        },
+        "gradedAt": "2026-11-07T22:43:25.045Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x6c4f07eb92271e0bc3f458762a8049aa7ccb84eccda0f71bf18734ae3f766517-1794078600",
+      "key": "0x6c4f07eb92271e0bc3f458762a8049aa7ccb84eccda0f71bf18734ae3f766517:1794078600",
+      "version": 1,
+      "blobId": "fc_h1EGddp2S2XwjPB9PLy5hPRQLjGqjaE1-MLxar2Y",
+      "walruscan": "https://walruscan.com/mainnet/blob/fc_h1EGddp2S2XwjPB9PLy5hPRQLjGqjaE1-MLxar2Y",
+      "summary": "\"Spread: BYU (-16.5)\" resolved UTAH. The noise verdict forecast 8% (Brier 0.007) and tied the market price 8% (Brier 0.007)",
+      "data": {
+        "verdictKey": "0x6c4f07eb92271e0bc3f458762a8049aa7ccb84eccda0f71bf18734ae3f766517:1794078600",
+        "marketId": "0x6c4f07eb92271e0bc3f458762a8049aa7ccb84eccda0f71bf18734ae3f766517",
+        "question": "Spread: BYU (-16.5)",
+        "label": "noise",
+        "resolution": "UTAH",
+        "yesWon": 0,
+        "forecast": 0.083,
+        "priceAtVerdict": 0.083,
+        "grade": {
+          "forecastBrier": 0.006889000000000001,
+          "marketBrier": 0.006889000000000001,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-07T21:42:20.496Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xc1dff0d02d2741c74889c8f061eeb1574c1b3829a69c9f0dafce24a5a6bb3cca-1794077400",
+      "key": "0xc1dff0d02d2741c74889c8f061eeb1574c1b3829a69c9f0dafce24a5a6bb3cca:1794077400",
+      "version": 1,
+      "blobId": "jPegKnmTDW71-WeL8W42zpZ3E5y3sN2uP0g1R8o8B-o",
+      "walruscan": "https://walruscan.com/mainnet/blob/jPegKnmTDW71-WeL8W42zpZ3E5y3sN2uP0g1R8o8B-o",
+      "summary": "\"Texas vs. Missouri\" resolved TEXAS. The contested verdict forecast 51% (Brier 0.244) and lost to the market price 52% (Brier 0.235)",
+      "data": {
+        "verdictKey": "0xc1dff0d02d2741c74889c8f061eeb1574c1b3829a69c9f0dafce24a5a6bb3cca:1794077400",
+        "marketId": "0xc1dff0d02d2741c74889c8f061eeb1574c1b3829a69c9f0dafce24a5a6bb3cca",
+        "question": "Texas vs. Missouri",
+        "label": "contested",
+        "resolution": "TEXAS",
+        "yesWon": 1,
+        "forecast": 0.5056748498198806,
+        "priceAtVerdict": 0.515,
+        "grade": {
+          "forecastBrier": 0.24435735410059756,
+          "marketBrier": 0.235225,
+          "gain": -0.009132354100597567
+        },
+        "gradedAt": "2026-11-07T21:42:20.164Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xa04c8a41d8de3aff65fd8a30861c5419d78845c1a8128743bf877d3860829b6c-1794077400",
+      "key": "0xa04c8a41d8de3aff65fd8a30861c5419d78845c1a8128743bf877d3860829b6c:1794077400",
+      "version": 1,
+      "blobId": "xstexoBfE0DUIW2yfkIEVKna7xAYMz7OggmubfNsxpk",
+      "walruscan": "https://walruscan.com/mainnet/blob/xstexoBfE0DUIW2yfkIEVKna7xAYMz7OggmubfNsxpk",
+      "summary": "\"BYU vs. Utah\" resolved UTAH. The mixed verdict forecast 64% (Brier 0.407) and lost to the market price 64% (Brier 0.403)",
+      "data": {
+        "verdictKey": "0xa04c8a41d8de3aff65fd8a30861c5419d78845c1a8128743bf877d3860829b6c:1794077400",
+        "marketId": "0xa04c8a41d8de3aff65fd8a30861c5419d78845c1a8128743bf877d3860829b6c",
+        "question": "BYU vs. Utah",
+        "label": "mixed",
+        "resolution": "UTAH",
+        "yesWon": 0,
+        "forecast": 0.6383267450079337,
+        "priceAtVerdict": 0.635,
+        "grade": {
+          "forecastBrier": 0.4074610333924237,
+          "marketBrier": 0.403225,
+          "gain": -0.004236033392423677
+        },
+        "gradedAt": "2026-11-07T21:42:20.161Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xca9660f9021c33457b796162145d7b992449f8e9371690f2906298a56579208c-1794077400",
+      "key": "0xca9660f9021c33457b796162145d7b992449f8e9371690f2906298a56579208c:1794077400",
+      "version": 1,
+      "blobId": "Cu30ERQ3fhWyNPY7KDiFCkAMb_b9KDoQxi51MskPi7Y",
+      "walruscan": "https://walruscan.com/mainnet/blob/Cu30ERQ3fhWyNPY7KDiFCkAMb_b9KDoQxi51MskPi7Y",
+      "summary": "\"Clemson vs. Syracuse\" resolved CLEMSON. The contested verdict forecast 55% (Brier 0.204) and lost to the market price 56% (Brier 0.189)",
+      "data": {
+        "verdictKey": "0xca9660f9021c33457b796162145d7b992449f8e9371690f2906298a56579208c:1794077400",
+        "marketId": "0xca9660f9021c33457b796162145d7b992449f8e9371690f2906298a56579208c",
+        "question": "Clemson vs. Syracuse",
+        "label": "contested",
+        "resolution": "CLEMSON",
+        "yesWon": 1,
+        "forecast": 0.5483134195577594,
+        "priceAtVerdict": 0.565,
+        "grade": {
+          "forecastBrier": 0.20402076695160473,
+          "marketBrier": 0.18922500000000006,
+          "gain": -0.014795766951604672
+        },
+        "gradedAt": "2026-11-07T20:40:47.808Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xf7f8c7ef4f172046782086823186aaef5ce1944544bc0ca71f2080d1a4eac089-1794074400",
+      "key": "0xf7f8c7ef4f172046782086823186aaef5ce1944544bc0ca71f2080d1a4eac089:1794074400",
+      "version": 1,
+      "blobId": "GGt_H3vDURbGOILR4BnvSLBJtBFAano7S0mDlyumS5Q",
+      "walruscan": "https://walruscan.com/mainnet/blob/GGt_H3vDURbGOILR4BnvSLBJtBFAano7S0mDlyumS5Q",
+      "summary": "\"Will Nottingham Forest FC vs. Manchester City FC end in a draw?\" resolved NO. The contested verdict forecast 20% (Brier 0.038) and lost to the market price 20% (Brier 0.038)",
+      "data": {
+        "verdictKey": "0xf7f8c7ef4f172046782086823186aaef5ce1944544bc0ca71f2080d1a4eac089:1794074400",
+        "marketId": "0xf7f8c7ef4f172046782086823186aaef5ce1944544bc0ca71f2080d1a4eac089",
+        "question": "Will Nottingham Forest FC vs. Manchester City FC end in a draw?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.1956705463455788,
+        "priceAtVerdict": 0.195,
+        "grade": {
+          "forecastBrier": 0.0382869627071773,
+          "marketBrier": 0.038025,
+          "gain": -0.0002619627071772934
+        },
+        "gradedAt": "2026-11-07T20:40:47.643Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x2e9866846e9573c2857e6f298d5ca13a80e1445ad46f20b6d333c53b2b56dd03-1794072900",
+      "key": "0x2e9866846e9573c2857e6f298d5ca13a80e1445ad46f20b6d333c53b2b56dd03:1794072900",
+      "version": 1,
+      "blobId": "irAKgEEJ0-l-1kJWX18zN_8EBhVXKLgOt9XSnibnZos",
+      "walruscan": "https://walruscan.com/mainnet/blob/irAKgEEJ0-l-1kJWX18zN_8EBhVXKLgOt9XSnibnZos",
+      "summary": "\"Will Nottingham Forest FC win on 2026-11-07?\" resolved YES. The contested verdict forecast 30% (Brier 0.495) and lost to the market price 35% (Brier 0.429)",
+      "data": {
+        "verdictKey": "0x2e9866846e9573c2857e6f298d5ca13a80e1445ad46f20b6d333c53b2b56dd03:1794072900",
+        "marketId": "0x2e9866846e9573c2857e6f298d5ca13a80e1445ad46f20b6d333c53b2b56dd03",
+        "question": "Will Nottingham Forest FC win on 2026-11-07?",
+        "label": "contested",
+        "resolution": "YES",
+        "yesWon": 1,
+        "forecast": 0.2963874462596884,
+        "priceAtVerdict": 0.345,
+        "grade": {
+          "forecastBrier": 0.4950706257809629,
+          "marketBrier": 0.42902500000000005,
+          "gain": -0.06604562578096285
+        },
+        "gradedAt": "2026-11-07T20:40:47.230Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x0b44b975c7cd3198301dfc297182037e667c713ae302ffd92f853c580b44394e-1794077400",
+      "key": "0x0b44b975c7cd3198301dfc297182037e667c713ae302ffd92f853c580b44394e:1794077400",
+      "version": 1,
+      "blobId": "4W9RqCbNwGtWV6qR5oaZaCl37X6ptoQm38zwlOmYz3A",
+      "walruscan": "https://walruscan.com/mainnet/blob/4W9RqCbNwGtWV6qR5oaZaCl37X6ptoQm38zwlOmYz3A",
+      "summary": "\"Will Bologna FC 1909 win on 2026-11-07?\" resolved YES. The mixed verdict forecast 95% (Brier 0.002) and lost to the market price 96% (Brier 0.002)",
+      "data": {
+        "verdictKey": "0x0b44b975c7cd3198301dfc297182037e667c713ae302ffd92f853c580b44394e:1794077400",
+        "marketId": "0x0b44b975c7cd3198301dfc297182037e667c713ae302ffd92f853c580b44394e",
+        "question": "Will Bologna FC 1909 win on 2026-11-07?",
+        "label": "mixed",
+        "resolution": "YES",
+        "yesWon": 1,
+        "forecast": 0.9537719618189799,
+        "priceAtVerdict": 0.9555,
+        "grade": {
+          "forecastBrier": 0.0021370315140658482,
+          "marketBrier": 0.0019802499999999985,
+          "gain": -0.00015678151406584972
+        },
+        "gradedAt": "2026-11-07T19:40:02.204Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x828e1b4e7e8f1886cc3ae5a6fe493b2d4c3aebcec0758e8f591f78128bb7f129-1794077400",
+      "key": "0x828e1b4e7e8f1886cc3ae5a6fe493b2d4c3aebcec0758e8f591f78128bb7f129:1794077400",
+      "version": 1,
+      "blobId": "4A-eqFRD30Ba5jaPMVi44eyFvsFZgl7CJqFUf1aoQF4",
+      "walruscan": "https://walruscan.com/mainnet/blob/4A-eqFRD30Ba5jaPMVi44eyFvsFZgl7CJqFUf1aoQF4",
+      "summary": "\"Will Parma Calcio 1913 vs. Bologna FC 1909 end in a draw?\" resolved NO. The noise verdict forecast 5% (Brier 0.002) and beat the market price 5% (Brier 0.002)",
+      "data": {
+        "verdictKey": "0x828e1b4e7e8f1886cc3ae5a6fe493b2d4c3aebcec0758e8f591f78128bb7f129:1794077400",
+        "marketId": "0x828e1b4e7e8f1886cc3ae5a6fe493b2d4c3aebcec0758e8f591f78128bb7f129",
+        "question": "Will Parma Calcio 1913 vs. Bologna FC 1909 end in a draw?",
         "label": "noise",
         "resolution": "NO",
         "yesWon": 0,
-        "forecast": 0.27498976687346804,
-        "priceAtVerdict": 0.275,
+        "forecast": 0.04799014314709699,
+        "priceAtVerdict": 0.048,
         "grade": {
-          "forecastBrier": 0.0756193718851243,
-          "marketBrier": 0.07562500000000001,
-          "gain": 0.000005628114875713686
+          "forecastBrier": 0.0023030538392788606,
+          "marketBrier": 0.002304,
+          "gain": 9.461607211394552e-7
         },
-        "gradedAt": "2026-11-04T20:19:31.665Z",
+        "gradedAt": "2026-11-07T19:40:01.780Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x8b714a0a0aa0c7a5e93bea4f433456963b0019300c82c67f874415bc3edaa47e-1794069900",
+      "key": "0x8b714a0a0aa0c7a5e93bea4f433456963b0019300c82c67f874415bc3edaa47e:1794069900",
+      "version": 1,
+      "blobId": "tiCSf5edESF1MnOj0zIKFXmGn_vfg9bAxdV8ieBYXCs",
+      "walruscan": "https://walruscan.com/mainnet/blob/tiCSf5edESF1MnOj0zIKFXmGn_vfg9bAxdV8ieBYXCs",
+      "summary": "\"Will Newcastle United FC win on 2026-11-07?\" resolved NO. The contested verdict forecast 8% (Brier 0.007) and lost to the market price 8% (Brier 0.006)",
+      "data": {
+        "verdictKey": "0x8b714a0a0aa0c7a5e93bea4f433456963b0019300c82c67f874415bc3edaa47e:1794069900",
+        "marketId": "0x8b714a0a0aa0c7a5e93bea4f433456963b0019300c82c67f874415bc3edaa47e",
+        "question": "Will Newcastle United FC win on 2026-11-07?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.08090618267116202,
+        "priceAtVerdict": 0.075,
+        "grade": {
+          "forecastBrier": 0.006545810394419438,
+          "marketBrier": 0.005625,
+          "gain": -0.0009208103944194383
+        },
+        "gradedAt": "2026-11-07T17:38:44.016Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xc2f84d5b3866212ecbd7c23ebdb51d9a82ab3b3688a176c6557323a41bea641f-1794069900",
+      "key": "0xc2f84d5b3866212ecbd7c23ebdb51d9a82ab3b3688a176c6557323a41bea641f:1794069900",
+      "version": 1,
+      "blobId": "BO1b9gGeaBxyRkJCTTpoBXZ63R3QD9tnbmtgVbaplOU",
+      "walruscan": "https://walruscan.com/mainnet/blob/BO1b9gGeaBxyRkJCTTpoBXZ63R3QD9tnbmtgVbaplOU",
+      "summary": "\"Will Fulham FC win on 2026-11-07?\" resolved NO. The mixed verdict forecast 14% (Brier 0.020) and lost to the market price 13% (Brier 0.017)",
+      "data": {
+        "verdictKey": "0xc2f84d5b3866212ecbd7c23ebdb51d9a82ab3b3688a176c6557323a41bea641f:1794069900",
+        "marketId": "0xc2f84d5b3866212ecbd7c23ebdb51d9a82ab3b3688a176c6557323a41bea641f",
+        "question": "Will Fulham FC win on 2026-11-07?",
+        "label": "mixed",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.14085373269810636,
+        "priceAtVerdict": 0.1295,
+        "grade": {
+          "forecastBrier": 0.019839774014989597,
+          "marketBrier": 0.01677025,
+          "gain": -0.003069524014989597
+        },
+        "gradedAt": "2026-11-07T17:38:43.343Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xaba896dd23c0e606deeceeaef770575bdcedb79ece6e4b3f0c9fa6751a182550-1794065700",
+      "key": "0xaba896dd23c0e606deeceeaef770575bdcedb79ece6e4b3f0c9fa6751a182550:1794065700",
+      "version": 1,
+      "blobId": "2Jj0ewy2ZkUbMUM_ZpbSLZDAmU5XipD4svjhu1hoh2o",
+      "walruscan": "https://walruscan.com/mainnet/blob/2Jj0ewy2ZkUbMUM_ZpbSLZDAmU5XipD4svjhu1hoh2o",
+      "summary": "\"Will Arsenal FC vs. Hull City AFC end in a draw?\" resolved NO. The mixed verdict forecast 17% (Brier 0.029) and beat the market price 18% (Brier 0.031)",
+      "data": {
+        "verdictKey": "0xaba896dd23c0e606deeceeaef770575bdcedb79ece6e4b3f0c9fa6751a182550:1794065700",
+        "marketId": "0xaba896dd23c0e606deeceeaef770575bdcedb79ece6e4b3f0c9fa6751a182550",
+        "question": "Will Arsenal FC vs. Hull City AFC end in a draw?",
+        "label": "mixed",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.16901564443584863,
+        "priceAtVerdict": 0.175,
+        "grade": {
+          "forecastBrier": 0.02856628806406521,
+          "marketBrier": 0.030624999999999996,
+          "gain": 0.002058711935934786
+        },
+        "gradedAt": "2026-11-07T17:38:43.131Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x0b5bbfd77a012ee9e55bb71249c34036298e30c5bff750c7c56ad2b0c215c802-1794062100",
+      "key": "0x0b5bbfd77a012ee9e55bb71249c34036298e30c5bff750c7c56ad2b0c215c802:1794062100",
+      "version": 1,
+      "blobId": "qotZ33VmX5hY3bAaJ5SnMXgst2FXJWK-U6PxFC-TNW4",
+      "walruscan": "https://walruscan.com/mainnet/blob/qotZ33VmX5hY3bAaJ5SnMXgst2FXJWK-U6PxFC-TNW4",
+      "summary": "\"Dota 2: Xipto Esports vs PlayTime - Game 2 Winner\" resolved XIPTO ESPORTS. The noise verdict forecast 45% (Brier 0.303) and tied the market price 45% (Brier 0.303)",
+      "data": {
+        "verdictKey": "0x0b5bbfd77a012ee9e55bb71249c34036298e30c5bff750c7c56ad2b0c215c802:1794062100",
+        "marketId": "0x0b5bbfd77a012ee9e55bb71249c34036298e30c5bff750c7c56ad2b0c215c802",
+        "question": "Dota 2: Xipto Esports vs PlayTime - Game 2 Winner",
+        "label": "noise",
+        "resolution": "XIPTO ESPORTS",
+        "yesWon": 1,
+        "forecast": 0.44999999999999996,
+        "priceAtVerdict": 0.45,
+        "grade": {
+          "forecastBrier": 0.30250000000000005,
+          "marketBrier": 0.30250000000000005,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-07T17:38:42.569Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xc32e864c070f97f0484effb81875cdea6c6410b0f2347bb022387c8757adf54e-1794062700",
+      "key": "0xc32e864c070f97f0484effb81875cdea6c6410b0f2347bb022387c8757adf54e:1794062700",
+      "version": 1,
+      "blobId": "1ygAMxW4iN8ty_IajyTnIoHZWzsaofrFBdgJThwfYBU",
+      "walruscan": "https://walruscan.com/mainnet/blob/1ygAMxW4iN8ty_IajyTnIoHZWzsaofrFBdgJThwfYBU",
+      "summary": "\"Will Frosinone Calcio win on 2026-11-07?\" resolved NO. The contested verdict forecast 24% (Brier 0.055) and lost to the market price 24% (Brier 0.055)",
+      "data": {
+        "verdictKey": "0xc32e864c070f97f0484effb81875cdea6c6410b0f2347bb022387c8757adf54e:1794062700",
+        "marketId": "0xc32e864c070f97f0484effb81875cdea6c6410b0f2347bb022387c8757adf54e",
+        "question": "Will Frosinone Calcio win on 2026-11-07?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.23547331302145533,
+        "priceAtVerdict": 0.235,
+        "grade": {
+          "forecastBrier": 0.055447681145300284,
+          "marketBrier": 0.055224999999999996,
+          "gain": -0.00022268114530028804
+        },
+        "gradedAt": "2026-11-07T16:37:18.874Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x23883c40d48be8f1d8395a56a3f64fba1a76b4321bd0dd05d6b1ec35d0df62aa-1794055500",
+      "key": "0x23883c40d48be8f1d8395a56a3f64fba1a76b4321bd0dd05d6b1ec35d0df62aa:1794055500",
+      "version": 1,
+      "blobId": "g36prJbHT_ArSK8z4jgXrEHrT0DSLM3HEWkU8FPjBC4",
+      "walruscan": "https://walruscan.com/mainnet/blob/g36prJbHT_ArSK8z4jgXrEHrT0DSLM3HEWkU8FPjBC4",
+      "summary": "\"Will Tottenham Hotspur FC win on 2026-11-07?\" resolved NO. The contested verdict forecast 35% (Brier 0.121) and lost to the market price 35% (Brier 0.119)",
+      "data": {
+        "verdictKey": "0x23883c40d48be8f1d8395a56a3f64fba1a76b4321bd0dd05d6b1ec35d0df62aa:1794055500",
+        "marketId": "0x23883c40d48be8f1d8395a56a3f64fba1a76b4321bd0dd05d6b1ec35d0df62aa",
+        "question": "Will Tottenham Hotspur FC win on 2026-11-07?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.3476949602319569,
+        "priceAtVerdict": 0.345,
+        "grade": {
+          "forecastBrier": 0.12089178537070208,
+          "marketBrier": 0.11902499999999998,
+          "gain": -0.0018667853707021037
+        },
+        "gradedAt": "2026-11-07T15:33:58.236Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x4c897dcc16aec3de6f1ea935d161c364129a018cdba832f9d12d9ed055ac5933-1794054600",
+      "key": "0x4c897dcc16aec3de6f1ea935d161c364129a018cdba832f9d12d9ed055ac5933:1794054600",
+      "version": 1,
+      "blobId": "Uc4HgcLp1Rf9HCcBsvA_C3JU_iPBE4tHilPutg8QcBA",
+      "walruscan": "https://walruscan.com/mainnet/blob/Uc4HgcLp1Rf9HCcBsvA_C3JU_iPBE4tHilPutg8QcBA",
+      "summary": "\"Dota 2: HULIGANI vs LEGION - Game 2 Winner\" resolved HULIGANI. The mixed verdict forecast 88% (Brier 0.013) and lost to the market price 90% (Brier 0.010)",
+      "data": {
+        "verdictKey": "0x4c897dcc16aec3de6f1ea935d161c364129a018cdba832f9d12d9ed055ac5933:1794054600",
+        "marketId": "0x4c897dcc16aec3de6f1ea935d161c364129a018cdba832f9d12d9ed055ac5933",
+        "question": "Dota 2: HULIGANI vs LEGION - Game 2 Winner",
+        "label": "mixed",
+        "resolution": "HULIGANI",
+        "yesWon": 1,
+        "forecast": 0.8844290554048845,
+        "priceAtVerdict": 0.9,
+        "grade": {
+          "forecastBrier": 0.013356643234607262,
+          "marketBrier": 0.009999999999999995,
+          "gain": -0.003356643234607267
+        },
+        "gradedAt": "2026-11-07T14:33:24.426Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x14f135f0759d8ddaaca33b162e47716ebdcf0d8d258b39e523ebdfabd91abfb0-1794048600",
+      "key": "0x14f135f0759d8ddaaca33b162e47716ebdcf0d8d258b39e523ebdfabd91abfb0:1794048600",
+      "version": 1,
+      "blobId": "SGykR_Ta4pmZmMDLxX0CILDtQuq36U6d0hqMiIc_gMs",
+      "walruscan": "https://walruscan.com/mainnet/blob/SGykR_Ta4pmZmMDLxX0CILDtQuq36U6d0hqMiIc_gMs",
+      "summary": "\"Counter-Strike: MOUZ vs BetBoom Team - Map 2 Winner\" resolved MOUZ. The sharp-led verdict forecast 80% (Brier 0.038) and lost to the market price 83% (Brier 0.031)",
+      "data": {
+        "verdictKey": "0x14f135f0759d8ddaaca33b162e47716ebdcf0d8d258b39e523ebdfabd91abfb0:1794048600",
+        "marketId": "0x14f135f0759d8ddaaca33b162e47716ebdcf0d8d258b39e523ebdfabd91abfb0",
+        "question": "Counter-Strike: MOUZ vs BetBoom Team - Map 2 Winner",
+        "label": "sharp-led",
+        "resolution": "MOUZ",
+        "yesWon": 1,
+        "forecast": 0.8047726997602173,
+        "priceAtVerdict": 0.825,
+        "grade": {
+          "forecastBrier": 0.03811369875891427,
+          "marketBrier": 0.030625000000000017,
+          "gain": -0.007488698758914256
+        },
+        "gradedAt": "2026-11-07T12:32:53.290Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x56462cd5dd7b573832f0de9fde8dab10cdd961361fc5952c7bc42e7420df323f-1794037800",
+      "key": "0x56462cd5dd7b573832f0de9fde8dab10cdd961361fc5952c7bc42e7420df323f:1794037800",
+      "version": 1,
+      "blobId": "-83Qc5AcBo0e-BrAA2QSqaN5kzqAQi8NMXsjQZYkzYA",
+      "walruscan": "https://walruscan.com/mainnet/blob/-83Qc5AcBo0e-BrAA2QSqaN5kzqAQi8NMXsjQZYkzYA",
+      "summary": "\"Counter-Strike: TheMongolz vs Natus Vincere - Map 2 Winner\" resolved THEMONGOLZ. The mixed verdict forecast 47% (Brier 0.282) and lost to the market price 50% (Brier 0.255)",
+      "data": {
+        "verdictKey": "0x56462cd5dd7b573832f0de9fde8dab10cdd961361fc5952c7bc42e7420df323f:1794037800",
+        "marketId": "0x56462cd5dd7b573832f0de9fde8dab10cdd961361fc5952c7bc42e7420df323f",
+        "question": "Counter-Strike: TheMongolz vs Natus Vincere - Map 2 Winner",
+        "label": "mixed",
+        "resolution": "THEMONGOLZ",
+        "yesWon": 1,
+        "forecast": 0.46869925491333875,
+        "priceAtVerdict": 0.495,
+        "grade": {
+          "forecastBrier": 0.2822804817296414,
+          "marketBrier": 0.255025,
+          "gain": -0.027255481729641373
+        },
+        "gradedAt": "2026-11-07T09:31:57.531Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xe7d19d3e44a35f5cb27395b0fc88270a91fae088af9b962604addf0bc3d4ce9b-1794033300",
+      "key": "0xe7d19d3e44a35f5cb27395b0fc88270a91fae088af9b962604addf0bc3d4ce9b:1794033300",
+      "version": 1,
+      "blobId": "_DpxHbTMaMVvPY0DAWuGlyF0YXns3ZB6CT86kXg7mx0",
+      "walruscan": "https://walruscan.com/mainnet/blob/_DpxHbTMaMVvPY0DAWuGlyF0YXns3ZB6CT86kXg7mx0",
+      "summary": "\"Counter-Strike: TheMongolz vs Natus Vincere - Map 1 Winner\" resolved THEMONGOLZ. The noise verdict forecast 38% (Brier 0.386) and beat the market price 38% (Brier 0.391)",
+      "data": {
+        "verdictKey": "0xe7d19d3e44a35f5cb27395b0fc88270a91fae088af9b962604addf0bc3d4ce9b:1794033300",
+        "marketId": "0xe7d19d3e44a35f5cb27395b0fc88270a91fae088af9b962604addf0bc3d4ce9b",
+        "question": "Counter-Strike: TheMongolz vs Natus Vincere - Map 1 Winner",
+        "label": "noise",
+        "resolution": "THEMONGOLZ",
+        "yesWon": 1,
+        "forecast": 0.3783583659184697,
+        "priceAtVerdict": 0.375,
+        "grade": {
+          "forecastBrier": 0.3864383212235552,
+          "marketBrier": 0.390625,
+          "gain": 0.004186678776444797
+        },
+        "gradedAt": "2026-11-07T08:31:30.434Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x489ccae84674819c0f3e44c519d209ec765bcb30222748790b69d1b08572305d-1794033000",
+      "key": "0x489ccae84674819c0f3e44c519d209ec765bcb30222748790b69d1b08572305d:1794033000",
+      "version": 1,
+      "blobId": "IMWcgzAZrOcG77SxProuqTXS8LDHKuYAKZPnPQfbjk4",
+      "walruscan": "https://walruscan.com/mainnet/blob/IMWcgzAZrOcG77SxProuqTXS8LDHKuYAKZPnPQfbjk4",
+      "summary": "\"TCU vs. Arizona\" resolved ARIZONA. The contested verdict forecast 58% (Brier 0.342) and beat the market price 61% (Brier 0.366)",
+      "data": {
+        "verdictKey": "0x489ccae84674819c0f3e44c519d209ec765bcb30222748790b69d1b08572305d:1794033000",
+        "marketId": "0x489ccae84674819c0f3e44c519d209ec765bcb30222748790b69d1b08572305d",
+        "question": "TCU vs. Arizona",
+        "label": "contested",
+        "resolution": "ARIZONA",
+        "yesWon": 0,
+        "forecast": 0.5843842792477781,
+        "priceAtVerdict": 0.605,
+        "grade": {
+          "forecastBrier": 0.34150498583194516,
+          "marketBrier": 0.366025,
+          "gain": 0.024520014168054827
+        },
+        "gradedAt": "2026-11-07T07:30:59.429Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a-1794030000",
+      "key": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a:1794030000",
+      "version": 1,
+      "blobId": "wlgzueml-rgvYWv3I81BqqQTJwJpT3NAXPJIcC4Dj8M",
+      "walruscan": "https://walruscan.com/mainnet/blob/wlgzueml-rgvYWv3I81BqqQTJwJpT3NAXPJIcC4Dj8M",
+      "summary": "\"Spread: Spurs (-15.5)\" resolved KINGS. The noise verdict forecast 62% (Brier 0.378) and tied the market price 62% (Brier 0.378)",
+      "data": {
+        "verdictKey": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a:1794030000",
+        "marketId": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a",
+        "question": "Spread: Spurs (-15.5)",
+        "label": "noise",
+        "resolution": "KINGS",
+        "yesWon": 0,
+        "forecast": 0.615,
+        "priceAtVerdict": 0.615,
+        "grade": {
+          "forecastBrier": 0.378225,
+          "marketBrier": 0.378225,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-07T06:29:26.474Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x05d7be83269c1d5cbc1ac48c8b5b4aceaf3c0fd3606614610b723a7708272df9-1794024600",
+      "key": "0x05d7be83269c1d5cbc1ac48c8b5b4aceaf3c0fd3606614610b723a7708272df9:1794024600",
+      "version": 1,
+      "blobId": "vcJnO6QnwogGAoDcwryT3kfnE-k0A8o7Xibi7ecX6_8",
+      "walruscan": "https://walruscan.com/mainnet/blob/vcJnO6QnwogGAoDcwryT3kfnE-k0A8o7Xibi7ecX6_8",
+      "summary": "\"Spread: Lakers (-3.5)\" resolved LAKERS. The contested verdict forecast 29% (Brier 0.502) and beat the market price 29% (Brier 0.504)",
+      "data": {
+        "verdictKey": "0x05d7be83269c1d5cbc1ac48c8b5b4aceaf3c0fd3606614610b723a7708272df9:1794024600",
+        "marketId": "0x05d7be83269c1d5cbc1ac48c8b5b4aceaf3c0fd3606614610b723a7708272df9",
+        "question": "Spread: Lakers (-3.5)",
+        "label": "contested",
+        "resolution": "LAKERS",
+        "yesWon": 1,
+        "forecast": 0.2916089162352328,
+        "priceAtVerdict": 0.29,
+        "grade": {
+          "forecastBrier": 0.5018179275574215,
+          "marketBrier": 0.5041,
+          "gain": 0.0022820724425784977
+        },
+        "gradedAt": "2026-11-07T06:29:26.472Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x804d4d76e21a79291fec4b34a6d23d0c085d5db0a8f027b9ed7a4246998e2a67-1794025500",
+      "key": "0x804d4d76e21a79291fec4b34a6d23d0c085d5db0a8f027b9ed7a4246998e2a67:1794025500",
+      "version": 1,
+      "blobId": "OZU_ngIFfdI4kublIf0k9Zlp98y8OneNC8bgnhuUifs",
+      "walruscan": "https://walruscan.com/mainnet/blob/OZU_ngIFfdI4kublIf0k9Zlp98y8OneNC8bgnhuUifs",
+      "summary": "\"Trail Blazers vs. Lakers\" resolved LAKERS. The contested verdict forecast 60% (Brier 0.362) and lost to the market price 60% (Brier 0.354)",
+      "data": {
+        "verdictKey": "0x804d4d76e21a79291fec4b34a6d23d0c085d5db0a8f027b9ed7a4246998e2a67:1794025500",
+        "marketId": "0x804d4d76e21a79291fec4b34a6d23d0c085d5db0a8f027b9ed7a4246998e2a67",
+        "question": "Trail Blazers vs. Lakers",
+        "label": "contested",
+        "resolution": "LAKERS",
+        "yesWon": 0,
+        "forecast": 0.601838385687268,
+        "priceAtVerdict": 0.595,
+        "grade": {
+          "forecastBrier": 0.36220944248665676,
+          "marketBrier": 0.354025,
+          "gain": -0.008184442486656784
+        },
+        "gradedAt": "2026-11-07T06:29:26.085Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xcd4e5842ed6bfd511ee064ab6636e21b0fe469e913b67f5f7f82537e311a8b83-1794023100",
+      "key": "0xcd4e5842ed6bfd511ee064ab6636e21b0fe469e913b67f5f7f82537e311a8b83:1794023100",
+      "version": 1,
+      "blobId": "3w34RInIx2Dur2w4-5aZ0hw-NnIX-N5tj5q_CfA7rhs",
+      "walruscan": "https://walruscan.com/mainnet/blob/3w34RInIx2Dur2w4-5aZ0hw-NnIX-N5tj5q_CfA7rhs",
+      "summary": "\"Spurs vs. Kings\" resolved SPURS. The mixed verdict forecast 92% (Brier 0.006) and beat the market price 92% (Brier 0.007)",
+      "data": {
+        "verdictKey": "0xcd4e5842ed6bfd511ee064ab6636e21b0fe469e913b67f5f7f82537e311a8b83:1794023100",
+        "marketId": "0xcd4e5842ed6bfd511ee064ab6636e21b0fe469e913b67f5f7f82537e311a8b83",
+        "question": "Spurs vs. Kings",
+        "label": "mixed",
+        "resolution": "SPURS",
+        "yesWon": 1,
+        "forecast": 0.9194094281522326,
+        "priceAtVerdict": 0.915,
+        "grade": {
+          "forecastBrier": 0.006494840270750161,
+          "marketBrier": 0.007224999999999994,
+          "gain": 0.0007301597292498326
+        },
+        "gradedAt": "2026-11-07T06:29:25.785Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a-1794022500",
+      "key": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a:1794022500",
+      "version": 1,
+      "blobId": "8jbuSrpriFNZEenxolPGbRYxus3cvLwCbL7KZ0_6WiY",
+      "walruscan": "https://walruscan.com/mainnet/blob/8jbuSrpriFNZEenxolPGbRYxus3cvLwCbL7KZ0_6WiY",
+      "summary": "\"Spread: Spurs (-15.5)\" resolved KINGS. The noise verdict forecast 59% (Brier 0.348) and beat the market price 59% (Brier 0.348)",
+      "data": {
+        "verdictKey": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a:1794022500",
+        "marketId": "0xf2b4abc5bcd8b5355aa1d276245f8beb5f1972d678b52cfd7a92f4b7957fa13a",
+        "question": "Spread: Spurs (-15.5)",
+        "label": "noise",
+        "resolution": "KINGS",
+        "yesWon": 0,
+        "forecast": 0.5898010726079658,
+        "priceAtVerdict": 0.59,
+        "grade": {
+          "forecastBrier": 0.34786530524950693,
+          "marketBrier": 0.34809999999999997,
+          "gain": 0.00023469475049303634
+        },
+        "gradedAt": "2026-11-07T06:29:25.632Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xd8ce5cfd357ea7d7f34f2c40a568a54e70337509600f48c61ba66b7ad5d22477-1794014400",
+      "key": "0xd8ce5cfd357ea7d7f34f2c40a568a54e70337509600f48c61ba66b7ad5d22477:1794014400",
+      "version": 1,
+      "blobId": "bxDkywJN1Xv6lswTxlYFEFfWOeTGGfwtqIQD0jd-bS0",
+      "walruscan": "https://walruscan.com/mainnet/blob/bxDkywJN1Xv6lswTxlYFEFfWOeTGGfwtqIQD0jd-bS0",
+      "summary": "\"Nebraska vs. Illinois\" resolved ILLINOIS. The noise verdict forecast 68% (Brier 0.469) and beat the market price 69% (Brier 0.469)",
+      "data": {
+        "verdictKey": "0xd8ce5cfd357ea7d7f34f2c40a568a54e70337509600f48c61ba66b7ad5d22477:1794014400",
+        "marketId": "0xd8ce5cfd357ea7d7f34f2c40a568a54e70337509600f48c61ba66b7ad5d22477",
+        "question": "Nebraska vs. Illinois",
+        "label": "noise",
+        "resolution": "ILLINOIS",
+        "yesWon": 0,
+        "forecast": 0.6848910427692746,
+        "priceAtVerdict": 0.685,
+        "grade": {
+          "forecastBrier": 0.4690757404655843,
+          "marketBrier": 0.46922500000000006,
+          "gain": 0.00014925953441574658
+        },
+        "gradedAt": "2026-11-07T05:28:48.040Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x67e0b8d53eb65228d9a14135a8f92f8e445eb9292ab5a4eeb9748966715d90da-1794021900",
+      "key": "0x67e0b8d53eb65228d9a14135a8f92f8e445eb9292ab5a4eeb9748966715d90da:1794021900",
+      "version": 1,
+      "blobId": "ZdPP4R4Cpp5lcZbk_hVXuhSO4J5EKBGxbeqm4Za6cLg",
+      "walruscan": "https://walruscan.com/mainnet/blob/ZdPP4R4Cpp5lcZbk_hVXuhSO4J5EKBGxbeqm4Za6cLg",
+      "summary": "\"Spread: Raptors (-7.5)\" resolved RAPTORS. The noise verdict forecast 52% (Brier 0.235) and tied the market price 52% (Brier 0.235)",
+      "data": {
+        "verdictKey": "0x67e0b8d53eb65228d9a14135a8f92f8e445eb9292ab5a4eeb9748966715d90da:1794021900",
+        "marketId": "0x67e0b8d53eb65228d9a14135a8f92f8e445eb9292ab5a4eeb9748966715d90da",
+        "question": "Spread: Raptors (-7.5)",
+        "label": "noise",
+        "resolution": "RAPTORS",
+        "yesWon": 1,
+        "forecast": 0.515,
+        "priceAtVerdict": 0.515,
+        "grade": {
+          "forecastBrier": 0.235225,
+          "marketBrier": 0.235225,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-07T04:25:39.854Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x28eae5212d2403ebeee525664ea36ce46d9fd3666d2fb5137ad00ce0095e9fb1-1794018300",
+      "key": "0x28eae5212d2403ebeee525664ea36ce46d9fd3666d2fb5137ad00ce0095e9fb1:1794018300",
+      "version": 1,
+      "blobId": "7zUaAbMGJJuWb-Z67frTgxNFILyG-2-Vzz55v7oNlho",
+      "walruscan": "https://walruscan.com/mainnet/blob/7zUaAbMGJJuWb-Z67frTgxNFILyG-2-Vzz55v7oNlho",
+      "summary": "\"Spread: Mavericks (-7.5)\" resolved MAVERICKS. The noise verdict forecast 45% (Brier 0.308) and tied the market price 45% (Brier 0.308)",
+      "data": {
+        "verdictKey": "0x28eae5212d2403ebeee525664ea36ce46d9fd3666d2fb5137ad00ce0095e9fb1:1794018300",
+        "marketId": "0x28eae5212d2403ebeee525664ea36ce46d9fd3666d2fb5137ad00ce0095e9fb1",
+        "question": "Spread: Mavericks (-7.5)",
+        "label": "noise",
+        "resolution": "MAVERICKS",
+        "yesWon": 1,
+        "forecast": 0.44500000000000006,
+        "priceAtVerdict": 0.445,
+        "grade": {
+          "forecastBrier": 0.30802499999999994,
+          "marketBrier": 0.30802499999999994,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-07T04:25:39.621Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x5d980b8d05e3e347fec960d599d485ecdf76939025246bff390d4ba8cf3a531c-1794018000",
+      "key": "0x5d980b8d05e3e347fec960d599d485ecdf76939025246bff390d4ba8cf3a531c:1794018000",
+      "version": 1,
+      "blobId": "TgjxGa3FCG4trda639ghaK4VZm2ezNAP7PZApdX4XWI",
+      "walruscan": "https://walruscan.com/mainnet/blob/TgjxGa3FCG4trda639ghaK4VZm2ezNAP7PZApdX4XWI",
+      "summary": "\"Jazz vs. Mavericks\" resolved MAVERICKS. The noise verdict forecast 30% (Brier 0.088) and lost to the market price 30% (Brier 0.087)",
+      "data": {
+        "verdictKey": "0x5d980b8d05e3e347fec960d599d485ecdf76939025246bff390d4ba8cf3a531c:1794018000",
+        "marketId": "0x5d980b8d05e3e347fec960d599d485ecdf76939025246bff390d4ba8cf3a531c",
+        "question": "Jazz vs. Mavericks",
+        "label": "noise",
+        "resolution": "MAVERICKS",
+        "yesWon": 0,
+        "forecast": 0.2960380341990238,
+        "priceAtVerdict": 0.295,
+        "grade": {
+          "forecastBrier": 0.08763851769242238,
+          "marketBrier": 0.08702499999999999,
+          "gain": -0.0006135176924223912
+        },
+        "gradedAt": "2026-11-07T04:25:39.168Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef-1794018000",
+      "key": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef:1794018000",
+      "version": 1,
+      "blobId": "m3Aqh9XIkSOrkzWmvp9OTPxQDK8n6YQcQUT8Z-Mklc4",
+      "walruscan": "https://walruscan.com/mainnet/blob/m3Aqh9XIkSOrkzWmvp9OTPxQDK8n6YQcQUT8Z-Mklc4",
+      "summary": "\"Raptors vs. Bucks\" resolved RAPTORS. The mixed verdict forecast 35% (Brier 0.429) and beat the market price 35% (Brier 0.429)",
+      "data": {
+        "verdictKey": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef:1794018000",
+        "marketId": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef",
+        "question": "Raptors vs. Bucks",
+        "label": "mixed",
+        "resolution": "RAPTORS",
+        "yesWon": 1,
+        "forecast": 0.3450945824002429,
+        "priceAtVerdict": 0.345,
+        "grade": {
+          "forecastBrier": 0.4289011060015122,
+          "marketBrier": 0.42902500000000005,
+          "gain": 0.000123893998487834
+        },
+        "gradedAt": "2026-11-07T04:25:38.876Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781-1794014400",
+      "key": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781:1794014400",
+      "version": 1,
+      "blobId": "pwSbqhS6yqGY61K8wRqAl0bKFzSkVxoyPQH9RKbGPjM",
+      "walruscan": "https://walruscan.com/mainnet/blob/pwSbqhS6yqGY61K8wRqAl0bKFzSkVxoyPQH9RKbGPjM",
+      "summary": "\"Spread: Thunder (-3.5)\" resolved THUNDER. The contested verdict forecast 59% (Brier 0.168) and lost to the market price 59% (Brier 0.168)",
+      "data": {
+        "verdictKey": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781:1794014400",
+        "marketId": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781",
+        "question": "Spread: Thunder (-3.5)",
+        "label": "contested",
+        "resolution": "THUNDER",
+        "yesWon": 1,
+        "forecast": 0.5899578123419045,
+        "priceAtVerdict": 0.59,
+        "grade": {
+          "forecastBrier": 0.16813459565943684,
+          "marketBrier": 0.16810000000000003,
+          "gain": -0.00003459565943680909
+        },
+        "gradedAt": "2026-11-07T04:25:38.570Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x0807bc1fb7e6d616f72b1ffd6158f17448df90223dbdd357281ccb7641b2fdbc-1794014400",
+      "key": "0x0807bc1fb7e6d616f72b1ffd6158f17448df90223dbdd357281ccb7641b2fdbc:1794014400",
+      "version": 1,
+      "blobId": "np7YGYYHJolHECXyjhwXQJZne_VpJ7rWULdnIVvYnTw",
+      "walruscan": "https://walruscan.com/mainnet/blob/np7YGYYHJolHECXyjhwXQJZne_VpJ7rWULdnIVvYnTw",
+      "summary": "\"Thunder vs. Grizzlies\" resolved THUNDER. The contested verdict forecast 68% (Brier 0.103) and lost to the market price 69% (Brier 0.099)",
+      "data": {
+        "verdictKey": "0x0807bc1fb7e6d616f72b1ffd6158f17448df90223dbdd357281ccb7641b2fdbc:1794014400",
+        "marketId": "0x0807bc1fb7e6d616f72b1ffd6158f17448df90223dbdd357281ccb7641b2fdbc",
+        "question": "Thunder vs. Grizzlies",
+        "label": "contested",
+        "resolution": "THUNDER",
+        "yesWon": 1,
+        "forecast": 0.678303642644334,
+        "priceAtVerdict": 0.685,
+        "grade": {
+          "forecastBrier": 0.10348854633590439,
+          "marketBrier": 0.09922499999999997,
+          "gain": -0.004263546335904422
+        },
+        "gradedAt": "2026-11-07T04:25:38.569Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xbab476bced4b179e692fa4299926f2ce13ede7b521fdb2e67e79a6d956220400-1794014400",
+      "key": "0xbab476bced4b179e692fa4299926f2ce13ede7b521fdb2e67e79a6d956220400:1794014400",
+      "version": 1,
+      "blobId": "A5ITt5ix3xw6HzJ9FWhokDBbrt2c13vf02y62cYcBgQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/A5ITt5ix3xw6HzJ9FWhokDBbrt2c13vf02y62cYcBgQ",
+      "summary": "\"Spread: 76ers (-2.5)\" resolved CAVALIERS. The contested verdict forecast 34% (Brier 0.116) and lost to the market price 33% (Brier 0.109)",
+      "data": {
+        "verdictKey": "0xbab476bced4b179e692fa4299926f2ce13ede7b521fdb2e67e79a6d956220400:1794014400",
+        "marketId": "0xbab476bced4b179e692fa4299926f2ce13ede7b521fdb2e67e79a6d956220400",
+        "question": "Spread: 76ers (-2.5)",
+        "label": "contested",
+        "resolution": "CAVALIERS",
+        "yesWon": 0,
+        "forecast": 0.34008177141862417,
+        "priceAtVerdict": 0.33,
+        "grade": {
+          "forecastBrier": 0.11565561125122933,
+          "marketBrier": 0.10890000000000001,
+          "gain": -0.006755611251229324
+        },
+        "gradedAt": "2026-11-07T04:25:38.221Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x153760e7ea5d8a07b8ceed9fe46440e44ad2d5f0028070b86acd53802329e1b3-1794014400",
+      "key": "0x153760e7ea5d8a07b8ceed9fe46440e44ad2d5f0028070b86acd53802329e1b3:1794014400",
+      "version": 1,
+      "blobId": "PkxuEZc2ruZk9FVnkFZ0ylAJFR2eFgaJ_cw37rNmI_o",
+      "walruscan": "https://walruscan.com/mainnet/blob/PkxuEZc2ruZk9FVnkFZ0ylAJFR2eFgaJ_cw37rNmI_o",
+      "summary": "\"76ers vs. Cavaliers\" resolved CAVALIERS. The mixed verdict forecast 37% (Brier 0.135) and lost to the market price 37% (Brier 0.133)",
+      "data": {
+        "verdictKey": "0x153760e7ea5d8a07b8ceed9fe46440e44ad2d5f0028070b86acd53802329e1b3:1794014400",
+        "marketId": "0x153760e7ea5d8a07b8ceed9fe46440e44ad2d5f0028070b86acd53802329e1b3",
+        "question": "76ers vs. Cavaliers",
+        "label": "mixed",
+        "resolution": "CAVALIERS",
+        "yesWon": 0,
+        "forecast": 0.36777375154308384,
+        "priceAtVerdict": 0.365,
+        "grade": {
+          "forecastBrier": 0.13525753232407395,
+          "marketBrier": 0.13322499999999998,
+          "gain": -0.0020325323240739657
+        },
+        "gradedAt": "2026-11-07T04:25:38.029Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x90d93e81a9fe5cc4af961261b3e98675423a5151dad10a578cb3850c118bd70e-1794010500",
+      "key": "0x90d93e81a9fe5cc4af961261b3e98675423a5151dad10a578cb3850c118bd70e:1794010500",
+      "version": 1,
+      "blobId": "Ta-1xaaxonFQFGlCfK4d6mfreD36kRIhKvQLDfgz6Lo",
+      "walruscan": "https://walruscan.com/mainnet/blob/Ta-1xaaxonFQFGlCfK4d6mfreD36kRIhKvQLDfgz6Lo",
+      "summary": "\"Virginia Tech vs. SMU\" resolved SMU. The sharp-led verdict forecast 23% (Brier 0.051) and lost to the market price 21% (Brier 0.042)",
+      "data": {
+        "verdictKey": "0x90d93e81a9fe5cc4af961261b3e98675423a5151dad10a578cb3850c118bd70e:1794010500",
+        "marketId": "0x90d93e81a9fe5cc4af961261b3e98675423a5151dad10a578cb3850c118bd70e",
+        "question": "Virginia Tech vs. SMU",
+        "label": "sharp-led",
+        "resolution": "SMU",
+        "yesWon": 0,
+        "forecast": 0.22514355185296894,
+        "priceAtVerdict": 0.205,
+        "grade": {
+          "forecastBrier": 0.050689618940970516,
+          "marketBrier": 0.04202499999999999,
+          "gain": -0.008664618940970523
+        },
+        "gradedAt": "2026-11-07T04:25:38.028Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x2e26333b69bcaf4ac04cce05408b244e586bca815efcdf84bd4520d83aa7d2dc-1794010500",
+      "key": "0x2e26333b69bcaf4ac04cce05408b244e586bca815efcdf84bd4520d83aa7d2dc:1794010500",
+      "version": 1,
+      "blobId": "J-6qMeqYZbBvHLBiBrq2D2u-k1bVLAR_ipKWcN3Mk3w",
+      "walruscan": "https://walruscan.com/mainnet/blob/J-6qMeqYZbBvHLBiBrq2D2u-k1bVLAR_ipKWcN3Mk3w",
+      "summary": "\"Celtics vs. Hornets\" resolved CELTICS. The sharp-led verdict forecast 90% (Brier 0.010) and lost to the market price 92% (Brier 0.007)",
+      "data": {
+        "verdictKey": "0x2e26333b69bcaf4ac04cce05408b244e586bca815efcdf84bd4520d83aa7d2dc:1794010500",
+        "marketId": "0x2e26333b69bcaf4ac04cce05408b244e586bca815efcdf84bd4520d83aa7d2dc",
+        "question": "Celtics vs. Hornets",
+        "label": "sharp-led",
+        "resolution": "CELTICS",
+        "yesWon": 1,
+        "forecast": 0.8979186516107285,
+        "priceAtVerdict": 0.915,
+        "grade": {
+          "forecastBrier": 0.010420601688971827,
+          "marketBrier": 0.007224999999999994,
+          "gain": -0.0031956016889718337
+        },
+        "gradedAt": "2026-11-07T04:25:37.737Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204-1793974200",
+      "key": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204:1793974200",
+      "version": 1,
+      "blobId": "4A3bGMJMA0_cF9L7sYdJFwqidx4AVzJIau8y8_Y_p6c",
+      "walruscan": "https://walruscan.com/mainnet/blob/4A3bGMJMA0_cF9L7sYdJFwqidx4AVzJIau8y8_Y_p6c",
+      "summary": "\"Spread: Hawks (-6.5)\" resolved HAWKS. The mixed verdict forecast 55% (Brier 0.205) and lost to the market price 56% (Brier 0.198)",
+      "data": {
+        "verdictKey": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204:1793974200",
+        "marketId": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204",
+        "question": "Spread: Hawks (-6.5)",
+        "label": "mixed",
+        "resolution": "HAWKS",
+        "yesWon": 1,
+        "forecast": 0.5468831493398114,
+        "priceAtVerdict": 0.555,
+        "grade": {
+          "forecastBrier": 0.20531488035220766,
+          "marketBrier": 0.19802499999999995,
+          "gain": -0.007289880352207706
+        },
+        "gradedAt": "2026-11-07T04:25:37.734Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781-1793974200",
+      "key": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781:1793974200",
+      "version": 1,
+      "blobId": "I2iVQDdgfB-AWFR7tF8oSVFmPFVJik_VCJEkY850EpA",
+      "walruscan": "https://walruscan.com/mainnet/blob/I2iVQDdgfB-AWFR7tF8oSVFmPFVJik_VCJEkY850EpA",
+      "summary": "\"Spread: Thunder (-3.5)\" resolved THUNDER. The sharp-led verdict forecast 52% (Brier 0.228) and lost to the market price 53% (Brier 0.226)",
+      "data": {
+        "verdictKey": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781:1793974200",
+        "marketId": "0xd4cbaadfa69dce41c7399a0c67aabc29fac0898c9db6221359b557f0b1c1e781",
+        "question": "Spread: Thunder (-3.5)",
+        "label": "sharp-led",
+        "resolution": "THUNDER",
+        "yesWon": 1,
+        "forecast": 0.5226628272086,
+        "priceAtVerdict": 0.525,
+        "grade": {
+          "forecastBrier": 0.22785077652848684,
+          "marketBrier": 0.225625,
+          "gain": -0.0022257765284868503
+        },
+        "gradedAt": "2026-11-07T04:25:37.732Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x007f87ec0818a9f007bf0f34902e417a8c20446db9d32f248f7fd75da0488fb3-1794010500",
+      "key": "0x007f87ec0818a9f007bf0f34902e417a8c20446db9d32f248f7fd75da0488fb3:1794010500",
+      "version": 1,
+      "blobId": "ZnIbq8qo9fOhMQzblpNq91ABxLPelqu9S7kNX_kuEd0",
+      "walruscan": "https://walruscan.com/mainnet/blob/ZnIbq8qo9fOhMQzblpNq91ABxLPelqu9S7kNX_kuEd0",
+      "summary": "\"Spread: Celtics (-8.5)\" resolved CELTICS. The noise verdict forecast 77% (Brier 0.053) and lost to the market price 77% (Brier 0.053)",
+      "data": {
+        "verdictKey": "0x007f87ec0818a9f007bf0f34902e417a8c20446db9d32f248f7fd75da0488fb3:1794010500",
+        "marketId": "0x007f87ec0818a9f007bf0f34902e417a8c20446db9d32f248f7fd75da0488fb3",
+        "question": "Spread: Celtics (-8.5)",
+        "label": "noise",
+        "resolution": "CELTICS",
+        "yesWon": 1,
+        "forecast": 0.7699674356996702,
+        "priceAtVerdict": 0.77,
+        "grade": {
+          "forecastBrier": 0.05291498063858537,
+          "marketBrier": 0.05289999999999999,
+          "gain": -0.000014980638585383732
+        },
+        "gradedAt": "2026-11-07T03:20:14.790Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204-1794010800",
+      "key": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204:1794010800",
+      "version": 1,
+      "blobId": "9hmGi7s_Uvbnz0HZivohwBy2lD-2q6E9kZmXzgzUEQ8",
+      "walruscan": "https://walruscan.com/mainnet/blob/9hmGi7s_Uvbnz0HZivohwBy2lD-2q6E9kZmXzgzUEQ8",
+      "summary": "\"Spread: Hawks (-6.5)\" resolved HAWKS. The noise verdict forecast 68% (Brier 0.102) and tied the market price 68% (Brier 0.102)",
+      "data": {
+        "verdictKey": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204:1794010800",
+        "marketId": "0xf21d67366017b58a72491bd68f3e8bcd2747c6da10f3d6d153261d0f4c98e204",
+        "question": "Spread: Hawks (-6.5)",
+        "label": "noise",
+        "resolution": "HAWKS",
+        "yesWon": 1,
+        "forecast": 0.68,
+        "priceAtVerdict": 0.68,
+        "grade": {
+          "forecastBrier": 0.10239999999999996,
+          "marketBrier": 0.10239999999999996,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-07T03:20:14.090Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xaad81cd350ffef5f0b3ded21bc89537c81aa880921993e3b32826c48b606df0e-1794010800",
+      "key": "0xaad81cd350ffef5f0b3ded21bc89537c81aa880921993e3b32826c48b606df0e:1794010800",
+      "version": 1,
+      "blobId": "6DCnpNfMx6fmUMgYkOJskgCqXfROreMqeJmnxWVib9o",
+      "walruscan": "https://walruscan.com/mainnet/blob/6DCnpNfMx6fmUMgYkOJskgCqXfROreMqeJmnxWVib9o",
+      "summary": "\"Wizards vs. Hawks\" resolved HAWKS. The contested verdict forecast 17% (Brier 0.027) and lost to the market price 17% (Brier 0.027)",
+      "data": {
+        "verdictKey": "0xaad81cd350ffef5f0b3ded21bc89537c81aa880921993e3b32826c48b606df0e:1794010800",
+        "marketId": "0xaad81cd350ffef5f0b3ded21bc89537c81aa880921993e3b32826c48b606df0e",
+        "question": "Wizards vs. Hawks",
+        "label": "contested",
+        "resolution": "HAWKS",
+        "yesWon": 0,
+        "forecast": 0.16510838853404317,
+        "priceAtVerdict": 0.165,
+        "grade": {
+          "forecastBrier": 0.027260779964308555,
+          "marketBrier": 0.027225000000000003,
+          "gain": -0.00003577996430855282
+        },
+        "gradedAt": "2026-11-07T03:20:14.087Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x90f8640fc2da5748ae2d21e79ab14eeebc130b68a171071a6d00d39e64a89b05-1794007200",
+      "key": "0x90f8640fc2da5748ae2d21e79ab14eeebc130b68a171071a6d00d39e64a89b05:1794007200",
+      "version": 1,
+      "blobId": "v_QQvoWjtY5eGjiGzxItmG0abZHGspAVQ-qTlHjaJFA",
+      "walruscan": "https://walruscan.com/mainnet/blob/v_QQvoWjtY5eGjiGzxItmG0abZHGspAVQ-qTlHjaJFA",
+      "summary": "\"LoL: Karmine Corp vs T1 - Game 2 Winner\" resolved T1. The mixed verdict forecast 10% (Brier 0.011) and lost to the market price 9% (Brier 0.007)",
+      "data": {
+        "verdictKey": "0x90f8640fc2da5748ae2d21e79ab14eeebc130b68a171071a6d00d39e64a89b05:1794007200",
+        "marketId": "0x90f8640fc2da5748ae2d21e79ab14eeebc130b68a171071a6d00d39e64a89b05",
+        "question": "LoL: Karmine Corp vs T1 - Game 2 Winner",
+        "label": "mixed",
+        "resolution": "T1",
+        "yesWon": 0,
+        "forecast": 0.10346709156292497,
+        "priceAtVerdict": 0.085,
+        "grade": {
+          "forecastBrier": 0.010705439036490698,
+          "marketBrier": 0.007225000000000001,
+          "gain": -0.003480439036490697
+        },
+        "gradedAt": "2026-11-07T02:19:21.370Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0xdb8805f2101fc79f95b8c2ae2a43c59ec51c36de537de597f7493f30429c9bbc-1794003600",
+      "key": "0xdb8805f2101fc79f95b8c2ae2a43c59ec51c36de537de597f7493f30429c9bbc:1794003600",
+      "version": 1,
+      "blobId": "869x7_76fOa8UxT4EDS5JS3Qagy-rJ3_yhf5DlXir14",
+      "walruscan": "https://walruscan.com/mainnet/blob/869x7_76fOa8UxT4EDS5JS3Qagy-rJ3_yhf5DlXir14",
+      "summary": "\"LoL: Karmine Corp vs T1 - Game 1 Winner\" resolved T1. The contested verdict forecast 35% (Brier 0.125) and beat the market price 36% (Brier 0.126)",
+      "data": {
+        "verdictKey": "0xdb8805f2101fc79f95b8c2ae2a43c59ec51c36de537de597f7493f30429c9bbc:1794003600",
+        "marketId": "0xdb8805f2101fc79f95b8c2ae2a43c59ec51c36de537de597f7493f30429c9bbc",
+        "question": "LoL: Karmine Corp vs T1 - Game 1 Winner",
+        "label": "contested",
+        "resolution": "T1",
+        "yesWon": 0,
+        "forecast": 0.35320802637545246,
+        "priceAtVerdict": 0.355,
+        "grade": {
+          "forecastBrier": 0.12475590989604232,
+          "marketBrier": 0.126025,
+          "gain": 0.0012690901039576763
+        },
+        "gradedAt": "2026-11-07T01:18:28.581Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x17b2afaf574dafde4a5988995ba43c5a99283fee166e1f5fb559f24a255ea73f-1793996100",
+      "key": "0x17b2afaf574dafde4a5988995ba43c5a99283fee166e1f5fb559f24a255ea73f:1793996100",
+      "version": 1,
+      "blobId": "wUijARhEAH85pnjevNfYQbNLZdx0m8zZO6ix_7a7nP0",
+      "walruscan": "https://walruscan.com/mainnet/blob/wUijARhEAH85pnjevNfYQbNLZdx0m8zZO6ix_7a7nP0",
+      "summary": "\"Will Sevilla FC win on 2026-11-06?\" resolved NO. The contested verdict forecast 43% (Brier 0.181) and lost to the market price 43% (Brier 0.181)",
+      "data": {
+        "verdictKey": "0x17b2afaf574dafde4a5988995ba43c5a99283fee166e1f5fb559f24a255ea73f:1793996100",
+        "marketId": "0x17b2afaf574dafde4a5988995ba43c5a99283fee166e1f5fb559f24a255ea73f",
+        "question": "Will Sevilla FC win on 2026-11-06?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.42502656730237687,
+        "priceAtVerdict": 0.425,
+        "grade": {
+          "forecastBrier": 0.1806475829128419,
+          "marketBrier": 0.18062499999999998,
+          "gain": -0.00002258291284190639
+        },
+        "gradedAt": "2026-11-06T23:17:52.301Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c-1793967000",
+      "key": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c:1793967000",
+      "version": 1,
+      "blobId": "ecGbyNVS_pg7gYB__wYSDD2qqtvsTyx80L146-9VfDM",
+      "walruscan": "https://walruscan.com/mainnet/blob/ecGbyNVS_pg7gYB__wYSDD2qqtvsTyx80L146-9VfDM",
+      "summary": "\"Counter-Strike: FURIA vs BetBoom Team - Map 2 Winner\" resolved FURIA. The contested verdict forecast 70% (Brier 0.091) and lost to the market price 73% (Brier 0.076)",
+      "data": {
+        "verdictKey": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c:1793967000",
+        "marketId": "0x2c4dd1868b067903726f4abb65efd6ee80ec8fd86c7b49739ddd8972a2daeb3c",
+        "question": "Counter-Strike: FURIA vs BetBoom Team - Map 2 Winner",
+        "label": "contested",
+        "resolution": "FURIA",
+        "yesWon": 1,
+        "forecast": 0.6989217552470328,
+        "priceAtVerdict": 0.725,
+        "grade": {
+          "forecastBrier": 0.09064810946352761,
+          "marketBrier": 0.07562500000000001,
+          "gain": -0.015023109463527598
+        },
+        "gradedAt": "2026-11-06T14:13:39.569Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da-1793963700",
+      "key": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da:1793963700",
+      "version": 1,
+      "blobId": "4JfzROh0h-sN7VEEcykKAuSa3ZvRU8bEPMmMxnN_TzU",
+      "walruscan": "https://walruscan.com/mainnet/blob/4JfzROh0h-sN7VEEcykKAuSa3ZvRU8bEPMmMxnN_TzU",
+      "summary": "\"Counter-Strike: FURIA vs BetBoom Team - Map 1 Winner\" resolved BETBOOM TEAM. The mixed verdict forecast 60% (Brier 0.357) and beat the market price 61% (Brier 0.366)",
+      "data": {
+        "verdictKey": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da:1793963700",
+        "marketId": "0x44fc392244c60bd4baac0ad0880e860e26c2ed30478adc23c5d86cbc79ed59da",
+        "question": "Counter-Strike: FURIA vs BetBoom Team - Map 1 Winner",
+        "label": "mixed",
+        "resolution": "BETBOOM TEAM",
+        "yesWon": 0,
+        "forecast": 0.5977299450211496,
+        "priceAtVerdict": 0.605,
+        "grade": {
+          "forecastBrier": 0.3572810871749865,
+          "marketBrier": 0.366025,
+          "gain": 0.008743912825013467
+        },
+        "gradedAt": "2026-11-06T14:13:39.356Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031-1793899500",
+      "key": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031:1793899500",
+      "version": 1,
+      "blobId": "AogYDpZhWcxKNZndtqlAmw29qZZcmqy7TwGSWo7LExY",
+      "walruscan": "https://walruscan.com/mainnet/blob/AogYDpZhWcxKNZndtqlAmw29qZZcmqy7TwGSWo7LExY",
+      "summary": "\"Will AC Sparta Praha win on 2026-11-05?\" resolved NO. The noise verdict forecast 18% (Brier 0.031) and tied the market price 18% (Brier 0.031)",
+      "data": {
+        "verdictKey": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031:1793899500",
+        "marketId": "0x1d0ca5fb4591345d7670869892f642e7a9002a88c0a713a162942767ebf41031",
+        "question": "Will AC Sparta Praha win on 2026-11-05?",
+        "label": "noise",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.175,
+        "priceAtVerdict": 0.175,
+        "grade": {
+          "forecastBrier": 0.030624999999999996,
+          "marketBrier": 0.030624999999999996,
+          "gain": 0
+        },
+        "gradedAt": "2026-11-06T14:13:38.922Z",
+        "model": "v3"
+      }
+    },
+    {
+      "id": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30-1793823000",
+      "key": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30:1793823000",
+      "version": 1,
+      "blobId": "3OYhg745p_jq0xQ99xcRInxx12uos5yN9Gqi3KNBtPs",
+      "walruscan": "https://walruscan.com/mainnet/blob/3OYhg745p_jq0xQ99xcRInxx12uos5yN9Gqi3KNBtPs",
+      "summary": "\"Will SSC Napoli win on 2026-11-04?\" resolved NO. The contested verdict forecast 23% (Brier 0.051) and lost to the market price 23% (Brier 0.051)",
+      "data": {
+        "verdictKey": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30:1793823000",
+        "marketId": "0x21cb3058a5a4a4c1be68401a8fe47494240a8e908807cc6bdb66566616b44a30",
+        "question": "Will SSC Napoli win on 2026-11-04?",
+        "label": "contested",
+        "resolution": "NO",
+        "yesWon": 0,
+        "forecast": 0.2251038546137259,
+        "priceAtVerdict": 0.225,
+        "grade": {
+          "forecastBrier": 0.05067174536195745,
+          "marketBrier": 0.050625,
+          "gain": -0.000046745361957444
+        },
+        "gradedAt": "2026-11-06T14:13:38.619Z",
         "model": "v3"
       }
     },
@@ -73,31 +1898,6 @@
           "gain": -0.005142824499774545
         },
         "gradedAt": "2026-11-04T20:19:31.329Z",
-        "model": "v3"
-      }
-    },
-    {
-      "id": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574-1793815500",
-      "key": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574:1793815500",
-      "version": 1,
-      "blobId": "ZjnwaHAUpdnM3CxBoBuuZhk0Pxq9aEF_NKr6cVB6Pro",
-      "walruscan": "https://walruscan.com/mainnet/blob/ZjnwaHAUpdnM3CxBoBuuZhk0Pxq9aEF_NKr6cVB6Pro",
-      "summary": "\"Will Real Madrid CF win on 2026-11-04?\" resolved YES. The noise verdict forecast 61% (Brier 0.150) and beat the market price 61% (Brier 0.156)",
-      "data": {
-        "verdictKey": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574:1793815500",
-        "marketId": "0x8941f985cce9ac4a175ce7a0a3d75f38536a43de46517d75aa9658ee2cf55574",
-        "question": "Will Real Madrid CF win on 2026-11-04?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.612982308410476,
-        "priceAtVerdict": 0.605,
-        "grade": {
-          "forecastBrier": 0.14978269360328395,
-          "marketBrier": 0.15602500000000002,
-          "gain": 0.00624230639671608
-        },
-        "gradedAt": "2026-11-04T20:19:31.005Z",
         "model": "v3"
       }
     },
@@ -173,31 +1973,6 @@
           "gain": -0.0004668846865938381
         },
         "gradedAt": "2026-11-04T20:19:30.603Z",
-        "model": "v3"
-      }
-    },
-    {
-      "id": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad-1793808900",
-      "key": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad:1793808900",
-      "version": 1,
-      "blobId": "FSAKwgwCAs3EMv85FRmyv-SLFY_Db-YoBhUT35G-4CU",
-      "walruscan": "https://walruscan.com/mainnet/blob/FSAKwgwCAs3EMv85FRmyv-SLFY_Db-YoBhUT35G-4CU",
-      "summary": "\"Will Stade Rennais FC 1901 vs. Olympiakós SFP end in a draw?\" resolved YES. The noise verdict forecast 37% (Brier 0.391) and tied the market price 38% (Brier 0.391)",
-      "data": {
-        "verdictKey": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad:1793808900",
-        "marketId": "0x8280ee6708ba8db47d87f71d9886124c1ecbbc66c71e0d71f81281742329aaad",
-        "question": "Will Stade Rennais FC 1901 vs. Olympiakós SFP end in a draw?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.37499999999999994,
-        "priceAtVerdict": 0.375,
-        "grade": {
-          "forecastBrier": 0.390625,
-          "marketBrier": 0.390625,
-          "gain": 0
-        },
-        "gradedAt": "2026-11-04T20:19:30.466Z",
         "model": "v3"
       }
     },
@@ -302,131 +2077,6 @@
       }
     },
     {
-      "id": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d-1793755500",
-      "key": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d:1793755500",
-      "version": 1,
-      "blobId": "WiMcLYds5_oE5IjS5Fov4QGGWSxybAQJ87KtFBGzVKk",
-      "walruscan": "https://walruscan.com/mainnet/blob/WiMcLYds5_oE5IjS5Fov4QGGWSxybAQJ87KtFBGzVKk",
-      "summary": "\"Will the Republicans win the Michigan Senate race in 2026?\" resolved NO. The noise verdict forecast 6% (Brier 0.003) and lost to the market price 6% (Brier 0.003)",
-      "data": {
-        "verdictKey": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d:1793755500",
-        "marketId": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d",
-        "question": "Will the Republicans win the Michigan Senate race in 2026?",
-        "label": "noise",
-        "resolution": "NO",
-        "yesWon": 0,
-        "forecast": 0.055115883163630745,
-        "priceAtVerdict": 0.055,
-        "grade": {
-          "forecastBrier": 0.003037760576906995,
-          "marketBrier": 0.003025,
-          "gain": -0.000012760576906994947
-        },
-        "gradedAt": "2026-11-04T11:47:25.579Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4-1793755500",
-      "key": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4:1793755500",
-      "version": 1,
-      "blobId": "_6bUTp-EtT1jhzT6wUxZ7RzzocB8FSrAYfMNsN4pJUg",
-      "walruscan": "https://walruscan.com/mainnet/blob/_6bUTp-EtT1jhzT6wUxZ7RzzocB8FSrAYfMNsN4pJUg",
-      "summary": "\"Will the Democrats win the Michigan Senate race in 2026?\" resolved YES. The contested verdict forecast 95% (Brier 0.002) and lost to the market price 95% (Brier 0.002)",
-      "data": {
-        "verdictKey": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4:1793755500",
-        "marketId": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4",
-        "question": "Will the Democrats win the Michigan Senate race in 2026?",
-        "label": "contested",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.9539910929069357,
-        "priceAtVerdict": 0.954,
-        "grade": {
-          "forecastBrier": 0.0021168195318982193,
-          "marketBrier": 0.0021160000000000037,
-          "gain": -8.195318982155697e-7
-        },
-        "gradedAt": "2026-11-04T11:47:25.576Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d-1793748000",
-      "key": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d:1793748000",
-      "version": 1,
-      "blobId": "kT5FpfTOsRGnuQn4Zx-BlBTS1nBXyIUtM8KYC0sFVRQ",
-      "walruscan": "https://walruscan.com/mainnet/blob/kT5FpfTOsRGnuQn4Zx-BlBTS1nBXyIUtM8KYC0sFVRQ",
-      "summary": "\"Will the Republicans win the Michigan Senate race in 2026?\" resolved NO. The noise verdict forecast 14% (Brier 0.018) and lost to the market price 14% (Brier 0.018)",
-      "data": {
-        "verdictKey": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d:1793748000",
-        "marketId": "0x3fd189cac9280dfc49a07115581e8d4c9e0b7e1c1e8580a44e9ff3d74e39cf2d",
-        "question": "Will the Republicans win the Michigan Senate race in 2026?",
-        "label": "noise",
-        "resolution": "NO",
-        "yesWon": 0,
-        "forecast": 0.13503560677625923,
-        "priceAtVerdict": 0.135,
-        "grade": {
-          "forecastBrier": 0.018234615097432506,
-          "marketBrier": 0.018225,
-          "gain": -0.00000961509743250405
-        },
-        "gradedAt": "2026-11-04T11:47:25.575Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4-1793748000",
-      "key": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4:1793748000",
-      "version": 1,
-      "blobId": "GtxIyVjj-elx7SyGyYX0VC4FHpJ1bQc6Z74wjq-wJ2Y",
-      "walruscan": "https://walruscan.com/mainnet/blob/GtxIyVjj-elx7SyGyYX0VC4FHpJ1bQc6Z74wjq-wJ2Y",
-      "summary": "\"Will the Democrats win the Michigan Senate race in 2026?\" resolved YES. The contested verdict forecast 86% (Brier 0.018) and lost to the market price 87% (Brier 0.018)",
-      "data": {
-        "verdictKey": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4:1793748000",
-        "marketId": "0xbfeb6d4cf3eab6071e204219b0647c8224d63a12778df467311b5f2a4b3a5bd4",
-        "question": "Will the Democrats win the Michigan Senate race in 2026?",
-        "label": "contested",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.8649988327164779,
-        "priceAtVerdict": 0.865,
-        "grade": {
-          "forecastBrier": 0.018225315167913512,
-          "marketBrier": 0.018225,
-          "gain": -3.15167913510217e-7
-        },
-        "gradedAt": "2026-11-04T11:47:25.297Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3-1793748000",
-      "key": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3:1793748000",
-      "version": 1,
-      "blobId": "AlpqBN4rCjUts0ZKU2LhB9eMrg404p3_ARRpVqeJYIA",
-      "walruscan": "https://walruscan.com/mainnet/blob/AlpqBN4rCjUts0ZKU2LhB9eMrg404p3_ARRpVqeJYIA",
-      "summary": "\"Will the Democratic Party control the Senate after the 2026 Midterm elections?\" resolved YES. The noise verdict forecast 81% (Brier 0.034) and lost to the market price 82% (Brier 0.034)",
-      "data": {
-        "verdictKey": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3:1793748000",
-        "marketId": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3",
-        "question": "Will the Democratic Party control the Senate after the 2026 Midterm elections?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.8149733862838433,
-        "priceAtVerdict": 0.815,
-        "grade": {
-          "forecastBrier": 0.034234847783267866,
-          "marketBrier": 0.03422500000000002,
-          "gain": -0.000009847783267846744
-        },
-        "gradedAt": "2026-11-04T11:47:25.069Z",
-        "model": "v2"
-      }
-    },
-    {
       "id": "0xedca8db60b5fe5a9cc29e967e3a1485602d46dd1a32603437417eabab359b710-1793778900",
       "key": "0xedca8db60b5fe5a9cc29e967e3a1485602d46dd1a32603437417eabab359b710:1793778900",
       "version": 1,
@@ -477,31 +2127,6 @@
       }
     },
     {
-      "id": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587-1793748000",
-      "key": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587:1793748000",
-      "version": 1,
-      "blobId": "2J9p6SoowBQLZn8aTGdc2vgTFvd0YJUj92rYxX2IUcY",
-      "walruscan": "https://walruscan.com/mainnet/blob/2J9p6SoowBQLZn8aTGdc2vgTFvd0YJUj92rYxX2IUcY",
-      "summary": "\"Will the Republican Party control the Senate after the 2026 Midterm elections?\" resolved NO. The noise verdict forecast 20% (Brier 0.038) and lost to the market price 20% (Brier 0.038)",
-      "data": {
-        "verdictKey": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587:1793748000",
-        "marketId": "0x86bfb53af7250a40928975c551d12c185b762fa4ce0b40c6a64a50c946d72587",
-        "question": "Will the Republican Party control the Senate after the 2026 Midterm elections?",
-        "label": "noise",
-        "resolution": "NO",
-        "yesWon": 0,
-        "forecast": 0.1950309362555804,
-        "priceAtVerdict": 0.195,
-        "grade": {
-          "forecastBrier": 0.038037066096728266,
-          "marketBrier": 0.038025,
-          "gain": -0.000012066096728262365
-        },
-        "gradedAt": "2026-11-04T08:47:40.260Z",
-        "model": "v2"
-      }
-    },
-    {
       "id": "0x154743106aa9b31a948b3b45bb29df9cdcd33412b634788919a0af5926eeaeb4-1793771700",
       "key": "0x154743106aa9b31a948b3b45bb29df9cdcd33412b634788919a0af5926eeaeb4:1793771700",
       "version": 1,
@@ -523,81 +2148,6 @@
           "gain": 0.00011076626739703332
         },
         "gradedAt": "2026-11-04T07:45:52.626Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417-1793755800",
-      "key": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417:1793755800",
-      "version": 1,
-      "blobId": "YFA05XlfjaAqF5gSGPjN_EVWgMLmjCgdRdR38CwMCe0",
-      "walruscan": "https://walruscan.com/mainnet/blob/YFA05XlfjaAqF5gSGPjN_EVWgMLmjCgdRdR38CwMCe0",
-      "summary": "\"Will the Democrats win the Texas Senate race in 2026?\" resolved YES. The noise verdict forecast 97% (Brier 0.001) and lost to the market price 97% (Brier 0.001)",
-      "data": {
-        "verdictKey": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417:1793755800",
-        "marketId": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417",
-        "question": "Will the Democrats win the Texas Senate race in 2026?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.9654569186174733,
-        "priceAtVerdict": 0.9655,
-        "grade": {
-          "forecastBrier": 0.0011932244713998633,
-          "marketBrier": 0.0011902499999999984,
-          "gain": -0.0000029744713998648784
-        },
-        "gradedAt": "2026-11-04T07:45:52.373Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14-1793748300",
-      "key": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14:1793748300",
-      "version": 1,
-      "blobId": "RVoKcZtOd8MQJDH5Z1HEbVcdzMpM6DaYO4ADFB3v1l4",
-      "walruscan": "https://walruscan.com/mainnet/blob/RVoKcZtOd8MQJDH5Z1HEbVcdzMpM6DaYO4ADFB3v1l4",
-      "summary": "\"Will the Republicans win the Texas Senate race in 2026?\" resolved NO. The noise verdict forecast 19% (Brier 0.034) and tied the market price 19% (Brier 0.034)",
-      "data": {
-        "verdictKey": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14:1793748300",
-        "marketId": "0x94521176f57d2ce81dde01e0b7699ca4279423042d37ed53908f0c8bfefe7e14",
-        "question": "Will the Republicans win the Texas Senate race in 2026?",
-        "label": "noise",
-        "resolution": "NO",
-        "yesWon": 0,
-        "forecast": 0.185,
-        "priceAtVerdict": 0.185,
-        "grade": {
-          "forecastBrier": 0.034225,
-          "marketBrier": 0.034225,
-          "gain": 0
-        },
-        "gradedAt": "2026-11-04T07:45:52.372Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417-1793748000",
-      "key": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417:1793748000",
-      "version": 1,
-      "blobId": "NUICKL6d3WXwdy7K82H9x1EVHTbg84IKEXDzgSgtJvM",
-      "walruscan": "https://walruscan.com/mainnet/blob/NUICKL6d3WXwdy7K82H9x1EVHTbg84IKEXDzgSgtJvM",
-      "summary": "\"Will the Democrats win the Texas Senate race in 2026?\" resolved YES. The noise verdict forecast 80% (Brier 0.038) and lost to the market price 81% (Brier 0.038)",
-      "data": {
-        "verdictKey": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417:1793748000",
-        "marketId": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417",
-        "question": "Will the Democrats win the Texas Senate race in 2026?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.8049986905185639,
-        "priceAtVerdict": 0.805,
-        "grade": {
-          "forecastBrier": 0.03802551069947483,
-          "marketBrier": 0.03802499999999998,
-          "gain": -5.106994748482752e-7
-        },
-        "gradedAt": "2026-11-04T07:45:52.027Z",
         "model": "v2"
       }
     },
@@ -748,31 +2298,6 @@
           "gain": 7.221665771980912e-7
         },
         "gradedAt": "2026-11-04T04:42:18.172Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103-1793759400",
-      "key": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103:1793759400",
-      "version": 1,
-      "blobId": "Dh5Smw5LFsVx_kJpnHjR_H2tJlbtr3mgwP3JkBWKsWE",
-      "walruscan": "https://walruscan.com/mainnet/blob/Dh5Smw5LFsVx_kJpnHjR_H2tJlbtr3mgwP3JkBWKsWE",
-      "summary": "\"Jets vs. Canadiens: O/U 4.5\" resolved OVER. The noise verdict forecast 53% (Brier 0.221) and tied the market price 53% (Brier 0.221)",
-      "data": {
-        "verdictKey": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103:1793759400",
-        "marketId": "0x9f08cc76a765938c95d892f852c1157b1a63d7f478545a305da8479b350ca103",
-        "question": "Jets vs. Canadiens: O/U 4.5",
-        "label": "noise",
-        "resolution": "OVER",
-        "yesWon": 1,
-        "forecast": 0.53,
-        "priceAtVerdict": 0.53,
-        "grade": {
-          "forecastBrier": 0.22089999999999999,
-          "marketBrier": 0.22089999999999999,
-          "gain": 0
-        },
-        "gradedAt": "2026-11-04T03:40:12.382Z",
         "model": "v2"
       }
     },
@@ -977,81 +2502,6 @@
       }
     },
     {
-      "id": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681-1793737500",
-      "key": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681:1793737500",
-      "version": 1,
-      "blobId": "p0tE4KnNTZZVO3xN2gknKeNybey2mASnuDLRyfnjNx0",
-      "walruscan": "https://walruscan.com/mainnet/blob/p0tE4KnNTZZVO3xN2gknKeNybey2mASnuDLRyfnjNx0",
-      "summary": "\"Will Manchester United FC vs. AS Roma end in a draw?\" resolved NO. The noise verdict forecast 14% (Brier 0.021) and tied the market price 14% (Brier 0.021)",
-      "data": {
-        "verdictKey": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681:1793737500",
-        "marketId": "0x999cfb279324a81e8e1b2f12eeb7672462896a866f824d0440463d4d069c8681",
-        "question": "Will Manchester United FC vs. AS Roma end in a draw?",
-        "label": "noise",
-        "resolution": "NO",
-        "yesWon": 0,
-        "forecast": 0.145,
-        "priceAtVerdict": 0.145,
-        "grade": {
-          "forecastBrier": 0.021025,
-          "marketBrier": 0.021025,
-          "gain": 0
-        },
-        "gradedAt": "2026-11-03T22:37:06.919Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c-1793737200",
-      "key": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c:1793737200",
-      "version": 1,
-      "blobId": "WaAOLr_aptZPMdRvtb3OFS5ot-60AwYcdszVc_pQZvA",
-      "walruscan": "https://walruscan.com/mainnet/blob/WaAOLr_aptZPMdRvtb3OFS5ot-60AwYcdszVc_pQZvA",
-      "summary": "\"Will AS Roma win on 2026-11-03?\" resolved NO. The noise verdict forecast 75% (Brier 0.570) and beat the market price 76% (Brier 0.570)",
-      "data": {
-        "verdictKey": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c:1793737200",
-        "marketId": "0x931d947e8a111a438b831c65d94868c8f1a9e58fb43db89f88bd8ceff3ccf21c",
-        "question": "Will AS Roma win on 2026-11-03?",
-        "label": "noise",
-        "resolution": "NO",
-        "yesWon": 0,
-        "forecast": 0.7549999999999999,
-        "priceAtVerdict": 0.755,
-        "grade": {
-          "forecastBrier": 0.5700249999999999,
-          "marketBrier": 0.570025,
-          "gain": 1.1102230246251565e-16
-        },
-        "gradedAt": "2026-11-03T22:37:06.918Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7-1793736900",
-      "key": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7:1793736900",
-      "version": 1,
-      "blobId": "mWuKy0kQHRfjXXiJsSFPK3WdL7MwjZ5f9IWf4rhXEAw",
-      "walruscan": "https://walruscan.com/mainnet/blob/mWuKy0kQHRfjXXiJsSFPK3WdL7MwjZ5f9IWf4rhXEAw",
-      "summary": "\"Will Manchester United FC win on 2026-11-03?\" resolved YES. The noise verdict forecast 11% (Brier 0.801) and tied the market price 11% (Brier 0.801)",
-      "data": {
-        "verdictKey": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7:1793736900",
-        "marketId": "0x605e64bac476f348d18ca4b5d587d451afd7c794c304d2d2a5dbbb7cf6dbc9c7",
-        "question": "Will Manchester United FC win on 2026-11-03?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.105,
-        "priceAtVerdict": 0.105,
-        "grade": {
-          "forecastBrier": 0.801025,
-          "marketBrier": 0.801025,
-          "gain": 0
-        },
-        "gradedAt": "2026-11-03T22:37:06.917Z",
-        "model": "v2"
-      }
-    },
-    {
       "id": "0x3656c904a84afd6e03092a48ec28f42d77997f1ba293402278b5ca31f2a1571f-1793728800",
       "key": "0x3656c904a84afd6e03092a48ec28f42d77997f1ba293402278b5ca31f2a1571f:1793728800",
       "version": 1,
@@ -1098,31 +2548,6 @@
           "gain": 0
         },
         "gradedAt": "2026-11-03T20:35:34.289Z",
-        "model": "v2"
-      }
-    },
-    {
-      "id": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8-1793728800",
-      "key": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8:1793728800",
-      "version": 1,
-      "blobId": "g8L3MFkTNAVqfkYVo2ttVgTJDP_YqkTDfowJelwE7Ck",
-      "walruscan": "https://walruscan.com/mainnet/blob/g8L3MFkTNAVqfkYVo2ttVgTJDP_YqkTDfowJelwE7Ck",
-      "summary": "\"Will Galatasaray SK win on 2026-11-03?\" resolved YES. The noise verdict forecast 82% (Brier 0.034) and tied the market price 82% (Brier 0.034)",
-      "data": {
-        "verdictKey": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8:1793728800",
-        "marketId": "0x824d83ff2c740aa027b47ae2f0f7abe7492e435c5faef09202495c4f34ab96a8",
-        "question": "Will Galatasaray SK win on 2026-11-03?",
-        "label": "noise",
-        "resolution": "YES",
-        "yesWon": 1,
-        "forecast": 0.815,
-        "priceAtVerdict": 0.815,
-        "grade": {
-          "forecastBrier": 0.03422500000000002,
-          "marketBrier": 0.03422500000000002,
-          "gain": 0
-        },
-        "gradedAt": "2026-11-03T20:35:33.881Z",
         "model": "v2"
       }
     },
@@ -1205,43 +2630,43 @@
   "grades": [
     {
       "label": "contested",
-      "n": 8,
-      "forecastBrier": 0.14186836467961064,
-      "marketBrier": 0.18868637500000002,
-      "gain": 0.04681801032038936,
-      "winRate": 0.625
+      "n": 37,
+      "forecastBrier": 0.18413855483332098,
+      "marketBrier": 0.1928087837837838,
+      "gain": 0.008670228950462839,
+      "winRate": 0.40540540540540543
     },
     {
       "label": "mixed",
-      "n": 5,
-      "forecastBrier": 0.14393014449501557,
-      "marketBrier": 0.14082,
-      "gain": -0.003110144495015585,
-      "winRate": 0.2
+      "n": 21,
+      "forecastBrier": 0.1245800541349314,
+      "marketBrier": 0.12025597619047619,
+      "gain": -0.004324077944455201,
+      "winRate": 0.2857142857142857
     },
     {
       "label": "noise",
-      "n": 34,
-      "forecastBrier": 0.18744163539208514,
-      "marketBrier": 0.187804125,
-      "gain": 0.00036248960791489287,
-      "winRate": 0.29411764705882354
+      "n": 37,
+      "forecastBrier": 0.18932000346804215,
+      "marketBrier": 0.18957281081081084,
+      "gain": 0.0002528073427686851,
+      "winRate": 0.2972972972972973
     },
     {
       "label": "sharp-led",
-      "n": 1,
-      "forecastBrier": 0.06549188468659384,
-      "marketBrier": 0.065025,
-      "gain": -0.0004668846865938381,
-      "winRate": 0
+      "n": 10,
+      "forecastBrier": 0.09197551482610082,
+      "marketBrier": 0.08462499999999999,
+      "gain": -0.007350514826100818,
+      "winRate": 0.1
     },
     {
       "label": "all",
-      "n": 48,
-      "forecastBrier": 0.1727730234985303,
-      "marketBrier": 0.1804990885416667,
-      "gain": 0.007726065043136447,
-      "winRate": 0.3333333333333333
+      "n": 105,
+      "forecastBrier": 0.16527526611661905,
+      "marketBrier": 0.16685470952380957,
+      "gain": 0.001579443407190466,
+      "winRate": 0.3142857142857143
     }
   ]
 }
