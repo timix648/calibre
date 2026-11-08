@@ -136,6 +136,12 @@ for (const [label, cost, why] of actions) console.log(`${label.padEnd(aw)}  ${St
 
 // --- Watcher cost per hour -------------------------------------------------------------------------------------------
 // Measured on the VPS logs: 6 passes an hour, discovery every 2 h (3 event listings), about 1.8 moves judged an hour.
+//
+// A warning, learned by getting it wrong twice. Do NOT scale this figure by the hourly cap (--tatum-hourly) unless the cap
+// is actually binding. At cap 60 the watcher averaged about 20 calls an hour and only touched the ceiling in bursts, so the
+// burn was not proportional to the cap: predicting cap 24 by scaling 2,605/h down by 24/60 gave 1,042/h, and the measured
+// figure was 1,908/h — nearly double. Below roughly cap 25 the cap does bind and scaling from a measured rate at a binding
+// cap is sound. Measure, then scale from the measurement; never from a cap that is not being reached.
 const perMove = TATUM_CREDITS.marketHistory + M + TATUM_CREDITS.marketPrice + T + G;
 const watcherHour = (3 * TATUM_CREDITS.events) / 2 + 1.8 * perMove + 1.5 * M;
 console.log("\n--- Watcher ---");
