@@ -2,7 +2,8 @@
 
 Before you chase a price move or copy a whale, see whether the money behind it comes from traders who reliably lose.
 
-**Live:** https://calibre-blush.vercel.app · Built for **Total Recall: Tatum x Walrus Memory** (Track 01, Markets & Sports Prediction)
+**Live:** https://calibre-blush.vercel.app · **Demo video (2:44):** https://youtu.be/-FlnLNTNff0
+Built for **Total Recall: Tatum x Walrus Memory** (Track 01, Markets & Sports Prediction)
 
 On Polymarket a market jumps 8 points and everyone asks who knows something. Usually nobody does. CALIBRE looks at the wallets
 that pushed the price, scores each one against the prices it actually paid on its past bets, and tells you in plain words
@@ -160,13 +161,61 @@ checkpoint 341674249, 0.01 USDC from the agent to the API's wallet, gas price 0.
 
 ## Run it
 
+### Nothing to install
+
+Everything a reviewer needs is live. No keys, no signup, no local setup.
+
+| What | Where | What you are checking |
+|---|---|---|
+| The demo | https://youtu.be/-FlnLNTNff0 | 2:44, the whole thing end to end |
+| A wallet X-ray | https://calibre-blush.vercel.app → paste any Polymarket profile or wallet | Runs live on the server: edge against the prices paid, error band, sniping share, and the Sui checkpoint it was read at |
+| A market X-ray | paste a Polymarket market or event link | The latest move, who pushed it, the square-money share and how much of it could be judged |
+| The sealed record | https://calibre-blush.vercel.app/record | Every verdict with its grade. Read from Walrus when the page renders, so it moves while you watch |
+| The proof | https://calibre-blush.vercel.app/proof | Namespace counts, blob links on Walruscan, and the checkpoint source for each verdict |
+| The method and its limits | https://calibre-blush.vercel.app/method | The label test, the replay, and where the evidence stops |
+
+No wallet to hand? The landing page has a **Try a sample wallet** link. Note that a wallet's label is not fixed: it is
+recomputed from that wallet's newest 1,000 trades every time, so one labelled a proven winner last week can read *too early*
+today once older bets fall out of the window. That is the measurement behaving correctly, not drifting.
+
+**The MCP server** takes one line and no key:
+
+```
+claude mcp add --transport http calibre https://calibre-blush.vercel.app/api/mcp
+```
+
+It is plain JSON-RPC over HTTP, so nothing Anthropic-specific is required — Cursor, VS Code, Windsurf, Cline and Goose all
+speak it, and `curl` works too:
+
+```bash
+curl -s -X POST https://calibre-blush.vercel.app/api/mcp   -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream'   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```
+
+**The Chrome extension**: download https://calibre-blush.vercel.app/calibre-extension.zip, unzip it, then
+`chrome://extensions` → Developer mode → Load unpacked. Open any polymarket.com profile, market or game page.
+
+### Rebuild the proof yourself
+
+The strongest check, and the one that does not trust this repository: rebuild the record from Walrus Memory alone.
+
 ```bash
 pnpm install
-pnpm test                         # 278 tests
+cp .env.example .env     # add MEMWAL_PRIVATE_KEY, MEMWAL_ACCOUNT_ID and MEMWAL_SERVER_URL
+pnpm verify              # recalls every verdict and outcome from Walrus, checks each outcome has its verdict,
+                         # rewrites docs/PROOF.md and prints the Sui checkpoint it read through Tatum
+```
+
+Nothing in `docs/PROOF.md` comes from a local database; it is rebuilt from the memories on mainnet each time.
+
+### Run the code
+
+```bash
+pnpm install
+pnpm test                         # 292 tests
 pnpm --filter @calibre/web dev    # the site on http://localhost:3000, no keys needed
 ```
 
-With keys in `.env` (copy `.env.example`: a free Tatum key, a Walrus Memory delegate key and account ID):
+With keys in `.env` (copy `.env.example`: a Tatum API key, a Walrus Memory delegate key and account ID):
 
 ```bash
 pnpm verify          # rebuild the proof from Walrus Memory
@@ -191,4 +240,4 @@ Or locally over stdio: `claude mcp add calibre -- pnpm --silent exec tsx apps/mc
 - Edge is measured against the price paid and ignores fees and bet size. Wallets trade the same events, so intervals are optimistic.
 - The wallet X-ray reads a wallet's newest 1,000 trades; a long history is judged on its recent part.
 - The square-money result is p = 0.073. It is early evidence, and the product says so wherever it appears.
-- 271 wallet records are sealed on Walrus; the watcher labels takers from a larger local index (5,740 wallets) that is not all sealed.
+- The sealed wallet records are a subset: 337 and rising on Walrus, while the watcher labels takers from a larger local index (5,740 wallets) that is not all sealed.
