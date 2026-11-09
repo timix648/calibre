@@ -21,6 +21,13 @@ const PAYMENT = {
 
 const SHOWN = 10;
 
+/**
+ * How many memories a namespace actually holds, from the relayer's own inventory listing.
+ * Recall is a capped similarity search (100 per query), so the merged read can surface fewer than this; the pages say
+ * "newest N of M" rather than quietly showing the smaller number.
+ */
+const onWalrus = (ns: string) => memory.namespaces.find((n) => n.name === ns)?.memories ?? 0;
+
 // Re-render at most every ten minutes, so a verdict sealed on Walrus appears without anything being deployed.
 export const revalidate = 600;
 // The Walrus recall takes 8 to 13 seconds; give the render room for a slow one.
@@ -38,8 +45,8 @@ export default async function Proof() {
 
       <section data-stagger className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4" aria-label="Totals">
         <Stat label="Memories" value={memory.total} note={`Across ${memory.namespaces.filter((n) => n.memories > 0).length} namespaces`} />
-        <Stat label="Sealed verdicts" value={verdicts.length} />
-        <Stat label="Graded outcomes" value={outcomes.length} />
+        <Stat label="Sealed verdicts" value={verdicts.length} note={onWalrus("calibre-verdicts") > verdicts.length ? `Newest ${verdicts.length} of ${onWalrus("calibre-verdicts")} on Walrus` : undefined} />
+        <Stat label="Graded outcomes" value={outcomes.length} note={onWalrus("calibre-outcomes") > outcomes.length ? `Newest ${outcomes.length} of ${onWalrus("calibre-outcomes")} on Walrus` : undefined} />
         <Stat
           label="Stamped via Tatum gRPC"
           value={<><CountUp value={tatumStamped} /><span className="text-muted"> / {verdicts.length}</span></>}

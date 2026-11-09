@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SquareGauge } from "@/components/square-gauge";
 import { Badge, Card, ExternalLink, H2, PageTitle, Stat, TableWrap } from "@/components/ui";
+import { memory } from "@/lib/data";
 import { liveRecord } from "@/lib/live-record";
 import { pct, utc } from "@/lib/format";
 import { buildRecord, type RecordRow } from "@/lib/record";
@@ -58,6 +59,8 @@ export default async function Record() {
   const { verdicts, outcomes, generatedAt, source } = await liveRecord();
   const record = buildRecord(verdicts, outcomes);
   const { rows, summary } = record;
+  // The relayer's inventory count, which can exceed what a capped similarity recall surfaces.
+  const sealedOnWalrus = memory.namespaces.find((n) => n.name === "calibre-verdicts")?.memories ?? 0;
   return (
     <div className="space-y-8">
       <PageTitle tab="Graded calls"
@@ -66,7 +69,7 @@ export default async function Record() {
       />
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Summary">
-        <Stat label="Sealed verdicts" value={summary.sealed} />
+        <Stat label="Sealed verdicts" value={summary.sealed} note={sealedOnWalrus > summary.sealed ? `Newest ${summary.sealed} of ${sealedOnWalrus} on Walrus` : undefined} />
         <Stat label="Graded" value={summary.graded} note={summary.graded === 0 ? "Graded when the market resolves" : `of ${summary.sealed} sealed`} />
         <Stat label="CALIBRE Brier" value={brier(summary.forecastBrier)} note="Lower is better" />
         <Stat label="Market-price Brier" value={brier(summary.marketBrier)} note="At verdict time" />
