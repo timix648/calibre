@@ -42,8 +42,8 @@ not beat the market price on Brier and says so on the record page. What it adds 
 | **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
-| **149 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 105 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
-| **Every sealed verdict** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway, 149 of 149 so far |
+| **174 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 110 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
+| **Every sealed verdict** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway, 174 of 174 so far |
 | **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
