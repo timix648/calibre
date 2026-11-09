@@ -14,6 +14,26 @@ on a live move is sealed on Walrus Memory before the result is known, and graded
 
 *The Chrome extension on a live Polymarket profile: up $1.3M, yet over 656 bets its edge is within what luck produces.*
 
+## Does it fit Track 01? Line by line
+
+The track asks for a "prediction app for sports, elections, culture or markets" that can "compare bookmaker odds with onchain
+sources", "track which voices were right", let "users log picks before events", and use "memory [to store] credibility scores
+so the app learns who to trust" — with "pick journals with post-game scorecards" and "odds dashboards that flag when sources
+disagree" as the worked examples. Where each of those lives in CALIBRE:
+
+| The brief | In CALIBRE |
+|---|---|
+| Prediction app for sports or markets | Polymarket sports markets across 142 leagues. Every page is a judgement about a live market. |
+| Compare bookmaker odds with onchain sources | **The move gate.** A candidate move spotted on Polymarket's free feed is judged only if Tatum's own price history shows the same move. Two independent sources must agree before a verdict exists; a disagreement kills it, and the log says so. |
+| Track which voices were right | The "voices" are the wallets that actually move the price, scored against the prices they paid — not self-declared analysts. 790,185 bets scored across 5,740 wallets. |
+| Users log picks before events | **The one line CALIBRE reads differently.** The picks logged before the event are the agent's own, not a user's: the watcher seals a forecast on Walrus Memory with a Sui checkpoint *before* the market resolves, so the timing is not something anyone can assert after the fact. A user-entered pick journal cannot be proven to have been entered early. This one can. |
+| Memory stores credibility scores so the app learns who to trust | `calibre-wallets` is exactly that: 337 versioned credibility records, one per wallet and league. Walrus Memory has no update, so a changed judgement is a new version and the old one stays readable. The labels on the next move come from those records. |
+| *"pick journals with post-game scorecards"* | [`/record`](https://calibre-blush.vercel.app/record) — every sealed verdict with its Brier score once the market resolved, next to the market price for the same event. Nothing is pooled across model versions. |
+| *"odds dashboards that flag when sources disagree"* | Every X-ray names the source that answered it and why, and the move gate above is the disagreement flag with teeth: it refuses to publish rather than quietly picking a side. |
+
+The honest summary: CALIBRE answers "who moved this price, and do they have a record?" rather than "what will happen?". It does
+not beat the market price on Brier and says so on the record page. What it adds is the part the price does not tell you.
+
 ## By the numbers
 
 | | |
@@ -22,8 +42,8 @@ on a live move is sealed on Walrus Memory before the result is known, and graded
 | **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
-| **100+ verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 85+ graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
-| **Every sealed verdict** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway, 100+ so far |
+| **149 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 105 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
+| **Every sealed verdict** | stamped with a Sui checkpoint read through Tatum's Sui gRPC gateway, 149 of 149 so far |
 | **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
@@ -54,7 +74,7 @@ Every X-ray runs live on the server, and Tatum is in each one:
 
 The server counts every Tatum request at its listed credit price against a daily budget and pauses Tatum after a plan error,
 so the site never stops: when Tatum cannot answer, the free source takes over and the page says which one answered.
-The radar, record and proof pages read files exported from Walrus Memory.
+The radar, record and proof pages recall the sealed record from Walrus Memory as the page renders, so a verdict appears without anything being deployed and without any machine holding write access to this repository. If Walrus is slow or a namespace is past the 100-per-query recall ceiling, the page falls back to the last committed export and says which one you are looking at.
 
 ## Does the label mean anything? The evidence
 
