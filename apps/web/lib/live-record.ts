@@ -28,10 +28,10 @@ export interface LiveRecord {
 const REVALIDATE_MS = 10 * 60_000;
 /**
  * A recall that has not answered in this long is treated as a failure, so a page is never left hanging. One query per
- * namespace takes 8 to 13 seconds against the mainnet relayer and they run together, so 45 leaves room for a slow day
+ * merged read measured 25 to 33 seconds from a home connection on 9 Nov, so 50 leaves room for a slower one
  * while staying inside the page's own 60-second limit.
  */
-const TIMEOUT_MS = 45_000;
+const TIMEOUT_MS = 50_000;
 
 const fallback = (note: string | null): LiveRecord => ({
   verdicts: staticVerdicts,

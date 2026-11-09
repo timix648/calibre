@@ -27,13 +27,13 @@ export const revalidate = 600;
 export const maxDuration = 60;
 
 export default async function Proof() {
-  const { verdicts, outcomes, grades, generatedAt, source } = await liveRecord();
+  const { verdicts, outcomes, grades, generatedAt, source, note } = await liveRecord();
   const tatumStamped = tatumStampedIn(verdicts);
   return (
     <div className="space-y-8">
       <PageTitle tab="On-chain receipts"
         title="Proof"
-        sub={`Everything here is rebuilt from Walrus Memory on Sui mainnet, not from a private database. ${source === "walrus" ? "Read from Walrus" : "Exported"} ${utc(generatedAt)}.`}
+        sub={`Everything here is rebuilt from Walrus Memory on Sui mainnet, not from a private database. ${source === "walrus" ? "Read from Walrus" : "Exported"} ${utc(generatedAt)}.${source === "walrus" || !note ? "" : ` Showing the last export because ${note}.`}`}
       />
 
       <section data-stagger className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4" aria-label="Totals">
