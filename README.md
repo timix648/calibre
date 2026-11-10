@@ -23,10 +23,11 @@ Nothing to install, nothing to clone. In order:
    losing record. Note the line that says how much of the money it *could* judge; a tool that hides its coverage is hiding
    its error bars.
 2. **[`/record`](https://calibre-blush.vercel.app/record) — the scorecard.** 227 verdicts sealed on Walrus before the
-   result, 222 graded since. CALIBRE's Brier against the market's Brier on the same events. We do not beat the price, and
-   the page says so in the heading rather than in a footnote. The page shows the newest 194 of those 227 and says so:
-   Walrus recall is a similarity search capped at 100 hits per query, so the merged read surfaces fewer than the namespace
-   holds — `pnpm verify` walks the full inventory.
+   result, 222 graded since, as of 10 November 2026 — the live page will show more. CALIBRE's Brier against the market's
+   Brier on the same events. We do not beat the price, and the page says so in the heading rather than in a footnote. The
+   page shows the newest of those and labels the count "newest N of M", because Walrus recall is a similarity search capped
+   at 100 hits per query and the merged read surfaces fewer than the namespace holds — `pnpm verify` walks the full
+   inventory.
 3. **[`/proof`](https://calibre-blush.vercel.app/proof) — the receipts.** Every namespace, every blob on Walruscan, every
    Sui checkpoint on Suiscan, and the one settled agent payment. The heading tells you whether you are looking at a live
    Walrus read or the fallback export, with the time.
@@ -89,7 +90,7 @@ Walrus, there is nothing left to recover from. That is the test of whether memor
 
 | What the award looks for | The evidence | Where |
 |---|---|---|
-| Memory that is actually written to, at volume | **830 memories** across 3 namespaces on Walrus mainnet: 381 wallet credibility records, 227 sealed verdicts, 222 graded outcomes, plus the model cards | [`/proof`](https://calibre-blush.vercel.app/proof) lists every namespace with counts |
+| Memory that is actually written to, at volume | **830 memories** across 3 namespaces on Walrus mainnet on 10 Nov 2026 — 381 wallet credibility records, 227 sealed verdicts, 222 graded outcomes, plus the model cards — and still growing without a deploy | [`/proof`](https://calibre-blush.vercel.app/proof) lists every namespace with counts |
 | Memory that is read back and *changes behaviour* | A verdict's labels come from recalled wallet records. Re-score a wallet and the next move it pushes is labelled differently — that is the loop, not a report | `apps/worker/src/watch.ts`, `loadMemoryState` |
 | Handling the append-only constraint properly | Walrus Memory has **no update and no delete**. A changed judgement is a new version under the same key: `[cal1\|kind\|key\|vN] summary \|\| {json}`. Readers keep the highest version per key. **117 of the 126 wallet records written from my machine now carry a v2** that supersedes a v1 — and the v1 is still there, readable, which is exactly what a record of a changed judgement should look like | `packages/memory/src/envelope.ts`, `rebuild.ts` |
 | Encryption | Every memory is sealed with Seal before it leaves the process; recall decrypts on the relayer | `packages/memory/src/store.ts` |
@@ -133,11 +134,17 @@ workspaces, and the MCP server exists so that an AI agent can *consume* CALIBRE,
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
 | **227 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 222 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
-| **Every sealed verdict** | stamped with a Sui checkpoint; 157 of 194 read through Tatum's Sui gRPC gateway, the rest via Sui's public GraphQL and recorded as such |
+| **Every sealed verdict** | stamped with a Sui checkpoint, read through Tatum's Sui gRPC gateway — 157 of the 194 in the 10 Nov snapshot, the rest via Sui's public GraphQL when the gateway was unreachable, recorded as such rather than hidden |
 | **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
 Every figure is a plain sum over the study outputs (`scripts/scale-stats.ts`), not an estimate.
+
+**The study figures above are fixed; the live ones are a snapshot taken 10 November 2026 and will be higher by the time you
+read this.** The watcher seals about 1.7 verdicts an hour and keeps running, and the site reads Walrus Memory at render
+rather than a file in this repository, so [`/proof`](https://calibre-blush.vercel.app/proof) and
+[`/record`](https://calibre-blush.vercel.app/record) are always the authoritative count and no number here has to be
+updated for them to move. If a figure in this README is lower than the live page, the live page is right.
 
 ## What it does
 
@@ -250,7 +257,7 @@ from it. The fills are the only part Tatum cannot supply, and the code tracks th
 
 | On every sealed verdict | Count |
 |---|---|
-| Sui checkpoint read through **Tatum's Sui gRPC gateway** | 157 of 194 |
+| Sui checkpoint read through **Tatum's Sui gRPC gateway** | 157 of 194 in the 10 Nov snapshot |
 | Checkpoint via Sui's public GraphQL, recorded as such, when the gateway was unreachable | 37 of 194 |
 | Move checked against Tatum's `midpoint` price history before judging | every candidate |
 | The feed that supplied the fills, and the endpoint that failed if it was not Tatum | every verdict |
