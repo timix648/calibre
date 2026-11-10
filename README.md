@@ -69,7 +69,7 @@ disagree" as the worked examples. Where each of those lives in CALIBRE:
 | Compare bookmaker odds with onchain sources | **The move gate.** Every candidate move is checked against Tatum's own `midpoint` price history before anything is judged. When Tatum answers, the move CALIBRE judges is Tatum's, and a move Tatum's history does not show is **dropped and never sealed** — two sources have to agree on the thing being judged. Tatum cannot supply the fills behind a move (its `/trades` returns zero rows for every Polymarket market), so wallet attribution falls back to Polymarket's free API and each verdict records that. See [How Tatum is used](#how-tatum-is-used) for which field answers which question. |
 | Track which voices were right | The "voices" are the wallets that actually move the price, scored against the prices they paid — not self-declared analysts. 790,185 bets scored across 5,740 wallets. |
 | Users log picks before events | **The one line CALIBRE reads differently.** The picks logged before the event are the agent's own, not a user's: the watcher seals a forecast on Walrus Memory with a Sui checkpoint *before* the market resolves, so the timing is not something anyone can assert after the fact. A user-entered pick journal cannot be proven to have been entered early. This one can. |
-| Memory stores credibility scores so the app learns who to trust | `calibre-wallets` is exactly that: 337 versioned credibility records, one per wallet and league. Walrus Memory has no update, so a changed judgement is a new version and the old one stays readable. The labels on the next move come from those records. |
+| Memory stores credibility scores so the app learns who to trust | `calibre-wallets` is exactly that: 381 versioned credibility records, one per wallet and league. Walrus Memory has no update, so a changed judgement is a new version and the old one stays readable. The labels on the next move come from those records. |
 | *"pick journals with post-game scorecards"* | [`/record`](https://calibre-blush.vercel.app/record) — every sealed verdict with its Brier score once the market resolved, next to the market price for the same event. Nothing is pooled across model versions. |
 | *"odds dashboards that flag when sources disagree"* | Every X-ray names the source that answered it and why, and the move gate above is the disagreement flag with teeth: it refuses to publish rather than quietly picking a side. |
 
@@ -92,7 +92,7 @@ Walrus, there is nothing left to recover from. That is the test of whether memor
 |---|---|---|
 | Memory that is actually written to, at volume | **830 memories** across 3 namespaces on Walrus mainnet on 10 Nov 2026 — 381 wallet credibility records, 227 sealed verdicts, 222 graded outcomes, plus the model cards — and still growing without a deploy | [`/proof`](https://calibre-blush.vercel.app/proof) lists every namespace with counts |
 | Memory that is read back and *changes behaviour* | A verdict's labels come from recalled wallet records. Re-score a wallet and the next move it pushes is labelled differently — that is the loop, not a report | `apps/worker/src/watch.ts`, `loadMemoryState` |
-| Handling the append-only constraint properly | Walrus Memory has **no update and no delete**. A changed judgement is a new version under the same key: `[cal1\|kind\|key\|vN] summary \|\| {json}`. Readers keep the highest version per key. **117 of the 126 wallet records written from my machine now carry a v2** that supersedes a v1 — and the v1 is still there, readable, which is exactly what a record of a changed judgement should look like | `packages/memory/src/envelope.ts`, `rebuild.ts` |
+| Handling the append-only constraint properly | Walrus Memory has **no update and no delete**. A changed judgement is a new version under the same key: `[cal1\|kind\|key\|vN] summary \|\| {json}`. Readers keep the highest version per key. **117 of the 126 records that existed when the scoring method changed now carry a v2** that supersedes a v1 (the namespace has since grown to 381) — and the v1 is still there, readable, which is exactly what a record of a changed judgement should look like | `packages/memory/src/envelope.ts`, `rebuild.ts` |
 | Encryption | Every memory is sealed with Seal before it leaves the process; recall decrypts on the relayer | `packages/memory/src/store.ts` |
 | Working around the real limits | Recall returns **at most 100 memories per query**. Past that, one query can no longer see a namespace, so the rebuild merges five semantic queries and dedupes by blob ID. Measured: the merged read takes 25–33s, a single query 8–13s. The site runs the merged read with a 50s budget and falls back to the last export if Walrus has a bad minute — and **says on the page which one you are reading** | `packages/memory/src/rebuild.ts`, `apps/web/lib/live-record.ts` |
 | Provable ordering, not just storage | Each verdict carries the **Sui checkpoint** current at the moment it was sealed. That is what makes "CALIBRE called this before the result" checkable by a stranger rather than asserted by me | every verdict's `checkpoint`, linked to Suiscan from `/proof` |
@@ -133,7 +133,7 @@ workspaces, and the MCP server exists so that an AI agent can *consume* CALIBRE,
 | **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
-| **227 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 222 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
+| **227 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 222 graded. That is the namespace's own inventory count. Where a figure below reads "of 194", 194 is what the merged recall surfaced for the 10 November snapshot, because recall caps at 100 hits per query — the two are different measurements of the same record, not a disagreement. |
 | **Every sealed verdict** | stamped with a Sui checkpoint, read through Tatum's Sui gRPC gateway — 157 of the 194 in the 10 Nov snapshot, the rest via Sui's public GraphQL when the gateway was unreachable, recorded as such rather than hidden |
 | **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
@@ -200,7 +200,7 @@ carries no persistent signal at all (rank correlation -0.04, p 0.57).
 Difference -3.1 pts, one-sided permutation p = 0.073, mostly in-play. That is why square money is shown as a caution and CALIBRE
 never tells anyone to trade against it.
 
-**3. The sealed forecasts so far are level with the market.** 85+ verdicts are graded on mainnet and the number keeps rising. Under the current models (v2
+**3. The sealed forecasts so far are level with the market.** 222 graded outcomes are sealed on mainnet and the number keeps rising; 121 of the 123 in the 10 November snapshot were judged under the current models (v2
 and v3, 46 verdicts) CALIBRE's forecast and the market price score within 0.001 Brier of each other; the 2 graded verdicts of
 the first model are too few to count. The forecast is deliberately conservative (it moves the price at most 10 points): the
 product is the X-ray, not a price prediction, and the record is public so this can be checked.
@@ -266,7 +266,7 @@ Where to see the confirmation: the watcher logs it on every judged move as `MOVE
 from 10 November 2026 the sealed envelope carries it as `moveConfirmedBy` too. Earlier envelopes are not backfilled —
 Walrus Memory is append-only, and rewriting history to add a field is exactly what a record of past judgements must not do.
 
-**Spending is budgeted, not hoped for.****Spending is budgeted, not hoped for.** Every request is counted at Tatum's listed credit price — a price history request
+**Spending is budgeted, not hoped for.** Every request is counted at Tatum's listed credit price — a price history request
 is 200, a market lookup 100, a gRPC query 2 — against a daily cap worked out from the plan
 (`packages/chain/src/credits.ts`; `scripts/tatum-cost-model.ts` measures it). Measured on the live mainnet watcher:
 502 credits per judged move, about 26,000 a day. Past the daily cap the site serves free Polymarket data rather than
@@ -365,7 +365,7 @@ pnpm grade           # grade resolved verdicts
 pnpm export:site     # refresh apps/web/data from Walrus
 ```
 
-Extension: download the zip from https://calibre-blush.vercel.app/extension and load it unpacked, or build it with
+Extension: download the zip from https://calibre-blush.vercel.app/calibre-extension.zip and load it unpacked, or build it with
 `pnpm --filter @calibre/extension build` and load `apps/extension/dist`.
 
 MCP, hosted, nothing to install:
@@ -381,4 +381,4 @@ Or locally over stdio: `claude mcp add calibre -- pnpm --silent exec tsx apps/mc
 - Edge is measured against the price paid and ignores fees and bet size. Wallets trade the same events, so intervals are optimistic.
 - The wallet X-ray reads a wallet's newest 1,000 trades; a long history is judged on its recent part.
 - The square-money result is p = 0.073. It is early evidence, and the product says so wherever it appears.
-- The sealed wallet records are a subset: 337 and rising on Walrus, while the watcher labels takers from a larger local index (5,740 wallets) that is not all sealed.
+- The sealed wallet records are a subset: 381 and rising on Walrus, while the watcher labels takers from a larger local index (5,740 wallets) that is not all sealed.
