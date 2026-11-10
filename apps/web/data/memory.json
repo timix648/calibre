@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-11-09T15:08:45.237Z",
-  "total": 764,
+  "generatedAt": "2026-11-10T10:57:20.100Z",
+  "total": 830,
   "namespaces": [
     {
       "name": "calibre-wallets",
-      "memories": 363,
-      "relayerCount": 363
+      "memories": 381,
+      "relayerCount": 381
     },
     {
       "name": "calibre-verdicts",
-      "memories": 203,
-      "relayerCount": 203
+      "memories": 227,
+      "relayerCount": 227
     },
     {
       "name": "calibre-outcomes",
-      "memories": 198,
-      "relayerCount": 198
+      "memories": 222,
+      "relayerCount": 222
     },
     {
       "name": "calibre-lessons",
@@ -24,9 +24,9 @@
     }
   ],
   "checkpoint": {
-    "sequence": "343397878",
-    "timestamp": "2026-11-09T15:09:04.150Z",
-    "source": "sui-public-graphql"
+    "sequence": "343691519",
+    "timestamp": "2026-11-10T10:57:39.646Z",
+    "source": "tatum-grpc"
   },
   "sampleBlobs": [
     {

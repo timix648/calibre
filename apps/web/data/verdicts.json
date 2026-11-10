@@ -1,6 +1,2164 @@
 {
-  "generatedAt": "2026-11-09T15:08:45.237Z",
+  "generatedAt": "2026-11-10T10:57:20.100Z",
   "verdicts": [
+    {
+      "id": "0x3cdcec536c49f5219c82e202ef63a54c823e7a5581c8f3356c2102b30e1ab2ba-1794291000",
+      "key": "0x3cdcec536c49f5219c82e202ef63a54c823e7a5581c8f3356c2102b30e1ab2ba:1794291000",
+      "version": 1,
+      "blobId": "la4sBnWdLSkX4bQsoGgEESongiLvUFACe4BWM6E05fc",
+      "walruscan": "https://walruscan.com/mainnet/blob/la4sBnWdLSkX4bQsoGgEESongiLvUFACe4BWM6E05fc",
+      "summary": "LOL move up on \"LoL: FENNEL vs Nothin'Here - Game 2 Winner\" (FENNEL 64% to 93%) is noise: only 11% of the money behind it came from wallets with a learned edge. CALIBRE forecast 92% for FENNEL. Square money 0% of the money pushing the move (judged 15%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x3cdcec536c49f5219c82e202ef63a54c823e7a5581c8f3356c2102b30e1ab2ba",
+        "eventSlug": "lol-fnl-nh1-2026-11-10",
+        "league": "lol",
+        "question": "LoL: FENNEL vs Nothin'Here - Game 2 Winner",
+        "yesOutcome": "FENNEL",
+        "move": {
+          "from": 0.635,
+          "to": 0.925,
+          "startTs": 1794289200000,
+          "endTs": 1794291000000
+        },
+        "label": "noise",
+        "sharpShare": 0.11011767879964124,
+        "opposition": 0.5457296401087648,
+        "forecast": 0.9158475770728337,
+        "priceAtVerdict": 0.925,
+        "trades": 496,
+        "wallets": 162,
+        "topWallets": [
+          {
+            "wallet": "0xf61a809a241c7e3ca8d83d454a90e1ce20f85943",
+            "league": "lol",
+            "netYesUsd": -1555.59,
+            "edge": 0.0017915150972362234,
+            "z": 0.07690550981130301,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x27753c9c8dcdec6f35e30c3dc64fcd0797d93652",
+            "league": "lol",
+            "netYesUsd": 1511.84,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x599c2cf41b974242996ba9877d61729f717957cc",
+            "league": "lol",
+            "netYesUsd": -1257.34,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xc5aca8897bc3e920fba29195b1278c7ae5662a18",
+            "league": "lol",
+            "netYesUsd": -1090.67,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xfc23869c29e0cda2b3d379c4aa665bbe5b3c2f5e",
+            "league": "lol",
+            "netYesUsd": 1031.88,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.15107065026977282,
+        "checkpoint": {
+          "sequence": "343621611",
+          "digest": "9r44sR5UGsE1XV1qRNCLNrNyAi4JoFxJqf12TUrL13qw",
+          "timestamp": "2026-11-10T06:14:15.378Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T06:14:15.875Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xfdaae9df46b736cbb348e9a39aae1bf16cae60987b88d394167e23b456ee9311-1794283200",
+      "key": "0xfdaae9df46b736cbb348e9a39aae1bf16cae60987b88d394167e23b456ee9311:1794283200",
+      "version": 1,
+      "blobId": "HryP7S3Nn6nqeCymQUpjCKcq5_qwkI6P6qMZyHEv4LI",
+      "walruscan": "https://walruscan.com/mainnet/blob/HryP7S3Nn6nqeCymQUpjCKcq5_qwkI6P6qMZyHEv4LI",
+      "summary": "NFL move up on \"Spread: Bills (-1.5)\" (BILLS 66% to 93%) is mixed: 27% of the money behind it came from wallets with a learned edge. CALIBRE forecast 92% for BILLS. Square money 0% of the money pushing the move (judged 29%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xfdaae9df46b736cbb348e9a39aae1bf16cae60987b88d394167e23b456ee9311",
+        "eventSlug": "nfl-buf-min-2026-11-10",
+        "league": "nfl",
+        "question": "Spread: Bills (-1.5)",
+        "yesOutcome": "BILLS",
+        "move": {
+          "from": 0.655,
+          "to": 0.925,
+          "startTs": 1794279900000,
+          "endTs": 1794283200000
+        },
+        "label": "mixed",
+        "sharpShare": 0.2664199831648245,
+        "opposition": 0.028433671126135592,
+        "forecast": 0.9192201684916385,
+        "priceAtVerdict": 0.925,
+        "trades": 7,
+        "wallets": 7,
+        "topWallets": [
+          {
+            "wallet": "0xaba8aad8bc1409da4bcd6ef46de75cb164eeaead",
+            "league": "nfl",
+            "netYesUsd": 81.88,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x9b11866433281ade9f2811dbde8acdefc45f5375",
+            "league": "nfl",
+            "netYesUsd": -65.4,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xbfeceb4126b34e7e194c3d02cc107125785f4c6c",
+            "league": "nfl",
+            "netYesUsd": 31.68,
+            "edge": 0.010625,
+            "z": 0.5394786935790704,
+            "n": 2,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x08febdf3ba7541679f195313e0ea974e8a5636e8",
+            "league": "nfl",
+            "netYesUsd": -4.6,
+            "edge": 0.0020806027815614457,
+            "z": 0.06490202069262288,
+            "n": 6,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x796fc6fda8f8e03c03e2a2d012155989960300f6",
+            "league": "nfl",
+            "netYesUsd": 3.35,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.29459255349557045,
+        "checkpoint": {
+          "sequence": "343589135",
+          "digest": "vGhyJN8e3MWc7xXGiKchsg547nkpWc8ia9nJF21Xyie",
+          "timestamp": "2026-11-10T04:02:27.762Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T04:02:28.263Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xb9a7b47c2b3c56a902bd706745a98c3f627e6f25e3566205b362856f2804c721-1794282000",
+      "key": "0xb9a7b47c2b3c56a902bd706745a98c3f627e6f25e3566205b362856f2804c721:1794282000",
+      "version": 1,
+      "blobId": "f8sUmQAEysWLhLvt-FvFpEKHuPaKSJ28zYI2Z_y5wDQ",
+      "walruscan": "https://walruscan.com/mainnet/blob/f8sUmQAEysWLhLvt-FvFpEKHuPaKSJ28zYI2Z_y5wDQ",
+      "summary": "NFL move up on \"Bills vs. Vikings\" (BILLS 68% to 85%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 83% for BILLS. Square money 0% of the money pushing the move (judged 42%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xb9a7b47c2b3c56a902bd706745a98c3f627e6f25e3566205b362856f2804c721",
+        "eventSlug": "nfl-buf-min-2026-11-10",
+        "league": "nfl",
+        "question": "Bills vs. Vikings",
+        "yesOutcome": "BILLS",
+        "move": {
+          "from": 0.675,
+          "to": 0.845,
+          "startTs": 1794280200000,
+          "endTs": 1794282000000
+        },
+        "label": "contested",
+        "sharpShare": 0.02659076812751272,
+        "opposition": 28.226316438841533,
+        "forecast": 0.8286220111805992,
+        "priceAtVerdict": 0.845,
+        "trades": 248,
+        "wallets": 136,
+        "topWallets": [
+          {
+            "wallet": "0xfe787d2da716d60e8acff57fb87eb13cd4d10319",
+            "league": "nfl",
+            "netYesUsd": -22000,
+            "edge": 0.025159631906726074,
+            "z": 0.5626028298209552,
+            "n": 25,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xafbae43b98afc7f8b2c85d5294d2979dcac0e81a",
+            "league": "nfl",
+            "netYesUsd": 8900,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xf28e42d20e4826f2b10a24bc952001697947cab2",
+            "league": "nfl",
+            "netYesUsd": 8297.68,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x8a260ebadf8ef07e693dd1b0be120b3330dd73c3",
+            "league": "nfl",
+            "netYesUsd": -7600,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xe07744c53c273de2acfd485a5212553bced6f5ee",
+            "league": "nfl",
+            "netYesUsd": 6917.75,
+            "edge": 0,
+            "z": -0.6559211974501026,
+            "n": 4,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.41588195612330986,
+        "checkpoint": {
+          "sequence": "343584117",
+          "digest": "WN6QpbLjGof6nuuEMU52wi7mgXPjM4TDoGxGZM6Miwd",
+          "timestamp": "2026-11-10T03:41:59.156Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T03:41:59.803Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xeb5633bfb5a36d41d7fb04f65a8933404bfc8a1784189f62d70a187308492819-1794281400",
+      "key": "0xeb5633bfb5a36d41d7fb04f65a8933404bfc8a1784189f62d70a187308492819:1794281400",
+      "version": 1,
+      "blobId": "VVgKTSpiZaeQQCfr8-e6P-0ep150LB39pO0gi-Hp2wg",
+      "walruscan": "https://walruscan.com/mainnet/blob/VVgKTSpiZaeQQCfr8-e6P-0ep150LB39pO0gi-Hp2wg",
+      "summary": "NBA move down on \"Pelicans vs. Warriors\" (PELICANS 18% to 10%) is noise: only 11% of the money behind it came from wallets with a learned edge. CALIBRE forecast 9% for PELICANS. Square money 0% of the money pushing the move (judged 36%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xeb5633bfb5a36d41d7fb04f65a8933404bfc8a1784189f62d70a187308492819",
+        "eventSlug": "nba-nop-gsw-2026-11-09",
+        "league": "nba",
+        "question": "Pelicans vs. Warriors",
+        "yesOutcome": "PELICANS",
+        "move": {
+          "from": 0.175,
+          "to": 0.095,
+          "startTs": 1794280200000,
+          "endTs": 1794281400000
+        },
+        "label": "noise",
+        "sharpShare": 0.10864153931063139,
+        "opposition": 0.018758075952892764,
+        "forecast": 0.09480910776264097,
+        "priceAtVerdict": 0.095,
+        "trades": 174,
+        "wallets": 99,
+        "topWallets": [
+          {
+            "wallet": "0x5051ed2551c4392d061263b21db0ba112bc9e34d",
+            "league": "nba",
+            "netYesUsd": -9495.11,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+            "league": "nba",
+            "netYesUsd": -7946.92,
+            "edge": 0,
+            "z": -0.9213328540448533,
+            "n": 14,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": -6089.67,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xa0f21e6d351baa9185716b5c00c2925ed9621848",
+            "league": "nba",
+            "netYesUsd": -4428.9,
+            "edge": 0.014621897383685929,
+            "z": 0.9105415385528551,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xb7543630695ee399d2da7cf26e39d26066685aed",
+            "league": "nba",
+            "netYesUsd": -3709.22,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.364448641235387,
+        "checkpoint": {
+          "sequence": "343581575",
+          "digest": "25faCL5xzJAfkid85KDajHQs9SjUors3b4RukseYmAR2",
+          "timestamp": "2026-11-10T03:31:34.482Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T03:31:35.097Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x7e5836cbf7344c3686d441974dcf6ad97c54f9d7271c36c5dae5d523af839d32-1794280800",
+      "key": "0x7e5836cbf7344c3686d441974dcf6ad97c54f9d7271c36c5dae5d523af839d32:1794280800",
+      "version": 1,
+      "blobId": "33P3EJGQk2-haTb8KNPhGmU2UNTpGlZrT_nnARwCorI",
+      "walruscan": "https://walruscan.com/mainnet/blob/33P3EJGQk2-haTb8KNPhGmU2UNTpGlZrT_nnARwCorI",
+      "summary": "NBA move up on \"Spread: Warriors (-10.5)\" (WARRIORS 52% to 62%) is sharp-led: 59% of the money behind it came from wallets with a learned edge. CALIBRE forecast 64% for WARRIORS. Square money 0% of the money pushing the move (judged 84%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x7e5836cbf7344c3686d441974dcf6ad97c54f9d7271c36c5dae5d523af839d32",
+        "eventSlug": "nba-nop-gsw-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Warriors (-10.5)",
+        "yesOutcome": "WARRIORS",
+        "move": {
+          "from": 0.515,
+          "to": 0.62,
+          "startTs": 1794280200000,
+          "endTs": 1794280800000
+        },
+        "label": "sharp-led",
+        "sharpShare": 0.5864321646754289,
+        "opposition": 0,
+        "forecast": 0.6395096730224887,
+        "priceAtVerdict": 0.62,
+        "trades": 14,
+        "wallets": 11,
+        "topWallets": [
+          {
+            "wallet": "0x61a3f1ef9c9618f532eb49f0cb260486c168e508",
+            "league": "nba",
+            "netYesUsd": 1500,
+            "edge": 0.08,
+            "z": 3.0702715763697075,
+            "n": 24,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x9e3ed7b661a903fc97afcf49e0f014ebe869f882",
+            "league": "nba",
+            "netYesUsd": 382.85,
+            "edge": 0,
+            "z": -1.4541525456877185,
+            "n": 2,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": 273.85,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x0c99d9f172fc4c25fd2aa92f9fc272da5f020c88",
+            "league": "nba",
+            "netYesUsd": -245,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x5051ed2551c4392d061263b21db0ba112bc9e34d",
+            "league": "nba",
+            "netYesUsd": 108.9,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8431724009622004,
+        "checkpoint": {
+          "sequence": "343579033",
+          "digest": "EtqX4unrtjTSQsE1FJbEomwQAa2dSY1z9csWrTFyDi1x",
+          "timestamp": "2026-11-10T03:21:10.054Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T03:21:10.766Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xa8e99a09b61b44eb18f0302396a3da213c89b8b802f541a04aa1a0ad9c745370-1794278400",
+      "key": "0xa8e99a09b61b44eb18f0302396a3da213c89b8b802f541a04aa1a0ad9c745370:1794278400",
+      "version": 1,
+      "blobId": "gJzxYLzUWXAcmKhgUk1WI-K3uxjq-qFGP_3GGxyiDDs",
+      "walruscan": "https://walruscan.com/mainnet/blob/gJzxYLzUWXAcmKhgUk1WI-K3uxjq-qFGP_3GGxyiDDs",
+      "summary": "NBA move up on \"Spurs vs. Suns\" (SPURS 74% to 89%) is mixed: 17% of the money behind it came from wallets with a learned edge. CALIBRE forecast 88% for SPURS. Square money 0% of the money pushing the move (judged 65%). Data: Polymarket public API (Tatum hourly call cap (48) reached)",
+      "data": {
+        "marketId": "0xa8e99a09b61b44eb18f0302396a3da213c89b8b802f541a04aa1a0ad9c745370",
+        "eventSlug": "nba-sas-phx-2026-11-09",
+        "league": "nba",
+        "question": "Spurs vs. Suns",
+        "yesOutcome": "SPURS",
+        "move": {
+          "from": 0.74,
+          "to": 0.885,
+          "startTs": 1794277800000,
+          "endTs": 1794278400000
+        },
+        "label": "mixed",
+        "sharpShare": 0.1737955830329268,
+        "opposition": 0.2305567814523379,
+        "forecast": 0.8791556086907508,
+        "priceAtVerdict": 0.885,
+        "trades": 184,
+        "wallets": 92,
+        "topWallets": [
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": 3788.27,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x042e9bd0e9e0c50a9a7a516ea80d5542e11e462e",
+            "league": "nba",
+            "netYesUsd": 1975,
+            "edge": 0,
+            "z": -0.09924942169726006,
+            "n": 15,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+            "league": "nba",
+            "netYesUsd": 1838.01,
+            "edge": 0,
+            "z": -0.9213328540448533,
+            "n": 14,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x3957fb024ae4314fafd2fae943965fdebeda35f0",
+            "league": "nba",
+            "netYesUsd": 1000,
+            "edge": 0.014845110812466788,
+            "z": 0.4296252340165892,
+            "n": 9,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x5051ed2551c4392d061263b21db0ba112bc9e34d",
+            "league": "nba",
+            "netYesUsd": 864.92,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.650629826776755,
+        "checkpoint": {
+          "sequence": "343569009",
+          "digest": "DnbkaxFCkUeZq6bxHe81vt4CnP7UqP97kubtLRsYrxE1",
+          "timestamp": "2026-11-10T02:40:29.530Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T02:40:30.334Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (48) reached"
+      }
+    },
+    {
+      "id": "0x590259cc5871d80e9a11217c7a730c231973630d9eeac975fad0c26886419d9c-1794277500",
+      "key": "0x590259cc5871d80e9a11217c7a730c231973630d9eeac975fad0c26886419d9c:1794277500",
+      "version": 1,
+      "blobId": "vWb9GvG94HDjI8paq0UhuZS8QB6JnxX0CefDdiy9jd8",
+      "walruscan": "https://walruscan.com/mainnet/blob/vWb9GvG94HDjI8paq0UhuZS8QB6JnxX0CefDdiy9jd8",
+      "summary": "NBA move down on \"Spread: Spurs (-7.5)\" (SPURS 59% to 55%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 55% for SPURS. Square money 0% of the money pushing the move (judged 0%). Data: Polymarket public API (Tatum hourly call cap (48) reached)",
+      "data": {
+        "marketId": "0x590259cc5871d80e9a11217c7a730c231973630d9eeac975fad0c26886419d9c",
+        "eventSlug": "nba-sas-phx-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Spurs (-7.5)",
+        "yesOutcome": "SPURS",
+        "move": {
+          "from": 0.5900000000000001,
+          "to": 0.55,
+          "startTs": 1794276900000,
+          "endTs": 1794277500000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.55,
+        "priceAtVerdict": 0.55,
+        "trades": 2,
+        "wallets": 2,
+        "topWallets": [
+          {
+            "wallet": "0x670ba66d2938896f5cd7b6f00aee0560aed02c75",
+            "league": "nba",
+            "netYesUsd": 6.89,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x19e675f4946456a2fe622fb79f650c9172dcdc4c",
+            "league": "nba",
+            "netYesUsd": -4.1,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0,
+        "checkpoint": {
+          "sequence": "343566387",
+          "digest": "24FXgwgeZq1eshz63bcYoM5eEm6ZHsL336DucsTs89o6",
+          "timestamp": "2026-11-10T02:29:57.737Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T02:29:58.405Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum hourly call cap (48) reached"
+      }
+    },
+    {
+      "id": "0x2ca5443fd08ec579e1693a103762fb8e2c42df31a8ae0a66040aa97846caf49c-1794277500",
+      "key": "0x2ca5443fd08ec579e1693a103762fb8e2c42df31a8ae0a66040aa97846caf49c:1794277500",
+      "version": 1,
+      "blobId": "C6lQg0xCJSPog8hfU1Q6YhLa_Jle_a58_DYdBR0k29w",
+      "walruscan": "https://walruscan.com/mainnet/blob/C6lQg0xCJSPog8hfU1Q6YhLa_Jle_a58_DYdBR0k29w",
+      "summary": "NBA move up on \"Spread: Pistons (-10.5)\" (PISTONS 52% to 79%) is mixed: 22% of the money behind it came from wallets with a learned edge. CALIBRE forecast 78% for PISTONS. Square money 0% of the money pushing the move (judged 27%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x2ca5443fd08ec579e1693a103762fb8e2c42df31a8ae0a66040aa97846caf49c",
+        "eventSlug": "nba-was-det-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Pistons (-10.5)",
+        "yesOutcome": "PISTONS",
+        "move": {
+          "from": 0.52,
+          "to": 0.785,
+          "startTs": 1794275700000,
+          "endTs": 1794277500000
+        },
+        "label": "mixed",
+        "sharpShare": 0.21978338704359018,
+        "opposition": 0.00955753962067034,
+        "forecast": 0.7811090318627887,
+        "priceAtVerdict": 0.785,
+        "trades": 30,
+        "wallets": 17,
+        "topWallets": [
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "nba",
+            "netYesUsd": 771.15,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x796fc6fda8f8e03c03e2a2d012155989960300f6",
+            "league": "nba",
+            "netYesUsd": 138.9,
+            "edge": 0.02656558671502973,
+            "z": 1.2639848849179767,
+            "n": 2,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x0599dc10a7934fea2f60b497ea2b6335c7533c6a",
+            "league": "nba",
+            "netYesUsd": 119,
+            "edge": 0.02387096774193548,
+            "z": 1.6870547845739468,
+            "n": 1,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xbca08c1bc204a34f2fddbe47b438b9bd42ac9705",
+            "league": "nba",
+            "netYesUsd": 84.8,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": 76.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.274218857370168,
+        "checkpoint": {
+          "sequence": "343566300",
+          "digest": "BcQtH6y7bLq6MVTTnXuYxHZR1HYTeC3wrvKDRJMd6iw",
+          "timestamp": "2026-11-10T02:29:36.326Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T02:29:36.916Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x7af284c3d7b4fd35575ea7933f65bfb6ad0a67c0fc24ec7b6a09a8903f3c044c-1794276300",
+      "key": "0x7af284c3d7b4fd35575ea7933f65bfb6ad0a67c0fc24ec7b6a09a8903f3c044c:1794276300",
+      "version": 1,
+      "blobId": "aQPoGcOpIiZEEDr6bYisv--eV_YRlEHGOUTJT2IyS2o",
+      "walruscan": "https://walruscan.com/mainnet/blob/aQPoGcOpIiZEEDr6bYisv--eV_YRlEHGOUTJT2IyS2o",
+      "summary": "NBA move down on \"Cavaliers vs. Hornets\" (CAVALIERS 33% to 5%) is noise: only 14% of the money behind it came from wallets with a learned edge. CALIBRE forecast 5% for CAVALIERS. Square money 14% of the money pushing the move (judged 26%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x7af284c3d7b4fd35575ea7933f65bfb6ad0a67c0fc24ec7b6a09a8903f3c044c",
+        "eventSlug": "nba-cle-cha-2026-11-09",
+        "league": "nba",
+        "question": "Cavaliers vs. Hornets",
+        "yesOutcome": "CAVALIERS",
+        "move": {
+          "from": 0.325,
+          "to": 0.0505,
+          "startTs": 1794273600000,
+          "endTs": 1794276300000
+        },
+        "label": "noise",
+        "sharpShare": 0.1373031675939172,
+        "opposition": 0.09720687294319903,
+        "forecast": 0.05380958375762648,
+        "priceAtVerdict": 0.0505,
+        "trades": 1011,
+        "wallets": 353,
+        "topWallets": [
+          {
+            "wallet": "0x30e1ffee3ea0fbd1e904bc715cb4504dead2510b",
+            "league": "nba",
+            "netYesUsd": -19609.13,
+            "edge": 0,
+            "z": -2.0654647522741056,
+            "n": 42,
+            "blobId": "4FTEiwKm0VwkjxGk2Mkz1L9TbIx_Y9FbwhSV12E2A6w",
+            "label": "proven losing record"
+          },
+          {
+            "wallet": "0xffff6537da5efd428cc09187f90cbd2e726d4413",
+            "league": "nba",
+            "netYesUsd": -7221.05,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "nba",
+            "netYesUsd": -5979.62,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x84cfffc3f16dcc353094de30d4a45226eccd2f63",
+            "league": "nba",
+            "netYesUsd": -5790.03,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xe1aff568c9ce89fbd38e89071515f1d75aefd23b",
+            "league": "nba",
+            "netYesUsd": -5251.12,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0.14260809876769695,
+        "squareCoverage": 0.25999518620729106,
+        "checkpoint": {
+          "sequence": "343561237",
+          "digest": "CzdMdSUS921ecHPXELHKXwHKCF5G4N4mkPptZANva8Ro",
+          "timestamp": "2026-11-10T02:09:10.311Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T02:09:10.848Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x976e35b2d3bf476e3fd84a4162a831a613a7102dd156b85d964f47e9302df828-1794276300",
+      "key": "0x976e35b2d3bf476e3fd84a4162a831a613a7102dd156b85d964f47e9302df828:1794276300",
+      "version": 1,
+      "blobId": "Mq_bGv-j3IFXdKCV0oZB0hZr0EHjvRyM6ab1tRtCn4c",
+      "walruscan": "https://walruscan.com/mainnet/blob/Mq_bGv-j3IFXdKCV0oZB0hZr0EHjvRyM6ab1tRtCn4c",
+      "summary": "NBA move down on \"Nuggets vs. Rockets\" (NUGGETS 36% to 19%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 19% for NUGGETS. Square money 0% of the money pushing the move (judged 86%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x976e35b2d3bf476e3fd84a4162a831a613a7102dd156b85d964f47e9302df828",
+        "eventSlug": "nba-den-hou-2026-11-09",
+        "league": "nba",
+        "question": "Nuggets vs. Rockets",
+        "yesOutcome": "NUGGETS",
+        "move": {
+          "from": 0.355,
+          "to": 0.185,
+          "startTs": 1794275100000,
+          "endTs": 1794276300000
+        },
+        "label": "contested",
+        "sharpShare": 0.004517595998500617,
+        "opposition": 22.889754385068123,
+        "forecast": 0.18896096921053882,
+        "priceAtVerdict": 0.185,
+        "trades": 232,
+        "wallets": 88,
+        "topWallets": [
+          {
+            "wallet": "0x14ccf1f4f402ed164477e9ac50a699f425307c02",
+            "league": "nba",
+            "netYesUsd": -4547.81,
+            "edge": 0,
+            "z": -0.09096883918834048,
+            "n": 166,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": -3499.23,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x06190f7c8d25d7120e8e25de29df6b45e4b46680",
+            "league": "nba",
+            "netYesUsd": 2190.47,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+            "league": "nba",
+            "netYesUsd": -1867.5,
+            "edge": 0,
+            "z": -0.9213328540448533,
+            "n": 14,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xb6be96df81d8825c0824ba2d8a0dce5e22c3c2f8",
+            "league": "nba",
+            "netYesUsd": -1700,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8556545217238358,
+        "checkpoint": {
+          "sequence": "343561142",
+          "digest": "6GWAnuZY3S8fodvjAQ2ka49HM2so78LUvQicWQwbHxXb",
+          "timestamp": "2026-11-10T02:08:47.387Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T02:08:47.951Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x6948ca490950b9371a41487959370380719e5ecb7040eda83385cf5046c6eefd-1794275700",
+      "key": "0x6948ca490950b9371a41487959370380719e5ecb7040eda83385cf5046c6eefd:1794275700",
+      "version": 1,
+      "blobId": "fR-4jYbIzM2Aop1V60YTaVMPo5sXxUmyszrSs_crFvI",
+      "walruscan": "https://walruscan.com/mainnet/blob/fR-4jYbIzM2Aop1V60YTaVMPo5sXxUmyszrSs_crFvI",
+      "summary": "NBA move up on \"Spread: Rockets (-4.5)\" (ROCKETS 52% to 59%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 59% for ROCKETS. Square money 0% of the money pushing the move (judged 88%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x6948ca490950b9371a41487959370380719e5ecb7040eda83385cf5046c6eefd",
+        "eventSlug": "nba-den-hou-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Rockets (-4.5)",
+        "yesOutcome": "ROCKETS",
+        "move": {
+          "from": 0.515,
+          "to": 0.59,
+          "startTs": 1794275100000,
+          "endTs": 1794275700000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.5864514229969996,
+        "priceAtVerdict": 0.59,
+        "trades": 14,
+        "wallets": 11,
+        "topWallets": [
+          {
+            "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
+            "league": "nba",
+            "netYesUsd": -540,
+            "edge": 0,
+            "z": -0.25430313161499074,
+            "n": 75,
+            "blobId": "teJghX51_8SeSvCKJ_kbN_EOpGajDINJ3RGIzOSzAnU",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x0c99d9f172fc4c25fd2aa92f9fc272da5f020c88",
+            "league": "nba",
+            "netYesUsd": -240.1,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": 213.98,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xd089af0b330d6e755e99150bda51f842d174087f",
+            "league": "nba",
+            "netYesUsd": -72,
+            "edge": 0.014516129032258063,
+            "z": 0.9045340337332908,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
+            "league": "nba",
+            "netYesUsd": -67.18,
+            "edge": 0.018484925192957233,
+            "z": 0.7217575362764439,
+            "n": 3,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8776866785534543,
+        "checkpoint": {
+          "sequence": "343558519",
+          "digest": "63s4f4FahDBZbZ6LBSoyJHMUcZJkZDgZ29dYv5E8mmxX",
+          "timestamp": "2026-11-10T01:58:18.091Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T01:58:18.937Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xfdaae9df46b736cbb348e9a39aae1bf16cae60987b88d394167e23b456ee9311-1794275100",
+      "key": "0xfdaae9df46b736cbb348e9a39aae1bf16cae60987b88d394167e23b456ee9311:1794275100",
+      "version": 1,
+      "blobId": "JY4WXaGpD6o1QNWEPdqNVyAwbfhBBfBGG7Mkbxo1I_I",
+      "walruscan": "https://walruscan.com/mainnet/blob/JY4WXaGpD6o1QNWEPdqNVyAwbfhBBfBGG7Mkbxo1I_I",
+      "summary": "NFL move up on \"Spread: Bills (-1.5)\" (BILLS 52% to 62%) is mixed: 50% of the money behind it came from wallets with a learned edge. CALIBRE forecast 62% for BILLS. Square money 0% of the money pushing the move (judged 50%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xfdaae9df46b736cbb348e9a39aae1bf16cae60987b88d394167e23b456ee9311",
+        "eventSlug": "nfl-buf-min-2026-11-10",
+        "league": "nfl",
+        "question": "Spread: Bills (-1.5)",
+        "yesOutcome": "BILLS",
+        "move": {
+          "from": 0.515,
+          "to": 0.615,
+          "startTs": 1794274500000,
+          "endTs": 1794275100000
+        },
+        "label": "mixed",
+        "sharpShare": 0.4974704890387859,
+        "opposition": 0,
+        "forecast": 0.6150609812058807,
+        "priceAtVerdict": 0.615,
+        "trades": 6,
+        "wallets": 5,
+        "topWallets": [
+          {
+            "wallet": "0x9b11866433281ade9f2811dbde8acdefc45f5375",
+            "league": "nfl",
+            "netYesUsd": -879.24,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xbca08c1bc204a34f2fddbe47b438b9bd42ac9705",
+            "league": "nfl",
+            "netYesUsd": -77.7,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xe0265f8dea549638630807869dc8ba5700940404",
+            "league": "nfl",
+            "netYesUsd": 14.75,
+            "edge": 0.03312499999998002,
+            "z": 1.5017720029800528,
+            "n": 2,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x7c1b3a6db8a1d57de8ee5d7bca620dc0623185c8",
+            "league": "nfl",
+            "netYesUsd": 11.6,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x99e8380c1382e8e1262c5dc8af6c1445ce83cc69",
+            "league": "nfl",
+            "netYesUsd": 3.3,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.4974704890387859,
+        "checkpoint": {
+          "sequence": "343555928",
+          "digest": "2TALmYChXA9g1m9f1N95JzsqV7RpcZC8d67enxZMLDkL",
+          "timestamp": "2026-11-10T01:47:54.104Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T01:47:54.711Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xb9a7b47c2b3c56a902bd706745a98c3f627e6f25e3566205b362856f2804c721-1794274500",
+      "key": "0xb9a7b47c2b3c56a902bd706745a98c3f627e6f25e3566205b362856f2804c721:1794274500",
+      "version": 1,
+      "blobId": "WPn4EQVsMUda9j70wWpRFi4eSjhzIf1br24c-Vb7JMA",
+      "walruscan": "https://walruscan.com/mainnet/blob/WPn4EQVsMUda9j70wWpRFi4eSjhzIf1br24c-Vb7JMA",
+      "summary": "NFL move down on \"Bills vs. Vikings\" (BILLS 64% to 55%) is sharp-led: 50% of the money behind it came from wallets with a learned edge. CALIBRE forecast 56% for BILLS. Square money 0% of the money pushing the move (judged 85%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xb9a7b47c2b3c56a902bd706745a98c3f627e6f25e3566205b362856f2804c721",
+        "eventSlug": "nfl-buf-min-2026-11-10",
+        "league": "nfl",
+        "question": "Bills vs. Vikings",
+        "yesOutcome": "BILLS",
+        "move": {
+          "from": 0.635,
+          "to": 0.545,
+          "startTs": 1794274200000,
+          "endTs": 1794274500000
+        },
+        "label": "sharp-led",
+        "sharpShare": 0.5000148416881759,
+        "opposition": 0.09667993919434208,
+        "forecast": 0.55959170746951,
+        "priceAtVerdict": 0.545,
+        "trades": 115,
+        "wallets": 80,
+        "topWallets": [
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "nfl",
+            "netYesUsd": -10142.54,
+            "edge": 0.0020000986391992656,
+            "z": 0.04867707438621371,
+            "n": 12,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x496121ba250d47b62c2d84b3414a99aeeacade13",
+            "league": "nfl",
+            "netYesUsd": -7396.44,
+            "edge": 0,
+            "z": -0.5236039050178471,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+            "league": "nfl",
+            "netYesUsd": -3333.07,
+            "edge": 0.017741935483870968,
+            "z": 1.1055415967851334,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xf8fdc4067784d70f7828149d009a519b6bd5876f",
+            "league": "nfl",
+            "netYesUsd": -3174.6,
+            "edge": 0,
+            "z": -2.3396567011228977,
+            "n": 11,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x7c1b3a6db8a1d57de8ee5d7bca620dc0623185c8",
+            "league": "nfl",
+            "netYesUsd": -2874.9,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.854105416197536,
+        "checkpoint": {
+          "sequence": "343553362",
+          "digest": "PZ8XBhcwF3nz9tp9zxwmpK9aMkwpnojx7R1ThCgbQLt",
+          "timestamp": "2026-11-10T01:37:31.599Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T01:37:32.177Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x87da75a934a64850a44b02401eb1b41950f9d829dc42f5ce6a02fd0b541ce595-1794272700",
+      "key": "0x87da75a934a64850a44b02401eb1b41950f9d829dc42f5ce6a02fd0b541ce595:1794272700",
+      "version": 1,
+      "blobId": "q8QdJgWHdhNpW_gnUE6H5GSJ621dmsFoTNq1iQSK3_I",
+      "walruscan": "https://walruscan.com/mainnet/blob/q8QdJgWHdhNpW_gnUE6H5GSJ621dmsFoTNq1iQSK3_I",
+      "summary": "NBA move up on \"Spread: Raptors (-2.5)\" (RAPTORS 33% to 40%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 40% for RAPTORS. Square money 0% of the money pushing the move (judged 4%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x87da75a934a64850a44b02401eb1b41950f9d829dc42f5ce6a02fd0b541ce595",
+        "eventSlug": "nba-mem-tor-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Raptors (-2.5)",
+        "yesOutcome": "RAPTORS",
+        "move": {
+          "from": 0.325,
+          "to": 0.395,
+          "startTs": 1794272100000,
+          "endTs": 1794272700000
+        },
+        "label": "noise",
+        "sharpShare": 0,
+        "opposition": 0,
+        "forecast": 0.395,
+        "priceAtVerdict": 0.395,
+        "trades": 4,
+        "wallets": 3,
+        "topWallets": [
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": -288.02,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x821dab0565ebf5b327f51db06223fdcfe01acf16",
+            "league": "nba",
+            "netYesUsd": 36.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xe5502f3b033ebcd64233b5ffc43c44c24170be3f",
+            "league": "nba",
+            "netYesUsd": 1.7,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.04478398314485272,
+        "checkpoint": {
+          "sequence": "343545859",
+          "digest": "4uVFBEESztjJx26C2xrj5GDSTMDJJGc3WznYzKvpEJKM",
+          "timestamp": "2026-11-10T01:07:04.119Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T01:07:05.024Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x87b847e161ea1a750e1f094223a644ca374e4d97a7b9d0397974a2f3c67e547d-1794272700",
+      "key": "0x87b847e161ea1a750e1f094223a644ca374e4d97a7b9d0397974a2f3c67e547d:1794272700",
+      "version": 1,
+      "blobId": "6AyBxXkRax78NhKaF9Fys9KmKgKdbmYodKZDv0P-EhA",
+      "walruscan": "https://walruscan.com/mainnet/blob/6AyBxXkRax78NhKaF9Fys9KmKgKdbmYodKZDv0P-EhA",
+      "summary": "NBA move down on \"Grizzlies vs. Raptors\" (GRIZZLIES 61% to 52%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 52% for GRIZZLIES. Square money 0% of the money pushing the move (judged 86%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x87b847e161ea1a750e1f094223a644ca374e4d97a7b9d0397974a2f3c67e547d",
+        "eventSlug": "nba-mem-tor-2026-11-09",
+        "league": "nba",
+        "question": "Grizzlies vs. Raptors",
+        "yesOutcome": "GRIZZLIES",
+        "move": {
+          "from": 0.605,
+          "to": 0.515,
+          "startTs": 1794272100000,
+          "endTs": 1794272700000
+        },
+        "label": "contested",
+        "sharpShare": 0.003584825389133775,
+        "opposition": 8.847014695458958,
+        "forecast": 0.5152070244973582,
+        "priceAtVerdict": 0.515,
+        "trades": 127,
+        "wallets": 57,
+        "topWallets": [
+          {
+            "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
+            "league": "nba",
+            "netYesUsd": 12645.03,
+            "edge": 0,
+            "z": -0.00186028400617523,
+            "n": 10,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x84cfffc3f16dcc353094de30d4a45226eccd2f63",
+            "league": "nba",
+            "netYesUsd": 12080.94,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "nba",
+            "netYesUsd": -11010.06,
+            "edge": 0,
+            "z": -0.7974357827608132,
+            "n": 8,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x5051ed2551c4392d061263b21db0ba112bc9e34d",
+            "league": "nba",
+            "netYesUsd": -999.08,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xec9f344ac6b942bf2a8bb36ebc0294a73cd9e57b",
+            "league": "nba",
+            "netYesUsd": 940,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8597298751291567,
+        "checkpoint": {
+          "sequence": "343545773",
+          "digest": "5uBgT7RrGFbhYcvojvdit6oKsPXZwMkDUoZpHxb6csQR",
+          "timestamp": "2026-11-10T01:06:43.114Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T01:06:43.801Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xb31aeb7ff3c123ab7eda6ed3f602847c5c0d305734838ce07b7684bc5ce9deb7-1794270900",
+      "key": "0xb31aeb7ff3c123ab7eda6ed3f602847c5c0d305734838ce07b7684bc5ce9deb7:1794270900",
+      "version": 1,
+      "blobId": "X6xhE1ZRvhraVdiNSgJVjxjDlse9YK-qUwGQGeTrZPg",
+      "walruscan": "https://walruscan.com/mainnet/blob/X6xhE1ZRvhraVdiNSgJVjxjDlse9YK-qUwGQGeTrZPg",
+      "summary": "NBA move up on \"Spread: Lakers (-2.5)\" (LAKERS 26% to 56%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 52% for LAKERS. Square money 0% of the money pushing the move (judged 84%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xb31aeb7ff3c123ab7eda6ed3f602847c5c0d305734838ce07b7684bc5ce9deb7",
+        "eventSlug": "nba-lal-atl-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Lakers (-2.5)",
+        "yesOutcome": "LAKERS",
+        "move": {
+          "from": 0.255,
+          "to": 0.565,
+          "startTs": 1794270000000,
+          "endTs": 1794270900000
+        },
+        "label": "contested",
+        "sharpShare": 0.6353307720781453,
+        "opposition": 1.470073087685754,
+        "forecast": 0.5152816113979531,
+        "priceAtVerdict": 0.565,
+        "trades": 45,
+        "wallets": 15,
+        "topWallets": [
+          {
+            "wallet": "0x796fc6fda8f8e03c03e2a2d012155989960300f6",
+            "league": "nba",
+            "netYesUsd": -2167.65,
+            "edge": 0.02656558671502973,
+            "z": 1.2639848849179767,
+            "n": 2,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x6d3c5bd13984b2de47c3a88ddc455309aab3d294",
+            "league": "nba",
+            "netYesUsd": 931.82,
+            "edge": 0.04214609062529497,
+            "z": 1.0425052721066963,
+            "n": 78,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xa466841143753310fa0f4448526595fa65641c77",
+            "league": "nba",
+            "netYesUsd": -543.2,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": 247.75,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x02733a3c8cf1e67562f06332cf56f1ca7e6c1867",
+            "league": "nba",
+            "netYesUsd": 201.03,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8351369181795245,
+        "checkpoint": {
+          "sequence": "343538073",
+          "digest": "DDLpmVNfxv1dQJ2PEcvcvRVrpRPcwtbHmQ8XuuGaJfeG",
+          "timestamp": "2026-11-10T00:36:13.542Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T00:36:14.191Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea-1794270900",
+      "key": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea:1794270900",
+      "version": 1,
+      "blobId": "P1jm2t7GD8CNRPAjRHatFJianB-C_hfe8s7txYlwDeE",
+      "walruscan": "https://walruscan.com/mainnet/blob/P1jm2t7GD8CNRPAjRHatFJianB-C_hfe8s7txYlwDeE",
+      "summary": "NBA move up on \"Lakers vs. Hawks\" (LAKERS 35% to 65%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 64% for LAKERS. Square money 0% of the money pushing the move (judged 83%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea",
+        "eventSlug": "nba-lal-atl-2026-11-09",
+        "league": "nba",
+        "question": "Lakers vs. Hawks",
+        "yesOutcome": "LAKERS",
+        "move": {
+          "from": 0.345,
+          "to": 0.645,
+          "startTs": 1794270000000,
+          "endTs": 1794270900000
+        },
+        "label": "contested",
+        "sharpShare": 0.005849189234945389,
+        "opposition": 0.8661243096260615,
+        "forecast": 0.6445335615268846,
+        "priceAtVerdict": 0.645,
+        "trades": 317,
+        "wallets": 189,
+        "topWallets": [
+          {
+            "wallet": "0xebfdb8164f0e0748818d6c7a9ac85a323267fd63",
+            "league": "nba",
+            "netYesUsd": 43900,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
+            "league": "nba",
+            "netYesUsd": -29611.79,
+            "edge": 0,
+            "z": -0.00186028400617523,
+            "n": 10,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xe5b70fd855af9258d9463992e4f1ed7987905ee3",
+            "league": "nba",
+            "netYesUsd": 17882.31,
+            "edge": 0,
+            "z": -1.2307861506883107,
+            "n": 38,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xf1da56e58fb35f99987c87db50a3a1ae0d86ce2a",
+            "league": "nba",
+            "netYesUsd": -3561.33,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": -2265.47,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.8316424631198871,
+        "checkpoint": {
+          "sequence": "343537993",
+          "digest": "JCTePKMK1zAKgik5g1G3TnGxRShEpLRjvniueiBAYYUb",
+          "timestamp": "2026-11-10T00:35:53.772Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T00:35:54.285Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x2ca5443fd08ec579e1693a103762fb8e2c42df31a8ae0a66040aa97846caf49c-1794270000",
+      "key": "0x2ca5443fd08ec579e1693a103762fb8e2c42df31a8ae0a66040aa97846caf49c:1794270000",
+      "version": 1,
+      "blobId": "LkHl0COBZJu6QcTE6N35JOwB5VY1PDljPJ76mk5eCW8",
+      "walruscan": "https://walruscan.com/mainnet/blob/LkHl0COBZJu6QcTE6N35JOwB5VY1PDljPJ76mk5eCW8",
+      "summary": "NBA move up on \"Spread: Pistons (-10.5)\" (PISTONS 44% to 57%) is noise: only 7% of the money behind it came from wallets with a learned edge. CALIBRE forecast 57% for PISTONS. Square money 0% of the money pushing the move (judged 99%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x2ca5443fd08ec579e1693a103762fb8e2c42df31a8ae0a66040aa97846caf49c",
+        "eventSlug": "nba-was-det-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Pistons (-10.5)",
+        "yesOutcome": "PISTONS",
+        "move": {
+          "from": 0.435,
+          "to": 0.575,
+          "startTs": 1794268500000,
+          "endTs": 1794270000000
+        },
+        "label": "noise",
+        "sharpShare": 0.06626896720973312,
+        "opposition": 0,
+        "forecast": 0.5733870028494821,
+        "priceAtVerdict": 0.575,
+        "trades": 27,
+        "wallets": 14,
+        "topWallets": [
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "nba",
+            "netYesUsd": 3738.66,
+            "edge": 0,
+            "z": -1.1240426859653245,
+            "n": 14,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
+            "league": "nba",
+            "netYesUsd": 339.81,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x796fc6fda8f8e03c03e2a2d012155989960300f6",
+            "league": "nba",
+            "netYesUsd": 294,
+            "edge": 0.02656558671502973,
+            "z": 1.2639848849179767,
+            "n": 2,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x6dd9b2a9559fafebc3fa0bf860b56ca3a56fbfe8",
+            "league": "nba",
+            "netYesUsd": -224,
+            "edge": 0,
+            "z": -1.175264522663566,
+            "n": 34,
+            "blobId": "y1woFh1irniZeYES1UYa1rS1TVPWBTclhhlI4KIWCSs",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x0c99d9f172fc4c25fd2aa92f9fc272da5f020c88",
+            "league": "nba",
+            "netYesUsd": -218.81,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.9855741023759285,
+        "checkpoint": {
+          "sequence": "343535404",
+          "digest": "HyyV8UWgBcZBmjDDP5q3NkfeegVsJdeKPMWkffeHCmjK",
+          "timestamp": "2026-11-10T00:25:22.989Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T00:25:23.636Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xda99019efa84c559e53e35e57bcf07b0b616a8221790fe5de6576882bf152084-1794270000",
+      "key": "0xda99019efa84c559e53e35e57bcf07b0b616a8221790fe5de6576882bf152084:1794270000",
+      "version": 1,
+      "blobId": "-zORGi8vnL8Z7eEYrT9CGZwRApbgV_si4ljZ4Uk8sgs",
+      "walruscan": "https://walruscan.com/mainnet/blob/-zORGi8vnL8Z7eEYrT9CGZwRApbgV_si4ljZ4Uk8sgs",
+      "summary": "NBA move down on \"Wizards vs. Pistons\" (WIZARDS 22% to 14%) is mixed: 27% of the money behind it came from wallets with a learned edge. CALIBRE forecast 15% for WIZARDS. Square money 0% of the money pushing the move (judged 42%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xda99019efa84c559e53e35e57bcf07b0b616a8221790fe5de6576882bf152084",
+        "eventSlug": "nba-was-det-2026-11-09",
+        "league": "nba",
+        "question": "Wizards vs. Pistons",
+        "yesOutcome": "WIZARDS",
+        "move": {
+          "from": 0.215,
+          "to": 0.145,
+          "startTs": 1794269400000,
+          "endTs": 1794270000000
+        },
+        "label": "mixed",
+        "sharpShare": 0.27165239953784237,
+        "opposition": 0.3854723888640427,
+        "forecast": 0.15277736197301067,
+        "priceAtVerdict": 0.145,
+        "trades": 90,
+        "wallets": 55,
+        "topWallets": [
+          {
+            "wallet": "0x6db568e61e5e3de7d87f831431b673f38ce2e279",
+            "league": "nba",
+            "netYesUsd": -20720.19,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x26b46988d027c6c03cfa12a7c0c6d778be49b8a9",
+            "league": "nba",
+            "netYesUsd": -9500,
+            "edge": 0.008387096774193548,
+            "z": 0.5927489783638191,
+            "n": 1,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x958bdb8aa30b8e5bd1fe4ee071f309c84e97f826",
+            "league": "nba",
+            "netYesUsd": -3144,
+            "edge": 0,
+            "z": -0.7974357827608132,
+            "n": 8,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x84cfffc3f16dcc353094de30d4a45226eccd2f63",
+            "league": "nba",
+            "netYesUsd": -2091.47,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x0fded0ed829a00c35dcd2d550983e92108ed8ab1",
+            "league": "nba",
+            "netYesUsd": -2000,
+            "edge": 0.004516129035483868,
+            "z": 0.40347329256051967,
+            "n": 1,
+            "blobId": null,
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.4154199363497929,
+        "checkpoint": {
+          "sequence": "343535311",
+          "digest": "8w8jDGzzPvALJKwAQFcBt11PhPZPSbSyzgbh88YsCyvv",
+          "timestamp": "2026-11-10T00:25:00.290Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-10T00:25:00.803Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea-1794263400",
+      "key": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea:1794263400",
+      "version": 1,
+      "blobId": "dmWo4f0G6tmsv_Mba4I_WN1dbtXT8j84VPk9k-89fQ8",
+      "walruscan": "https://walruscan.com/mainnet/blob/dmWo4f0G6tmsv_Mba4I_WN1dbtXT8j84VPk9k-89fQ8",
+      "summary": "NBA move down on \"Lakers vs. Hawks\" (LAKERS 48% to 43%) is sharp-led: 92% of the money behind it came from wallets with a learned edge. CALIBRE forecast 43% for LAKERS. Square money 2% of the money pushing the move (judged 96%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea",
+        "eventSlug": "nba-lal-atl-2026-11-09",
+        "league": "nba",
+        "question": "Lakers vs. Hawks",
+        "yesOutcome": "LAKERS",
+        "move": {
+          "from": 0.475,
+          "to": 0.425,
+          "startTs": 1794263100000,
+          "endTs": 1794263400000
+        },
+        "label": "sharp-led",
+        "sharpShare": 0.9235428852948989,
+        "opposition": 0.004126129410212559,
+        "forecast": 0.43249816178345496,
+        "priceAtVerdict": 0.425,
+        "trades": 117,
+        "wallets": 36,
+        "topWallets": [
+          {
+            "wallet": "0x2c866881290c2197960f06448d3a236d9f20d939",
+            "league": "nba",
+            "netYesUsd": -46748,
+            "edge": 0.012215133315954294,
+            "z": 0.3356701176815513,
+            "n": 188,
+            "blobId": "frNUYhzvp2Fd5kJfWc5MUPzTyJvOL_x50vsrPj1OtII",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "nba",
+            "netYesUsd": -4252.67,
+            "edge": 0.0027695043483870964,
+            "z": 0.3064603136682259,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
+            "league": "nba",
+            "netYesUsd": 1695.06,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x2c9f5fab54858bf886f25342e384945190cf6626",
+            "league": "nba",
+            "netYesUsd": -1693.26,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
+            "league": "nba",
+            "netYesUsd": -1275.83,
+            "edge": 0,
+            "z": -0.25430313161499074,
+            "n": 75,
+            "blobId": "teJghX51_8SeSvCKJ_kbN_EOpGajDINJ3RGIzOSzAnU",
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0.015474222798325681,
+        "squareCoverage": 0.9609898976539964,
+        "checkpoint": {
+          "sequence": "343507722",
+          "digest": "CggKSqd48cv7wE979Vmw5NhTpqoRbsPkHQ2PE1hnh2Fi",
+          "timestamp": "2026-11-09T22:33:45.237Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-09T22:33:45.697Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x7e5836cbf7344c3686d441974dcf6ad97c54f9d7271c36c5dae5d523af839d32-1794261000",
+      "key": "0x7e5836cbf7344c3686d441974dcf6ad97c54f9d7271c36c5dae5d523af839d32:1794261000",
+      "version": 1,
+      "blobId": "mnRFYJz62H4CKFxmMlsPairou87dfGCHn4Tz6k8tJ3s",
+      "walruscan": "https://walruscan.com/mainnet/blob/mnRFYJz62H4CKFxmMlsPairou87dfGCHn4Tz6k8tJ3s",
+      "summary": "NBA move up on \"Spread: Warriors (-10.5)\" (WARRIORS 47% to 55%) is sharp-led: 69% of the money behind it came from wallets with a learned edge. CALIBRE forecast 53% for WARRIORS. Square money 0% of the money pushing the move (judged 98%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x7e5836cbf7344c3686d441974dcf6ad97c54f9d7271c36c5dae5d523af839d32",
+        "eventSlug": "nba-nop-gsw-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Warriors (-10.5)",
+        "yesOutcome": "WARRIORS",
+        "move": {
+          "from": 0.465,
+          "to": 0.545,
+          "startTs": 1794260700000,
+          "endTs": 1794261000000
+        },
+        "label": "sharp-led",
+        "sharpShare": 0.6944060908350176,
+        "opposition": 0.0005785319061930538,
+        "forecast": 0.5289920361733825,
+        "priceAtVerdict": 0.545,
+        "trades": 50,
+        "wallets": 29,
+        "topWallets": [
+          {
+            "wallet": "0x2c866881290c2197960f06448d3a236d9f20d939",
+            "league": "nba",
+            "netYesUsd": 25304.63,
+            "edge": 0.012215133315954294,
+            "z": 0.3356701176815513,
+            "n": 188,
+            "blobId": "frNUYhzvp2Fd5kJfWc5MUPzTyJvOL_x50vsrPj1OtII",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
+            "league": "nba",
+            "netYesUsd": 13576.48,
+            "edge": 0,
+            "z": -1.1240426859653245,
+            "n": 14,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "nba",
+            "netYesUsd": 11779.41,
+            "edge": 0.0027695043483870964,
+            "z": 0.3064603136682259,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
+            "league": "nba",
+            "netYesUsd": 2662.4,
+            "edge": 0,
+            "z": -0.25430313161499074,
+            "n": 75,
+            "blobId": "teJghX51_8SeSvCKJ_kbN_EOpGajDINJ3RGIzOSzAnU",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xefde78f38169634477f6ff46572128b6d21a6505",
+            "league": "nba",
+            "netYesUsd": 252.45,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.9847526387074984,
+        "checkpoint": {
+          "sequence": "343497578",
+          "digest": "4maR7zR8s9rCBep1sasfQQpRqD94eqKSQpnVoYcTMqv1",
+          "timestamp": "2026-11-09T21:52:45.853Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-09T21:52:46.625Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x6948ca490950b9371a41487959370380719e5ecb7040eda83385cf5046c6eefd-1794252600",
+      "key": "0x6948ca490950b9371a41487959370380719e5ecb7040eda83385cf5046c6eefd:1794252600",
+      "version": 1,
+      "blobId": "VqT5ydqzTAkRMTgzMpApb6NJORri7wrUwmwkQrgYD2g",
+      "walruscan": "https://walruscan.com/mainnet/blob/VqT5ydqzTAkRMTgzMpApb6NJORri7wrUwmwkQrgYD2g",
+      "summary": "NBA move down on \"Spread: Rockets (-4.5)\" (ROCKETS 65% to 49%) is contested: wallets with a learned edge were betting against it. CALIBRE forecast 50% for ROCKETS. Square money 0% of the money pushing the move (judged 15%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x6948ca490950b9371a41487959370380719e5ecb7040eda83385cf5046c6eefd",
+        "eventSlug": "nba-den-hou-2026-11-09",
+        "league": "nba",
+        "question": "Spread: Rockets (-4.5)",
+        "yesOutcome": "ROCKETS",
+        "move": {
+          "from": 0.645,
+          "to": 0.485,
+          "startTs": 1794251700000,
+          "endTs": 1794252600000
+        },
+        "label": "contested",
+        "sharpShare": 0,
+        "opposition": null,
+        "forecast": 0.49909258472717144,
+        "priceAtVerdict": 0.485,
+        "trades": 45,
+        "wallets": 26,
+        "topWallets": [
+          {
+            "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
+            "league": "nba",
+            "netYesUsd": -1645.43,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x796fc6fda8f8e03c03e2a2d012155989960300f6",
+            "league": "nba",
+            "netYesUsd": 750.14,
+            "edge": 0.02656558671502973,
+            "z": 1.2639848849179767,
+            "n": 2,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "nba",
+            "netYesUsd": 618.56,
+            "edge": 0.0027695043483870964,
+            "z": 0.3064603136682259,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0x88ca0ad3808fb7e92c8bf4745dd8eb12c1982efb",
+            "league": "nba",
+            "netYesUsd": 330.76,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
+            "league": "nba",
+            "netYesUsd": -303.71,
+            "edge": 0,
+            "z": -0.25430313161499074,
+            "n": 75,
+            "blobId": "teJghX51_8SeSvCKJ_kbN_EOpGajDINJ3RGIzOSzAnU",
+            "label": "no proven edge"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.1521752114252435,
+        "checkpoint": {
+          "sequence": "343462643",
+          "digest": "AJD6NBLbvfS1VficwAKXXKtTgyXnJZKMN6XGMvXdie2r",
+          "timestamp": "2026-11-09T19:31:05.820Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-09T19:31:06.429Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0x976e35b2d3bf476e3fd84a4162a831a613a7102dd156b85d964f47e9302df828-1794252000",
+      "key": "0x976e35b2d3bf476e3fd84a4162a831a613a7102dd156b85d964f47e9302df828:1794252000",
+      "version": 1,
+      "blobId": "bpp4rJAakRsibGelk-9VZ4Q4anko1m85kyZ8YwitLo8",
+      "walruscan": "https://walruscan.com/mainnet/blob/bpp4rJAakRsibGelk-9VZ4Q4anko1m85kyZ8YwitLo8",
+      "summary": "NBA move up on \"Nuggets vs. Rockets\" (NUGGETS 26% to 38%) is sharp-led: 87% of the money behind it came from wallets with a learned edge. CALIBRE forecast 36% for NUGGETS. Square money 0% of the money pushing the move (judged 92%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0x976e35b2d3bf476e3fd84a4162a831a613a7102dd156b85d964f47e9302df828",
+        "eventSlug": "nba-den-hou-2026-11-09",
+        "league": "nba",
+        "question": "Nuggets vs. Rockets",
+        "yesOutcome": "NUGGETS",
+        "move": {
+          "from": 0.255,
+          "to": 0.375,
+          "startTs": 1794251700000,
+          "endTs": 1794252000000
+        },
+        "label": "sharp-led",
+        "sharpShare": 0.8717195458519824,
+        "opposition": 0.12115473154460966,
+        "forecast": 0.3609741240081353,
+        "priceAtVerdict": 0.375,
+        "trades": 201,
+        "wallets": 78,
+        "topWallets": [
+          {
+            "wallet": "0x2c866881290c2197960f06448d3a236d9f20d939",
+            "league": "nba",
+            "netYesUsd": 24169.69,
+            "edge": 0.012215133315954294,
+            "z": 0.3356701176815513,
+            "n": 188,
+            "blobId": "frNUYhzvp2Fd5kJfWc5MUPzTyJvOL_x50vsrPj1OtII",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
+            "league": "nba",
+            "netYesUsd": 11808.14,
+            "edge": 0.0027695043483870964,
+            "z": 0.3064603136682259,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xb4f978be63cdf75554b0b46a4262a6db597cc9a7",
+            "league": "nba",
+            "netYesUsd": 8769.53,
+            "edge": 0.016700326191135265,
+            "z": 0.41839095058697523,
+            "n": 84,
+            "blobId": "YluVmlSIIkvCgtj43wlqLXVpa9UAsNf02330pU-gVcU",
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+            "league": "nba",
+            "netYesUsd": 6398.53,
+            "edge": 0.011176928406604406,
+            "z": 0.38785503528910215,
+            "n": 5,
+            "blobId": null,
+            "label": "no proven edge"
+          },
+          {
+            "wallet": "0xa15e35c70bf9789d7a651522cd366989d25db828",
+            "league": "nba",
+            "netYesUsd": 5726.3,
+            "edge": 0,
+            "z": -0.8059278797875667,
+            "n": 4,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.9159483340812727,
+        "checkpoint": {
+          "sequence": "343460053",
+          "digest": "2syNHSaUBewip2aUSpo3mLcbMt1jfnHxXQhjmNhFqdgy",
+          "timestamp": "2026-11-09T19:20:35.814Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-09T19:20:36.470Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
+    {
+      "id": "0xeaa5208bae22de2b27cc6e36c41a087cd2eafa5b12bfc3c488f6a797d80afa04-1794239700",
+      "key": "0xeaa5208bae22de2b27cc6e36c41a087cd2eafa5b12bfc3c488f6a797d80afa04:1794239700",
+      "version": 1,
+      "blobId": "sKVfpYRSriKxGIHI2EwNSvYRTZW_Yjlx6TOXuh-M6RA",
+      "walruscan": "https://walruscan.com/mainnet/blob/sKVfpYRSriKxGIHI2EwNSvYRTZW_Yjlx6TOXuh-M6RA",
+      "summary": "CS2 move up on \"Counter-Strike: FOKUS vs Alliance - Map 2 Winner\" (FOKUS 5% to 72%) is mixed: 20% of the money behind it came from wallets with a learned edge. CALIBRE forecast 69% for FOKUS. Square money 0% of the money pushing the move (judged 18%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
+      "data": {
+        "marketId": "0xeaa5208bae22de2b27cc6e36c41a087cd2eafa5b12bfc3c488f6a797d80afa04",
+        "eventSlug": "cs2-fokus-all-2026-11-09",
+        "league": "cs2",
+        "question": "Counter-Strike: FOKUS vs Alliance - Map 2 Winner",
+        "yesOutcome": "FOKUS",
+        "move": {
+          "from": 0.045,
+          "to": 0.715,
+          "startTs": 1794239100000,
+          "endTs": 1794239700000
+        },
+        "label": "mixed",
+        "sharpShare": 0.19849037034037997,
+        "opposition": 0.4835949561481408,
+        "forecast": 0.6864257497549571,
+        "priceAtVerdict": 0.715,
+        "trades": 201,
+        "wallets": 87,
+        "topWallets": [
+          {
+            "wallet": "0x2a97e8680fbed0ffcb4661cac73b066dd3e12ffb",
+            "league": "cs2",
+            "netYesUsd": 1472.52,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x0f89a1509523bc36ff957fb5165ea80a99832652",
+            "league": "cs2",
+            "netYesUsd": -1340,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0xf61a809a241c7e3ca8d83d454a90e1ce20f85943",
+            "league": "cs2",
+            "netYesUsd": -718.04,
+            "edge": 0,
+            "z": -1.2622515179806728,
+            "n": 1,
+            "blobId": null,
+            "label": "too early"
+          },
+          {
+            "wallet": "0xfce2dab10c48199cabf691dd9aa12f8090dadd50",
+            "league": "cs2",
+            "netYesUsd": -631.47,
+            "edge": 0,
+            "z": null,
+            "n": null,
+            "blobId": null,
+            "label": null
+          },
+          {
+            "wallet": "0x9e3ed7b661a903fc97afcf49e0f014ebe869f882",
+            "league": "cs2",
+            "netYesUsd": 590.88,
+            "edge": 0.00809405691700491,
+            "z": 0.32369362053848294,
+            "n": 3,
+            "blobId": null,
+            "label": "too early"
+          }
+        ],
+        "squareShare": 0,
+        "squareCoverage": 0.18265332291671738,
+        "checkpoint": {
+          "sequence": "343409618",
+          "digest": "5NQsPbt5LnA1J8gAaGPhaUaSnv2hLKvpttaoqL8xvFBt",
+          "timestamp": "2026-11-09T15:56:22.906Z",
+          "source": "tatum-grpc"
+        },
+        "sealedAt": "2026-11-09T15:56:23.492Z",
+        "model": "v3",
+        "source": "polymarket-public",
+        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
+      }
+    },
     {
       "id": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea-1794232200",
       "key": "0x3fc1b3baed516c3f03aef0435531f6945e26c2bdfaa2fdc5f125de5709004aea:1794232200",
@@ -1930,98 +4088,6 @@
           "source": "tatum-grpc"
         },
         "sealedAt": "2026-11-08T21:07:35.868Z",
-        "model": "v3",
-        "source": "polymarket-public",
-        "fallbackReason": "Tatum hourly call cap (24) reached"
-      }
-    },
-    {
-      "id": "0x59b22f11d11e368132385fc0c31cbf1661cc89386351b0999e05565ff0d0319e-1794170700",
-      "key": "0x59b22f11d11e368132385fc0c31cbf1661cc89386351b0999e05565ff0d0319e:1794170700",
-      "version": 1,
-      "blobId": "p_Kahlm_budcGHNw6lXqzKIQinKXFMQNjDB7RaMr7XU",
-      "walruscan": "https://walruscan.com/mainnet/blob/p_Kahlm_budcGHNw6lXqzKIQinKXFMQNjDB7RaMr7XU",
-      "summary": "LAL move up on \"Will Club Atlético de Madrid vs. FC Barcelona end in a draw?\" (YES 21% to 28%) is mixed: 37% of the money behind it came from wallets with a learned edge. CALIBRE forecast 28% for YES. Square money 8% of the money pushing the move (judged 46%). Data: Polymarket public API (Tatum hourly call cap (24) reached)",
-      "data": {
-        "marketId": "0x59b22f11d11e368132385fc0c31cbf1661cc89386351b0999e05565ff0d0319e",
-        "eventSlug": "lal-mad-bar-2026-11-08",
-        "league": "lal",
-        "question": "Will Club Atlético de Madrid vs. FC Barcelona end in a draw?",
-        "yesOutcome": "YES",
-        "move": {
-          "from": 0.21000000949999997,
-          "to": 0.285,
-          "startTs": 1794167400000,
-          "endTs": 1794170700000
-        },
-        "label": "mixed",
-        "sharpShare": 0.36568424440733943,
-        "opposition": 0.001671255371329645,
-        "forecast": 0.28472653932650166,
-        "priceAtVerdict": 0.285,
-        "trades": 325,
-        "wallets": 155,
-        "topWallets": [
-          {
-            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
-            "league": "lal",
-            "netYesUsd": -395124.81,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": "no proven edge"
-          },
-          {
-            "wallet": "0x84cfffc3f16dcc353094de30d4a45226eccd2f63",
-            "league": "lal",
-            "netYesUsd": -13486.09,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": "too early"
-          },
-          {
-            "wallet": "0xc785252b25901a591e9d962e09f4342468444ef2",
-            "league": "lal",
-            "netYesUsd": -3161.13,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": "too early"
-          },
-          {
-            "wallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
-            "league": "lal",
-            "netYesUsd": 2428.04,
-            "edge": 0.010645161290322579,
-            "z": 0.7018100265975371,
-            "n": 1,
-            "blobId": null,
-            "label": "proven winning record"
-          },
-          {
-            "wallet": "0x3f985e3a68f88e6ed8da1a22e1a5eda81c8e0aa1",
-            "league": "lal",
-            "netYesUsd": 2000,
-            "edge": 0.01741935483870968,
-            "z": 1.0834726777719228,
-            "n": 1,
-            "blobId": null,
-            "label": "no proven edge"
-          }
-        ],
-        "squareShare": 0.07924632526867982,
-        "squareCoverage": 0.46131740438938995,
-        "checkpoint": {
-          "sequence": "343125335",
-          "digest": "4FqRhw2TQF7s9jxdMWfp6W3i8bApDoMwuaLmavEXRfZA",
-          "timestamp": "2026-11-08T20:47:15.809Z",
-          "source": "tatum-grpc"
-        },
-        "sealedAt": "2026-11-08T20:47:16.320Z",
         "model": "v3",
         "source": "polymarket-public",
         "fallbackReason": "Tatum hourly call cap (24) reached"
@@ -4153,98 +6219,6 @@
         "model": "v3",
         "source": "polymarket-public",
         "fallbackReason": "Tatum hourly call cap (24) reached"
-      }
-    },
-    {
-      "id": "0xe7c0c5512d77261c314114f7139d5e7d07a2a7cd3e6c6277e27e6d9a20eb83cc-1794142500",
-      "key": "0xe7c0c5512d77261c314114f7139d5e7d07a2a7cd3e6c6277e27e6d9a20eb83cc:1794142500",
-      "version": 1,
-      "blobId": "Ti3ZuxBY414wjtviI7jeCArO3oqF1drmyRvCwfOnkzE",
-      "walruscan": "https://walruscan.com/mainnet/blob/Ti3ZuxBY414wjtviI7jeCArO3oqF1drmyRvCwfOnkzE",
-      "summary": "EPL move down on \"Will Chelsea FC win on 2026-11-08?\" (YES 52% to 46%) is mixed: 44% of the money behind it came from wallets with a learned edge. CALIBRE forecast 45% for YES. Square money 0% of the money pushing the move (judged 64%). Data: Polymarket public API (Tatum trades returned no fills for a market that just moved)",
-      "data": {
-        "marketId": "0xe7c0c5512d77261c314114f7139d5e7d07a2a7cd3e6c6277e27e6d9a20eb83cc",
-        "eventSlug": "epl-sun-che-2026-11-08",
-        "league": "epl",
-        "question": "Will Chelsea FC win on 2026-11-08?",
-        "yesOutcome": "YES",
-        "move": {
-          "from": 0.515,
-          "to": 0.455,
-          "startTs": 1794140700000,
-          "endTs": 1794142500000
-        },
-        "label": "mixed",
-        "sharpShare": 0.4360821903696914,
-        "opposition": 0.07263114772833797,
-        "forecast": 0.4522708528156482,
-        "priceAtVerdict": 0.455,
-        "trades": 162,
-        "wallets": 109,
-        "topWallets": [
-          {
-            "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-            "league": "epl",
-            "netYesUsd": -242100.37,
-            "edge": 0.024761792388366375,
-            "z": 0.5922776367210228,
-            "n": 23,
-            "blobId": null,
-            "label": "no proven edge"
-          },
-          {
-            "wallet": "0xb52e8b3afd9f0f0d502a5a76494b42816d67285c",
-            "league": "epl",
-            "netYesUsd": -197912.73,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": null
-          },
-          {
-            "wallet": "0x983eedfbd75803602e4a6e6ea9aab6dc6b9c6748",
-            "league": "epl",
-            "netYesUsd": -90589.02,
-            "edge": 0,
-            "z": -0.6562903132818771,
-            "n": 4,
-            "blobId": null,
-            "label": "no proven edge"
-          },
-          {
-            "wallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
-            "league": "epl",
-            "netYesUsd": 17238.02,
-            "edge": 0.021029623096486573,
-            "z": 0.7731021667216268,
-            "n": 7,
-            "blobId": null,
-            "label": "no proven edge"
-          },
-          {
-            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
-            "league": "epl",
-            "netYesUsd": -16944.26,
-            "edge": 0,
-            "z": -0.2743516305843672,
-            "n": 1,
-            "blobId": null,
-            "label": "no proven edge"
-          }
-        ],
-        "squareShare": 0,
-        "squareCoverage": 0.6392466015682834,
-        "checkpoint": {
-          "sequence": "343004652",
-          "digest": "nFnCbXTUNhUduxUsNeDc3sEJKQNGnrV6fXn7pWWMUN8",
-          "timestamp": "2026-11-08T12:56:30.263Z",
-          "source": "tatum-grpc"
-        },
-        "sealedAt": "2026-11-08T12:56:30.856Z",
-        "model": "v3",
-        "source": "polymarket-public",
-        "fallbackReason": "Tatum trades returned no fills for a market that just moved"
       }
     },
     {
@@ -10200,98 +12174,6 @@
       }
     },
     {
-      "id": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef-1794018000",
-      "key": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef:1794018000",
-      "version": 1,
-      "blobId": "IxXcAVsQIZDSWh102ljmdJLDny59cS1cdp4jcDFwuk4",
-      "walruscan": "https://walruscan.com/mainnet/blob/IxXcAVsQIZDSWh102ljmdJLDny59cS1cdp4jcDFwuk4",
-      "summary": "NBA move down on \"Raptors vs. Bucks\" (RAPTORS 47% to 35%) is mixed: 37% of the money behind it came from wallets with a learned edge. CALIBRE forecast 35% for RAPTORS. Square money 0% of the money pushing the move (judged 56%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
-      "data": {
-        "marketId": "0x79ebb36fa1dae08c5da6d2fea3aed7d572bfb0b266910afb7aaa4f750f966fef",
-        "eventSlug": "nba-tor-mil-2026-11-06",
-        "league": "nba",
-        "question": "Raptors vs. Bucks",
-        "yesOutcome": "RAPTORS",
-        "move": {
-          "from": 0.47,
-          "to": 0.345,
-          "startTs": 1794015000000,
-          "endTs": 1794018000000
-        },
-        "label": "mixed",
-        "sharpShare": 0.3653152170411363,
-        "opposition": 0.461337507638933,
-        "forecast": 0.3450945824002429,
-        "priceAtVerdict": 0.345,
-        "trades": 348,
-        "wallets": 166,
-        "topWallets": [
-          {
-            "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
-            "league": "nba",
-            "netYesUsd": -8672.54,
-            "edge": 0.04545454529238221,
-            "z": 1.732975086196192,
-            "n": 3,
-            "blobId": null,
-            "label": "too early"
-          },
-          {
-            "wallet": "0x0180046fa3137a7912d70995892b06687d29c6ee",
-            "league": "nba",
-            "netYesUsd": 7255.76,
-            "edge": 0.02064516129032258,
-            "z": 1.3333333333333335,
-            "n": 1,
-            "blobId": null,
-            "label": "too early"
-          },
-          {
-            "wallet": "0xe2d0f0580716e47979206dcff5220695e7967bbf",
-            "league": "nba",
-            "netYesUsd": -3474.36,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": "no proven edge"
-          },
-          {
-            "wallet": "0xbca08c1bc204a34f2fddbe47b438b9bd42ac9705",
-            "league": "nba",
-            "netYesUsd": -2387.48,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": null
-          },
-          {
-            "wallet": "0xd089af0b330d6e755e99150bda51f842d174087f",
-            "league": "nba",
-            "netYesUsd": -2104.87,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": null
-          }
-        ],
-        "squareShare": 0,
-        "squareCoverage": 0.558204907327242,
-        "checkpoint": {
-          "sequence": "342487214",
-          "digest": "AsQGsdgKagq4VqYvtGXn8oS9z95G5CdY5fqxqtZQWh9h",
-          "timestamp": "2026-11-07T02:26:05.178Z",
-          "source": "tatum-grpc"
-        },
-        "sealedAt": "2026-11-07T02:26:05.723Z",
-        "model": "v3",
-        "source": "polymarket-public",
-        "fallbackReason": "Tatum hourly call cap (18) reached"
-      }
-    },
-    {
       "id": "0xd8ce5cfd357ea7d7f34f2c40a568a54e70337509600f48c61ba66b7ad5d22477-1794014400",
       "key": "0xd8ce5cfd357ea7d7f34f2c40a568a54e70337509600f48c61ba66b7ad5d22477:1794014400",
       "version": 1,
@@ -11482,98 +13364,6 @@
           "source": "tatum-grpc"
         },
         "sealedAt": "2026-11-06T21:19:39.279Z",
-        "model": "v3",
-        "source": "polymarket-public",
-        "fallbackReason": "Tatum hourly call cap (18) reached"
-      }
-    },
-    {
-      "id": "0x7ed2e32a42df0a78c8ed00096ba28b603d06972cf773434e98f093a919eba835-1793997300",
-      "key": "0x7ed2e32a42df0a78c8ed00096ba28b603d06972cf773434e98f093a919eba835:1793997300",
-      "version": 1,
-      "blobId": "v3I76jOKnEu7zjOwBg9mlfhEufznMTRDC-A4qYcuM50",
-      "walruscan": "https://walruscan.com/mainnet/blob/v3I76jOKnEu7zjOwBg9mlfhEufznMTRDC-A4qYcuM50",
-      "summary": "EPL move up on \"Will Everton FC vs. Coventry City FC end in a draw?\" (YES 23% to 31%) is noise: only 0% of the money behind it came from wallets with a learned edge. CALIBRE forecast 30% for YES. Square money 0% of the money pushing the move (judged 50%). Data: Polymarket public API (Tatum hourly call cap (18) reached)",
-      "data": {
-        "marketId": "0x7ed2e32a42df0a78c8ed00096ba28b603d06972cf773434e98f093a919eba835",
-        "eventSlug": "epl-eve-cov-2026-11-06",
-        "league": "epl",
-        "question": "Will Everton FC vs. Coventry City FC end in a draw?",
-        "yesOutcome": "YES",
-        "move": {
-          "from": 0.22999999999999998,
-          "to": 0.305,
-          "startTs": 1793994900000,
-          "endTs": 1793997300000
-        },
-        "label": "noise",
-        "sharpShare": 0,
-        "opposition": 0,
-        "forecast": 0.30499999999999994,
-        "priceAtVerdict": 0.305,
-        "trades": 65,
-        "wallets": 37,
-        "topWallets": [
-          {
-            "wallet": "0x033cb53526acbf5a530464645fa3a1f5c590bafe",
-            "league": "epl",
-            "netYesUsd": -790,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": null
-          },
-          {
-            "wallet": "0xcf0c70317fd5e4e4429758b3d80a7b7f3762f2bb",
-            "league": "epl",
-            "netYesUsd": -766.09,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": null
-          },
-          {
-            "wallet": "0x9db82de5a71ae539bc82f4d9ac3a007c7d742eff",
-            "league": "epl",
-            "netYesUsd": 652.3,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": null
-          },
-          {
-            "wallet": "0x2559b5bae55fc693e15896e816aae2761d8eb2e3",
-            "league": "epl",
-            "netYesUsd": 306.78,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": "no proven edge"
-          },
-          {
-            "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
-            "league": "epl",
-            "netYesUsd": 267.69,
-            "edge": 0,
-            "z": null,
-            "n": null,
-            "blobId": null,
-            "label": "no proven edge"
-          }
-        ],
-        "squareShare": 0,
-        "squareCoverage": 0.4952820461387549,
-        "checkpoint": {
-          "sequence": "342397916",
-          "digest": "7nWgUkQJZSnTcnpSXz8F1kVKNyfGiGSDiQj2Z9Y9UeT3",
-          "timestamp": "2026-11-06T20:38:40.466Z",
-          "source": "tatum-grpc"
-        },
-        "sealedAt": "2026-11-06T20:38:41.304Z",
         "model": "v3",
         "source": "polymarket-public",
         "fallbackReason": "Tatum hourly call cap (18) reached"

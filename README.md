@@ -22,9 +22,11 @@ Nothing to install, nothing to clone. In order:
    move, the wallets that pushed it, each one's record, and what share of the pushing money came from traders with a proven
    losing record. Note the line that says how much of the money it *could* judge; a tool that hides its coverage is hiding
    its error bars.
-2. **[`/record`](https://calibre-blush.vercel.app/record) — the scorecard.** 174 verdicts sealed before the result, 110
-   graded since. CALIBRE's Brier against the market's Brier on the same events. We do not beat the price, and the page says
-   so in the heading rather than in a footnote.
+2. **[`/record`](https://calibre-blush.vercel.app/record) — the scorecard.** 227 verdicts sealed on Walrus before the
+   result, 222 graded since. CALIBRE's Brier against the market's Brier on the same events. We do not beat the price, and
+   the page says so in the heading rather than in a footnote. The page shows the newest 194 of those 227 and says so:
+   Walrus recall is a similarity search capped at 100 hits per query, so the merged read surfaces fewer than the namespace
+   holds — `pnpm verify` walks the full inventory.
 3. **[`/proof`](https://calibre-blush.vercel.app/proof) — the receipts.** Every namespace, every blob on Walruscan, every
    Sui checkpoint on Suiscan, and the one settled agent payment. The heading tells you whether you are looking at a live
    Walrus read or the fallback export, with the time.
@@ -63,7 +65,7 @@ disagree" as the worked examples. Where each of those lives in CALIBRE:
 | The brief | In CALIBRE |
 |---|---|
 | Prediction app for sports or markets | Polymarket sports markets across 142 leagues. Every page is a judgement about a live market. |
-| Compare bookmaker odds with onchain sources | **The move gate.** A candidate move is checked against Tatum's own price history before anything is judged. If Tatum answers and its history does **not** show the move, the move is dropped and never sealed. If Tatum cannot answer — hourly budget spent, empty series — the verdict proceeds on Polymarket's feed and records the reason in the verdict itself, so every one of the 174 says which source it stands on and why. See [How Tatum is used](#how-tatum-is-used) for the per-verdict provenance. |
+| Compare bookmaker odds with onchain sources | **The move gate.** Every candidate move is checked against Tatum's own `midpoint` price history before anything is judged. When Tatum answers, the move CALIBRE judges is Tatum's, and a move Tatum's history does not show is **dropped and never sealed** — two sources have to agree on the thing being judged. Tatum cannot supply the fills behind a move (its `/trades` returns zero rows for every Polymarket market), so wallet attribution falls back to Polymarket's free API and each verdict records that. See [How Tatum is used](#how-tatum-is-used) for which field answers which question. |
 | Track which voices were right | The "voices" are the wallets that actually move the price, scored against the prices they paid — not self-declared analysts. 790,185 bets scored across 5,740 wallets. |
 | Users log picks before events | **The one line CALIBRE reads differently.** The picks logged before the event are the agent's own, not a user's: the watcher seals a forecast on Walrus Memory with a Sui checkpoint *before* the market resolves, so the timing is not something anyone can assert after the fact. A user-entered pick journal cannot be proven to have been entered early. This one can. |
 | Memory stores credibility scores so the app learns who to trust | `calibre-wallets` is exactly that: 337 versioned credibility records, one per wallet and league. Walrus Memory has no update, so a changed judgement is a new version and the old one stays readable. The labels on the next move come from those records. |
@@ -87,7 +89,7 @@ Walrus, there is nothing left to recover from. That is the test of whether memor
 
 | What the award looks for | The evidence | Where |
 |---|---|---|
-| Memory that is actually written to, at volume | **764 memories** across 3 namespaces on Walrus mainnet: 337 wallet credibility records, 174 sealed verdicts, 110 graded outcomes, plus the model cards | [`/proof`](https://calibre-blush.vercel.app/proof) lists every namespace with counts |
+| Memory that is actually written to, at volume | **830 memories** across 3 namespaces on Walrus mainnet: 381 wallet credibility records, 227 sealed verdicts, 222 graded outcomes, plus the model cards | [`/proof`](https://calibre-blush.vercel.app/proof) lists every namespace with counts |
 | Memory that is read back and *changes behaviour* | A verdict's labels come from recalled wallet records. Re-score a wallet and the next move it pushes is labelled differently — that is the loop, not a report | `apps/worker/src/watch.ts`, `loadMemoryState` |
 | Handling the append-only constraint properly | Walrus Memory has **no update and no delete**. A changed judgement is a new version under the same key: `[cal1\|kind\|key\|vN] summary \|\| {json}`. Readers keep the highest version per key. **117 of the 126 wallet records written from my machine now carry a v2** that supersedes a v1 — and the v1 is still there, readable, which is exactly what a record of a changed judgement should look like | `packages/memory/src/envelope.ts`, `rebuild.ts` |
 | Encryption | Every memory is sealed with Seal before it leaves the process; recall decrypts on the relayer | `packages/memory/src/store.ts` |
@@ -130,8 +132,8 @@ workspaces, and the MCP server exists so that an AI agent can *consume* CALIBRE,
 | **$197.6 million** | of money behind 11,975 replayed price moves, traced to 10,113 wallets |
 | **790,185 bets** | scored against the price paid, across 5,740 wallets and 69,914 wallet-by-league records |
 | **356,116 bets** | in the profit-blind study of 1,000 wallets behind the label test |
-| **174 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 110 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
-| **Every sealed verdict** | stamped with a Sui checkpoint; 137 of 174 read through Tatum's Sui gRPC gateway, the rest via Sui's public GraphQL and recorded as such |
+| **227 verdicts, and counting** | sealed on Walrus Memory mainnet before the result was known; 222 graded. The watcher seals about 1.7 an hour, so the live site's count is always ahead of this page. |
+| **Every sealed verdict** | stamped with a Sui checkpoint; 157 of 194 read through Tatum's Sui gRPC gateway, the rest via Sui's public GraphQL and recorded as such |
 | **Paid Tatum Starter plan** | 4M credits a month, bought 7 Nov 2026; every request priced and budgeted, 502 credits per judged move |
 | **1 paid agent call** | settled on Sui mainnet: 0.01 USDC, gas price 0 |
 
@@ -219,8 +221,8 @@ CALIBRE runs on a paid **Tatum Starter plan** (4,000,000 credits a month), bough
 
 - **The move gate.** The watcher finds a candidate move on free data, then asks Tatum's price history whether it happened.
   If Tatum answers and its history does not show the move, the move is dropped and nothing is judged or sealed
-  (`apps/worker/src/watch.ts:204`). If Tatum cannot answer, the verdict proceeds on free data and records why, so every
-  verdict states the feed it stands on — see **Provenance is recorded on every verdict** below.
+  (`apps/worker/src/watch.ts:204`). The move that gets judged is then Tatum's, not Polymarket's. What Tatum cannot supply
+  is the fills behind the move — see **Two different questions, two different fields** below.
 - **Sui gRPC gateway** (`sui-mainnet-grpc.gateway.tatum.io`), native gRPC with `@grpc/grpc-js` and `@protobuf-ts/grpc-transport`
   — Tatum's Sui JSON-RPC is deprecated and returns 404. This is the checkpoint that proves when each verdict was sealed:
   it existed before the market resolved (`packages/chain/src/suiGrpc.ts`). Every X-ray on the site is stamped the same way.
@@ -234,31 +236,31 @@ Polymarket market, at every interval and range — almost certainly because it i
 on 2 November 2026. `midpoint` comes off the orderbook and returns a full series. That one parameter is the difference
 between the move gate working and silently never firing. It cost three days to find.
 
-**Provenance is recorded on every verdict, not asserted.** Tatum sits on the sealing path for every judgement CALIBRE
-makes, and each verdict carries the receipt for which feed answered which question:
+**Two different questions, two different fields.** This is worth spelling out, because the obvious reading of a verdict's
+`source` field is the wrong one. Judging a move asks two separate things, and Tatum answers one of them and not the other:
+
+| Question | Answered by | Recorded in |
+|---|---|---|
+| *Did this price move really happen?* | **Tatum's `midpoint` price history.** Every candidate move is checked against it. When Tatum answers, the move CALIBRE judges **is Tatum's move**, not Polymarket's, and a move Tatum's history does not show is dropped and never sealed | `moveConfirmedBy`, and the `[tatum]` tag on every move line in the watcher log |
+| *Which wallets pushed it?* | **Polymarket's free Data API**, because Tatum's market `/trades` returns HTTP 200 with zero rows for every Polymarket market — including one taking 34 fills in the same minute | `source`, with `fallbackReason` naming the endpoint that failed |
+
+So a verdict reading `source: "polymarket-public"` is telling you where the **fills** came from, not that Tatum was absent
+from it. The fills are the only part Tatum cannot supply, and the code tracks the two apart on purpose
+(`apps/worker/src/watch.ts:197`). What Tatum does on the sealing path, measured over the record:
 
 | On every sealed verdict | Count |
 |---|---|
-| Sui checkpoint read through **Tatum's Sui gRPC gateway** | 137 of 174 |
-| Checkpoint via Sui's public GraphQL, recorded as such, when the gateway was unreachable | 37 of 174 |
-| Move checked against Tatum's price history before judging | every candidate |
-| The feed that supplied the move, and the reason if it was not Tatum | every verdict |
+| Sui checkpoint read through **Tatum's Sui gRPC gateway** | 157 of 194 |
+| Checkpoint via Sui's public GraphQL, recorded as such, when the gateway was unreachable | 37 of 194 |
+| Move checked against Tatum's `midpoint` price history before judging | every candidate |
+| The feed that supplied the fills, and the endpoint that failed if it was not Tatum | every verdict |
 
-The gate is a veto, and it is asymmetric on purpose: when Tatum's history answers and **contradicts** a candidate move, the
-move is dropped and nothing is sealed. When Tatum cannot answer, CALIBRE does not invent a confirmation — it judges on the
-free feed and writes down why, which is why the reasons can be counted at all:
+The one honest gap: `moveConfirmedBy` was added to the watcher after the live run had started, so verdicts sealed before
+10 November 2026 do not carry it even where Tatum confirmed the move. For those, the confirmation is in the watcher log
+(`MOVE <slug> ...: 65% -> 100% [tatum]`) rather than in the sealed envelope, and the envelopes are append-only, so I am not
+going to backfill it. The deployed watcher writes the field from 10 November onward.
 
-| Why Tatum did not supply the move | Verdicts |
-|---|---|
-| Tatum's market `/trades` returned no fills for a market that had just moved (see the broken-endpoint list below) | 86 |
-| CALIBRE's own hourly Tatum budget was already spent on the market scan | 79 |
-| Tatum's history returned an empty series for that market | 9 |
-
-That middle row is a throttle setting, not a limitation of the integration: the hourly cap was held at 18, then 24, to
-protect a credit allowance shared with another builder, and the broad market scan spends it before the judging path asks for
-history. It is the one number in this project tuned for cost rather than for the product.
-
-**Spending is budgeted, not hoped for.** Every request is counted at Tatum's listed credit price — a price history request
+**Spending is budgeted, not hoped for.****Spending is budgeted, not hoped for.** Every request is counted at Tatum's listed credit price — a price history request
 is 200, a market lookup 100, a gRPC query 2 — against a daily cap worked out from the plan
 (`packages/chain/src/credits.ts`; `scripts/tatum-cost-model.ts` measures it). Measured on the live mainnet watcher:
 502 credits per judged move, about 26,000 a day. Past the daily cap the site serves free Polymarket data rather than
