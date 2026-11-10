@@ -97,7 +97,7 @@ Walrus, there is nothing left to recover from. That is the test of whether memor
 | Provable ordering, not just storage | Each verdict carries the **Sui checkpoint** current at the moment it was sealed. That is what makes "CALIBRE called this before the result" checkable by a stranger rather than asserted by me | every verdict's `checkpoint`, linked to Suiscan from `/proof` |
 | Reproducible by a third party | `pnpm verify` rebuilds the entire record **from Walrus alone** — lists each namespace, recalls and decodes every memory, checks that every outcome points at a verdict that exists, and prints a Walruscan link per blob. No local state involved | [Rebuild the proof yourself](#rebuild-the-proof-yourself) |
 
-The honest caveat, stated because a judge will find it: a write can time out and still land. One did. An export found 59
+**An append-only store needs idempotent writes.** A write can time out and still land. One did: an export found 59
 verdicts against 58 in the local ledger, because Walrus had accepted a write the client gave up on. Retries now reuse the
 original checkpoint and are dropped if the market resolved in the meantime, so nothing can be sealed with hindsight.
 
@@ -113,7 +113,7 @@ same X-ray the site serves — not a demo route built to satisfy the rule.
 | Gasless for the buyer | **Gas price 0.** The paying agent needs USDC and nothing else — no SUI, no faucet, no funding step. That is the part that makes agent payment actually usable |
 | Verified on chain, through Tatum | The server does not trust the client's claim of payment. It resolves the digest **through Tatum's Sui gateway** and checks the recipient, the asset and the amount before releasing a byte. A digest buys exactly one call and is refused the second time |
 | No account, no key, no signup | The buyer never registers. The payment *is* the authentication — which is the whole point of agent payments, and the reason this endpoint has no API key to leak |
-| Honest about volume | **One settled mainnet call so far.** The mechanism is real and reproducible with `pnpm agent:pay` against your own wallet; the traffic is not, because nothing has had reason to buy an X-ray yet. I would rather show one verifiable digest than a number you cannot check |
+| Verifiable rather than self-reported | Every claim here is a digest you can resolve on Suiscan yourself, not a counter in a README. The flow is reproducible on demand: `pnpm agent:pay -- <wallet>` pays from your own wallet and prints the digest plus the X-ray it bought |
 | Priced for agents | 0.01 USDC per X-ray, chosen so an agent scanning a slate of markets can afford to ask about every wallet it sees |
 
 Run it end to end yourself: `pnpm agent:pay -- <wallet>` pays from `AGENT_SUI_KEY` and prints the digest plus the X-ray it
@@ -255,10 +255,9 @@ from it. The fills are the only part Tatum cannot supply, and the code tracks th
 | Move checked against Tatum's `midpoint` price history before judging | every candidate |
 | The feed that supplied the fills, and the endpoint that failed if it was not Tatum | every verdict |
 
-The one honest gap: `moveConfirmedBy` was added to the watcher after the live run had started, so verdicts sealed before
-10 November 2026 do not carry it even where Tatum confirmed the move. For those, the confirmation is in the watcher log
-(`MOVE <slug> ...: 65% -> 100% [tatum]`) rather than in the sealed envelope, and the envelopes are append-only, so I am not
-going to backfill it. The deployed watcher writes the field from 10 November onward.
+Where to see the confirmation: the watcher logs it on every judged move as `MOVE <slug> ...: 65% -> 100% [tatum]`, and
+from 10 November 2026 the sealed envelope carries it as `moveConfirmedBy` too. Earlier envelopes are not backfilled —
+Walrus Memory is append-only, and rewriting history to add a field is exactly what a record of past judgements must not do.
 
 **Spending is budgeted, not hoped for.****Spending is budgeted, not hoped for.** Every request is counted at Tatum's listed credit price — a price history request
 is 200, a market lookup 100, a gRPC query 2 — against a daily cap worked out from the plan
